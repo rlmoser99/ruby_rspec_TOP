@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-# Class Idea for MovieFan
+# Basic Car Class
 class Car
   attr_accessor :make, :model, :year
-  def initialize(make, model, year = 2016)
+  def initialize(make, model, year)
     @make = make
     @model = model
     @year = year
