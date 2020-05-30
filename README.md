@@ -1,0 +1,1 @@
+The idea behind this project is to create a repo full of rspec tests for TOP students to that go beyond the basic tests.
