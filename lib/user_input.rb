@@ -1,32 +1,27 @@
 # frozen_string_literal: true
 
-# Create a random number for Number Game
-class RandomNumber
-  attr_reader :number
-
-  def initialize
-    @number = rand(0..9)
-  end
-end
-
-# Game with a random number
+# Game to find the random number
 class NumberGame
   attr_reader :game_solution
 
   def initialize
-    @game_solution = RandomNumber.new
+    @game_solution = rand(0..9)
   end
 
   def play_game
-    guess = verify_input(player_input)
-    puts compare_guess(guess)
+    puts "Let's play a game called 'Guess a random number!'"
+    @count = 0
+    loop do
+      guess = verify_input(player_input)
+      @count += 1
+      break if correct_guess?(guess)
+    end
+    game_over
   end
 
-  def compare_guess(number)
-    number == game_solution.number
+  def correct_guess?(number)
+    number == game_solution.to_s
   end
-
-  # def turn_order; end
 
   def verify_input(number)
     return number if valid_input?(number)
@@ -43,8 +38,17 @@ class NumberGame
   def valid_input?(input)
     input.match(/^[0-9]$/)
   end
+
+  def game_over
+    if @count == 1
+      puts 'LUCKY GUESS!'
+    elsif @count < 4
+      puts "Congratulations! You picked the random number in #{@count} guesses!"
+    else
+      puts "That was hard. It took you #{@count} guesses!"
+    end
+  end
 end
 
-game = NumberGame.new
-game.play_game
-# puts game.number_solution.random_number
+# game = NumberGame.new
+# game.play_game
