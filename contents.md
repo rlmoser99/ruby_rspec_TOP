@@ -43,6 +43,11 @@ stubs double - use when an object is needed to provide something that takes time
 
 http://testing-for-beginners.rubymonstas.org/test_doubles.html
 
+From http://www.betterspecs.org/#describe
+  expect(response).to respond_with_content_type(:json)
+  expect(response).to assign_to(:resource)
+
+
 what is:
 game.instance_variable_set
 expect(STDOUT).to receive(:puts).at_least(:twice)
