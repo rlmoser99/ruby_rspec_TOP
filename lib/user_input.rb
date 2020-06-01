@@ -2,7 +2,7 @@
 
 # Game to find the random number
 class NumberGame
-  attr_reader :game_solution
+  attr_accessor :game_solution
 
   def initialize
     @game_solution = rand(0..9)
