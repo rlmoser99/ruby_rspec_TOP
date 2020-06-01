@@ -19,15 +19,15 @@ class NumberGame
     game_over
   end
 
-  def correct_guess?(number)
-    number == game_solution.to_s
-  end
-
   def verify_input(number)
     return number if valid_input?(number)
 
     puts 'Input error!'
     verify_input(player_input)
+  end
+
+  def correct_guess?(number)
+    number == game_solution.to_s
   end
 
   def game_over
