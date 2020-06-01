@@ -1,10 +1,10 @@
-# let variables
-let(:card) { Card.new('Ace', 'Spades') }
+# Divide String, Array, Hash into 3 files. Make a similar exercise for student to write.
 
+# RUBY_CLASSES_SPEC
+# let variables
+
+# RUBY_CLASSES_SPEC
 # parameters of variables that can change
-expect(card.rank).to eq('Ace')
-card.rank = 'Queen'
-expect(card.rank).to eq('Queen')
 
 # A custom error message, gives you the ability to provide "documentation" material on what should be happening.
 comparison = 'Spade'
@@ -34,17 +34,17 @@ expect(language.name).to eq('Python')
 let(:language) { ProgrammingLanguage.new }
 expect(language.name).to eq('Ruby')
 
+# RUBY_CLASSES_SPEC
 # If an object can be initialized without parameters, 'subject' will be an instance of the class declared after describe 
-describe Hash do
-expect(subject.length).to eq(0)
 
+# RUBY_CLASSES_SPEC
 # Subject resets between each example
 
 # described_class = Ensure for future class name changes
 subject { described_class.new('Boris') }
 
+# RUBY_CLASSES_SPEC
 # one-lines syntex
-it { is_expected.to eq(5) }
 
 # shared_examples (maybe with polymorphism)
 shared_context possible. not sure of use cases.
