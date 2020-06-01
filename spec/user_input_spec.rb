@@ -9,6 +9,13 @@ describe NumberGame do
       expect(subject.game_solution).to be >= 0
       expect(subject.game_solution).to be < 10
     end
+    it 'should be a number between 0 and 9' do
+      # rubocop error:
+      # expect(subject.game_solution).to satisfy { |num| num.between?(0, 9) }
+      expect(subject.game_solution).to satisfy do |number|
+        number.between?(0, 9)
+      end
+    end
   end
   context '#correct_guess?' do
     it 'responds with 1 argument' do

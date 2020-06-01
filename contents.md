@@ -53,13 +53,3 @@ game.instance_variable_set
 expect(STDOUT).to receive(:puts).at_least(:twice)
 expect(game.intro).not_to raise_error
 expect(my_game.check_input(5)).to satisfy { |num| num.between?(1, 7) }
-expect { board.display_to_screen }.to output(/\|1\|2\|3\|4\|5\|6\|7\|/).to_stdout
-
-it "prompts player 1 first" do
-    player = 1
-    newgame1.take_turn(player)
-    allow($stdin).to receive(:gets).and_return(1)
-    play = $stdin.gets
-    
-    expect(play).to eql(1)
-end

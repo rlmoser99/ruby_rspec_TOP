@@ -1,5 +1,43 @@
 # frozen_string_literal: true
 
+# Game that is nearly impossible to test
+class ImpossibleTestGame
+  attr_accessor :game_solution, :count
+
+  def initialize
+    @game_solution = rand(0..9)
+  end
+
+  def play_game
+    puts "Let's play a game called 'Guess a random number!'"
+    @count = 0
+    loop do
+      player_input
+      @count += 1
+      break if @guess == game_solution.to_s
+    end
+    game_over
+  end
+
+  def player_input
+    loop do
+      puts 'Choose 1-digit between 0-9'
+      @guess = gets.chomp
+      break if @guess.match(/^[0-9]$/)
+    end
+  end
+
+  def game_over
+    if @count == 1
+      puts 'LUCKY GUESS!'
+    elsif @count < 4
+      puts "Congratulations! You picked the random number in #{@count} guesses!"
+    else
+      puts "That was hard. It took you #{@count} guesses!"
+    end
+  end
+end
+
 # Game to find the random number
 class NumberGame
   attr_accessor :game_solution, :count
@@ -53,4 +91,7 @@ class NumberGame
 end
 
 # game = NumberGame.new
+# game.play_game
+
+# game = ImpossibleTestGame.new
 # game.play_game
