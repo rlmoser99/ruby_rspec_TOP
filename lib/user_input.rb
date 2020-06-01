@@ -2,7 +2,7 @@
 
 # Game to find the random number
 class NumberGame
-  attr_accessor :game_solution
+  attr_accessor :game_solution, :count
 
   def initialize
     @game_solution = rand(0..9)
@@ -30,15 +30,6 @@ class NumberGame
     verify_input(player_input)
   end
 
-  def player_input
-    puts 'Choose 1-digit between 0-9'
-    gets.chomp
-  end
-
-  def valid_input?(input)
-    input.match(/^[0-9]$/)
-  end
-
   def game_over
     if @count == 1
       puts 'LUCKY GUESS!'
@@ -47,6 +38,17 @@ class NumberGame
     else
       puts "That was hard. It took you #{@count} guesses!"
     end
+  end
+
+  protected
+
+  def player_input
+    puts 'Choose 1-digit between 0-9'
+    gets.chomp
+  end
+
+  def valid_input?(input)
+    input.match(/^[0-9]$/)
   end
 end
 
