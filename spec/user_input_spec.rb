@@ -11,7 +11,6 @@ describe NumberGame do
     end
     it 'should be a number between 0 and 9' do
       # rubocop error:
-      # expect(subject.game_solution).to satisfy { |num| num.between?(0, 9) }
       expect(subject.game_solution).to satisfy do |number|
         number.between?(0, 9)
       end
