@@ -5,7 +5,8 @@ describe String do
   # It will be called if the value of the variable when needed (known as: lazy loading)
   let(:favorite_color) { String.new('blue') }
 
-  # context is used to explain the conditional for the test
+  # Use a context block make your tests clear and well organized, but it is not required.
+  # it is used to make your explain any conditionals
   # should start with words like: if, when, unless, with, without, for, before, after, during
   context 'when let variable is used' do
     it 'should be value of variable assigned' do
