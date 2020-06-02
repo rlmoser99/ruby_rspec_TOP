@@ -50,6 +50,7 @@ expect(language.name).to eq('Ruby')
 
 # described_class = Ensure for future class name changes
 subject { described_class.new('Boris') }
+(example: pet to animal) ?
 
 # shared_examples (maybe with polymorphism)
 shared_context possible. not sure of use cases.

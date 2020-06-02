@@ -35,6 +35,9 @@ describe Array do
 
   # Look at the order of these 5 tests when this test file is run (in terminal).
   # Why do you think they are in a different order then these tests are written?
+
+  # Clarification: one-line tests are only recommended when the matcher aligns exactly with the doc string.
+  # However, many ruby-ists prefer explicitly writing out the test & not using one-line syntex.
 end
 
 # ASSIGNMENT
