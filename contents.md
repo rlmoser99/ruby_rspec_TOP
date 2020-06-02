@@ -1,10 +1,22 @@
-# Divide String, Array, Hash into 3 files. Make a similar exercise for student to write.
+# Each file should introduce at least once new concept.
+# Each file should have an assignment to complete that covers any previous material.
 
 # 1_STRING_SPEC
 let variables
 let variables can change
-don't put conditional information in the 'it' string
+Subject/Let variables resets between each example
+put conditional information in the 'context' string
 
+# 2_ARRAY_SPEC
+implicitly defined 'subject'
+one-lines syntex
+predicate matchers
+
+# 3_NUMBER_SPEC
+comparison matchers
+.not_to instead of .to
+
+# 4_HASH_SPEC
 
 
 
@@ -12,7 +24,9 @@ don't put conditional information in the 'it' string
 comparison = 'Spade'
 expect(card.suit).to eq(comparison), Expected #{comparison}, not #{card.suit}."
 
-
+# .not_to with errors
+using this as a .not_to is fine. Not when you are testing for a specific error, you should be explicit with a specific error name.
+expect { 11 / 3 }.not_to raise_error
 
 # Before and After Hooks
 before(:context) do
@@ -34,32 +48,11 @@ expect(language.name).to eq('Python')
 let(:language) { ProgrammingLanguage.new }
 expect(language.name).to eq('Ruby')
 
-# RUBY_CLASSES_SPEC
-# If an object can be initialized without parameters, 'subject' will be an instance of the class declared after describe 
-
-# RUBY_CLASSES_SPEC
-# Subject resets between each example
-
 # described_class = Ensure for future class name changes
 subject { described_class.new('Boris') }
 
-# RUBY_CLASSES_SPEC
-# one-lines syntex
-
 # shared_examples (maybe with polymorphism)
 shared_context possible. not sure of use cases.
-
-# .not_to can be used with any of the other matchers
-expect('Hello').not_to eq('hello')
-expect(10).not_to be_odd
-expect([1, 2, 3]).not_to be_empty
-expect(nil).not_to be_truthy
-expect('Philadelphia').not_to start_with('car')
-expect(5).not_to respond_to(:length)
-expect(%i[a b c]).not_to include(:d)
-
-using this as a .not_to is fine. Not when you are testing for a specific error, you should be explicit with a specific error name.
-expect { 11 / 3 }.not_to raise_error
 
 # Equality Matchers
 equal and be are the same - some people prefer to use 'be' over 'equal' because the name implies same object expect(first).to be(second)
@@ -86,17 +79,7 @@ describe 'equal and be matcher' do
   end
 end
 
-# Comparison Matchers
-expect(22).to be <= 100
-it { is_expected.to be > 90 }
 
-# predicate methods
-result = 16 / 2
-expect(result.even?).to eq(true)
-expect(16 / 2).to be_even
-expect(15).to be_odd
-expect(0).to be_zero
-expect([]).to be_empty
 
 # Using 'all'
 expect([5, 7, 9, 13]).to all(be_odd)
