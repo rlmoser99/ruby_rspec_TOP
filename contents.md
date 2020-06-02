@@ -1,18 +1,18 @@
 # Divide String, Array, Hash into 3 files. Make a similar exercise for student to write.
 
-# RUBY_CLASSES_SPEC
-# let variables
+# 1_STRING_SPEC
+let variables
+let variables can change
+don't put conditional information in the 'it' string
 
-# RUBY_CLASSES_SPEC
-# parameters of variables that can change
+
+
 
 # A custom error message, gives you the ability to provide "documentation" material on what should be happening.
 comparison = 'Spade'
 expect(card.suit).to eq(comparison), Expected #{comparison}, not #{card.suit}."
 
-# Don't put conditional information in the 'it' string
-context 'with even number' do
-  it 'should return true' do
+
 
 # Before and After Hooks
 before(:context) do
