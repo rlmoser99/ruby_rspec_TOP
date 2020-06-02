@@ -1,5 +1,6 @@
-# Each file should introduce at least once new concept.
-# Each file should have an assignment to complete that covers any previous material.
+# Each file:
+should introduce at least once new concept.
+should have an assignment to complete that covers any previous material.
 
 # 1_STRING_SPEC
 let variables
@@ -15,6 +16,7 @@ predicate matchers
 # 3_NUMBER_SPEC
 comparison matchers
 .not_to instead of .to
+(assignment has 'include')
 
 # 4_HASH_SPEC
 
@@ -79,8 +81,6 @@ describe 'equal and be matcher' do
     expect(c).not_to equal([1, 2, 3])
   end
 end
-
-
 
 # Using 'all'
 expect([5, 7, 9, 13]).to all(be_odd)
