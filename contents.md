@@ -19,7 +19,9 @@ comparison matchers
 (assignment has 'include')
 
 # 4_HASH_SPEC
-
+change?
+true/false?
+include with hash?
 
 
 # A custom error message, gives you the ability to provide "documentation" material on what should be happening.
