@@ -5,40 +5,79 @@
 # equal checks for OBJECT IDENTITY
 # be checks for OBJECT IDENTITY
 
-# some prefer to use 'be' over 'equal' because semantically makes sense expect(first).to be(second)
-
-# WIP
 describe 'differences between eq, eql, equal, and be' do
-  # let(:a) { 3.0 }
-  # let(:b) { 3 }
-  let(:my_car) { [2017, 'red', 'Jetta'] }
-  let(:your_car) { [2017, 'red', 'Jetta'] }
-  let(:my_kids_borrow) { my_car }
+  context 'my_score vs. your_score' do
+    let(:my_score) { 10.0 }
+    let(:your_score) { 10 }
 
-  # context 'eq only looks at value' do
-  #   it 'should be eql to each other' do
-  #     expect(my_car).to eq(your_car)
-  #     expect(my_kids_borrow).to eq(your_car)
-  #   end
-  # end
+    context 'eq only looks at value' do
+      it 'should be eq to each other' do
+        expect(my_score).to eq(your_score)
+      end
+    end
 
-  context 'eql looks at type & value' do
-    it 'should be eq to each other' do
-      expect(my_car).to eql(your_car)
-      expect(my_kids_borrow).to eql(your_car)
+    # my_score is a Float and your_score is an Integer
+    context 'eql looks at type & value' do
+      it 'should not be eql to each other' do
+        expect(my_score).not_to eql(your_score)
+      end
     end
   end
 
-  context 'be and equal cares about object identity' do
-    it 'should be/equal the same car' do
-      expect(my_car).to equal(my_kids_borrow)
-      expect(my_car).to be(my_kids_borrow)
+  context 'my_car vs. your_car vs. my_kids_borrow' do
+    let(:my_car) { [2017, 'red', 'Jetta'] }
+    let(:your_car) { [2017, 'red', 'Jetta'] }
+    let(:my_kids_borrow) { my_car }
+
+    context 'eql looks at type & value' do
+      it 'should be eq to each other' do
+        expect(my_car).to eql(your_car)
+        expect(my_kids_borrow).to eql(your_car)
+      end
     end
-    it 'should not be/equal your car' do
-      expect(my_car).not_to be(your_car)
+
+    # some prefer to use 'be' over 'equal' because semantically it makes sense.
+    # expect(first_item).to be(second_item)
+    context 'be and equal cares about object identity' do
+      it 'should be/equal the same car' do
+        expect(my_car).to equal(my_kids_borrow)
+        expect(my_car).to be(my_kids_borrow)
+      end
+      it 'should not be/equal your car' do
+        expect(my_car).not_to be(your_car)
+      end
+      it 'should not be/equal any other 2017 red Jetta' do
+        expect(my_car).not_to equal([2017, 'red', 'Jetta'])
+      end
     end
-    it 'should not be/equal any other 2017 red Jetta' do
-      expect(my_car).not_to equal([2017, 'red', 'Jetta'])
-    end
+  end
+end
+
+# ASSIGNMENT
+
+describe 'equality assignment' do
+  let(:amy) { { 'fav_color' => 'blue', 'fav_food' => 'tacos' } }
+  let(:bob) { { 'fav_color' => 'blue', 'fav_food' => 'tacos' } }
+  let(:copy_cat) { amy }
+  # Write a test that express each of the following statements
+
+  # remove the 'x' before running this test
+  xit 'amy is eq to bob' do
+    expect(amy).to eq(bob) # REMOVE
+  end
+
+  # remove the 'x' before running this test
+  xit 'amy is eql to bob' do
+    expect(amy).to eql(bob) # REMOVE
+  end
+
+  # remove the 'x' before running this test
+  xit 'amy is not equal to bob' do
+    expect(amy).not_to be(bob) # REMOVE
+  end
+
+  # remove the 'x' before running this test
+  xit 'copy_cat is equal to amy' do
+    expect(copy_cat).to be(amy) # REMOVE
   end
 end
