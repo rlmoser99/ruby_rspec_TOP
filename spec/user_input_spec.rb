@@ -1,8 +1,20 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
+# rubocop:disable Metrics/BlockLength, Layout/LineLength
 
 require_relative '../lib/user_input'
+
+# Ruby code that was written before you learned how to use rpsec, may be nearly impossible to test.
+# For example, in the user_input file, there is a game called ImpossibleTestGame.
+# It is the exact same game as NumberGame, which is much easier to test.
+
+# The difference is that NumberGame has smaller, isolated methods that are easier to test.
+# Therefore, look at refactoring your method(s) if you don't know how to test them.
+
+# In addition, don't write tests for methods that only contain puts statements.
+# There is an example below, but it is truly un-neccesary.
+# Puts is a basic part of the standard ruby library & is already well tested.
+# In addition, most real world applications don't even output like that except to loggers.
 
 describe NumberGame do
   it { is_expected.to respond_to(:game_solution, :count) }
@@ -69,4 +81,4 @@ describe NumberGame do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength
+# rubocop:enable Metrics/BlockLength, Layout/LineLength

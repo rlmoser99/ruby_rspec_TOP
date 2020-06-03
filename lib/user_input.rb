@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# Game that is nearly impossible to test
+# Game that is nearly impossible to test.
+# Therefore is re-written below (NumberGame) with isolated methods easy to test
 class ImpossibleTestGame
   attr_accessor :game_solution, :count
 
