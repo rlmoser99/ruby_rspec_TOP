@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Layout/LineLength
 describe String do
   # The let method is passed a block that computes the value of the variable.
   # It will be called if the value of the variable when needed (known as: lazy loading)
@@ -47,3 +48,4 @@ describe String do
     expect(favorite_food).to eq('fajitas') # REMOVE
   end
 end
+# rubocop:enable Layout/LineLength

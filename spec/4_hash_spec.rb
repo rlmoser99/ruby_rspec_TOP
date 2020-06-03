@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Layout/LineLength, Metrics/BlockLength
 describe Hash do
   # It is recommended to implicitly define the subject with an alias
   # https://relishapp.com/rspec/rspec-core/docs/subject/explicit-subject
@@ -72,3 +73,4 @@ describe Hash do
     expect(my_car['assisted_steering?']).to be false # REMOVE
   end
 end
+# rubocop:enable Layout/LineLength, Metrics/BlockLength

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Layout/LineLength, Metrics/BlockLength
+
 # In a typical work-flow, the class being tested will be located in a different file.
 # But for this simple example, let's keep everything together.
 class RandomNumber
@@ -22,8 +24,8 @@ describe RandomNumber do
 
   context 'when tests can be compounded' do
     it 'should be greater then 0 and less then 6' do
-      # ROBOCOP LINTER - CHECK OUT ALTERNATIVE?
-      expect(subject.number).to (be > 0).and be < 6
+      # rubocop produced an error with (be > 0).and be < 6, but works with the following:
+      expect(subject.number).to be_positive.and be < 6
     end
 
     context 'when random number is 3' do
@@ -84,3 +86,4 @@ describe Array do
     end
   end
 end
+# rubocop:enable Layout/LineLength, Metrics/BlockLength

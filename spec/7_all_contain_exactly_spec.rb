@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Layout/LineLength
+
 # In a typical work-flow, the object being tested will be located in a different file.
 # But for these simple examples, we will be putting the object directly in describe
 describe [11, 17, 21] do
@@ -36,3 +38,4 @@ describe [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] do
     expect(subject).to start_with(1, 1, 2).and all(be < 100)
   end
 end
+# rubocop:enable Layout/LineLength

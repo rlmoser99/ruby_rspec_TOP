@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/movie_spec'
+require_relative '../lib/movie'
 
 # describe Character do
 # end

@@ -24,6 +24,7 @@ class Character
   end
 end
 
+# Things to do with PB
 class PrincessBride
   attr_accessor :characters, :props
   def initialize

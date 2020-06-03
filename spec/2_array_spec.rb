@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Layout/LineLength
 describe Array do
   # An implicitly defined 'subject' is available when the outermost example group is a class.
   # 'subject' will be an instance of that class.
@@ -68,3 +69,4 @@ describe Array do
     end
   end
 end
+# rubocop:enable Layout/LineLength

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
+
 require_relative '../lib/user_input'
 
 describe NumberGame do
@@ -67,3 +69,4 @@ describe NumberGame do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

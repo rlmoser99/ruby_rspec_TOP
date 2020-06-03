@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-# https://eddyluten.com/rspec-be_truthy-exists-or-be-true
+# rubocop:disable Layout/LineLength
 
 # Do not use 'be_truthy' or 'be_falsey' for methods that should only be evaluated into a Boolean
+# https://eddyluten.com/rspec-be_truthy-exists-or-be-true
 describe 'truthy and falsy' do
   context 'almost everything is truthy' do
     it 'should be truthy' do
@@ -25,3 +26,4 @@ describe 'truthy and falsy' do
     end
   end
 end
+# rubocop:enable Layout/LineLength

@@ -41,6 +41,7 @@ more compound examples
 
 
 # compound expectations not used yet:
+using or instead of and
 expect(subject.sample).to eq(:usa).or eq(:canada).or eq(:mexico)
 expect(subject).to be_even.and respond_to(:times)
 
