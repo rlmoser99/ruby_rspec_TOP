@@ -18,13 +18,13 @@ describe RandomNumber do
 
   # There can be multiple tests in one example block
   it 'should be greater then 0 and less then 6' do
-    expect(subject.number).to be > 0
+    expect(subject.number).to be >= 1
     expect(subject.number).to be < 6
   end
 
   context 'when tests can be compounded' do
     it 'should be greater then 0 and less then 6' do
-      # rubocop produced an error with (be > 0).and be < 6, but works with the following:
+      # side note: rspec would run, but rubocop didnt like (be >= 1).and be < 6
       expect(subject.number).to be_positive.and be < 6
     end
 

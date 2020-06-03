@@ -30,7 +30,7 @@ truthy and falsy
 # 6_EQUALITY_MATCHERS
 eq & eql & equal & be
 
-# 7_???
+# 7_ALL_CONTAIN_EXACTLY
 put objects in describe
 all matcher
 contain_exactly matcher
