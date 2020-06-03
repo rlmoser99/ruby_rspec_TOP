@@ -14,6 +14,7 @@ one-lines syntex
 predicate matchers
 
 # 3_NUMBER_SPEC
+## ROBOCOP LINTER - CHECK OUT ALTERNATIVE?
 comparison matchers
 .not_to instead of .to
 (assignment has 'include')
@@ -27,31 +28,52 @@ truthy and falsy
 (no assignment)
 
 # 6_EQUALITY_MATCHERS
-equal and be are the same - some people prefer to use 'be' over 'equal' because the name implies same object expect(first).to be(second)
-equal is checking for equal object identity (every object of the same class, are different objects)
-eq      value
-eql     value + type
-equal   object identity
-be      object identity
+eq & eql & equal & be
 
-describe 'equal and be matcher' do
-  let(:c) { [1, 2, 3] }
-  let(:d) { [1, 2, 3] }
-  let(:e) { c }
+# 7_???
+put objects in describe
+all matcher
+contain_exactly matcher
+start_with
+end_with
+more compound examples
 
-  it 'cares about object identity' do
-    expect(c).to eq(d)
-    expect(c).to eql(d)
 
-    expect(c).to equal(e)
-    expect(c).to be(e)
 
-    expect(c).not_to equal(d)
-    expect(c).not_to equal([1, 2, 3])
+# compound expectations not used yet:
+expect(subject.sample).to eq(:usa).or eq(:canada).or eq(:mexico)
+expect(subject).to be_even.and respond_to(:times)
+
+# change matcher (syntex can be too tightly coupled to the subject)
+expect { subject.pop }.to change { subject.length }.from(4).to(3)
+expect { subject.pop }.to change { subject.length }.by(-1)
+expect { do_something }.to change(something).to(new_value)
+
+# default parameters - test without & with parameter
+let(:language) { ProgrammingLanguage.new('Python') }
+expect(language.name).to eq('Python')
+let(:language) { ProgrammingLanguage.new }
+expect(language.name).to eq('Ruby')
+
+# described_class = Ensure for future class name changes
+subject { described_class.new('Boris') }
+(example: pet to animal) ?
+
+# have_attributes
+describe ProfessionalWrestler.new('Stone Cold Steve Austin', 'Stunner') do
+expect(subject).to have_attributes(name: 'Stone Cold Steve Austin', finishing_move: 'Stunner')
+it { is_expected.to have_attributes(name: 'Stone Cold Steve Austin', finishing_move: 'Stunner') }
+
+# satisfy
+(rubocop does not like the one-line)
+expect(subject).to satisfy { |value| value == value.reverse }
+
+When the test fails with 'racecars', this test will generate it's own message in a more readable format to clearly communicate the error.
+it 'can accept a custom error message' do
+  expect(subject).to satisfy('be a palindrome') do |value|
+    value == value.reverse
   end
 end
-
-change?
 
 # A custom error message, gives you the ability to provide "documentation" material on what should be happening.
 comparison = 'Spade'
@@ -75,64 +97,13 @@ after(:example) do
   puts 'After Example Hook'
 end
 
-# default parameters - test without & with parameter
-let(:language) { ProgrammingLanguage.new('Python') }
-expect(language.name).to eq('Python')
-let(:language) { ProgrammingLanguage.new }
-expect(language.name).to eq('Ruby')
-
-# described_class = Ensure for future class name changes
-subject { described_class.new('Boris') }
-(example: pet to animal) ?
-
 # shared_examples (maybe with polymorphism)
 shared_context possible. not sure of use cases.
-
-
-# Using 'all'
-expect([5, 7, 9, 13]).to all(be_odd)
-expect([4, 6, 8, 10]).to all(be_even)
-expect([[], [], []]).to all(be_empty)
-expect([0, 0]).to all(be_zero)
-
-# Put objects in describe
-describe [5, 7, 9] do
-  it { is_expected.to all(be_odd) }
-  it { is_expected.to all(be < 10) }
-end
-
-# change matcher (syntex can be too tightly coupled to the subject)
-expect { subject.pop }.to change { subject.length }.from(4).to(3)
-expect { subject.pop }.to change { subject.length }.by(-1)
-expect { do_something }.to change(something).to(new_value)
-
-# contain exactly
-subject { [1, 2, 3] }
-expect(subject).to contain_exactly(1, 2, 3)
-it { is_expected.to contain_exactly(3, 1, 2) }
-
-# start_with and end_with
-describe [:a, :b, :c, :d] do
-expect(subject).to start_with(:a)
-expect(subject).to start_with(:a, :b)
-expect(subject).to start_with(:a, :b, :c)
-expect(subject).to end_with(:d)
-expect(subject).to end_with(:c, :d)
-
-# have_attributes
-describe ProfessionalWrestler.new('Stone Cold Steve Austin', 'Stunner') do
-expect(subject).to have_attributes(name: 'Stone Cold Steve Austin', finishing_move: 'Stunner')
-it { is_expected.to have_attributes(name: 'Stone Cold Steve Austin', finishing_move: 'Stunner') }
-
-# include matcher
-expect(subject).to include('late')
-it { is_expected.to include('choc') }
 
 # specific or custom errors
 expect { some_method }.to raise_error(NameError)
 expect { 10 / 0 }.to raise_error(ZeroDivisionError)
 expect { raise CustomError }.to raise_error(CustomError)
-
 
 # polymorphism - (many shapes)
 we shouldn't worry about about kind of object is, but what is can respond to...
@@ -141,24 +112,6 @@ This is a great way to test different class types with the same methods.
 This literally just tests in a method exists on a object.
 expect(subject).to respond_to(:drink, :discard, :purchase)
 expect(subject).to respond_to(:purchase).with(1).arguments
-
-# satisfy
-(rubocop does not like the one-line)
-expect(subject).to satisfy { |value| value == value.reverse }
-
-When the test fails with 'racecars', this test will generate it's own message in a more readable format to clearly communicate the error.
-it 'can accept a custom error message' do
-  expect(subject).to satisfy('be a palindrome') do |value|
-    value == value.reverse
-  end
-end
-
-# compound expectations
-RSpec.describe 'caterpillar' do
-it { is_expected.to start_with('cat').and end_with('pillar') }
-expect(subject.sample).to eq(:usa).or eq(:canada).or eq(:mexico)
-expect(subject).to include(42).and start_with(4, 8, 15)
-expect(subject).to be_even.and respond_to(:times)
 
 # Test object methods in isolation, we can emulate the behavior of other objects.
 Real-life application - reaching out to a database to retrieve info, reach out to a server to get info, etc. So you can assume that whatever you need to do, provides you correct info.

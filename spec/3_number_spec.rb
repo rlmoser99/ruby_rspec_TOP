@@ -22,6 +22,7 @@ describe RandomNumber do
 
   context 'when tests can be compounded' do
     it 'should be greater then 0 and less then 6' do
+      # ROBOCOP LINTER - CHECK OUT ALTERNATIVE?
       expect(subject.number).to (be > 0).and be < 6
     end
 
