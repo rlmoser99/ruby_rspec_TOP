@@ -19,10 +19,39 @@ comparison matchers
 (assignment has 'include')
 
 # 4_HASH_SPEC
-change?
-true/false?
-include with hash?
+true/false
+include
 
+# 5_TRUTHY_FALSY
+truthy and falsy
+(no assignment)
+
+# 6_EQUALITY_MATCHERS
+equal and be are the same - some people prefer to use 'be' over 'equal' because the name implies same object expect(first).to be(second)
+equal is checking for equal object identity (every object of the same class, are different objects)
+eq      value
+eql     value + type
+equal   object identity
+be      object identity
+
+describe 'equal and be matcher' do
+  let(:c) { [1, 2, 3] }
+  let(:d) { [1, 2, 3] }
+  let(:e) { c }
+
+  it 'cares about object identity' do
+    expect(c).to eq(d)
+    expect(c).to eql(d)
+
+    expect(c).to equal(e)
+    expect(c).to be(e)
+
+    expect(c).not_to equal(d)
+    expect(c).not_to equal([1, 2, 3])
+  end
+end
+
+change?
 
 # A custom error message, gives you the ability to provide "documentation" material on what should be happening.
 comparison = 'Spade'
@@ -59,30 +88,6 @@ subject { described_class.new('Boris') }
 # shared_examples (maybe with polymorphism)
 shared_context possible. not sure of use cases.
 
-# Equality Matchers
-equal and be are the same - some people prefer to use 'be' over 'equal' because the name implies same object expect(first).to be(second)
-equal is checking for equal object identity (every object of the same class, are different objects)
-eq      value
-eql     value + type
-equal   object identity
-be      object identity
-
-describe 'equal and be matcher' do
-  let(:c) { [1, 2, 3] }
-  let(:d) { [1, 2, 3] }
-  let(:e) { c }
-
-  it 'cares about object identity' do
-    expect(c).to eq(d)
-    expect(c).to eql(d)
-
-    expect(c).to equal(e)
-    expect(c).to be(e)
-
-    expect(c).not_to equal(d)
-    expect(c).not_to equal([1, 2, 3])
-  end
-end
 
 # Using 'all'
 expect([5, 7, 9, 13]).to all(be_odd)
@@ -95,21 +100,6 @@ describe [5, 7, 9] do
   it { is_expected.to all(be_odd) }
   it { is_expected.to all(be < 10) }
 end
-
-# truthy and falsey
-expect(true).to be_truthy
-expect('Hello').to be_truthy
-expect(5).to be_truthy
-expect(0).to be_truthy
-expect(-1).to be_truthy
-expect([]).to be_truthy
-expect([1, 2]).to be_truthy
-expect({}).to be_truthy
-expect(:symbol).to be_truthy
-expect(false).to be_falsy
-expect(nil).to be_falsy
-my_hash = { a: 5 }
-expect(my_hash[:b]).to be_nil
 
 # change matcher (syntex can be too tightly coupled to the subject)
 expect { subject.pop }.to change { subject.length }.from(4).to(3)
