@@ -21,35 +21,43 @@ end
 
 describe 'spaceship' do
   it 'starts with space' do
+    expect(subject).to start_with('s')
+    expect(subject).to start_with('spa')
     expect(subject).to start_with('space')
+    expect(subject).to start_with('spaceship')
   end
 
   it 'ends with ship' do
+    expect(subject).to end_with('p')
+    expect(subject).to end_with('hip')
     expect(subject).to end_with('ship')
+    expect(subject).to end_with('spaceship')
   end
 end
 
-describe [:a, :b, :c, :d, :e, :f, :g] do
-  it 'starts with examples' do
-    expect(subject).to start_with(:a)
-    expect(subject).to start_with(:a, :b, :c)
-    expect(subject).to start_with(:a, :b, :c, :d, :e, :f, :g)
+describe [:a, :b, :c, :d, :e] do
+  it 'should start with :a and end with :e' do
+    expect(subject).to start_with(:a).and end_with(:e)
   end
 
-  it 'ends with examples' do
-    expect(subject).to end_with(:g)
-    expect(subject).to end_with(:e, :f, :g)
-    expect(subject).to end_with(:a, :b, :c, :d, :e, :f, :g)
+  it 'should start with :a and include :c' do
+    expect(subject).to start_with(:a).and include(:c)
   end
 end
+
+# ASSIGNMENT
 
 describe [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] do
-  it 'includes 21 and ends with 89' do
-    expect(subject).to include(21).and end_with(89)
+  # Write a test that expresses each of the following statements
+
+  # remove the 'x' before running this test
+  it 'should include 21 and end with 89' do
+    expect(subject).to include(21).and end_with(89) # REMOVE
   end
 
-  it 'starts with 1, 1, 2 and all under 100' do
-    expect(subject).to start_with(1, 1, 2).and all(be < 100)
+  # remove the 'x' before running this test
+  it 'should start with 1, 1, 2 and all under 100' do
+    expect(subject).to start_with(1, 1, 2).and all(be < 100) # REMOVE
   end
 end
 # rubocop:enable Layout/LineLength

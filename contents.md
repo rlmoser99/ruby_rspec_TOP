@@ -38,12 +38,12 @@ start_with
 end_with
 more compound examples
 
+# 8_CHANGE_MATCHER
+
 
 
 # compound expectations not used yet:
-using or instead of and
 expect(subject.sample).to eq(:usa).or eq(:canada).or eq(:mexico)
-expect(subject).to be_even.and respond_to(:times)
 
 # change matcher (syntex can be too tightly coupled to the subject)
 expect { subject.pop }.to change { subject.length }.from(4).to(3)
@@ -130,6 +130,7 @@ expect(stuntman).to receive(:fall_off_ladder).once
 expect(stuntman).to receive(:act).at_least(2).times
 
 # Stub -  We are going to stub the .sum method on an array.
+https://www.tutorialspoint.com/rspec/rspec_stubs.htm
 it 'can stub one or more methods on a real object' do
   arr = [1, 2, 3]
   allow(arr).to receive(:sum).and_return(10)
@@ -279,3 +280,6 @@ expect(foo).to have_received(:bar)
 it "should be true", skip: true do
   expect(1).to eq(2)
 end
+
+# Cheat Sheet
+https://kapeli.com/cheat_sheets/RSpec_Expectations.docset/Contents/Resources/Documents/index
