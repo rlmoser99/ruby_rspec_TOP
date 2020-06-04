@@ -2,34 +2,34 @@
 should introduce at least once new concept.\
 should have an assignment to complete that covers any previous material.
 
-# 1_string_spec
+## 1_string_spec
 let variables\
 let variables can change\
 subject/let variables resets between each example\
 put conditional information in the 'context' string
 
-# 2_array_spec
+## 2_array_spec
 implicitly defined 'subject'\
 one-lines syntex\
 predicate matchers
 
-# 3_number_spec
+## 3_number_spec
 comparison matchers\
 .not_to instead of .to\
 (assignment has 'include')
 
-# 4_hash_spec
+## 4_hash_spec
 true/false\
 include
 
-# 5_truthy_falsy
+## 5_truthy_falsy
 truthy and falsy\
 (no assignment)
 
-# 6_equality_matchers
+## 6_equality_matchers
 eq & eql & equal & be\
 
-# 7_all_contain_exactly
+## 7_all_contain_exactly
 put objects in describe\
 all matcher\
 contain_exactly matcher\
@@ -37,39 +37,24 @@ start_with\
 end_with\
 more compound examples
 
-# 8_change_matcher
+## 8_change_matcher
 using .or with compound expectations\
 change matcher (syntex can be too tightly coupled to the subject)
 
-# 9_satisfy_matcher
+## 9_satisfy_matcher
 satisfy matcher\
 custom error message for satisfy method
 
+## 10_drinks_spec
+default parameters\
+described class\
 
-
+Can not cover everything!!!
 
 # FUTURE:
 
-## Be-within matcher
-https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/be-within-matcher
-
-## Cover matcher
-https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/cover-matcher
-
-
-## Exist matcher
-add this to truthy falsy\
-https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/exist-matcher
-
-## default parameters - test without & with parameter
-let(:language) { ProgrammingLanguage.new('Python') }
-expect(language.name).to eq('Python')
-let(:language) { ProgrammingLanguage.new }
-expect(language.name).to eq('Ruby')
-
-## described_class = Ensure for future class name changes
-subject { described_class.new('Boris') }
-(example: pet to animal) ?
+Can add method name to subject, for example:
+subject { described_class.do_something } or subject { MyClass.do_something }
 
 ## have_attributes
 https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/have-attributes-matcher
@@ -77,41 +62,8 @@ describe ProfessionalWrestler.new('Stone Cold Steve Austin', 'Stunner') do
 expect(subject).to have_attributes(name: 'Stone Cold Steve Austin', finishing_move: 'Stunner')
 it { is_expected.to have_attributes(name: 'Stone Cold Steve Austin', finishing_move: 'Stunner') }
 
-
-
-## A custom error message, gives you the ability to provide "documentation" material on what should be happening.
-https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/customized-message
-comparison = 'Spade'
-expect(card.suit).to eq(comparison), Expected #{comparison}, not #{card.suit}."
-
-## .not_to with errors
-using this as a .not_to is fine. Not when you are testing for a specific error, you should be explicit with a specific error name.
-expect { 11 / 3 }.not_to raise_error
-
-## Before and After Hooks
-before(:context) do
-  puts 'Before Context Hook - use case: to open a database connection'
-end
-after(:context) do
-  puts 'After Context Hook - use case: to close a database connection'
-end
-before(:example) do
-  puts 'Before Example Hook'
-end
-after(:example) do
-  puts 'After Example Hook'
-end
-
-## shared_examples (maybe with polymorphism)
-shared_context possible. not sure of use cases.
-
-## specific or custom errors
-https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/raise-error-matcher
-expect { some_method }.to raise_error(NameError)
-expect { 10 / 0 }.to raise_error(ZeroDivisionError)
-expect { raise CustomError }.to raise_error(CustomError)
-
 ## polymorphism - (many shapes)
+shared_examples - one test, for different classes.
 https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/respond-to-matcher
 we shouldn't worry about about kind of object is, but what is can respond to...
 It doesn't matter if we are responding to HotChocolate, Coffee, or Milk
@@ -216,28 +168,17 @@ it 'adds a car to its storage' do
   expect(subject.storage.first).to eq(car)
 end
 
-
-
 http://testing-for-beginners.rubymonstas.org/test_doubles.html
 
-From http://www.betterspecs.org/#describe
-  expect(response).to respond_with_content_type(:json)
-  expect(response).to assign_to(:resource)
+## Review TOP resources to make sure that this material is consistent:
+http://www.betterspecs.org/
 
-## Seen in TOP student project. That I don't understand fully:
+## Check out TOP student project. To see if there is something that I don't understand yet, like:
 game.instance_variable_set
-expect(STDOUT).to receive(:puts).at_least(:twice)
-expect(game.intro).not_to raise_error
 
 ## Rspec & Rubocop Style Guide:
 
-expect(foo).to receive(:bar).once
-expect(foo).to receive(:bar).twice
-expect(foo).to receive(:bar).at_least(:once)
-expect(foo).to receive(:bar).at_least(:twice)
-expect(foo).to receive(:bar).at_most(:once)
-
-Prefer instance doubles over stubbing any instance of a class
+### Prefer instance doubles over stubbing any instance of a class
 let(:my_instance) { instance_double(MyClass) }
 allow(MyClass).to receive(:new).and_return(my_instance)
 allow(my_instance).to receive(:foo)
@@ -246,26 +187,28 @@ let(:foo) do
   instance_double("ClassName", method_name: 'returned value')
 end
 
-## Check that the first argument to the top level describe is a constant.
-describe TestedClass do
-
-## Add method name to subject
-describe MyClass do
-  subject { described_class.do_something }
-end
-subject { MyClass.do_something }
-
-## RSpec/DescribedClassModuleWrapping
+### RSpec/DescribedClassModuleWrapping
 RSpec.describe MyModule::MyClass do
   ...
 end
 
-## RSpec/ExpectOutput
-expect { my_app.print_report }.to output('Hello World').to_stdout
-
-## RSpec/InstanceSpy
+### RSpec/InstanceSpy
 foo = instance_spy(Foo)
 expect(foo).to have_received(:bar)
 
-# Cheat Sheet
+# Not Going to Cover?
+be_within matcher\
+cover matcher\
+exist matcher (link on truthy/falsy talks about it)\
+throw_symbol matcher\
+yield matcher\
+output matcher\
+shared_context\
+raise-error matcher\
+.not_to with errors\
+custom error message - expect(card.suit).to eq(comparison), Expected #{comparison}, not #{card.suit}."\
+before and after hooks\
+
+# Resources to Share
+Cheat Sheet\
 https://kapeli.com/cheat_sheets/RSpec_Expectations.docset/Contents/Resources/Documents/index
