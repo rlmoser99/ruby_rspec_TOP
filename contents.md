@@ -39,16 +39,10 @@ end_with
 more compound examples
 
 # 8_CHANGE_MATCHER
+using .or with compound expectations
+change matcher (syntex can be too tightly coupled to the subject)
 
 
-
-# compound expectations not used yet:
-expect(subject.sample).to eq(:usa).or eq(:canada).or eq(:mexico)
-
-# change matcher (syntex can be too tightly coupled to the subject)
-expect { subject.pop }.to change { subject.length }.from(4).to(3)
-expect { subject.pop }.to change { subject.length }.by(-1)
-expect { do_something }.to change(something).to(new_value)
 
 # default parameters - test without & with parameter
 let(:language) { ProgrammingLanguage.new('Python') }
