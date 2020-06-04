@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Layout/LineLength
+
 describe Array do
   subject(:drinks) { %w[coffee tea water] }
 
@@ -13,10 +15,6 @@ describe Array do
   # Testing for a change to occur
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/change-matcher
   context 'when testing for a change' do
-    it 'should change the length' do
-      expect { drinks << 'juice' }.to change { drinks.length }
-    end
-
     it 'should change the length to 4' do
       expect { drinks << 'juice' }.to change { drinks.length }.to(4)
     end
@@ -67,3 +65,4 @@ describe 'lucky numbers with rotate! method' do
     end
   end
 end
+# rubocop:enable Layout/LineLength

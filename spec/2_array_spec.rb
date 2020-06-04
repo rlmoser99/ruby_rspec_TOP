@@ -7,6 +7,8 @@ describe Array do
   # https://relishapp.com/rspec/rspec-core/v/2-11/docs/subject/implicitly-defined-subject
 
   context 'when subject is implicitly defined' do
+    # type matchers:
+    # https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/type-matchers
     it 'should be an Array' do
       expect(subject).to be_a(Array)
     end

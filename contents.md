@@ -1,83 +1,94 @@
 # Each file:
-should introduce at least once new concept.
+should introduce at least once new concept.\
 should have an assignment to complete that covers any previous material.
 
-# 1_STRING_SPEC
-let variables
-let variables can change
-Subject/Let variables resets between each example
+# 1_string_spec
+let variables\
+let variables can change\
+subject/let variables resets between each example\
 put conditional information in the 'context' string
 
-# 2_ARRAY_SPEC
-implicitly defined 'subject'
-one-lines syntex
+# 2_array_spec
+implicitly defined 'subject'\
+one-lines syntex\
 predicate matchers
 
-# 3_NUMBER_SPEC
-## ROBOCOP LINTER - CHECK OUT ALTERNATIVE?
-comparison matchers
-.not_to instead of .to
+# 3_number_spec
+comparison matchers\
+.not_to instead of .to\
 (assignment has 'include')
 
-# 4_HASH_SPEC
-true/false
+# 4_hash_spec
+true/false\
 include
 
-# 5_TRUTHY_FALSY
-truthy and falsy
+# 5_truthy_falsy
+truthy and falsy\
 (no assignment)
 
-# 6_EQUALITY_MATCHERS
-eq & eql & equal & be
+# 6_equality_matchers
+eq & eql & equal & be\
 
-# 7_ALL_CONTAIN_EXACTLY
-put objects in describe
-all matcher
-contain_exactly matcher
-start_with
-end_with
+# 7_all_contain_exactly
+put objects in describe\
+all matcher\
+contain_exactly matcher\
+start_with\
+end_with\
 more compound examples
 
-# 8_CHANGE_MATCHER
-using .or with compound expectations
+# 8_change_matcher
+using .or with compound expectations\
 change matcher (syntex can be too tightly coupled to the subject)
 
-# 9_SATISFY_MATCHER
-satisfy matcher
+# 9_satisfy_matcher
+satisfy matcher\
 custom error message for satisfy method
 
 
 
 
+# FUTURE:
+
+## Be-within matcher
+https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/be-within-matcher
+
+## Cover matcher
+https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/cover-matcher
 
 
-# default parameters - test without & with parameter
+## Exist matcher
+add this to truthy falsy\
+https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/exist-matcher
+
+## default parameters - test without & with parameter
 let(:language) { ProgrammingLanguage.new('Python') }
 expect(language.name).to eq('Python')
 let(:language) { ProgrammingLanguage.new }
 expect(language.name).to eq('Ruby')
 
-# described_class = Ensure for future class name changes
+## described_class = Ensure for future class name changes
 subject { described_class.new('Boris') }
 (example: pet to animal) ?
 
-# have_attributes
+## have_attributes
+https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/have-attributes-matcher
 describe ProfessionalWrestler.new('Stone Cold Steve Austin', 'Stunner') do
 expect(subject).to have_attributes(name: 'Stone Cold Steve Austin', finishing_move: 'Stunner')
 it { is_expected.to have_attributes(name: 'Stone Cold Steve Austin', finishing_move: 'Stunner') }
 
-# Regex Match matcher
-https://relishapp.com/rspec/rspec-expectations/v/2-2/docs/matchers/match-matcher
 
-# A custom error message, gives you the ability to provide "documentation" material on what should be happening.
+
+## A custom error message, gives you the ability to provide "documentation" material on what should be happening.
+https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/customized-message
 comparison = 'Spade'
 expect(card.suit).to eq(comparison), Expected #{comparison}, not #{card.suit}."
 
-# .not_to with errors
+## .not_to with errors
 using this as a .not_to is fine. Not when you are testing for a specific error, you should be explicit with a specific error name.
 expect { 11 / 3 }.not_to raise_error
 
-# Before and After Hooks
+## Before and After Hooks
 before(:context) do
   puts 'Before Context Hook - use case: to open a database connection'
 end
@@ -91,15 +102,17 @@ after(:example) do
   puts 'After Example Hook'
 end
 
-# shared_examples (maybe with polymorphism)
+## shared_examples (maybe with polymorphism)
 shared_context possible. not sure of use cases.
 
-# specific or custom errors
+## specific or custom errors
+https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/raise-error-matcher
 expect { some_method }.to raise_error(NameError)
 expect { 10 / 0 }.to raise_error(ZeroDivisionError)
 expect { raise CustomError }.to raise_error(CustomError)
 
-# polymorphism - (many shapes)
+## polymorphism - (many shapes)
+https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/respond-to-matcher
 we shouldn't worry about about kind of object is, but what is can respond to...
 It doesn't matter if we are responding to HotChocolate, Coffee, or Milk
 This is a great way to test different class types with the same methods.
@@ -107,7 +120,7 @@ This literally just tests in a method exists on a object.
 expect(subject).to respond_to(:drink, :discard, :purchase)
 expect(subject).to respond_to(:purchase).with(1).arguments
 
-# Test object methods in isolation, we can emulate the behavior of other objects.
+## Test object methods in isolation, we can emulate the behavior of other objects.
 Real-life application - reaching out to a database to retrieve info, reach out to a server to get info, etc. So you can assume that whatever you need to do, provides you correct info.
 stuntman = double('Mr. Danger')
 allow(stuntman).to receive_messages(fall_off_ladder: 'Ouch', light_on_fire: true)
@@ -122,7 +135,7 @@ expect(stuntman).to receive(:light_on_fire).at_most(1).times
 expect(stuntman).to receive(:fall_off_ladder).once
 expect(stuntman).to receive(:act).at_least(2).times
 
-# Stub -  We are going to stub the .sum method on an array.
+## Stub -  We are going to stub the .sum method on an array.
 https://www.tutorialspoint.com/rspec/rspec_stubs.htm
 it 'can stub one or more methods on a real object' do
   arr = [1, 2, 3]
@@ -135,8 +148,8 @@ it 'can stub one or more methods on a real object' do
   expect(arr.sum).to eq(10)
 end
 
-# If you expect a method to return different values each time it is called. Here we are mocking the behavior of an array [:b, :c]
-# This is not the best example. It will typically used for very complicated behavior.
+## If you expect a method to return different values each time it is called. Here we are mocking the behavior of an array [:b, :c]
+## This is not the best example. It will typically used for very complicated behavior.
 it 'can return multiple return values in sequence' do
   mock_array = double
   allow(mock_array).to receive(:pop).and_return(:c, :b, nil)
@@ -146,9 +159,8 @@ it 'can return multiple return values in sequence' do
   expect(mock_array.pop).to be_nil
 end
 
-# RIGHT HERE
-# We are going to stubbing/mocking (emulating) the behavior of [1, 2, 3].
-# Re-write this with letters, because it is confusing to have 1 arg and return 1.
+## We are going to stubbing/mocking (emulating) the behavior of [1, 2, 3].
+## Re-write this with letters, because it is confusing to have 1 arg and return 1.
 it 'can return different values depending on the argument' do
   three_element_array = double
 
@@ -164,7 +176,7 @@ it 'can return different values depending on the argument' do
   expect(three_element_array.first(100)).to eq(['a', 'b', 'c'])
 end
 
-# Using instance double gives the tests more security, and is preferred over regular doubles when possible.
+## Using instance double gives the tests more security, and is preferred over regular doubles when possible.
 The first argument has to be the class that you want to make a double of.
 rspec will give you an error if you pass in the wrong number of arguments then defined in class.
 We are not making a mock of the person class, we are making a mock of an instance of ther person class.
@@ -173,7 +185,7 @@ allow(person).to receive(:a).with(3).and_return('Hello')
 expect(person.a(3)).to eq('Hello')
 
 
-# Many people use mock, spies and doubles interchangeably, but they are all slightly different.
+## Many people use mock, spies and doubles interchangeably, but they are all slightly different.
 Double => Pattern: Create Double, Give it a message, Expect that double to receive that message, before we invoke the method that would send the message to the double. So the expectation was before the action.
 
 Spies are ultimate type of test double. They follow a slightly different pattern. We assert a message has been received after the action. So, the expectation is after the action. Spies automatically 'observe' all the messages that are sent to an object, even if we have not explicitly defined that message.
@@ -188,7 +200,7 @@ expect(animal).to have_received(:eat_food).at_least(2).times
 RSpec.describe Garage do
   let(:car) { instance_double(Car) }
 
-# This mocks a class method. This intercepts this message and creates the car instance double.
+## This mocks a class method. This intercepts this message and creates the car instance double.
 This also gives us spy-like functionality in our example.
 Our test is going to be on the Garage class. All of the dependencies on the Car class need to be faked. There are 2 dependencies in this example.
 We are invoking the new method on the class itself and we also need to fake what car returns. So, we need to fake the Car class and the Car instance.
@@ -212,19 +224,18 @@ From http://www.betterspecs.org/#describe
   expect(response).to respond_with_content_type(:json)
   expect(response).to assign_to(:resource)
 
-# Seen in TOP student project. That I don't understand fully:
+## Seen in TOP student project. That I don't understand fully:
 game.instance_variable_set
 expect(STDOUT).to receive(:puts).at_least(:twice)
 expect(game.intro).not_to raise_error
 
-# Rspec & Rubocop Style Guide:
+## Rspec & Rubocop Style Guide:
 
 expect(foo).to receive(:bar).once
 expect(foo).to receive(:bar).twice
 expect(foo).to receive(:bar).at_least(:once)
 expect(foo).to receive(:bar).at_least(:twice)
 expect(foo).to receive(:bar).at_most(:once)
-
 
 Prefer instance doubles over stubbing any instance of a class
 let(:my_instance) { instance_double(MyClass) }
@@ -235,44 +246,26 @@ let(:foo) do
   instance_double("ClassName", method_name: 'returned value')
 end
 
-# context should not be used for specifying methods.
-describe '#foo_bar' do (YES)
-context '#foo_bar' do (NO)
-
-# context start with
-- when
-- with
-- without
-- if
-- unless
-- for
-Other acceptable prefixes may include if, unless, for, before, after, or during.
-
-# Check that the first argument to the top level describe is a constant.
+## Check that the first argument to the top level describe is a constant.
 describe TestedClass do
 
-# Add method name to subject
+## Add method name to subject
 describe MyClass do
   subject { described_class.do_something }
 end
 subject { MyClass.do_something }
 
-# RSpec/DescribedClassModuleWrapping
+## RSpec/DescribedClassModuleWrapping
 RSpec.describe MyModule::MyClass do
   ...
 end
 
-# RSpec/ExpectOutput
+## RSpec/ExpectOutput
 expect { my_app.print_report }.to output('Hello World').to_stdout
 
-# RSpec/InstanceSpy
+## RSpec/InstanceSpy
 foo = instance_spy(Foo)
 expect(foo).to have_received(:bar)
-
-# Skips a test ??!!!
-it "should be true", skip: true do
-  expect(1).to eq(2)
-end
 
 # Cheat Sheet
 https://kapeli.com/cheat_sheets/RSpec_Expectations.docset/Contents/Resources/Documents/index
