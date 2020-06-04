@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
-# Basic Drink Class
+# very basic Drink class
 class Drink
-  attr_accessor :type
+  attr_accessor :type, :ounces
 
-  def initialize(type = 'water')
+  def initialize(type = 'water', ounces = 16)
     @type = type
+    @ounces = ounces
+  end
+
+  def full?
+    ounces == 16
   end
 end

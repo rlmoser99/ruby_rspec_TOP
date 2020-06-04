@@ -41,7 +41,38 @@ describe Drink do
   end
 end
 
-# Can add method name to subject, for example:
-# subject { described_class.do_something } or subject { MyClass.do_something }
+# ASSIGNMENT
+
+describe Drink do
+  # For both contexts, write a subject & 2 tests that expresses each of the following statements
+
+  context 'when my drink is new' do
+    subject(:my_drink) { described_class.new('tea') } # REMOVE
+
+    # remove the 'x' before running this test
+    xit 'should have 16 ounces' do
+      expect(my_drink.ounces).to eq(16) # REMOVE
+    end
+
+    # remove the 'x' before running this test
+    xit 'should be full' do
+      expect(my_drink.full?).to be true # REMOVE
+    end
+  end
+
+  context 'when my drink only has 12 ounces' do
+    subject(:my_drink) { described_class.new('tea', 12) } # REMOVE
+
+    # remove the 'x' before running this test
+    xit 'should have 12 ounces' do
+      expect(my_drink.ounces).to eq(12) # REMOVE
+    end
+
+    # remove the 'x' before running this test
+    xit 'should not be full' do
+      expect(my_drink.full?).to be false # REMOVE
+    end
+  end
+end
 
 # rubocop:enable Layout/LineLength
