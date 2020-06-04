@@ -42,7 +42,18 @@ more compound examples
 using .or with compound expectations
 change matcher (syntex can be too tightly coupled to the subject)
 
+# 9_SATISFY_MATCHER
 
+# satisfy
+(rubocop does not like the one-line)
+expect(subject).to satisfy { |value| value == value.reverse }
+
+When the test fails with 'racecars', this test will generate it's own message in a more readable format to clearly communicate the error.
+it 'can accept a custom error message' do
+  expect(subject).to satisfy('be a palindrome') do |value|
+    value == value.reverse
+  end
+end
 
 # default parameters - test without & with parameter
 let(:language) { ProgrammingLanguage.new('Python') }
@@ -59,16 +70,7 @@ describe ProfessionalWrestler.new('Stone Cold Steve Austin', 'Stunner') do
 expect(subject).to have_attributes(name: 'Stone Cold Steve Austin', finishing_move: 'Stunner')
 it { is_expected.to have_attributes(name: 'Stone Cold Steve Austin', finishing_move: 'Stunner') }
 
-# satisfy
-(rubocop does not like the one-line)
-expect(subject).to satisfy { |value| value == value.reverse }
 
-When the test fails with 'racecars', this test will generate it's own message in a more readable format to clearly communicate the error.
-it 'can accept a custom error message' do
-  expect(subject).to satisfy('be a palindrome') do |value|
-    value == value.reverse
-  end
-end
 
 # A custom error message, gives you the ability to provide "documentation" material on what should be happening.
 comparison = 'Spade'
