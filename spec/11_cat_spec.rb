@@ -13,6 +13,10 @@ describe Cat do
     include_examples 'a pet object'
   end
 
+  context 'when Cat has duck-typing methods' do
+    include_examples 'duck-typing method'
+  end
+
   context 'when cat has name and breed, but no color' do
     # https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/have-attributes-matcher
     it 'should have name, breed & color attributes' do

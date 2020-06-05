@@ -13,6 +13,10 @@ describe Dog do
     include_examples 'a pet object'
   end
 
+  context 'when Dog has duck-typing methods' do
+    include_examples 'duck-typing method'
+  end
+
   context 'when dog has name and color, but no breed' do
     it 'should have name, breed & color attributes' do
       expect(subject).to have_attributes(name: 'Toby', breed: nil, color: 'brown')
