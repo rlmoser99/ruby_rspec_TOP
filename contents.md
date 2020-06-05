@@ -64,9 +64,6 @@ Dog only - like_to_run
 
 ## have_attributes
 https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/have-attributes-matcher
-describe ProfessionalWrestler.new('Stone Cold Steve Austin', 'Stunner') do
-expect(subject).to have_attributes(name: 'Stone Cold Steve Austin', finishing_move: 'Stunner')
-it { is_expected.to have_attributes(name: 'Stone Cold Steve Austin', finishing_move: 'Stunner') }
 
 ## polymorphism - (many shapes)
 shared_examples - one test, for different classes.

@@ -3,14 +3,19 @@
 require_relative '../lib/11_dog'
 require_relative '../spec/11_shared_example_spec'
 
+# Not only will the class being tested be located in a different file,
+# but there are multiple classes for this example. All files begin with '11_'
+
 describe Dog do
-  subject(:oscar) { described_class.new('Toby', 'Yorkshire Terrier') }
+  subject(:toby) { described_class.new('Toby', nil, 'brown') }
 
   context 'when Dog is a superclass of Pet' do
     include_examples 'a pet object'
   end
 
-  it 'should have name, breed & color attributes' do
-    expect(subject).to have_attributes(name: 'Toby', breed: 'Yorkshire Terrier', color: nil)
+  context 'when dog has name and color, but no breed' do
+    it 'should have name, breed & color attributes' do
+      expect(subject).to have_attributes(name: 'Toby', breed: nil, color: 'brown')
+    end
   end
 end
