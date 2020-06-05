@@ -5,7 +5,7 @@
 # Now that the basics are covered, we are going to use a typical work-flow.
 # The class being tested will be located in a different file.
 # If you are using VS Code, you can split the screen to see both files. (view menu -> editor layout)
-require_relative '../lib/drink'
+require_relative '../lib/10_drink'
 
 describe Drink do
   # The Drink class needs to have an attr_reader for :type

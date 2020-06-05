@@ -27,7 +27,7 @@ truthy and falsy\
 (no assignment)
 
 ## 6_equality_matchers
-eq & eql & equal & be\
+eq & eql & equal & be
 
 ## 7_all_contain_exactly
 put objects in describe\
@@ -47,14 +47,20 @@ custom error message for satisfy method
 
 ## 10_drinks_spec
 default parameters\
-described class\
+described class
 
-### Can not cover everything!!!
+## 11_polymorphism
+
+Similar Items - Pets => Cats & Dogs
+Similar Attributes - name, breed, color
+Similar Methods - feed, talk
+
+Cat only - like_to_nap
+Dog only - like_to_run
+
+## Can not cover everything!!!
 
 # FUTURE:
-
-Can add method name to subject, for example:
-subject { described_class.do_something } or subject { MyClass.do_something }
 
 ## have_attributes
 https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/have-attributes-matcher
@@ -64,12 +70,10 @@ it { is_expected.to have_attributes(name: 'Stone Cold Steve Austin', finishing_m
 
 ## polymorphism - (many shapes)
 shared_examples - one test, for different classes.
-https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/respond-to-matcher
 we shouldn't worry about about kind of object is, but what is can respond to...
 It doesn't matter if we are responding to HotChocolate, Coffee, or Milk
 This is a great way to test different class types with the same methods.
 This literally just tests in a method exists on a object.
-expect(subject).to respond_to(:drink, :discard, :purchase)
 expect(subject).to respond_to(:purchase).with(1).arguments
 
 ## Test object methods in isolation, we can emulate the behavior of other objects.
