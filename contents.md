@@ -49,47 +49,15 @@ custom error message for satisfy method
 default parameters\
 described class
 
-## 11_polymorphism
+## 11_shared_example with pets
+have_attributes\
+respond_to
 
-Similar Items - Pets => Cats & Dogs
-Similar Attributes - name, breed, color
-Similar Methods - feed, talk
+## Stub
 
-Cat only - like_to_nap
-Dog only - like_to_run
+Generally, when talking to any external system is problematic, then that’s a good indication that you’d want to use a stub to fake that call.
 
-## Can not cover everything!!!
-
-# FUTURE:
-
-## have_attributes
-https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/have-attributes-matcher
-
-## polymorphism - (many shapes)
-shared_examples - one test, for different classes.
-we shouldn't worry about about kind of object is, but what is can respond to...
-It doesn't matter if we are responding to HotChocolate, Coffee, or Milk
-This is a great way to test different class types with the same methods.
-This literally just tests in a method exists on a object.
-expect(subject).to respond_to(:purchase).with(1).arguments
-
-## Test object methods in isolation, we can emulate the behavior of other objects.
-Real-life application - reaching out to a database to retrieve info, reach out to a server to get info, etc. So you can assume that whatever you need to do, provides you correct info.
-stuntman = double('Mr. Danger')
-allow(stuntman).to receive_messages(fall_off_ladder: 'Ouch', light_on_fire: true)
-or => stuntman = double('Mr. Danger', fall_off_ladder: 'Ouch', light_on_fire: true)
-expect(stuntman.fall_off_ladder).to eq('Ouch')
-expect(stuntman.light_on_fire).to eq(true)
-
-stubs double - use when an object is needed to provide something that takes time (database call)
-One class shouldn't care if it is given an actual instance of an class object, but rather all it cares is that it is given an object that can respond to certain methods (polymorphism).
-
-expect(stuntman).to receive(:light_on_fire).at_most(1).times
-expect(stuntman).to receive(:fall_off_ladder).once
-expect(stuntman).to receive(:act).at_least(2).times
-
-## Stub -  We are going to stub the .sum method on an array.
-https://www.tutorialspoint.com/rspec/rspec_stubs.htm
+We are going to stub the .sum method on an array.
 it 'can stub one or more methods on a real object' do
   arr = [1, 2, 3]
   allow(arr).to receive(:sum).and_return(10)
@@ -101,8 +69,11 @@ it 'can stub one or more methods on a real object' do
   expect(arr.sum).to eq(10)
 end
 
-## If you expect a method to return different values each time it is called. Here we are mocking the behavior of an array [:b, :c]
-## This is not the best example. It will typically used for very complicated behavior.
+If you expect a method to return different values each time it is called. 
+Here we are mocking the behavior of an array [:b, :c]
+
+This is not the best example. It will typically used for very complicated behavior.
+
 it 'can return multiple return values in sequence' do
   mock_array = double
   allow(mock_array).to receive(:pop).and_return(:c, :b, nil)
@@ -112,8 +83,9 @@ it 'can return multiple return values in sequence' do
   expect(mock_array.pop).to be_nil
 end
 
-## We are going to stubbing/mocking (emulating) the behavior of [1, 2, 3].
-## Re-write this with letters, because it is confusing to have 1 arg and return 1.
+We are going to stubbing/mocking (emulating) the behavior of [1, 2, 3].
+Re-write this with letters, because it is confusing to have 1 arg and return 1.
+
 it 'can return different values depending on the argument' do
   three_element_array = double
 
@@ -129,16 +101,48 @@ it 'can return different values depending on the argument' do
   expect(three_element_array.first(100)).to eq(['a', 'b', 'c'])
 end
 
-## Using instance double gives the tests more security, and is preferred over regular doubles when possible.
+## Doubles | Mocks
+Doubles, also known as Mocks, is an object which can “stand in” for another object.
+
+Test object methods in isolation, we can emulate the behavior of other objects.
+
+Real-life application - reaching out to a database to retrieve info, reach out to a server to get info, etc. So you can assume that whatever you need to do, provides you correct info.
+
+stuntman = double('Mr. Danger')
+allow(stuntman).to receive_messages(fall_off_ladder: 'Ouch', light_on_fire: true)
+or => stuntman = double('Mr. Danger', fall_off_ladder: 'Ouch', light_on_fire: true)
+expect(stuntman.fall_off_ladder).to eq('Ouch')
+expect(stuntman.light_on_fire).to eq(true)
+
+stubs double - use when an object is needed to provide something that takes time (database call)
+One class shouldn't care if it is given an actual instance of an class object, but rather all it cares is that it is given an object that can respond to certain methods (polymorphism).
+
+expect(stuntman).to receive(:light_on_fire).at_most(1).times
+expect(stuntman).to receive(:fall_off_ladder).once
+expect(stuntman).to receive(:act).at_least(2).times
+
+Using instance double gives the tests more security, and is preferred over regular doubles when possible.
 The first argument has to be the class that you want to make a double of.
 rspec will give you an error if you pass in the wrong number of arguments then defined in class.
-We are not making a mock of the person class, we are making a mock of an instance of ther person class.
+We are not making a mock of the person class, we are making a mock of an instance of the person class.
+
+INSTANCE_DOUBLE!!!
+
 person = instance_double(Person)
 allow(person).to receive(:a).with(3).and_return('Hello')
 expect(person.a(3)).to eq('Hello')
 
+Rubocop Rspec style guide = Prefer instance doubles over stubbing any instance of a class
+let(:my_instance) { instance_double(MyClass) }
+allow(MyClass).to receive(:new).and_return(my_instance)
+allow(my_instance).to receive(:foo)
 
-## Many people use mock, spies and doubles interchangeably, but they are all slightly different.
+let(:foo) do
+  instance_double("ClassName", method_name: 'returned value')
+end
+
+## Spies
+Many people use mock, spies and doubles interchangeably, but they are all slightly different.
 Double => Pattern: Create Double, Give it a message, Expect that double to receive that message, before we invoke the method that would send the message to the double. So the expectation was before the action.
 
 Spies are ultimate type of test double. They follow a slightly different pattern. We assert a message has been received after the action. So, the expectation is after the action. Spies automatically 'observe' all the messages that are sent to an object, even if we have not explicitly defined that message.
@@ -150,8 +154,24 @@ expect(animal).to have_received(:eat_food)
 expect(animal).not_to have_received(:eat_human)
 expect(animal).to have_received(:eat_food).at_least(2).times
 
-RSpec.describe Garage do
-  let(:car) { instance_double(Car) }
+
+## Resources on Doubles:
+https://martinfowler.com/bliki/TestDouble.html
+https://www.tutorialspoint.com/rspec/rspec_test_doubles.htm
+http://testing-for-beginners.rubymonstas.org/test_doubles.html
+
+## Can not cover everything!!!
+
+# FUTURE:
+
+## polymorphism - (many shapes)
+we shouldn't worry about about kind of object is, but what is can respond to...
+It doesn't matter if we are responding to HotChocolate, Coffee, or Milk
+This is a great way to test different class types with the same methods.
+This literally just tests in a method exists on a object.
+expect(subject).to respond_to(:purchase).with(1).arguments
+
+
 
 ## This mocks a class method. This intercepts this message and creates the car instance double.
 This also gives us spy-like functionality in our example.
@@ -169,8 +189,6 @@ it 'adds a car to its storage' do
   expect(subject.storage.first).to eq(car)
 end
 
-http://testing-for-beginners.rubymonstas.org/test_doubles.html
-
 ## Review TOP resources to make sure that this material is consistent:
 http://www.betterspecs.org/
 
@@ -178,15 +196,6 @@ http://www.betterspecs.org/
 game.instance_variable_set
 
 ## Rspec & Rubocop Style Guide:
-
-### Prefer instance doubles over stubbing any instance of a class
-let(:my_instance) { instance_double(MyClass) }
-allow(MyClass).to receive(:new).and_return(my_instance)
-allow(my_instance).to receive(:foo)
-
-let(:foo) do
-  instance_double("ClassName", method_name: 'returned value')
-end
 
 ### RSpec/DescribedClassModuleWrapping
 RSpec.describe MyModule::MyClass do
