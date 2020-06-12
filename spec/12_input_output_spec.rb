@@ -10,8 +10,8 @@ require_relative '../lib/12_input_output'
 
 # One key difference is that NumberGame has smaller, isolated methods.
 
-# Small and isolated methods that only do one thing are easy to test.
-# Long methods are like a run-on sentence that should have been divided into 2 or 3 different sentences so that everything could be easily understood and in this case easily tested.
+# Small and isolated methods that only do one thing are easier to test.
+# Long methods are like a run-on sentence that should have been divided into 2 or 3 different sentences so that everything could be clearly understood and in this case if each method only does one thing it will also be easier to test.
 
 # Therefore, if you are new to testing, be open to refactoring your previous code to make writing testing easier.
 # As you learn testing, you are also learning how to write better testable methods.
@@ -64,7 +64,7 @@ describe NumberGame do
     end
 
     # The method that asks for 'player_input' is not tested because it is unneccessary to test methods that only contain puts and/or gets.chomp.
-    # The player_input is only used in the game as an argument passed into the verify_input method.
+    # The player_input is used in the game as an argument passed into the verify_input method.
     # Note: this recursive method will repeat until a valid argument is given, due to a regex check.
     context 'when given a valid input as argument' do
       it 'should return valid input' do
@@ -76,7 +76,7 @@ describe NumberGame do
   # It is unneccessary to write tests for methods that only contain puts statements, like #game_over.
   # Puts is a basic part of the standard ruby library & is already well tested. Plus, most 'real world applications' don't even output like this except to loggers.
 
-  # However, here is an example of how you can test it using the output matcher
+  # However, here is an example of how you could test it using the output matcher
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/output-matcher
 
   context '#game_over' do
@@ -104,7 +104,7 @@ describe NumberGame do
         # Write the conditions to make this test pass
         subject.count = 7 # REMOVE
         phrase = "That was hard. It took you 7 guesses!\n" # REMOVE
-        expect { subject.game_over }.to output(phrase).to_stdout # REMOVE
+        expect { subject.game_over }.to output(phrase).to_stdout
       end
     end
   end

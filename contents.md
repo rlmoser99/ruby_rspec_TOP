@@ -164,6 +164,9 @@ http://testing-for-beginners.rubymonstas.org/test_doubles.html
 
 # FUTURE:
 
+## Adding method names in subject
+subject { described_class.new.game_solution }
+
 ## polymorphism - (many shapes)
 we shouldn't worry about about kind of object is, but what is can respond to...
 It doesn't matter if we are responding to HotChocolate, Coffee, or Milk
