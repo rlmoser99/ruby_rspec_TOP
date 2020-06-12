@@ -53,6 +53,19 @@ described class
 have_attributes\
 respond_to
 
+## 12_input_output
+Important to write small, isolated methods to test\
+Unnecessary to test puts and gets\
+Use 'gets methods' as parameters in another method that is tested\
+output matcher
+
+## Stub, Double, Spies Idea for Code:
+Use - Arrange, Act & Assert to show differences
+
+Number Game, with solution as a different class?
+Something that sleeps(3) to show test time saving (database lookup)
+
+
 ## Stub
 
 Generally, when talking to any external system is problematic, then that’s a good indication that you’d want to use a stub to fake that call.
