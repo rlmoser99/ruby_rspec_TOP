@@ -24,7 +24,8 @@ class GameBoard
       if number.between?(min, max)
         print "\e[32m#{number}\e[0m  "
       else
-        print "\e[31m#{number}\e[0m  "
+        # print "\e[31m-\e[0m  "
+        print '-  '
       end
     end
     puts ''
@@ -41,7 +42,8 @@ class NumberGame
   end
 
   def play_game
-    puts "Let's play 'Find a number like BST'"
+    puts "\nBinary Search Tree Number Game\n\n"
+    puts "Choose a number in the middle of the \e[32mgreen range\e[0m"
     @count = 0
     loop do
       board.show
@@ -49,7 +51,7 @@ class NumberGame
       @count += 1
       break if correct_guess?(guess)
 
-      turn_feedback(guess)
+      update_board(guess)
     end
     game_over
   end
@@ -61,12 +63,10 @@ class NumberGame
     verify_input(player_input)
   end
 
-  def turn_feedback(guess)
+  def update_board(guess)
     if guess < game_solution.to_s
-      puts "\e[32mGUESS HIGHER\e[0m  "
       board.min = guess.to_i + 1
     else
-      puts "\e[32mGUESS LOWER\e[0m  "
       board.max = guess.to_i - 1
     end
   end
@@ -78,22 +78,33 @@ class NumberGame
   def game_over
     if @count == 1
       puts 'LUCKY GUESS!'
-    elsif @count < 4
-      puts "Congratulations! You picked the random number in #{@count} guesses!"
+    elsif @count <= 4
+      puts "Congratulations! You found the random number in #{@count} guesses!"
     else
-      puts "That was hard. It took you #{@count} guesses!"
+      puts "It took you #{@count} guesses."
+      puts 'Remember BST always picks the middle number in the green range.'
     end
   end
 
   protected
 
   def player_input
-    puts 'Choose 1-digit between 0-9'
+    puts ''
+    difference = board.max - board.min
+    if difference > 1
+      puts "Enter 1-digit in the middle of \e[32m#{board.min}-#{board.max}\e[0m"
+    elsif difference == 1
+      puts 'You have a 50% chance to get it right'
+      puts "Enter either \e[32m#{board.min}\e[0m or \e[32m#{board.max}\e[0m"
+    else
+      puts "You've narrowed it down to one possibility."
+      puts 'Enter that number to win the game.'
+    end
     gets.chomp
   end
 
   def valid_input?(input)
-    input.match(/^[0-9]$/)
+    input.to_i.between?(board.min, board.max)
   end
 end
 
