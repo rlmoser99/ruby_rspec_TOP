@@ -1,14 +1,5 @@
 # frozen_string_literal: true
 
-# Class to create the random number
-# class RandomNumber
-#   attr_reader :number
-
-#   def initialize
-#     @number = rand(0..9)
-#   end
-# end
-
 # Class to display the random number
 class GameBoard
   attr_accessor :board, :min, :max
@@ -24,7 +15,6 @@ class GameBoard
       if number.between?(min, max)
         print "\e[32m#{number}\e[0m  "
       else
-        # print "\e[31m-\e[0m  "
         print '-  '
       end
     end
@@ -42,8 +32,7 @@ class NumberGame
   end
 
   def play_game
-    puts "\nBinary Search Tree Number Game\n\n"
-    puts "Choose a number in the middle of the \e[32mgreen range\e[0m"
+    puts instructions
     @count = 0
     loop do
       board.show
@@ -59,7 +48,7 @@ class NumberGame
   def verify_input(number)
     return number if valid_input?(number)
 
-    puts 'Input error!'
+    puts "\e[31mInput error!\e[0m"
     verify_input(player_input)
   end
 
@@ -79,32 +68,51 @@ class NumberGame
     if @count == 1
       puts 'LUCKY GUESS!'
     elsif @count <= 4
-      puts "Congratulations! You found the random number in #{@count} guesses!"
+      puts 'Awesome! You should have found the number in 4 or less guesses.'
+      puts "To be exact, you found it in #{@count} guesses!"
     else
+      puts 'You should have found the number in 4 or less guesses.'
+      puts 'Remember to always pick from the middle of the green range.'
       puts "It took you #{@count} guesses."
-      puts 'Remember BST always picks the middle number in the green range.'
     end
   end
 
   protected
 
   def player_input
-    puts ''
-    difference = board.max - board.min
-    if difference > 1
+    if board.max - board.min > 1
       puts "Enter 1-digit in the middle of \e[32m#{board.min}-#{board.max}\e[0m"
-    elsif difference == 1
+    else
+      final_turn_prompts
+    end
+    gets.chomp
+  end
+
+  def final_turn_prompts
+    if board.max - board.min == 1
       puts 'You have a 50% chance to get it right'
       puts "Enter either \e[32m#{board.min}\e[0m or \e[32m#{board.max}\e[0m"
     else
       puts "You've narrowed it down to one possibility."
       puts 'Enter that number to win the game.'
     end
-    gets.chomp
   end
 
   def valid_input?(input)
     input.to_i.between?(board.min, board.max)
+  end
+
+  def instructions
+    <<~HEREDOC
+
+      \e[32mBinary Search Tree Number Game\e[0m
+      Try to find a random number that is between 0 and 9.
+
+      If you choose a number in the middle of the \e[32mgreen range\e[0m,
+      you should be able to find the number in 4 or less guesses.
+
+
+    HEREDOC
   end
 end
 
