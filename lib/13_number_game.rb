@@ -96,5 +96,5 @@ class NumberGame
   end
 end
 
-game = NumberGame.new
-game.play_game
+# game = NumberGame.new
+# game.play_game
