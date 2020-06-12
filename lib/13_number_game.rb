@@ -1,28 +1,8 @@
 # frozen_string_literal: true
 
-# Class to display the random number
-class GameBoard
-  attr_accessor :board, :min, :max
+require_relative '../lib/13_game_board'
 
-  def initialize
-    @board = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    @min = 0
-    @max = 9
-  end
-
-  def show
-    board.each do |number|
-      if number.between?(min, max)
-        print "\e[32m#{number}\e[0m  "
-      else
-        print '-  '
-      end
-    end
-    puts ''
-  end
-end
-
-# Game to find the random number
+# Binary Search Tree Number Game
 class NumberGame
   attr_accessor :game_solution, :count, :board
 
