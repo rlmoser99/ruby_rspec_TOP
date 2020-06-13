@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/13_game_board'
+require_relative '../lib/game_board'
 
 # Binary Search Tree Number Game
 class NumberGame
@@ -20,7 +20,8 @@ class NumberGame
       @count += 1
       break if correct_guess?(guess)
 
-      update_board(guess)
+      # update_board(guess)
+      board.update(guess.to_i, game_solution)
     end
     game_over
   end
@@ -32,13 +33,14 @@ class NumberGame
     verify_input(player_input)
   end
 
-  def update_board(guess)
-    if guess < game_solution.to_s
-      board.min = guess.to_i + 1
-    else
-      board.max = guess.to_i - 1
-    end
-  end
+  # Should this be in board or game???
+  # def update_board(guess)
+  #   if guess < game_solution.to_s
+  #     board.min = guess.to_i + 1
+  #   else
+  #     board.max = guess.to_i - 1
+  #   end
+  # end
 
   def correct_guess?(number)
     number == game_solution.to_s

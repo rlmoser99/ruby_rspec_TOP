@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../lib/13_number_game'
-require_relative '../lib/13_game_board'
+require_relative '../lib/number_game'
+require_relative '../lib/game_board'
 
 describe NumberGame do
   it { is_expected.to respond_to(:game_solution, :count, :board) }
@@ -20,7 +20,18 @@ describe NumberGame do
       it 'should be 5' do
         subject.game_solution = 7
         subject.board = instance_double(GameBoard)
+        # What is the point of the and_return???
         allow(subject.board).to receive(:min=).with(5).and_return(5)
+        expect(subject.update_board('4')).to eq(5)
+      end
+    end
+
+    context 'when using board double' do
+      it 'should be 5' do
+        # Still confusing wording to me...
+        subject.game_solution = 7
+        subject.board = instance_double(GameBoard)
+        allow(subject.board).to receive(:min=).with(5)
         expect(subject.update_board('4')).to eq(5)
       end
     end

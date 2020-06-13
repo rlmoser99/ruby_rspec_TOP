@@ -20,4 +20,8 @@ class GameBoard
     end
     puts ''
   end
+
+  def update(guess, solution)
+    guess < solution ? @min = guess + 1 : @max = guess - 1
+  end
 end
