@@ -60,7 +60,7 @@ Use 'gets methods' as parameters in another method that is tested\
 output matcher
 
 ## Stub, Double, Spies Idea for Code:
-Use - Arrange, Act & Assert to show differences
+Use - Arrange, Act & Assert to show differences (like future_learn file)
 
 Number Game, with solution as a different class?
 Something that sleeps(3) to show test time saving (database lookup)
