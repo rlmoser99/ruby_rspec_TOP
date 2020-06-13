@@ -65,6 +65,23 @@ Use - Arrange, Act & Assert to show differences
 Number Game, with solution as a different class?
 Something that sleeps(3) to show test time saving (database lookup)
 
+## Double (file #29 & #30)
+Example using two classes. One is an argument for the other when instantiated.
+Great to use for TDD, because you can use the double to respond to anything.
+The movie class shouldn't care if it is given an actual class object, but rather all it cares is that it is given an object that can respond to certain methods (polymorphism).
+Show how doubles can respond to same method with different return values
+
+## Double vs. Instance Double (file #32)
+Example using one class that has a method that takes a while to complete.
+Show how a regular double can have 'extra' responses and still pass.
+Show how a instance double gives more security
+
+## Spies (file #34 & #35)
+Example using two classes. One method in first class is given second as argument.
+Uses a before block.
+
+## Unsure when/how to implement
+class double in file #33
 
 ## Stub
 
