@@ -224,6 +224,7 @@ end
 
 ## Review TOP resources to make sure that this material is consistent:
 http://www.betterspecs.org/
++++ Check to see consistent use of describe and context
 
 ## Check out TOP student project. To see if there is something that I don't understand yet, like:
 game.instance_variable_set
