@@ -189,6 +189,8 @@ expect(animal).to have_received(:eat_food).at_least(2).times
 https://martinfowler.com/bliki/TestDouble.html
 https://www.tutorialspoint.com/rspec/rspec_test_doubles.htm
 http://testing-for-beginners.rubymonstas.org/test_doubles.html
+https://relishapp.com/rspec/rspec-mocks/v/3-2/docs/configuring-responses
+
 
 ## Can not cover everything!!!
 
