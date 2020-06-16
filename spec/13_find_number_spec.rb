@@ -81,6 +81,10 @@ describe FindNumber do
   describe '#computer_guess' do
     it 'should guess until equals 8' do
       allow(subject).to receive(:make_guess).and_return(4, 7, 8)
+      # These 3 lines remove the puts statement that happens during test.
+      # allow(subject).to receive(:display_guess).with(1)
+      # allow(subject).to receive(:display_guess).with(2)
+      # allow(subject).to receive(:display_guess).with(3)
       subject.computer_guess
       expect(subject.guess).to eq(8)
     end

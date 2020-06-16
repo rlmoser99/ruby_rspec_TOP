@@ -59,6 +59,9 @@ Unnecessary to test puts and gets\
 Use 'gets methods' as parameters in another method that is tested\
 output matcher
 
+## TDD with doubles
+Show basic example of using doubles
+
 ## Stub, Double, Spies Idea for Code:
 Use - Arrange, Act & Assert to show differences (like future_learn file)
 
