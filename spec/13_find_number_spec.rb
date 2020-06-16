@@ -2,7 +2,7 @@
 
 require_relative '../lib/13_find_number'
 
-# DIVIDE EACH SECTION INTO THEIR OWN FILE, WITH ACTUAL METHOD EVALVING
+# DIVIDE EACH SECTION INTO THEIR OWN FILE, WITH ACTUAL METHOD EVOLVING
 
 # Mocking is a technique used in test-driven development (TDD).
 # Mocking creates a fake object or method 'double' that does not exist.
@@ -71,12 +71,16 @@ describe FindNumber do
   end
 end
 
+# This #make_guess method takes a long time to complete.
+# By providing the return values to test, the time of the test is shortened.
+# Do an example with and without this change.
 describe FindNumber do
   let(:random_number) { instance_double(RandomNumber, number: 8) }
   subject { described_class.new(0, 9, random_number) }
 
   describe '#computer_guess' do
     it 'should guess until equals 8' do
+      allow(subject).to receive(:make_guess).and_return(4, 7, 8)
       subject.computer_guess
       expect(subject.guess).to eq(8)
     end

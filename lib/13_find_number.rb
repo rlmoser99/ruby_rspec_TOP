@@ -34,7 +34,7 @@ class FindNumber
   def computer_guess
     count = 1
     loop do
-      make_guess
+      @guess = make_guess
       display_guess(count)
       break if game_over?
 
@@ -45,7 +45,7 @@ class FindNumber
 
   def make_guess
     sleep(1)
-    @guess = (min + max) / 2
+    (min + max) / 2
   end
 
   def display_guess(count)

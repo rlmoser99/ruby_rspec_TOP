@@ -230,6 +230,8 @@ http://www.betterspecs.org/
 
 ## Check out TOP student project. To see if there is something that I don't understand yet, like:
 game.instance_variable_set
+allow(subject).to receive(:gets).and_return(‘X’)
+allow_any_instance_of(Kernel).to receive(:gets).and_return(‘X’)
 
 ## Rspec & Rubocop Style Guide:
 
