@@ -18,6 +18,7 @@ describe RandomNumber do
 
   # There can be multiple tests in one example block
   it 'should be greater then 0 and less then 6' do
+    # Remember 'subject' can be implicitly defined when the outermost example group is a class.
     expect(subject.number).to be >= 1
     expect(subject.number).to be < 6
   end
@@ -54,14 +55,12 @@ end
 # ASSIGNMENT
 
 describe Array do
-  it 'should be empty' do
+  xit 'should be empty' do
     # Write a test that verifies if subject is empty
-    expect(subject).to be_empty # REMOVE
   end
 
-  context 'when my_array is perfect' do
-    # Write a let variable that passes these
-    let(:my_array) { [-7, 42, 101, 98] } # REMOVE
+  context 'when my_array has perfect values' do
+    # Write a let variable 'my_array' that passes all tests
 
     # remove the 'x' before running this test
     xit 'should have specific first and last values' do
@@ -76,13 +75,13 @@ describe Array do
     end
 
     # remove the 'x' before running this test
-    xit 'should have made sense of this double-negative' do
-      expect(my_array[3]).not_to be_nil
+    xit 'should include a value of 42' do
+      expect(my_array).to include(42)
     end
 
     # remove the 'x' before running this test
-    xit 'should pass this bonus test' do
-      expect(my_array).to include(42)
+    xit 'should have at least four values' do
+      expect(my_array[3]).not_to be_nil
     end
   end
 end
