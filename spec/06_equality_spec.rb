@@ -2,10 +2,10 @@
 
 # rubocop:disable Metrics/BlockLength
 
-# eq checks for equal VALUE
-# eql checks for equal VALUE and TYPE
-# equal checks for OBJECT IDENTITY
-# be checks for OBJECT IDENTITY
+# 'eq' checks for equal VALUE
+# 'eql' checks for equal VALUE and TYPE
+# 'equal' checks for OBJECT IDENTITY
+# 'be' checks for OBJECT IDENTITY
 
 describe 'differences between eq, eql, equal, and be' do
   context 'my_score vs. your_score' do
@@ -38,16 +38,18 @@ describe 'differences between eq, eql, equal, and be' do
       end
     end
 
-    # some prefer to use 'be' over 'equal' because semantically it makes sense.
+    # some prefer to use 'be' over 'equal' because it semantically makes sense.
     # expect(first_item).to be(second_item)
     context 'be and equal cares about object identity' do
       it 'should be/equal the same car' do
         expect(my_car).to equal(my_kids_borrow)
         expect(my_car).to be(my_kids_borrow)
       end
+
       it 'should not be/equal your car' do
         expect(my_car).not_to be(your_car)
       end
+
       it 'should not be/equal any other 2017 red Jetta' do
         expect(my_car).not_to equal([2017, 'red', 'Jetta'])
       end
@@ -65,22 +67,18 @@ describe 'equality assignment' do
 
   # remove the 'x' before running this test
   xit 'amy is eq to bob' do
-    expect(amy).to eq(bob) # REMOVE
   end
 
   # remove the 'x' before running this test
   xit 'amy is eql to bob' do
-    expect(amy).to eql(bob) # REMOVE
   end
 
   # remove the 'x' before running this test
   xit 'amy is not equal to bob' do
-    expect(amy).not_to be(bob) # REMOVE
   end
 
   # remove the 'x' before running this test
   xit 'copy_cat is equal to amy' do
-    expect(copy_cat).to be(amy) # REMOVE
   end
 end
 # rubocop:enable Metrics/BlockLength
