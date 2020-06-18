@@ -27,7 +27,10 @@ describe NumberGame do
 
     # ASSIGNMENT
     # Write one test for subject.game_solution that uses 'satisfy' instead of <, >, =
-    xit 'should be a number between 0 and 9' do
+    it 'should be a number between 0 and 9' do
+      expect(subject.game_solution).to satisfy do |number|
+        number.between?(0, 9)
+      end
     end
   end
 
@@ -46,7 +49,9 @@ describe NumberGame do
     # ASSIGNMENT
     # Write one test for when subject.game_solution does not equal correct_guess?
     context 'when number is not correct' do
-      xit 'should return false' do
+      it 'should return false' do
+        subject.game_solution = 5
+        expect(subject.correct_guess?('2')).to be false
       end
     end
   end
@@ -54,7 +59,8 @@ describe NumberGame do
   context '#verify_input' do
     # ASSIGNMENT
     # Write one test that shows subject will respond to verify_input with 1 argument
-    xit 'responds with 1 argument' do
+    it 'responds with 1 argument' do
+      expect(subject).to respond_to(:verify_input).with(1).arguments
     end
 
     # The method that asks for 'player_input' is not tested because it is unneccessary to test methods that only contain puts and/or gets.
@@ -84,18 +90,20 @@ describe NumberGame do
 
     # ASSIGNMENT
     context 'when count is 2-3' do
-      xit 'should output correct phrase' do
+      it 'should output correct phrase' do
         subject.count = 3
         phrase = "Congratulations! You picked the random number in 3 guesses!\n"
         # Write the expect statement for this test
-        phrase # Use phrase variable
+        expect { subject.game_over }.to output(phrase).to_stdout
       end
     end
 
     # ASSIGNMENT
     context 'when count is 4 and over' do
-      xit 'should output correct phrase' do
+      it 'should output correct phrase' do
         # Write the conditions to make this test pass
+        subject.count = 7
+        phrase = "That was hard. It took you 7 guesses!\n"
         expect { subject.game_over }.to output(phrase).to_stdout
       end
     end

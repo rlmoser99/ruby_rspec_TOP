@@ -39,7 +39,8 @@ class ImpossibleTestGame
   end
 end
 
-# Game to find the random number
+# NumberGame is the exact game as above ImpossibleTestGame
+# NumberGame has small, isolated methods that are easy to test
 class NumberGame
   attr_accessor :game_solution, :count
 
