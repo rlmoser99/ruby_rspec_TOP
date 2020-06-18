@@ -59,8 +59,6 @@ Unnecessary to test puts and gets\
 Use 'gets methods' as parameters in another method that is tested\
 output matcher
 
-## Example using modules instead of classes for Duck-Typing
-
 ## TDD with doubles
 Show basic example of using doubles
 
