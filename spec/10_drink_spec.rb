@@ -34,9 +34,9 @@ describe Drink do
   # Use 'described_class' instead of the class name, to limit the code that will need to be changed if/when it changes.
   # For example, as applications develop, class names are subject to change. Drink could be changed to 'Beverage'.
   context 'when limiting future code changes' do
-    subject(:my_drink) { described_class.new('pepsi') }
-    it 'should be pepsi' do
-      expect(my_drink.type).to eq('pepsi')
+    subject(:my_drink) { described_class.new('juice') }
+    it 'should be juice' do
+      expect(my_drink.type).to eq('juice')
     end
   end
 end
@@ -47,30 +47,22 @@ describe Drink do
   # For both contexts, write a subject & 2 tests that expresses each of the following statements
 
   context 'when my drink is new' do
-    subject(:my_drink) { described_class.new('tea') } # REMOVE
-
     # remove the 'x' before running this test
     xit 'should have 16 ounces' do
-      expect(my_drink.ounces).to eq(16) # REMOVE
     end
 
     # remove the 'x' before running this test
     xit 'should be full' do
-      expect(my_drink.full?).to be true # REMOVE
     end
   end
 
   context 'when my drink only has 12 ounces' do
-    subject(:my_drink) { described_class.new('tea', 12) } # REMOVE
-
     # remove the 'x' before running this test
     xit 'should have 12 ounces' do
-      expect(my_drink.ounces).to eq(12) # REMOVE
     end
 
     # remove the 'x' before running this test
     xit 'should not be full' do
-      expect(my_drink.full?).to be false # REMOVE
     end
   end
 end
