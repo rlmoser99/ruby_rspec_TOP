@@ -10,46 +10,15 @@ class FindNumber
     @answer = answer
   end
 
-  # def start
-  #   puts "The random number between #{min}-#{max} is #{answer.number}"
-  #   puts "The computer will find it in #{max_guesses} guesses or less!\n\n"
-  #   computer_guess
-  # end
-
-  # def max_guesses
-  #   (Math.log2(max - min) + 1).to_i
-  # end
-
-  # def computer_guess
-  #   count = 1
-  #   loop do
-  #     @guess = make_guess
-  #     display_guess(count)
-  #     break if game_over?
-
-  #     update_range
-  #     count += 1
-  #   end
-  # end
-
   def make_guess
     (min + max) / 2
   end
 
-  def display_guess(count)
-    puts "Guess ##{count} -> #{guess}"
-  end
-
   def game_over?
-    @guess == answer.number
+    @guess == answer.value
   end
 
   def update_range
-    guess < answer.number ? @min = guess + 1 : @max = guess - 1
+    guess < answer.value ? @min = guess + 1 : @max = guess - 1
   end
 end
-
-# game = FindNumber.new(0, 9)
-# game = FindNumber.new(0, 100)
-# game = FindNumber.new(50, 151)
-# game.start

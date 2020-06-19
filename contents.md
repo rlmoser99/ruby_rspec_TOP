@@ -59,8 +59,9 @@ Unnecessary to test puts and gets\
 Use 'gets methods' as parameters in another method that is tested\
 output matcher
 
-## TDD with doubles
-Show basic example of using doubles
+## 13_find_number
+TDD with doubles\
+Add method names to: subject { described_class.new.game_solution }
 
 ## Stub, Double, Spies Idea for Code:
 Use - Arrange, Act & Assert to show differences (like future_learn file)
@@ -199,8 +200,7 @@ https://relishapp.com/rspec/rspec-mocks/v/3-2/docs/configuring-responses
 
 # FUTURE:
 
-## Adding method names in subject
-subject { described_class.new.game_solution }
+
 
 ## polymorphism - (many shapes)
 we shouldn't worry about about kind of object is, but what is can respond to...

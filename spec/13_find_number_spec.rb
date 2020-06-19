@@ -4,6 +4,35 @@ require_relative '../lib/13_find_number'
 
 # rubocop:disable Layout/LineLength, Metrics/BlockLength
 
+# THIS NEEDS TO GO IN AN EARLIER LESSON?!
+
+# Testing is not the time to write short-hand or worry about writing too explicitly...
+
+# Before we go deeper into testing, there are 3 stages to keep in mind when writing a test:
+# 1. Arrange -> set-up the test (initializing objects, let variables, updating values of instance variables, etc.)
+# 2. Act -> executing the logic to test (calling a method to run)
+# 3. Assert -> expect the results of arrange & act
+
+describe 'three stages to write a test' do
+  # Arrange
+  let(:lucky_numbers) { [3, 7, 13, 31, 42] }
+  it 'should change the first value to 7' do
+    # Act
+    lucky_numbers.rotate!
+    # Assert
+    expect(lucky_numbers).to eq([7, 13, 31, 42, 3])
+  end
+end
+
+describe 'three stages to write a test' do
+  # Arrange
+  let(:lucky_numbers) { [3, 7, 13, 31, 42] }
+  it 'should change the first value to 7' do
+    # Act & Assert
+    expect(lucky_numbers.rotate!).to eq([7, 13, 31, 42, 3])
+  end
+end
+
 # Let's take a look at test-driven development (TDD) technique called mocking.
 # Mocking uses a 'double', which is a generic ruby object.
 # Doubles are strict, which means you must specify (allow) any messages that it can receive.
@@ -17,7 +46,7 @@ require_relative '../lib/13_find_number'
 # An instance of 'FindNumber' is initialized with a 'RandomNumber' object.
 # Since we have not written the 'RandomNumber' class, we will use a double to 'mock' it.
 
-# Doubles are used in many different ways - Dummy, Fake, Stubs, Spies, Mocks
+# FYI: Doubles are used in many different ways - Dummy, Fake, Stubs, Spies, Mocks
 # https://martinfowler.com/bliki/TestDouble.html
 
 describe FindNumber do
@@ -51,11 +80,11 @@ describe FindNumber do
     # When testing the same method in multiple tests, it is possible to add method names to subject
     context 'when adding method names to subject' do
       let(:random_number) { double('random_number', value: 5) }
-      # subject { described_class.new(0, 9, random_number) }
+      # instead of subject { described_class.new(0, 9, random_number) }
       subject { described_class.new(0, 9, random_number).answer.value }
 
       it 'should be 3' do
-        # expect(subject.answer.value).to eq(5)
+        # instead of expect(subject.answer.value).to eq(5)
         expect(subject).to eq(5)
       end
     end
@@ -63,22 +92,79 @@ describe FindNumber do
 end
 
 # ASSIGNMENT
-# Using these tests, write the code in 'lib/13_find_number' to make these tests pass.
+# This assignment is going to be writing tests & writing code to make those tests pass.
+
+# The basic idea of 'FindNumber' is to program a computer to guess a random_number, using binary search.
+# Remember the binary search video that you watched in the Computer Science section
+# https://www.youtube.com/watch?v=T98PIp4omUA
+# The computer will update min and max values to help find the correct number.
 
 describe FindNumber do
-  let(:random_number) { double('random_number', number: 8) }
+  let(:random_number) { double('random_number', value: 8) }
   subject { described_class.new(0, 9, random_number) }
 
-  describe '#game_over' do
-    it 'should be true' do
-      allow(random_number).to receive(:number).and_return(8)
-      subject.guess = 8
-      expect(subject.game_over?).to be true
+  describe '#make_guess' do
+    # ASSIGNMENT: STEP 1
+    # Write a method in 13_find_number.rb called #make_guess
+    # Each guess should return the middle value of the min and max values
+    # For this test, the subject starts off with min = 0 and max = 9
+
+    context 'when min is 0 and max is 9' do
+      it 'should be 4' do
+        guess = subject.make_guess
+        expect(guess).to eq(4)
+      end
     end
 
-    it 'should be false' do
-      subject.guess = 5
-      expect(subject.game_over?).to be false
+    context 'when min is 5 and max is 9' do
+      it 'should be 7' do
+        subject.min = 5
+        guess = subject.make_guess
+        expect(guess).to eq(7)
+      end
+    end
+
+    context 'when min is 8 and max is 9' do
+      it 'should be 8' do
+        subject.min = 8
+        guess = subject.make_guess
+        expect(guess).to eq(8)
+      end
+    end
+
+    context 'when min is 0 and max is 3' do
+      it 'should be 1' do
+        subject.max = 3
+        guess = subject.make_guess
+        expect(guess).to eq(1)
+      end
+    end
+
+    context 'when min and max both equal 3' do
+      it 'should be 3' do
+        subject.min = 3
+        subject.max = 3
+        guess = subject.make_guess
+        expect(guess).to eq(3)
+      end
+    end
+  end
+
+  describe '#game_over?' do
+    context 'when guess is 8 and random_number.value is 8' do
+      it 'should be true' do
+        subject.guess = 8
+        game_over = subject.game_over?
+        expect(game_over).to be true
+      end
+    end
+
+    context 'when guess is 4 and random_number.value is 8' do
+      it 'should be false' do
+        subject.guess = 4
+        game_over = subject.game_over?
+        expect(game_over).to be false
+      end
     end
   end
 
