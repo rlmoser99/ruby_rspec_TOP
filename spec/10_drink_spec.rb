@@ -3,15 +3,31 @@
 # rubocop:disable Layout/LineLength
 
 # Now that the basics are covered, we are going to use a typical work-flow.
-# The class being tested will be located in a different file.
-# If you are using VS Code, you can split the screen to see both files. (view menu -> editor layout)
+# The class being tested will be located in a different file:
 require_relative '../lib/10_drink'
+# If you are using VS Code, you can split the screen to see both files. (view menu -> editor layout)
+
+# In addition, we are going to start using Arrange-Act-Assert to format each test.
+# http://www.chrisrolle.com/en/blog/testing-arrange-act-assert
+# https://youtu.be/sCthIEOaMI8
+
+# 1. Arrange -> set-up the test (for example: initializing objects, let variables, updating values of instance variables, etc.)
+# 2. Act -> executing the logic to test (for example: calling a method to run)
+# 3. Assert -> expect the results of arrange & act
+
+# Warning: When you start using A-A-A to format your tests, it can feel counter-intuitive to DRY (don't repeat yourself)
+# Using repetition is unavoidable in read-able tests, which is the project's 'living documention' and should be very explicit.
 
 describe Drink do
   # The Drink class needs to have an attr_reader for :type
   context 'when using default initialization' do
+    # Arrange
+    subject(:my_drink) { Drink.new }
     it 'should be water' do
-      expect(subject.type).to eq('water')
+      # Act
+      drink_type = my_drink.type
+      # Assert
+      expect(drink_type).to eq('water')
     end
   end
 

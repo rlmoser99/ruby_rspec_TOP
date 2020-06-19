@@ -4,35 +4,6 @@ require_relative '../lib/13_find_number'
 
 # rubocop:disable Layout/LineLength, Metrics/BlockLength
 
-# THIS NEEDS TO GO IN AN EARLIER LESSON?!
-
-# Testing is not the time to write short-hand or worry about writing too explicitly...
-
-# Before we go deeper into testing, there are 3 stages to keep in mind when writing a test:
-# 1. Arrange -> set-up the test (initializing objects, let variables, updating values of instance variables, etc.)
-# 2. Act -> executing the logic to test (calling a method to run)
-# 3. Assert -> expect the results of arrange & act
-
-describe 'three stages to write a test' do
-  # Arrange
-  let(:lucky_numbers) { [3, 7, 13, 31, 42] }
-  it 'should change the first value to 7' do
-    # Act
-    lucky_numbers.rotate!
-    # Assert
-    expect(lucky_numbers).to eq([7, 13, 31, 42, 3])
-  end
-end
-
-describe 'three stages to write a test' do
-  # Arrange
-  let(:lucky_numbers) { [3, 7, 13, 31, 42] }
-  it 'should change the first value to 7' do
-    # Act & Assert
-    expect(lucky_numbers.rotate!).to eq([7, 13, 31, 42, 3])
-  end
-end
-
 # Let's take a look at test-driven development (TDD) technique called mocking.
 # Mocking uses a 'double', which is a generic ruby object.
 # Doubles are strict, which means you must specify (allow) any messages that it can receive.
