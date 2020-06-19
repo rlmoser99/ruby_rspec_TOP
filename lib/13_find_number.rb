@@ -1,16 +1,5 @@
 # frozen_string_literal: true
 
-# class to generate random number
-class RandomNumber
-  attr_accessor :number
-
-  def initialize(lowest, highest)
-    # PUT BACK FOR TEST EXAMPLES!!!
-    sleep(3)
-    @number = rand(lowest..highest)
-  end
-end
-
 # class for computer to find random number
 class FindNumber
   attr_accessor :answer, :min, :max, :guess
@@ -21,30 +10,29 @@ class FindNumber
     @answer = answer
   end
 
-  def start
-    puts "The random number between #{min}-#{max} is #{answer.number}"
-    puts "The computer will find it in #{max_guesses} guesses or less!\n\n"
-    computer_guess
-  end
+  # def start
+  #   puts "The random number between #{min}-#{max} is #{answer.number}"
+  #   puts "The computer will find it in #{max_guesses} guesses or less!\n\n"
+  #   computer_guess
+  # end
 
-  def max_guesses
-    (Math.log2(max - min) + 1).to_i
-  end
+  # def max_guesses
+  #   (Math.log2(max - min) + 1).to_i
+  # end
 
-  def computer_guess
-    count = 1
-    loop do
-      @guess = make_guess
-      display_guess(count)
-      break if game_over?
+  # def computer_guess
+  #   count = 1
+  #   loop do
+  #     @guess = make_guess
+  #     display_guess(count)
+  #     break if game_over?
 
-      update_range
-      count += 1
-    end
-  end
+  #     update_range
+  #     count += 1
+  #   end
+  # end
 
   def make_guess
-    sleep(1)
     (min + max) / 2
   end
 

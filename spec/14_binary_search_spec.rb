@@ -3,10 +3,10 @@
 require_relative '../lib/14_binary_search'
 require_relative '../lib/14_random_number'
 
-# DIVIDE EACH SECTION INTO THEIR OWN FILE, WITH ACTUAL METHOD EVOLVING
-
-# Mocking is a technique used in test-driven development (TDD).
-# Mocking creates a fake object or method 'double' that does not exist.
+# Unit testing will rely on different types of DOUBLES???.
+# The reason why we don’t use the real object is isolation —
+# we want to isolate the object under test from the rest of the world,
+# the rest of the world being the objects it depends on in this case.
 
 describe FindNumber do
   # random_number is simple double, which is a plain ruby object
