@@ -16,6 +16,17 @@ require_relative '../lib/12_input_output'
 # Therefore, if you are new to testing, be open to refactoring your previous code to make writing testing easier.
 # As you learn testing, you are also learning how to write better testable methods.
 
+# In addition, we are going to start using Arrange-Act-Assert to format each test.
+# http://www.chrisrolle.com/en/blog/testing-arrange-act-assert
+# https://youtu.be/sCthIEOaMI8
+
+# 1. Arrange -> set-up the test (for example: initializing objects, let variables, updating values of instance variables, etc.)
+# 2. Act -> executing the logic to test (for example: calling a method to run)
+# 3. Assert -> expect the results of arrange & act
+
+# Warning: When you start using A-A-A to format your tests, it can feel counter-intuitive to DRY (don't repeat yourself)
+# Using repetition is unavoidable in read-able tests, which is the project's 'living documention' and should be very explicit.
+
 describe NumberGame do
   it { is_expected.to respond_to(:game_solution, :count) }
 
