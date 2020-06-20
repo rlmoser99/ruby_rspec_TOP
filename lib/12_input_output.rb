@@ -3,10 +3,10 @@
 # Game that is nearly impossible to test.
 # Therefore is re-written below (NumberGame) with isolated methods easy to test
 class ImpossibleTestGame
-  attr_accessor :game_solution, :count
+  attr_accessor :solution, :count
 
   def initialize
-    @game_solution = rand(0..9)
+    @solution = rand(0..9)
   end
 
   def play_game
@@ -15,7 +15,7 @@ class ImpossibleTestGame
     loop do
       player_input
       @count += 1
-      break if @guess == game_solution.to_s
+      break if @guess == solution.to_s
     end
     game_over
   end
@@ -42,10 +42,10 @@ end
 # NumberGame is the exact game as above ImpossibleTestGame
 # NumberGame has small, isolated methods that are easy to test
 class NumberGame
-  attr_accessor :game_solution, :count
+  attr_accessor :solution, :count
 
   def initialize
-    @game_solution = rand(0..9)
+    @solution = rand(0..9)
   end
 
   def play_game
@@ -67,7 +67,7 @@ class NumberGame
   end
 
   def correct_guess?(number)
-    number == game_solution.to_s
+    number == solution.to_s
   end
 
   def game_over

@@ -28,52 +28,43 @@ require_relative '../lib/12_input_output'
 # Using repetition is unavoidable in read-able tests, which is the project's 'living documention' and should be very explicit.
 
 describe NumberGame do
-  it { is_expected.to respond_to(:game_solution, :count) }
+  # Arrange
+  subject(:game) { described_class.new }
 
-  context '#initialize' do
-    it 'should be a number 0 - 9' do
-      expect(subject.game_solution).to be >= 0
-      expect(subject.game_solution).to be < 10
-    end
-
-    # ASSIGNMENT
-    # Write one test for subject.game_solution that uses 'satisfy' instead of <, >, =
-    xit 'should be a number between 0 and 9' do
-    end
-  end
-
-  context '#correct_guess?' do
-    it 'responds with 1 argument' do
-      expect(subject).to respond_to(:correct_guess?).with(1).arguments
-    end
-
-    context 'when number is correct' do
+  describe '#correct_guess?' do
+    context 'when user guess is correct' do
       it 'should return true' do
-        subject.game_solution = 5
-        expect(subject.correct_guess?('5')).to be true
+        # Arrange
+        game.solution = 5
+        user_guess = '5'
+        # Act
+        guess_equals_solution = game.correct_guess?(user_guess)
+        # Assert
+        expect(guess_equals_solution).to be true
       end
     end
 
     # ASSIGNMENT
     # Write one test for when subject.game_solution does not equal correct_guess?
-    context 'when number is not correct' do
+    context 'when user guess is not correct' do
       xit 'should return false' do
       end
     end
   end
 
   context '#verify_input' do
-    # ASSIGNMENT
-    # Write one test that shows subject will respond to verify_input with 1 argument
-    xit 'responds with 1 argument' do
-    end
-
     # The method that asks for 'player_input' is not tested because it is unneccessary to test methods that only contain puts and/or gets.
-    # The player_input is used in the game as an argument passed into the verify_input method.
+
+    # The player_input is used in the game as an argument passed into #verify_input.
     # Note: this recursive method will repeat until a valid argument is given, due to a regex check.
     context 'when given a valid input as argument' do
       it 'should return valid input' do
-        expect(subject.verify_input('3')).to eq('3')
+        # Arrange
+        user_input = '3'
+        # Act
+        verified_input = game.verify_input(user_input)
+        # Assert
+        expect(verified_input).to eq('3')
       end
     end
   end
@@ -88,6 +79,7 @@ describe NumberGame do
     context 'when count is 1' do
       it 'should output correct phrase' do
         subject.count = 1
+        # USE DIFFERNT PHRASE NAME VARIABLES
         phrase = "LUCKY GUESS!\n"
         expect { subject.game_over }.to output(phrase).to_stdout
       end
@@ -97,6 +89,7 @@ describe NumberGame do
     context 'when count is 2-3' do
       xit 'should output correct phrase' do
         subject.count = 3
+        # USE DIFFERNT PHRASE NAME VARIABLES
         phrase = "Congratulations! You picked the random number in 3 guesses!\n"
         # Write the expect statement for this test
         phrase # Use phrase variable
@@ -107,6 +100,7 @@ describe NumberGame do
     context 'when count is 4 and over' do
       xit 'should output correct phrase' do
         # Write the conditions to make this test pass
+        # USE DIFFERNT PHRASE NAME VARIABLES
         expect { subject.game_over }.to output(phrase).to_stdout
       end
     end
