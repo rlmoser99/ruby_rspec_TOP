@@ -13,7 +13,7 @@ class MagicSeven
     step_two = multiply_by_two(step_one)
     step_three = minus_four(step_two)
     step_four = divide_by_two(step_three)
-    step_five = subtract_original(step_four)
+    step_five = subtract_random_number(step_four)
     puts display_result(step_one, step_two, step_three, step_four, step_five)
   end
 
@@ -33,7 +33,7 @@ class MagicSeven
     number / 2
   end
 
-  def subtract_original(number)
+  def subtract_random_number(number)
     number - random_number
   end
 
@@ -66,5 +66,5 @@ class MagicSeven
   end
 end
 
-game = MagicSeven.new
-game.play
+# game = MagicSeven.new
+# game.play
