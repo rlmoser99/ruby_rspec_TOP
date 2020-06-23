@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/12_input_output'
+require_relative '../lib/13_input_output'
 
 # rubocop:disable Layout/LineLength, Metrics/BlockLength
 
@@ -16,55 +16,59 @@ require_relative '../lib/12_input_output'
 # Therefore, if you are new to testing, be open to refactoring your previous code to make writing testing easier.
 # As you learn testing, you are also learning how to write better testable methods.
 
-# In addition, we are going to start using Arrange-Act-Assert to format each test.
-# http://www.chrisrolle.com/en/blog/testing-arrange-act-assert
-# https://youtu.be/sCthIEOaMI8
-
-# 1. Arrange -> set-up the test (for example: initializing objects, let variables, updating values of instance variables, etc.)
-# 2. Act -> executing the logic to test (for example: calling a method to run)
-# 3. Assert -> expect the results of arrange & act
-
-# Warning: When you start using A-A-A to format your tests, it can feel counter-intuitive to DRY (don't repeat yourself)
-# Using repetition is unavoidable in read-able tests, which is the project's 'living documention' and should be very explicit.
-
 describe NumberGame do
-  # Arrange
-  subject(:game) { described_class.new }
+  it { is_expected.to respond_to(:game_solution, :count) }
 
-  describe '#correct_guess?' do
-    context 'when user guess is correct' do
+  context '#initialize' do
+    it 'should be a number 0 - 9' do
+      expect(subject.game_solution).to be >= 0
+      expect(subject.game_solution).to be < 10
+    end
+
+    # ASSIGNMENT
+    # Write one test for subject.game_solution that uses 'satisfy' instead of <, >, =
+    it 'should be a number between 0 and 9' do
+      expect(subject.game_solution).to satisfy do |number|
+        number.between?(0, 9)
+      end
+    end
+  end
+
+  context '#correct_guess?' do
+    it 'responds with 1 argument' do
+      expect(subject).to respond_to(:correct_guess?).with(1).arguments
+    end
+
+    context 'when number is correct' do
       it 'should return true' do
-        # Arrange
-        game.solution = 5
-        user_guess = '5'
-        # Act
-        guess_equals_solution = game.correct_guess?(user_guess)
-        # Assert
-        expect(guess_equals_solution).to be true
+        subject.game_solution = 5
+        expect(subject.correct_guess?('5')).to be true
       end
     end
 
     # ASSIGNMENT
     # Write one test for when subject.game_solution does not equal correct_guess?
-    context 'when user guess is not correct' do
-      xit 'should return false' do
+    context 'when number is not correct' do
+      it 'should return false' do
+        subject.game_solution = 5
+        expect(subject.correct_guess?('2')).to be false
       end
     end
   end
 
   context '#verify_input' do
-    # The method that asks for 'player_input' is not tested because it is unneccessary to test methods that only contain puts and/or gets.
+    # ASSIGNMENT
+    # Write one test that shows subject will respond to verify_input with 1 argument
+    it 'responds with 1 argument' do
+      expect(subject).to respond_to(:verify_input).with(1).arguments
+    end
 
-    # The player_input is used in the game as an argument passed into #verify_input.
+    # The method that asks for 'player_input' is not tested because it is unneccessary to test methods that only contain puts and/or gets.
+    # The player_input is used in the game as an argument passed into the verify_input method.
     # Note: this recursive method will repeat until a valid argument is given, due to a regex check.
     context 'when given a valid input as argument' do
       it 'should return valid input' do
-        # Arrange
-        user_input = '3'
-        # Act
-        verified_input = game.verify_input(user_input)
-        # Assert
-        expect(verified_input).to eq('3')
+        expect(subject.verify_input('3')).to eq('3')
       end
     end
   end
@@ -79,7 +83,6 @@ describe NumberGame do
     context 'when count is 1' do
       it 'should output correct phrase' do
         subject.count = 1
-        # USE DIFFERNT PHRASE NAME VARIABLES
         phrase = "LUCKY GUESS!\n"
         expect { subject.game_over }.to output(phrase).to_stdout
       end
@@ -87,20 +90,20 @@ describe NumberGame do
 
     # ASSIGNMENT
     context 'when count is 2-3' do
-      xit 'should output correct phrase' do
+      it 'should output correct phrase' do
         subject.count = 3
-        # USE DIFFERNT PHRASE NAME VARIABLES
         phrase = "Congratulations! You picked the random number in 3 guesses!\n"
         # Write the expect statement for this test
-        phrase # Use phrase variable
+        expect { subject.game_over }.to output(phrase).to_stdout
       end
     end
 
     # ASSIGNMENT
     context 'when count is 4 and over' do
-      xit 'should output correct phrase' do
+      it 'should output correct phrase' do
         # Write the conditions to make this test pass
-        # USE DIFFERNT PHRASE NAME VARIABLES
+        subject.count = 7
+        phrase = "That was hard. It took you 7 guesses!\n"
         expect { subject.game_over }.to output(phrase).to_stdout
       end
     end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/13_find_number'
+require_relative '../lib/14_find_number'
 
 # rubocop:disable Layout/LineLength, Metrics/BlockLength
 

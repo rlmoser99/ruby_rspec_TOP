@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../lib/magic_seven'
+require_relative '../lib/12_magic_seven'
+
+# rubocop:disable Layout/LineLength
 
 # Arrange-Act-Assert is a to format each test.
 # http://www.chrisrolle.com/en/blog/testing-arrange-act-assert
@@ -73,3 +75,5 @@ describe MagicSeven do
     end
   end
 end
+
+# rubocop:enable Layout/LineLength

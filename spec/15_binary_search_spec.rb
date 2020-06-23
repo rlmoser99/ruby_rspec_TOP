@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../lib/14_binary_search'
-require_relative '../lib/14_random_number'
+require_relative '../lib/15_binary_search'
+require_relative '../lib/15_random_number'
 
 # Unit testing will rely on different types of DOUBLES???.
 # The reason why we don’t use the real object is isolation —
