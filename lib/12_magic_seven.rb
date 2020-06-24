@@ -3,18 +3,18 @@
 # Given any number, the final number will always be 7
 class MagicSeven
   attr_accessor :random_number
+  attr_reader :step_one, :step_two, :step_three, :step_four, :step_five
 
   def initialize
     @random_number = rand(0..20)
   end
 
   def play
-    step_one = add_nine(random_number)
-    step_two = multiply_by_two(step_one)
-    step_three = minus_four(step_two)
-    step_four = divide_by_two(step_three)
-    step_five = subtract_random_number(step_four)
-    puts display_result(step_one, step_two, step_three, step_four, step_five)
+    @step_one = add_nine(random_number)
+    @step_two = multiply_by_two(step_one)
+    @step_three = minus_four(step_two)
+    @step_four = divide_by_two(step_three)
+    @step_five = subtract_random_number(step_four)
   end
 
   def add_nine(number)
@@ -37,8 +37,8 @@ class MagicSeven
     number - random_number
   end
 
-  def display_result(one, two, three, four, five)
-    <<~HEREDOC
+  def display_result
+    puts <<~HEREDOC
 
       MAGIC SEVEN
 
@@ -47,19 +47,19 @@ class MagicSeven
       For example, let's start with the random number: #{random_number}.
 
       1. Add nine:
-          #{random_number} + 9 = #{one}
+          #{random_number} + 9 = #{step_one}
 
       2. Take #1 answer and multiply by two:
-          #{one} * 2 = #{two}
+          #{step_one} * 2 = #{step_two}
 
       3. Take #2 answer and minus four:
-          #{two} - 4 = #{three}
+          #{step_two} - 4 = #{step_three}
 
       4. Take #3 answer and divide by two:
-          #{three} / 2 = #{four}
+          #{step_three} / 2 = #{step_four}
 
       5. Take #4 answer and subtract the original random number:
-          #{four} - #{random_number} = #{five}
+          #{step_four} - #{random_number} = #{step_five}
 
       Step #5 will always be 7!
     HEREDOC
@@ -68,3 +68,4 @@ end
 
 # game = MagicSeven.new
 # game.play
+# game.display_result

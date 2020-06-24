@@ -52,21 +52,36 @@ describe MagicSeven do
   # ASSIGNMENT
 
   describe '#minus_four' do
-  end
-
-  describe '#divide_by_two' do
-  end
-
-  describe '#subtract_random_number' do
-    # The last method of this 'magic seven' game should always be seven
-    xit 'should return 7' do
-      # This test will need one additional variable set-up to write a passing test.
+    it 'should return 6' do
+      previous_step = 10
+      result = game.minus_four(previous_step)
+      expect(result).to eq(6)
     end
   end
 
-  # The result of this 'magic seven' game should always be seven (no matter the random_number)
+  describe '#divide_by_two' do
+    it 'should return 6' do
+      previous_step = 18
+      result = game.divide_by_two(previous_step)
+      expect(result).to eq(9)
+    end
+  end
+
+  describe '#subtract_random_number' do
+    it 'should return 7' do
+      # Arrange - ADDITIONAL SET-UP HERE!!!
+      game.random_number = 3
+      previous_step = 10
+      result = game.subtract_random_number(previous_step)
+      expect(result).to eq(7)
+    end
+  end
+
   describe '#play' do
-    xit 'should return 7' do
+    it 'should return 7' do
+      game.random_number = 3
+      result = game.play
+      expect(result).to eq(7)
     end
   end
 end
