@@ -2,10 +2,9 @@
 
 require_relative '../lib/12_magic_seven'
 
-# rubocop:disable Layout/LineLength
+# rubocop:disable Layout/LineLength, Metrics/BlockLength
 
-# Arrange-Act-Assert is a to format each test.
-# http://www.chrisrolle.com/en/blog/testing-arrange-act-assert
+# Standard Testing Pattern - Arrange Act, and Assert
 # https://youtu.be/sCthIEOaMI8
 
 # 1. Arrange -> set-up the test (for example: initializing objects, let variables, updating values of instance variables, etc.)
@@ -16,28 +15,22 @@ require_relative '../lib/12_magic_seven'
 # Using repetition is unavoidable in read-able tests, which is the project's 'living documention' and should be very explicit.
 
 describe MagicSeven do
-  # Arrange
-  subject(:game) { described_class.new }
+  subject(:game) { described_class.new } # Arrange
 
   describe '#add_nine' do
     it 'should return 10' do
-      # Arrange
-      previous_step = 1
-      # Act
-      result = game.add_nine(previous_step)
-      # Assert
-      expect(result).to eq(10)
+      # THIS IS ACTUALLY THE RANDOM NUMBER? BUT SHOULDN'T MATTER
+      input = 1 # Arrange
+      result = game.add_nine(input) # Act
+      expect(result).to eq(10) # Assert
     end
   end
 
   describe '#multiply_by_two' do
     it 'should return 16' do
-      # Arrange
-      previous_step = 8
-      # Act
-      result = game.multiply_by_two(previous_step)
-      # Assert
-      expect(result).to eq(16)
+      previous_step = 8 # Arrange
+      result = game.multiply_by_two(previous_step) # Act
+      expect(result).to eq(16) # Assert
     end
   end
 
@@ -76,4 +69,4 @@ describe MagicSeven do
   end
 end
 
-# rubocop:enable Layout/LineLength
+# rubocop:enable Layout/LineLength, Metrics/BlockLength
