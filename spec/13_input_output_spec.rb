@@ -27,7 +27,8 @@ describe NumberGame do
     end
 
     # ASSIGNMENT
-    # Write one test for subject.solution that uses 'satisfy' instead of <, >, =
+    # Write one test for game.solution that uses 'satisfy' instead of <, >, =
+    # remove the 'x' before running this test
     xit 'should be a number between 0 and 9' do
     end
   end
@@ -43,28 +44,27 @@ describe NumberGame do
     end
 
     # ASSIGNMENT
-    # Write one test for when subject.game_solution does not equal correct_guess?
+    # Write one test for when game.game_solution does not equal correct_guess?
     context 'when user guess is not correct' do
+      # remove the 'x' before running this test
       xit 'should return false' do
       end
     end
   end
 
   describe '#verify_input' do
-    # The method that asks for 'player_input' is not tested because it is unneccessary to test methods that only contain puts and/or gets.
+    # The method that asks for 'player_input' is not tested because it is a protected method and it unneccessary to test methods that only contain puts and/or gets. However, at the bottom of the answer file is an example of how to test the #player_input method if it were not protected.
 
     # The player_input is used in the game as an argument passed into #verify_input.
     # Note: this recursive method will repeat until a valid argument is given, due to a regex check.
     context 'when given a valid input as argument' do
       it 'should return valid input' do
-        # Arrange
         user_input = '3'
-        # Act
         verified_input = game.verify_input(user_input)
-        # Assert
         expect(verified_input).to eq('3')
       end
     end
+    # At the bottom of the answer file is an example of how to test the #verify_input method 'faking' an in-valid argument.
   end
 
   # It is unneccessary to write tests for methods that only contain puts statements, like #game_over.
@@ -76,30 +76,30 @@ describe NumberGame do
   describe '#game_over' do
     context 'when count is 1' do
       it 'should output correct phrase' do
-        subject.count = 1
-        # USE DIFFERNT PHRASE NAME VARIABLES
-        phrase = "LUCKY GUESS!\n"
-        expect { subject.game_over }.to output(phrase).to_stdout
+        game.count = 1
+        lucky_phrase = "LUCKY GUESS!\n"
+        # The output matcher needs a block of code to assert
+        expect { game.game_over }.to output(lucky_phrase).to_stdout
       end
     end
 
     # ASSIGNMENT
     context 'when count is 2-3' do
+      # remove the 'x' before running this test
       xit 'should output correct phrase' do
-        subject.count = 3
-        # USE DIFFERNT PHRASE NAME VARIABLES
-        phrase = "Congratulations! You picked the random number in 3 guesses!\n"
+        game.count = 3
+        congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
         # Write the expect statement for this test
-        phrase # Use phrase variable
+        congrats_phrase # Use congrats_phrase variable
       end
     end
 
     # ASSIGNMENT
     context 'when count is 4 and over' do
+      # remove the 'x' before running this test
       xit 'should output correct phrase' do
         # Write the conditions to make this test pass
-        # USE DIFFERNT PHRASE NAME VARIABLES
-        expect { subject.game_over }.to output(phrase).to_stdout
+        expect { game.game_over }.to output(phrase).to_stdout
       end
     end
   end

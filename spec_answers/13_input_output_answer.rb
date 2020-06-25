@@ -27,7 +27,8 @@ describe NumberGame do
     end
 
     # ASSIGNMENT
-    # Write one test for subject.solution that uses 'satisfy' instead of <, >, =
+    # Write one test for game.solution that uses 'satisfy' instead of <, >, =
+    # remove the 'x' before running this test
     it 'should be a number between 0 and 9' do
       solution = game.solution
       expect(solution).to satisfy do |number|
@@ -47,8 +48,9 @@ describe NumberGame do
     end
 
     # ASSIGNMENT
-    # Write one test for when subject.solution does not equal correct_guess?
+    # Write one test for when game.solution does not equal correct_guess?
     context 'when number is not correct' do
+      # remove the 'x' before running this test
       it 'should return false' do
         game.solution = 5
         user_guess = '2'
@@ -59,20 +61,18 @@ describe NumberGame do
   end
 
   describe '#verify_input' do
-    # ASSIGNMENT
-    # Write one test that shows subject will respond to verify_input with 1 argument
-    it 'responds with 1 argument' do
-      expect(subject).to respond_to(:verify_input).with(1).arguments
-    end
+    # The method that asks for 'player_input' is not tested because it is a protected method and it unneccessary to test methods that only contain puts and/or gets. However, at the bottom of the answer file is an example of how to test the #player_input method if it were not protected.
 
-    # The method that asks for 'player_input' is not tested because it is unneccessary to test methods that only contain puts and/or gets.
     # The player_input is used in the game as an argument passed into the verify_input method.
     # Note: this recursive method will repeat until a valid argument is given, due to a regex check.
     context 'when given a valid input as argument' do
       it 'should return valid input' do
-        expect(subject.verify_input('3')).to eq('3')
+        user_input = '3'
+        verified_input = game.verify_input(user_input)
+        expect(verified_input).to eq('3')
       end
     end
+    # At the bottom of the answer file is an example of how to test the #verify_input method 'faking' an in-valid argument.
   end
 
   # It is unneccessary to write tests for methods that only contain puts statements, like #game_over.
@@ -84,31 +84,69 @@ describe NumberGame do
   describe '#game_over' do
     context 'when count is 1' do
       it 'should output correct phrase' do
-        subject.count = 1
-        phrase = "LUCKY GUESS!\n"
-        expect { subject.game_over }.to output(phrase).to_stdout
+        game.count = 1
+        lucky_phrase = "LUCKY GUESS!\n"
+        # The output matcher needs a block of code to assert
+        expect { game.game_over }.to output(lucky_phrase).to_stdout
       end
     end
 
     # ASSIGNMENT
     context 'when count is 2-3' do
+      # remove the 'x' before running this test
       it 'should output correct phrase' do
-        subject.count = 3
-        phrase = "Congratulations! You picked the random number in 3 guesses!\n"
+        game.count = 3
+        congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
         # Write the expect statement for this test
-        expect { subject.game_over }.to output(phrase).to_stdout
+        expect { game.game_over }.to output(congrats_phrase).to_stdout
       end
     end
 
     # ASSIGNMENT
     context 'when count is 4 and over' do
+      # remove the 'x' before running this test
       it 'should output correct phrase' do
         # Write the conditions to make this test pass
-        subject.count = 7
-        phrase = "That was hard. It took you 7 guesses!\n"
-        expect { subject.game_over }.to output(phrase).to_stdout
+        game.count = 7
+        hard_phrase = "That was hard. It took you 7 guesses!\n"
+        expect { game.game_over }.to output(hard_phrase).to_stdout
       end
     end
   end
+
+  # This method is a PROTECTED method and it does NOT need to be tested.
+  # This method is only used as parameter for the #verify_input method.
+  # It is unneccessary to test methods that only contain puts and/or gets because they are well-tested in the standard ruby library.
+  # However, if this test was public (instead of protected) and you had to test it, you'll need to create a stub for the gets method
+  # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/stub-with-substitute-implementation
+
+  # describe '#player_input' do
+  #   it 'outputs a phrase' do
+  #     prompt = "Choose 1-digit between 0-9\n"
+  #     expect { game.player_input }.to output(prompt).to_stdout
+  #   end
+
+  #   it 'receives gets with user input' do
+  #     allow(game).to receive(:gets).and_return('3')
+  #     input = game.player_input
+  #     expect(input).to eq('3')
+  #   end
+  # end
+
+  # This test is not neccessary, because this recursive method will repeat until a valid argument is given, due to a regex check.
+  # This test uses a stub to 'fake' that when it receives verify_method that it returns 7 no matter what.
+  # Therefore, this test really only proves that the stub works, not that the method works!
+
+  # describe '#verify_input' do
+  #   context 'when using a stub to fake an in-valid input as argument' do
+  #     it 'should return valid input' do
+  #       user_input = 'g'
+  #       allow(game).to receive(:verify_input).and_return('5')
+  #       verified_input = game.verify_input(user_input)
+  #       expect(game).to have_received(:verify_input).with('g')
+  #       expect(verified_input).to eq('5')
+  #     end
+  #   end
+  # end
 end
 # rubocop:enable Layout/LineLength, Metrics/BlockLength
