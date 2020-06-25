@@ -12,11 +12,11 @@ require_relative '../lib/12_magic_seven'
 # 3. Assert -> expect the results of arrange & act
 
 # The tests in this example are fairly easy to understand and may seem ridiculous to use A-A-A
-# However, as tests become more complicated, it is important to clearly arrange, act & assert each step individually.
+# However, as tests become more complicated, it is important to clearly arrange, act & assert each step clearly.
 
 # NOTE: When you start using A-A-A to format your tests, it will feel counter-intuitive to DRY (don't repeat yourself)
-# Creating easy-to-read tests is very important, therefore using repetition is neccessary.
-# When you start working on a existing code base, you will become familiar with the code by reading the tests.
+# Creating tests that are easy to read is very important, therefore using repetition is neccessary.
+# When you start working on a existing code base, you will often become familiar with the code by reading the tests.
 
 # BOTTOM LINE: Tests should be easily understood by someone that is not familiar with the code.
 
@@ -25,7 +25,7 @@ describe MagicSeven do
   subject(:game) { described_class.new }
 
   describe '#add_nine' do
-    it 'should return 10' do
+    it 'should return 15' do
       # This text could be written like the following (and would pass):
       expect(game.add_nine(6)).to eq(15)
 
@@ -50,6 +50,7 @@ describe MagicSeven do
   end
 
   # ASSIGNMENT
+  # Write a test for each of the following methods
 
   describe '#minus_four' do
     it 'should return 6' do
@@ -60,26 +61,30 @@ describe MagicSeven do
   end
 
   describe '#divide_by_two' do
-    it 'should return 6' do
+    it 'should return 9' do
       previous_step = 18
       result = game.divide_by_two(previous_step)
       expect(result).to eq(9)
     end
   end
 
+  # The last method of this 'magic seven' game should always be seven
   describe '#subtract_random_number' do
+    # remove the 'x' before running this test
     it 'should return 7' do
-      # Arrange - ADDITIONAL SET-UP HERE!!!
-      game.random_number = 3
+      # Hint: this test will need to 'arrange' two variables
       previous_step = 10
+      game.random_number = 3
       result = game.subtract_random_number(previous_step)
       expect(result).to eq(7)
     end
   end
 
+  # The result of this 'magic seven' game should always be seven (with any random_number)
   describe '#play' do
-    it 'should return 7' do
-      game.random_number = 3
+    # remove the 'x' before running this test
+    it 'should always return 7' do
+      game.random_number = 19
       result = game.play
       expect(result).to eq(7)
     end
