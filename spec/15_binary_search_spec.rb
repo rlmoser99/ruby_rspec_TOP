@@ -8,6 +8,9 @@ require_relative '../lib/15_random_number'
 # we want to isolate the object under test from the rest of the world,
 # the rest of the world being the objects it depends on in this case.
 
+# CHANGE FROM PREVIOUS VERSION - BE SURE TO UDPATE IT IN THIS VERSON!!!
+# Changed random_number.number to random_number.value!!! Check for consistency.
+
 describe FindNumber do
   # random_number is simple double, which is a plain ruby object
   # let(:random_number) { double }
