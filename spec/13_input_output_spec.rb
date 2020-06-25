@@ -11,25 +11,34 @@ require_relative '../lib/13_input_output'
 # One key difference is that NumberGame has smaller, isolated methods.
 
 # Small and isolated methods that only do one thing are easier to test.
-# Long methods are like a run-on sentence that should have been divided into 2 or 3 different sentences so that everything could be clearly understood and in this case if each method only does one thing it will also be easier to test.
+# Long methods are like a run-on sentence that should have been divided into 2 or 3 different sentences so that everything could be clearly understood and in this case if a method does many different things it can be difficult to test.
 
 # Therefore, if you are new to testing, be open to refactoring your previous code to make writing testing easier.
 # As you learn testing, you are also learning how to write better testable methods.
 
 describe NumberGame do
-  # Arrange
   subject(:game) { described_class.new }
+
+  describe '#initialize' do
+    it 'should be a number 0 - 9' do
+      solution = game.solution
+      expect(solution).to be >= 0
+      expect(solution).to be < 10
+    end
+
+    # ASSIGNMENT
+    # Write one test for subject.solution that uses 'satisfy' instead of <, >, =
+    xit 'should be a number between 0 and 9' do
+    end
+  end
 
   describe '#correct_guess?' do
     context 'when user guess is correct' do
       it 'should return true' do
-        # Arrange
         game.solution = 5
         user_guess = '5'
-        # Act
-        guess_equals_solution = game.correct_guess?(user_guess)
-        # Assert
-        expect(guess_equals_solution).to be true
+        correct = game.correct_guess?(user_guess)
+        expect(correct).to be true
       end
     end
 
@@ -41,7 +50,7 @@ describe NumberGame do
     end
   end
 
-  context '#verify_input' do
+  describe '#verify_input' do
     # The method that asks for 'player_input' is not tested because it is unneccessary to test methods that only contain puts and/or gets.
 
     # The player_input is used in the game as an argument passed into #verify_input.
@@ -64,7 +73,7 @@ describe NumberGame do
   # However, here is an example of how you could test it using the output matcher
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/output-matcher
 
-  context '#game_over' do
+  describe '#game_over' do
     context 'when count is 1' do
       it 'should output correct phrase' do
         subject.count = 1

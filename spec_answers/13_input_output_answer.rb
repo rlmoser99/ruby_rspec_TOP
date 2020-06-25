@@ -11,52 +11,54 @@ require_relative '../lib/13_input_output'
 # One key difference is that NumberGame has smaller, isolated methods.
 
 # Small and isolated methods that only do one thing are easier to test.
-# Long methods are like a run-on sentence that should have been divided into 2 or 3 different sentences so that everything could be clearly understood and in this case if each method only does one thing it will also be easier to test.
+# Long methods are like a run-on sentence that should have been divided into 2 or 3 different sentences so that everything could be clearly understood and in this case if a method does many different things it can be difficult to test.
 
 # Therefore, if you are new to testing, be open to refactoring your previous code to make writing testing easier.
 # As you learn testing, you are also learning how to write better testable methods.
 
 describe NumberGame do
-  it { is_expected.to respond_to(:game_solution, :count) }
+  subject(:game) { described_class.new }
 
-  context '#initialize' do
+  describe '#initialize' do
     it 'should be a number 0 - 9' do
-      expect(subject.game_solution).to be >= 0
-      expect(subject.game_solution).to be < 10
+      solution = game.solution
+      expect(solution).to be >= 0
+      expect(solution).to be < 10
     end
 
     # ASSIGNMENT
-    # Write one test for subject.game_solution that uses 'satisfy' instead of <, >, =
+    # Write one test for subject.solution that uses 'satisfy' instead of <, >, =
     it 'should be a number between 0 and 9' do
-      expect(subject.game_solution).to satisfy do |number|
+      solution = game.solution
+      expect(solution).to satisfy do |number|
         number.between?(0, 9)
       end
     end
   end
 
-  context '#correct_guess?' do
-    it 'responds with 1 argument' do
-      expect(subject).to respond_to(:correct_guess?).with(1).arguments
-    end
-
+  describe '#correct_guess?' do
     context 'when number is correct' do
       it 'should return true' do
-        subject.game_solution = 5
-        expect(subject.correct_guess?('5')).to be true
+        game.solution = 5
+        user_guess = '5'
+        correct = game.correct_guess?(user_guess)
+        expect(correct).to be true
       end
     end
 
     # ASSIGNMENT
-    # Write one test for when subject.game_solution does not equal correct_guess?
+    # Write one test for when subject.solution does not equal correct_guess?
     context 'when number is not correct' do
       it 'should return false' do
-        subject.game_solution = 5
-        expect(subject.correct_guess?('2')).to be false
+        game.solution = 5
+        user_guess = '2'
+        correct = game.correct_guess?(user_guess)
+        expect(correct).to be false
       end
     end
   end
 
-  context '#verify_input' do
+  describe '#verify_input' do
     # ASSIGNMENT
     # Write one test that shows subject will respond to verify_input with 1 argument
     it 'responds with 1 argument' do
@@ -79,7 +81,7 @@ describe NumberGame do
   # However, here is an example of how you could test it using the output matcher
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/output-matcher
 
-  context '#game_over' do
+  describe '#game_over' do
     context 'when count is 1' do
       it 'should output correct phrase' do
         subject.count = 1
