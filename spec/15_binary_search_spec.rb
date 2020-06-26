@@ -11,6 +11,9 @@ require_relative '../lib/15_random_number'
 # CHANGE FROM PREVIOUS VERSION - BE SURE TO UDPATE IT IN THIS VERSON!!!
 # Changed random_number.number to random_number.value!!! Check for consistency.
 
+# Update to instance doubles!!!
+# Something that sleeps(3) to show test time saving (database lookup)
+
 describe FindNumber do
   # random_number is simple double, which is a plain ruby object
   # let(:random_number) { double }
@@ -94,13 +97,3 @@ describe FindNumber do
     end
   end
 end
-
-# Unit testing will rely on different types of DOUBLES???.
-# The reason why we don’t use the real object is isolation —
-# we want to isolate the object under test from the rest of the world,
-# the rest of the world being the objects it depends on in this case.
-
-# Three stages to consider when writing a test:
-# Arrange ->
-# Act ->
-# Assert ->

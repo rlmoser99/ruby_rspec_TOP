@@ -54,204 +54,56 @@ have_attributes\
 magic_matchers\
 respond_to
 
-## 12_input_output
+## 12_magic_seven
+Arrange, Act & Assert testing pattern
+
+## 13_input_output
 Important to write small, isolated methods to test\
 Unnecessary to test puts and gets\
 Use 'gets methods' as parameters in another method that is tested\
 output matcher
 
-## 13_find_number
+## 14_find_number
 TDD with doubles\
 Add method names to: subject { described_class.new.game_solution }
 
-## Stub, Double, Spies Idea for Code:
-Use - Arrange, Act & Assert to show differences (like future_learn file)
+# CURRENT WORK IN PROGRESS FILE:
 
-Number Game, with solution as a different class?
-Something that sleeps(3) to show test time saving (database lookup)
-
-## Double (file #29 & #30)
-Example using two classes. One is an argument for the other when instantiated.
-Great to use for TDD, because you can use the double to respond to anything.
-The movie class shouldn't care if it is given an actual class object, but rather all it cares is that it is given an object that can respond to certain methods (polymorphism).
-Show how doubles can respond to same method with different return values
-
-## Double vs. Instance Double (file #32)
-Example using one class that has a method that takes a while to complete.
-Show how a regular double can have 'extra' responses and still pass.
-Show how a instance double gives more security
-
-## Spies (file #34 & #35)
-Example using two classes. One method in first class is given second as argument.
-Uses a before block.
-
-## Unsure when/how to implement
-class double in file #33
-
-## Stub
-
-Generally, when talking to any external system is problematic, then that’s a good indication that you’d want to use a stub to fake that call.
-
-We are going to stub the .sum method on an array.
-it 'can stub one or more methods on a real object' do
-  arr = [1, 2, 3]
-  allow(arr).to receive(:sum).and_return(10)
-  expect(arr.sum).to eq(10)
-
-  The other array methods have not been over-written. All of the other methods will continue to act normally
-  arr.push(4)
-  expect(arr).to eq([1, 2, 3, 4])
-  expect(arr.sum).to eq(10)
-end
-
-If you expect a method to return different values each time it is called. 
-Here we are mocking the behavior of an array [:b, :c]
-
-This is not the best example. It will typically used for very complicated behavior.
-
-it 'can return multiple return values in sequence' do
-  mock_array = double
-  allow(mock_array).to receive(:pop).and_return(:c, :b, nil)
-  expect(mock_array.pop).to eq(:c)
-  expect(mock_array.pop).to eq(:b)
-  expect(mock_array.pop).to be_nil
-  expect(mock_array.pop).to be_nil
-end
-
-We are going to stubbing/mocking (emulating) the behavior of [1, 2, 3].
-Re-write this with letters, because it is confusing to have 1 arg and return 1.
-
-it 'can return different values depending on the argument' do
-  three_element_array = double
-
-  allow(three_element_array).to receive(:first).with(no_args).and_return('a')
-  allow(three_element_array).to receive(:first).with(1).and_return('a')
-  allow(three_element_array).to receive(:first).with(2).and_return(['a', 'b'])
-  allow(three_element_array).to receive(:first).with(be >= 3).and_return(['a', 'b', 'c'])
-
-  expect(three_element_array.first).to eq('a')
-  expect(three_element_array.first(1)).to eq('a')
-  expect(three_element_array.first(2)).to eq(['a', 'b'])
-  expect(three_element_array.first(3)).to eq(['a', 'b', 'c'])
-  expect(three_element_array.first(100)).to eq(['a', 'b', 'c'])
-end
-
-## Doubles | Mocks
-Doubles, also known as Mocks, is an object which can “stand in” for another object.
-
-Test object methods in isolation, we can emulate the behavior of other objects.
-
-Real-life application - reaching out to a database to retrieve info, reach out to a server to get info, etc. So you can assume that whatever you need to do, provides you correct info.
-
-stuntman = double('Mr. Danger')
-allow(stuntman).to receive_messages(fall_off_ladder: 'Ouch', light_on_fire: true)
-or => stuntman = double('Mr. Danger', fall_off_ladder: 'Ouch', light_on_fire: true)
-expect(stuntman.fall_off_ladder).to eq('Ouch')
-expect(stuntman.light_on_fire).to eq(true)
-
-stubs double - use when an object is needed to provide something that takes time (database call)
-One class shouldn't care if it is given an actual instance of an class object, but rather all it cares is that it is given an object that can respond to certain methods (polymorphism).
-
-expect(stuntman).to receive(:light_on_fire).at_most(1).times
-expect(stuntman).to receive(:fall_off_ladder).once
-expect(stuntman).to receive(:act).at_least(2).times
-
+## 15_binary_search
+Changing TDD Double to Instance Double\
+Something that sleeps(3) to show test time saving (database lookup). Generally, when talking to any external system is problematic, then that’s a good indication that you’d want to use a stub to fake that call.\
 Using instance double gives the tests more security, and is preferred over regular doubles when possible.
 The first argument has to be the class that you want to make a double of.
 rspec will give you an error if you pass in the wrong number of arguments then defined in class.
 We are not making a mock of the person class, we are making a mock of an instance of the person class.
 
-INSTANCE_DOUBLE!!!
+# FUTURE - CAN NOT COVER EVERYTHING!!!
 
-person = instance_double(Person)
-allow(person).to receive(:a).with(3).and_return('Hello')
-expect(person.a(3)).to eq('Hello')
-
-Rubocop Rspec style guide = Prefer instance doubles over stubbing any instance of a class
-let(:my_instance) { instance_double(MyClass) }
-allow(MyClass).to receive(:new).and_return(my_instance)
-allow(my_instance).to receive(:foo)
-
-let(:foo) do
-  instance_double("ClassName", method_name: 'returned value')
-end
-
-## Spies
-Many people use mock, spies and doubles interchangeably, but they are all slightly different.
-Double => Pattern: Create Double, Give it a message, Expect that double to receive that message, before we invoke the method that would send the message to the double. So the expectation was before the action.
-
-Spies are ultimate type of test double. They follow a slightly different pattern. We assert a message has been received after the action. So, the expectation is after the action. Spies automatically 'observe' all the messages that are sent to an object, even if we have not explicitly defined that message.
-When you use a spy, instead of using 'receive' you use 'have_received'
-
-let(:animal) { spy('animal') }
-animal.eat_food
-expect(animal).to have_received(:eat_food)
-expect(animal).not_to have_received(:eat_human)
-expect(animal).to have_received(:eat_food).at_least(2).times
-
-
-## Resources on Doubles:
-https://martinfowler.com/bliki/TestDouble.html
-https://www.tutorialspoint.com/rspec/rspec_test_doubles.htm
-http://testing-for-beginners.rubymonstas.org/test_doubles.html
-https://relishapp.com/rspec/rspec-mocks/v/3-2/docs/configuring-responses
-
-
-## Can not cover everything!!!
-
-# FUTURE:
-
-
-
-## polymorphism - (many shapes)
+## Polumorphism Concept:
+The movie class shouldn't care if it is given an actual class object, but rather all it cares is that it is given an object that can respond to certain methods (polymorphism).
+Show how doubles can respond to same method with different return values
 we shouldn't worry about about kind of object is, but what is can respond to...
 It doesn't matter if we are responding to HotChocolate, Coffee, or Milk
 This is a great way to test different class types with the same methods.
 This literally just tests in a method exists on a object.
 expect(subject).to respond_to(:purchase).with(1).arguments
 
-
-
-## This mocks a class method. This intercepts this message and creates the car instance double.
-This also gives us spy-like functionality in our example.
-Our test is going to be on the Garage class. All of the dependencies on the Car class need to be faked. There are 2 dependencies in this example.
-We are invoking the new method on the class itself and we also need to fake what car returns. So, we need to fake the Car class and the Car instance.
-
-before do
-  allow(Car).to receive(:new).and_return(car)
-end
-
-it 'adds a car to its storage' do
-  subject.add_to_collection('Honda Civic')
-  expect(Car).to have_received(:new).with('Honda Civic')
-  expect(subject.storage.length).to eq(1)
-  expect(subject.storage.first).to eq(car)
-end
+## Resources on Doubles to include in files:
+https://martinfowler.com/bliki/TestDouble.html
+https://www.tutorialspoint.com/rspec/rspec_test_doubles.htm
+http://testing-for-beginners.rubymonstas.org/test_doubles.html
+https://relishapp.com/rspec/rspec-mocks/v/3-2/docs/configuring-responses
 
 ## Review TOP resources to make sure that this material is consistent:
 http://www.betterspecs.org/
-+++ Check to see consistent use of describe and context
+Also, check to for consistent use of describe and context
 
-## Check out TOP student project. To see if there is something that I don't understand yet, like:
+## Review connect_four student projects to see if anything else should be covered:
 game.instance_variable_set
-allow(subject).to receive(:gets).and_return(‘X’)
-allow_any_instance_of(Kernel).to receive(:gets).and_return(‘X’)
-
-## Rspec & Rubocop Style Guide:
-
-### RSpec/DescribedClassModuleWrapping
-RSpec.describe MyModule::MyClass do
-  ...
-end
-
-### RSpec/InstanceSpy
-foo = instance_spy(Foo)
-expect(foo).to have_received(:bar)
 
 # Not Going to Cover?
 be_within matcher\
 cover matcher\
-exist matcher (link on truthy/falsy talks about it)\
 throw_symbol matcher\
 yield matcher\
 output matcher\
@@ -260,7 +112,4 @@ raise-error matcher\
 .not_to with errors\
 custom error message - expect(card.suit).to eq(comparison), Expected #{comparison}, not #{card.suit}."\
 before and after hooks\
-
-# Resources to Share
-Cheat Sheet\
-https://kapeli.com/cheat_sheets/RSpec_Expectations.docset/Contents/Resources/Documents/index
+spies
