@@ -33,13 +33,12 @@ describe NumberGame do
     end
   end
 
-  describe '#correct_guess?' do
+  describe '#game_over?' do
     context 'when user guess is correct' do
-      it 'should return true' do
+      it 'should be game over' do
         game.solution = 5
-        user_guess = '5'
-        correct = game.correct_guess?(user_guess)
-        expect(correct).to be true
+        game.guess = '5'
+        expect(game).to be_game_over
       end
     end
 
@@ -47,7 +46,7 @@ describe NumberGame do
     # Write one test for when game.game_solution does not equal correct_guess?
     context 'when user guess is not correct' do
       # remove the 'x' before running this test
-      xit 'should return false' do
+      xit 'should not be game over' do
       end
     end
   end
@@ -67,19 +66,19 @@ describe NumberGame do
     # At the bottom of the answer file is an example of how to test the #verify_input method 'faking' an in-valid argument.
   end
 
-  # It is unneccessary to write tests for methods that only contain puts statements, like #game_over.
+  # It is unneccessary to write tests for methods that only contain puts statements, like #final_message.
   # Puts is a basic part of the standard ruby library & is already well tested. Plus, most 'real world applications' don't even output like this except to loggers.
 
   # However, here is an example of how you could test it using the output matcher
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/output-matcher
 
-  describe '#game_over' do
+  describe '#final_message' do
     context 'when count is 1' do
       it 'should output correct phrase' do
         game.count = 1
         lucky_phrase = "LUCKY GUESS!\n"
         # The output matcher needs a block of code to assert
-        expect { game.game_over }.to output(lucky_phrase).to_stdout
+        expect { game.final_message }.to output(lucky_phrase).to_stdout
       end
     end
 
@@ -99,7 +98,7 @@ describe NumberGame do
       # remove the 'x' before running this test
       xit 'should output correct phrase' do
         # Write the conditions to make this test pass
-        expect { game.game_over }.to output(phrase).to_stdout
+        expect { game.final_message }.to output(phrase).to_stdout
       end
     end
   end

@@ -17,7 +17,7 @@ class ImpossibleTestGame
       @count += 1
       break if @guess == solution.to_s
     end
-    game_over
+    final_message
   end
 
   def player_input
@@ -28,7 +28,7 @@ class ImpossibleTestGame
     end
   end
 
-  def game_over
+  def final_message
     if @count == 1
       puts 'LUCKY GUESS!'
     elsif @count < 4
@@ -54,9 +54,9 @@ class NumberGame
     loop do
       @guess = verify_input(player_input)
       @count += 1
-      break if correct_guess?(guess)
+      break if game_over?
     end
-    game_over
+    final_message
   end
 
   def verify_input(number)
@@ -66,15 +66,11 @@ class NumberGame
     verify_input(player_input)
   end
 
-  def correct?
+  def game_over?
     guess == solution.to_s
   end
 
-  # def correct_guess?(number)
-  #   number == solution.to_s
-  # end
-
-  def game_over
+  def final_message
     if @count == 1
       puts 'LUCKY GUESS!'
     elsif @count < 4

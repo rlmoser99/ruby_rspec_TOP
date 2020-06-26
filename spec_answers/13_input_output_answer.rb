@@ -37,25 +37,23 @@ describe NumberGame do
     end
   end
 
-  describe '#correct_guess?' do
-    context 'when number is correct' do
-      it 'should return true' do
+  describe '#game_over?' do
+    context 'when user guess is correct' do
+      it 'should be game over' do
         game.solution = 5
-        user_guess = '5'
-        correct = game.correct_guess?(user_guess)
-        expect(correct).to be true
+        game.guess = '5'
+        expect(game).to be_game_over
       end
     end
 
     # ASSIGNMENT
     # Write one test for when game.solution does not equal correct_guess?
-    context 'when number is not correct' do
+    context 'when user guess is not correct' do
       # remove the 'x' before running this test
-      it 'should return false' do
+      it 'should not be game over' do
         game.solution = 5
-        user_guess = '2'
-        correct = game.correct_guess?(user_guess)
-        expect(correct).to be false
+        game.guess = '2'
+        expect(game).to_not be_game_over
       end
     end
   end
@@ -75,19 +73,19 @@ describe NumberGame do
     # At the bottom of the answer file is an example of how to test the #verify_input method 'faking' an in-valid argument.
   end
 
-  # It is unneccessary to write tests for methods that only contain puts statements, like #game_over.
+  # It is unneccessary to write tests for methods that only contain puts statements, like #final_message.
   # Puts is a basic part of the standard ruby library & is already well tested. Plus, most 'real world applications' don't even output like this except to loggers.
 
   # However, here is an example of how you could test it using the output matcher
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/output-matcher
 
-  describe '#game_over' do
+  describe '#final_message' do
     context 'when count is 1' do
       it 'should output correct phrase' do
         game.count = 1
         lucky_phrase = "LUCKY GUESS!\n"
         # The output matcher needs a block of code to assert
-        expect { game.game_over }.to output(lucky_phrase).to_stdout
+        expect { game.final_message }.to output(lucky_phrase).to_stdout
       end
     end
 
@@ -98,7 +96,7 @@ describe NumberGame do
         game.count = 3
         congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
         # Write the expect statement for this test
-        expect { game.game_over }.to output(congrats_phrase).to_stdout
+        expect { game.final_message }.to output(congrats_phrase).to_stdout
       end
     end
 
@@ -109,7 +107,7 @@ describe NumberGame do
         # Write the conditions to make this test pass
         game.count = 7
         hard_phrase = "That was hard. It took you 7 guesses!\n"
-        expect { game.game_over }.to output(hard_phrase).to_stdout
+        expect { game.final_message }.to output(hard_phrase).to_stdout
       end
     end
   end
