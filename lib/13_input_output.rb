@@ -42,7 +42,7 @@ end
 # NumberGame is the exact game as above ImpossibleTestGame
 # NumberGame has small, isolated methods that are easy to test
 class NumberGame
-  attr_accessor :solution, :count
+  attr_accessor :solution, :count, :guess
 
   def initialize
     @solution = rand(0..9)
@@ -52,7 +52,7 @@ class NumberGame
     puts "Let's play a game called 'Guess a random number!'"
     @count = 0
     loop do
-      guess = verify_input(player_input)
+      @guess = verify_input(player_input)
       @count += 1
       break if correct_guess?(guess)
     end
@@ -66,9 +66,13 @@ class NumberGame
     verify_input(player_input)
   end
 
-  def correct_guess?(number)
-    number == solution.to_s
+  def correct?
+    guess == solution.to_s
   end
+
+  # def correct_guess?(number)
+  #   number == solution.to_s
+  # end
 
   def game_over
     if @count == 1
