@@ -11,7 +11,11 @@ class Cat < Pet
     'meow'
   end
 
-  def likes_to_nap?
+  def hiding?
     true
+  end
+
+  def hungry?
+    false
   end
 end

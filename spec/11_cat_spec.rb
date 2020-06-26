@@ -24,6 +24,14 @@ describe Cat do
       expect(subject).to have_attributes(name: 'Oscar', breed: 'Maine Coon', color: nil)
     end
   end
+
+  context 'when using magic matchers' do
+    # When using a method that returns a boolean value & does not take any parameters, you can use magic matchers
+    # http://testing-for-beginners.rubymonstas.org/rspec/matchers.html
+    it 'should be hiding' do
+      expect(oscar).to be_hiding
+    end
+  end
 end
 
 # ASSIGNMENT - complete either Cat or Dog assignment
@@ -35,8 +43,7 @@ describe Cat do
   context '' do
   end
 
-  # remove the 'x' before running this test
-  xit 'should like to nap' do
+  xit 'should not be hungry' do
   end
 end
 # rubocop:enable Layout/LineLength

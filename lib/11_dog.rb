@@ -11,7 +11,11 @@ class Dog < Pet
     'WOOF!'
   end
 
-  def likes_to_run?
+  def sleeping?
     true
+  end
+
+  def barking?
+    false
   end
 end

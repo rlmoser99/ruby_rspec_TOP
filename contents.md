@@ -51,6 +51,7 @@ described class
 
 ## 11_shared_example with pets
 have_attributes\
+magic_matchers\
 respond_to
 
 ## 12_input_output
