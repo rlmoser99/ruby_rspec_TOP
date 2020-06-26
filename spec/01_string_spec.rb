@@ -23,7 +23,7 @@ describe String do
       expect(favorite_color).to eq('navy blue')
     end
 
-    # let variables re-set between examples
+    # let variables reset between examples
     it 'should be value of variable assigned' do
       expect(favorite_color).to eq('blue')
     end

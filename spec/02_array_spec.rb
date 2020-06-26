@@ -12,7 +12,7 @@ describe Array do
     it 'should be an Array' do
       expect(subject).to be_a(Array)
     end
-    # One-line syntex that does the same as the above test.
+    # One-line syntax that does the same as the above test.
     # Look at the auto-generated doc string when this test is run (in terminal).
     it { is_expected.to be_a(Array) }
   end
@@ -22,7 +22,7 @@ describe Array do
   it 'should be empty' do
     expect(subject).to be_empty
   end
-  # One-line syntex that does the same as the above test.
+  # One-line syntax that does the same as the above test.
   # Look at the auto-generated doc string when this test file is run (in terminal).
   it { is_expected.to be_empty }
 
@@ -37,10 +37,10 @@ describe Array do
   end
 
   # Look at the order of these 5 tests when this test file is run (in terminal).
-  # Why do you think they are in a different order then these tests are written?
+  # Why do you think they are in a different order than these tests are written?
 
   # Please note: one-line tests are only recommended when the matcher aligns exactly with the doc string.
-  # However, many ruby-ists prefer explicitly writing out the test & not using one-line syntex.
+  # However, many ruby-ists prefer explicitly writing out the test & not using one-line syntax.
 end
 
 # ASSIGNMENT
@@ -48,7 +48,7 @@ describe Array do
   context 'when using an implicit subject, the third element' do
     # remove the 'x' before running this test
     xit 'should equal 21' do
-      # update the implicit subject to make this test past
+      # update the implicit subject to make this test pass
       subject << 13 # REMOVE
       subject << 7 # REMOVE
       subject << 21 # REMOVE
@@ -57,7 +57,7 @@ describe Array do
   end
 
   context 'when using one let varirable on two tests' do
-    # Make a let variable that will pass boths tests.
+    # Make a let variable that will pass both tests.
 
     # remove the 'x' before running this test
     xit 'should have length of 3' do
