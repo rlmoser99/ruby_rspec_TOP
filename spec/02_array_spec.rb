@@ -45,18 +45,16 @@ end
 
 # ASSIGNMENT
 describe Array do
-  context 'when using an implicit subject, the third element' do
+  context 'when updating an implicit subject' do
     # remove the 'x' before running this test
-    xit 'should equal 21' do
+    xit 'should be empty then have length of 1' do
+      expect(subject).to be_empty
       # update the implicit subject to make this test pass
-      subject << 13 # REMOVE
-      subject << 7 # REMOVE
-      subject << 21 # REMOVE
-      expect(subject[2]).to eq(21)
+      expect(subject.length).to eq(1)
     end
   end
 
-  context 'when using one let varirable on two tests' do
+  context 'when using one let variable on two tests' do
     # Make a let variable that will pass both tests.
 
     # remove the 'x' before running this test

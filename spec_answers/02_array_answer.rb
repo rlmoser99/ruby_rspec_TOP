@@ -1,18 +1,17 @@
 # frozen_string_literal: true
 
 describe Array do
-  context 'when using an implicit subject, the third element' do
+  context 'when updating an implicit subject' do
     # remove the 'x' before running this test
-    it 'should equal 21' do
+    it 'should be empty then have length of 1' do
+      expect(subject).to be_empty
       # update the implicit subject to make this test past
-      subject << 13
-      subject << 7
       subject << 21
-      expect(subject[2]).to eq(21)
+      expect(subject.length).to eq(1)
     end
   end
 
-  context 'when using one let varirable on two tests' do
+  context 'when using one let variable on two tests' do
     # Make a let variable that will pass boths tests.
     let(:lucky_numbers) { [3, 19, 20] }
 
