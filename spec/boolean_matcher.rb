@@ -3,7 +3,7 @@
 # http://testing-for-beginners.rubymonstas.org/rspec/matchers.html
 
 # using method_name? to write a test for it.
-# Change files -> 13, 14, 15
+# Change files -> 14, 15
 
 # example class to test predicate methods
 class NumberGame

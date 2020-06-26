@@ -75,14 +75,9 @@ describe FindNumber do
   describe '#make_guess' do
     subject(:game) { described_class.new(0, 9, random_number) }
     # Create a random_number double & allow it to receive 'value' and return 8 in one of the two ways explained above
-    let(:random_number) { double('random_number', value: 8) } # REMOVE
 
-    # Write a test that would expect #make_guess to return the middle number of the min and max values
+    # Write a test that would expect #make_guess to return the middle number of the min and max values (rounded down)
     context 'when min is 0 and max is 9' do
-      it 'should be 4' do
-        guess = game.make_guess # REMOVE
-        expect(guess).to eq(4) # REMOVE
-      end
     end
 
     # Write a method in 13_find_number.rb called #make_guess that returns the middle number of the min and max values
@@ -90,36 +85,15 @@ describe FindNumber do
     # Write a test for each of the following contexts:
 
     context 'when min is 5 and max is 9' do
-      it 'should be 7' do
-        game.min = 5 # REMOVE
-        guess = game.make_guess # REMOVE
-        expect(guess).to eq(7) # REMOVE
-      end
     end
 
     context 'when min is 8 and max is 9' do
-      it 'should be 8' do
-        game.min = 8 # REMOVE
-        guess = game.make_guess # REMOVE
-        expect(guess).to eq(8) # REMOVE
-      end
     end
 
     context 'when min is 0 and max is 3' do
-      it 'should be 1' do
-        game.max = 3 # REMOVE
-        guess = game.make_guess # REMOVE
-        expect(guess).to eq(1) # REMOVE
-      end
     end
 
     context 'when min and max both equal 3' do
-      it 'should be 3' do
-        game.min = 3 # REMOVE
-        game.max = 3 # REMOVE
-        guess = game.make_guess # REMOVE
-        expect(guess).to eq(3) # REMOVE
-      end
     end
   end
 
@@ -128,27 +102,16 @@ describe FindNumber do
     # In a long test file, it can be helpful to declare variables in each describe block, to make the tests more read-able.
     # So create a subject and random_number double & allow it to receive 'value' and return any number from the min - max
 
-    let(:random_number) { double('random_number', value: 3) } # REMOVE
-    subject(:game) { described_class.new(0, 9, random_number) } # REMOVE
+    # Write a test that would expect game to be_game_over when a guess equals the random_number.value above
 
-    # Write a test that would expect #game_over? to return true when a guess equals the value of the random_number
-
-    context 'when guess and random_number.value is are the same' do
-      it 'should be true' do
-        game.guess = 3 # REMOVE
-        game_over = game.game_over? # REMOVE
-        expect(game_over).to be true # REMOVE
-      end
+    context 'when guess and random_number.value equal' do
     end
 
     # Write a method in 13_find_number.rb called #game_over? that returns true when a guess equals the value of the random_number
 
-    context 'when guess and random_number.value is are NOT the same' do
-      it 'should be false' do
-        game.guess = 4 # REMOVE
-        game_over = game.game_over? # REMOVE
-        expect(game_over).to be false # REMOVE
-      end
+    # Write a test that would expect game to NOT be_game_over when a guess does NOT equal the random_number.value above
+
+    context 'when guess and random_number.value is not equal' do
     end
   end
 
@@ -157,31 +120,24 @@ describe FindNumber do
     let(:random_number) { double('random_number', value: 8) }
     subject(:game) { described_class.new(0, 9, random_number) }
 
-    # Write a method in 13_find_number.rb called #update_range that will do the following:
-    # 1. If the guess is less then the solution, then the min would update to one more then the guess
-    # 2. If the guess is greater then the solution, then the max would update to one less then the guess
-    # Note: this game starts off with min = 0 and max = 9 due to the { described_class.new(0, 9, random_number) }
+    # Write a test for #update_range that for each of the following scenerios:
+    # 1. If the guess is less then the solution, then the min would update to one more then the guess & max stays the same.
+    # 2. If the guess is greater then the solution, then the max would update to one less then the guess & min stays the same.
+    # Note: this example game starts off with min = 0 and max = 9 due to the { described_class.new(0, 9, random_number) }
 
     context 'when the guess is 4' do
-      it 'should only update min' do
-        game.guess = 4
-        game.update_range
-        minimum = game.min
-        maximum = game.max
-        expect(minimum).to eq(5)
-        expect(maximum).to eq(9)
-      end
     end
 
     context 'when the guess is 9' do
-      it 'should only update max' do
-        game.guess = 9
-        game.update_range
-        minimum = game.min
-        maximum = game.max
-        expect(minimum).to eq(0)
-        expect(maximum).to eq(8)
-      end
+    end
+
+    # Now, write the method in 13_find_number.rb called #update_range that will do the following:
+    # 1. If the guess is less then the solution, then the min would update to one more then the guess
+    # 2. If the guess is greater then the solution, then the max would update to one less then the guess
+
+    # Write a test for any 'edge cases' that you can think of, for example:
+
+    context 'when the guess is 7, with min=5 and max=8' do
     end
   end
 end
