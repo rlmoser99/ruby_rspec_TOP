@@ -56,7 +56,7 @@ describe Hash do
   end
 
   # remove the 'x' before running this test
-  xit 'should be newer then 2015' do
+  xit 'should be newer than 2015' do
     # Write a test that verifies above statement
   end
 

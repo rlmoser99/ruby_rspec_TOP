@@ -12,7 +12,7 @@ describe Array do
   end
 
   context 'when using one let variable on two tests' do
-    # Make a let variable that will pass boths tests.
+    # Make a let variable that will pass both tests.
     let(:lucky_numbers) { [3, 19, 20] }
 
     # remove the 'x' before running this test
