@@ -39,6 +39,9 @@ describe Array do
   # Look at the order of these 5 tests when this test file is run (in terminal).
   # Why do you think they are in a different order than these tests are written?
 
+  # The tests output in a different order, because each group runs its examples before running its nested example groups, even if the nested groups are defined before the examples.
+  # https://relishapp.com/rspec/rspec-core/v/3-9/docs/command-line/order
+
   # Please note: one-line tests are only recommended when the matcher aligns exactly with the doc string.
   # However, many ruby-ists prefer explicitly writing out the test & not using one-line syntax.
 end
