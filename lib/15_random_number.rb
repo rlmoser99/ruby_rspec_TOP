@@ -2,10 +2,10 @@
 
 # class to generate random number
 class RandomNumber
-  attr_accessor :number
+  attr_accessor :value
 
-  def initialize(lowest, highest)
+  def initialize(minimum, maximum)
     sleep(3)
-    @number = rand(lowest..highest)
+    @value = rand(minimum..maximum)
   end
 end

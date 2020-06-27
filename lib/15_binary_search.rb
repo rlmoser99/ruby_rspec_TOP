@@ -11,7 +11,7 @@ class BinarySearch
   end
 
   def start
-    puts "The random number between #{min}-#{max} is #{answer.number}"
+    puts "The random number between #{min}-#{max} is #{answer.value}"
     puts "The computer will find it in #{max_guesses} guesses or less!\n\n"
     computer_guess
   end
@@ -42,11 +42,11 @@ class BinarySearch
   end
 
   def game_over?
-    @guess == answer.number
+    @guess == answer.value
   end
 
   def update_range
-    guess < answer.number ? @min = guess + 1 : @max = guess - 1
+    guess < answer.value ? @min = guess + 1 : @max = guess - 1
   end
 end
 
