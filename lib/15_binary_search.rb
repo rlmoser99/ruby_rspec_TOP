@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../lib/15_random_number'
+
 # class for computer to find random number
 class BinarySearch
   attr_accessor :answer, :min, :max, :guess
@@ -33,20 +35,22 @@ class BinarySearch
   end
 
   def make_guess
-    sleep(1)
     (min + max) / 2
   end
 
-  def display_guess(count)
-    puts "Guess ##{count} -> #{guess}"
-  end
-
   def game_over?
-    @guess == answer.value
+    guess == answer.value
   end
 
   def update_range
     guess < answer.value ? @min = guess + 1 : @max = guess - 1
+  end
+
+  protected
+
+  def display_guess(count)
+    sleep(3)
+    puts "Guess ##{count} -> #{guess}"
   end
 end
 
