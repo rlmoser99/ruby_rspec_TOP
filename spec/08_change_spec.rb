@@ -42,7 +42,7 @@ describe Array do
     end
 
     # Can compound change matchers together
-    it 'should decrease by one and end with be tea' do
+    it 'should decrease by one and end with tea' do
       expect { drinks.pop }.to change { drinks.length }.by(-1).and change { drinks.last }.to('tea')
     end
   end
