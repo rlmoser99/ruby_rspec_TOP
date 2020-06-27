@@ -13,6 +13,7 @@ describe Array do
   end
 
   # Testing for a change to occur
+  # Note that unlike previous matchers we've seen, 'change' accepts a block of code
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/change-matcher
   context 'when testing for a change' do
     it 'should change the length to 4' do
@@ -33,6 +34,11 @@ describe Array do
     it 'should be even more specific' do
       expect { drinks << 'juice' }.to change { drinks.length }.by_at_least(1)
       expect { drinks << 'juice' }.to change { drinks.length }.by_at_most(1)
+    end
+
+    # Alternate form for 'change' matcher
+    it 'allows (object, :attribute) form' do
+      expect { drinks << 'juice' }.to change(drinks, :length).by(1)
     end
 
     # Can compound change matchers together
