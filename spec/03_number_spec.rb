@@ -30,7 +30,7 @@ describe RandomNumber do
     end
 
     context 'when random number is 3' do
-      it 'should be odd and less then 6' do
+      it 'should be odd and less than 6' do
         # Note: the number attribute must have a setter method (for example: attr_accessor).
         subject.number = 3
         expect(subject.number).to be_odd.and be < 6

@@ -60,8 +60,8 @@ end
 # ASSIGNMENT
 
 describe 'equality assignment' do
-  let(:amy) { { 'fav_color' => 'blue', 'fav_food' => 'tacos' } }
-  let(:bob) { { 'fav_color' => 'blue', 'fav_food' => 'tacos' } }
+  let(:amy) { { fav_color: 'blue', fav_food: 'tacos' } }
+  let(:bob) { { fav_color: 'blue', fav_food: 'tacos' } }
   let(:copy_cat) { amy }
   # Write a test that expresses each of the following statements
 

@@ -10,7 +10,7 @@ put conditional information in the 'context' string
 
 ## 2_array_spec
 implicitly defined 'subject'\
-one-lines syntex\
+one-lines syntax\
 predicate matchers
 
 ## 3_number_spec
@@ -39,7 +39,7 @@ more compound examples
 
 ## 8_change_matcher
 using .or with compound expectations\
-change matcher (syntex can be too tightly coupled to the subject)
+change matcher (syntax can be too tightly coupled to the subject)
 
 ## 9_satisfy_matcher
 satisfy matcher\

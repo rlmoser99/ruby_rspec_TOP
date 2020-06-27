@@ -123,8 +123,8 @@ describe FindNumber do
     subject(:game) { described_class.new(0, 9, random_number) }
 
     # Write a test for #update_range that for each of the following scenerios:
-    # 1. If the guess is less then the solution, then the min would update to one more then the guess & max stays the same.
-    # 2. If the guess is greater then the solution, then the max would update to one less then the guess & min stays the same.
+    # 1. If the guess is less than the solution, then the min would update to one more than the guess & max stays the same.
+    # 2. If the guess is greater than the solution, then the max would update to one less than the guess & min stays the same.
     # Note: this example game starts off with min = 0 and max = 9 due to the { described_class.new(0, 9, random_number) }
 
     context 'when the guess is 4' do
@@ -150,8 +150,8 @@ describe FindNumber do
     end
 
     # Now, write the method in 13_find_number.rb called #update_range that will do the following:
-    # 1. If the guess is less then the solution, then the min would update to one more then the guess
-    # 2. If the guess is greater then the solution, then the max would update to one less then the guess
+    # 1. If the guess is less than the solution, then the min would update to one more than the guess
+    # 2. If the guess is greater than the solution, then the max would update to one less than the guess
 
     # Write a test for any 'edge cases' that you can think of, for example:
 
