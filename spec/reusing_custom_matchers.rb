@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 # rubocop:disable Layout/LineLength
@@ -7,13 +6,17 @@
 # https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/custom-matchers
 
 describe 'defining custom matchers' do
-  context 'DRY' do
+  context 'reusing a matcher that is in scope' do
     matcher :be_divisible_by_four do
       match { |num| (num % 4).zero? }
     end
   
     it 'is divisible by 4' do
       expect(12).to be_divisible_by_four
+    end
+
+    it 'is not divisible by 4' do
+      expect(99).not_to be_divisible_by_four
     end
 
     it 'works with multiple values' do
