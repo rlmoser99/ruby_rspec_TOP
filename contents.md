@@ -71,22 +71,10 @@ Add method names to: subject { described_class.new.game_solution }
 
 ## 15_binary_search
 Changing TDD Double to Instance Double\
-Something that sleeps(3) to show test time saving (database lookup). Generally, when talking to any external system is problematic, then that’s a good indication that you’d want to use a stub to fake that call.\
-Using instance double gives the tests more security, and is preferred over regular doubles when possible.
-The first argument has to be the class that you want to make a double of.
-rspec will give you an error if you pass in the wrong number of arguments then defined in class.
-We are not making a mock of the person class, we are making a mock of an instance of the person class.
+Stubbing a method\
+Polymorphism concept
 
 # FUTURE - CAN NOT COVER EVERYTHING!!!
-
-## Polumorphism Concept:
-The movie class shouldn't care if it is given an actual class object, but rather all it cares is that it is given an object that can respond to certain methods (polymorphism).
-Show how doubles can respond to same method with different return values
-we shouldn't worry about about kind of object is, but what is can respond to...
-It doesn't matter if we are responding to HotChocolate, Coffee, or Milk
-This is a great way to test different class types with the same methods.
-This literally just tests in a method exists on a object.
-expect(subject).to respond_to(:purchase).with(1).arguments
 
 ## Resources on Doubles to include in files:
 https://martinfowler.com/bliki/TestDouble.html
