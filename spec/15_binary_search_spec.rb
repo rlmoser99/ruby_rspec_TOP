@@ -23,89 +23,21 @@ require_relative '../lib/15_random_number'
 # This concept is called polymorphism
 # https://www.geeksforgeeks.org/polymorphism-in-ruby/
 
-# Something that sleeps(3) to show test time saving (database lookup)
+# In the file, 14_find_number, you wrote tests for #make_guess, #game_over?, and #update_range.
+# We will not re-write them for this example, but the answer tests are at the bottom of this file, since FindNumber is now called BinarySearch
 
 describe BinarySearch do
-  describe '#make_guess' do
-    subject(:game) { described_class.new(0, 9, random_number) }
-    # A class called RandomNumber now exists, therefore it should be updated to an 'verifying double', like an 'instance_double'
-    # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles/using-an-instance-double
-    let(:random_number) { instance_double('random_number', value: 8) }
-
-    context 'when min is 0 and max is 9' do
-      it 'should be 4' do
-        guess = game.make_guess
-        expect(guess).to eq(4)
-      end
-    end
-
-    context 'when min and max both equal 3' do
-      it 'should be 3' do
-        game.min = 3
-        game.max = 3
-        guess = game.make_guess
-        expect(guess).to eq(3)
-      end
-    end
-  end
-
-  describe '#game_over?' do
-    let(:random_number) { instance_double('random_number', value: 3) }
-    subject(:game) { described_class.new(0, 9, random_number) }
-
-    context 'when guess and random_number.value equal' do
-      it 'should be game over' do
-        game.guess = 3
-        expect(game).to be_game_over
-      end
-    end
-
-    context 'when guess and random_number.value is not equal' do
-      it 'should not be game over' do
-        game.guess = 4
-        expect(game).to_not be_game_over
-      end
-    end
-  end
-
-  describe '#update_range' do
-    let(:random_number) { instance_double('random_number', value: 8) }
-    subject(:game) { described_class.new(0, 9, random_number) }
-
-    context 'when the guess is 4' do
-      it 'should only update min' do
-        game.guess = 4
-        game.update_range
-        minimum = game.min
-        maximum = game.max
-        expect(minimum).to eq(5)
-        expect(maximum).to eq(9)
-      end
-    end
-
-    context 'when the guess is 9' do
-      it 'should only update max' do
-        game.guess = 9
-        game.update_range
-        minimum = game.min
-        maximum = game.max
-        expect(minimum).to eq(0)
-        expect(maximum).to eq(8)
-      end
-    end
-  end
-end
-
-# The #computer_guess method calls 4 different methods (#make_guess, #display_guess, #game_over? and #update_range).
-
-# The #display_guess method is a protected method and does not need to be tested in unit testing.
-# For this test, the #display_guess method an example of a method may take a long time to complete, such as connecting to a database.
-# To test #computer_guess, we are going to stub #display_guess so that this unit test can run quickly and efficently.
-# https://relishapp.com/rspec/rspec-mocks/v/2-99/docs/method-stubs
-
-describe BinarySearch do
-  let(:random_number) { instance_double(RandomNumber, value: 8) }
   subject(:game) { described_class.new(0, 9, random_number) }
+  # A class called RandomNumber now exists, therefore it should be updated to an 'verifying double', like an 'instance_double'
+  # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles/using-an-instance-double
+  let(:random_number) { instance_double('random_number', value: 8) }
+
+  # The #computer_guess method calls 4 different methods (#make_guess, #display_guess, #game_over? and #update_range).
+
+  # The #display_guess method is a protected method and does not need to be tested in unit testing.
+  # For this test, the #display_guess method an example of a method may take a long time to complete, such as connecting to a database.
+  # To test #computer_guess, we are going to stub #display_guess so that this unit test can run quickly and efficently.
+  # https://relishapp.com/rspec/rspec-mocks/v/2-99/docs/method-stubs
 
   describe '#computer_guess' do
     it 'should loop until guess equals 8' do
@@ -152,5 +84,113 @@ describe BinarySearch do
     end
   end
 end
+
+# These tests are from spec_answers/14_find_number_answer (with instance_double)
+
+# describe BinarySearch do
+#   describe '#make_guess' do
+#     subject(:game) { described_class.new(0, 9, random_number) }
+#     let(:random_number) { instance_double('random_number', value: 8) }
+
+#     context 'when min is 0 and max is 9' do
+#       it 'should be 4' do
+#         guess = game.make_guess
+#         expect(guess).to eq(4)
+#       end
+#     end
+
+#     context 'when min is 5 and max is 9' do
+#       it 'should be 7' do
+#         game.min = 5
+#         guess = game.make_guess
+#         expect(guess).to eq(7)
+#       end
+#     end
+
+#     context 'when min is 8 and max is 9' do
+#       it 'should be 8' do
+#         game.min = 8
+#         guess = game.make_guess
+#         expect(guess).to eq(8)
+#       end
+#     end
+
+#     context 'when min is 0 and max is 3' do
+#       it 'should be 1' do
+#         game.max = 3
+#         guess = game.make_guess
+#         expect(guess).to eq(1)
+#       end
+#     end
+
+#     context 'when min and max both equal 3' do
+#       it 'should be 3' do
+#         game.min = 3
+#         game.max = 3
+#         guess = game.make_guess
+#         expect(guess).to eq(3)
+#       end
+#     end
+#   end
+
+#   describe '#game_over?' do
+#     let(:random_number) { instance_double('random_number', value: 3) }
+#     subject(:game) { described_class.new(0, 9, random_number) }
+
+#     context 'when guess and random_number.value equal' do
+#       it 'should be game over' do
+#         game.guess = 3
+#         expect(game).to be_game_over
+#       end
+#     end
+
+#     context 'when guess and random_number.value is not equal' do
+#       it 'should not be game over' do
+#         game.guess = 4
+#         expect(game).to_not be_game_over
+#       end
+#     end
+#   end
+
+#   describe '#update_range' do
+#     let(:random_number) { instance_double('random_number', value: 8) }
+#     subject(:game) { described_class.new(0, 9, random_number) }
+
+#     context 'when the guess is 4' do
+#       it 'should only update min' do
+#         game.guess = 4
+#         game.update_range
+#         minimum = game.min
+#         maximum = game.max
+#         expect(minimum).to eq(5)
+#         expect(maximum).to eq(9)
+#       end
+#     end
+
+#     context 'when the guess is 9' do
+#       it 'should only update max' do
+#         game.guess = 9
+#         game.update_range
+#         minimum = game.min
+#         maximum = game.max
+#         expect(minimum).to eq(0)
+#         expect(maximum).to eq(8)
+#       end
+#     end
+
+#     context 'when the guess is 7, with min=5 and max=8' do
+#       it 'should update min to the same value as max' do
+#         game.min = 5
+#         game.max = 8
+#         game.guess = 7
+#         game.update_range
+#         minimum = game.min
+#         maximum = game.max
+#         expect(minimum).to eq(8)
+#         expect(maximum).to eq(8)
+#       end
+#     end
+#   end
+# end
 
 # rubocop:enable Layout/LineLength, Metrics/BlockLength
