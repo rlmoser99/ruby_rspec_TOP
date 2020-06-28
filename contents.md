@@ -41,9 +41,8 @@ more compound examples
 using .or with compound expectations\
 change matcher (syntax can be too tightly coupled to the subject)
 
-## 9_satisfy_matcher
-satisfy matcher\
-custom error message for satisfy method
+## 9_custom_matcher
+custom matcher
 
 ## 10_drinks_spec
 default parameters\
