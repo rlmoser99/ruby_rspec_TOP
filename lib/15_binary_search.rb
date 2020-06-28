@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../lib/15_random_number'
+
 # class for computer to find random number
 class BinarySearch
   attr_accessor :answer, :min, :max, :guess
@@ -11,16 +13,16 @@ class BinarySearch
   end
 
   def start
-    puts "The random number between #{min}-#{max} is #{answer.number}"
+    puts "The random number between #{min}-#{max} is #{answer.value}"
     puts "The computer will find it in #{max_guesses} guesses or less!\n\n"
-    computer_guess
+    computer_turns
   end
 
   def max_guesses
     (Math.log2(max - min) + 1).to_i
   end
 
-  def computer_guess
+  def computer_turns
     count = 1
     loop do
       @guess = make_guess
@@ -33,20 +35,22 @@ class BinarySearch
   end
 
   def make_guess
-    sleep(1)
     (min + max) / 2
   end
 
-  def display_guess(count)
-    puts "Guess ##{count} -> #{guess}"
-  end
-
   def game_over?
-    @guess == answer.number
+    guess == answer.value
   end
 
   def update_range
-    guess < answer.number ? @min = guess + 1 : @max = guess - 1
+    guess < answer.value ? @min = guess + 1 : @max = guess - 1
+  end
+
+  protected
+
+  def display_guess(count)
+    sleep(3)
+    puts "Guess ##{count} -> #{guess}"
   end
 end
 
