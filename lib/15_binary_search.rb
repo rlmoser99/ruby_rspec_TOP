@@ -15,14 +15,14 @@ class BinarySearch
   def start
     puts "The random number between #{min}-#{max} is #{answer.value}"
     puts "The computer will find it in #{max_guesses} guesses or less!\n\n"
-    computer_guess
+    computer_turns
   end
 
   def max_guesses
     (Math.log2(max - min) + 1).to_i
   end
 
-  def computer_guess
+  def computer_turns
     count = 1
     loop do
       @guess = make_guess

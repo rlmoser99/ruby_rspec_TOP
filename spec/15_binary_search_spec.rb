@@ -10,7 +10,7 @@ require_relative '../lib/15_random_number'
 # The files for this example (#15) builds on the TDD files from #14.
 # The FindNumber class is now called BinarySearch, which is a more accurate description.
 
-# After TDD is complete, the classes and methods that were used as a test double, should be updated to a 'verifying double'
+# After TDD is complete, the classes and methods that were used as a test double, should be updated to be a 'verifying double'
 # Using a 'verifying double' is preferred, because they will produce an error if does not exist on the actual class.
 # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles
 
@@ -18,74 +18,104 @@ require_relative '../lib/15_random_number'
 # Therefore, using a 'verifying double' makes a test more stable.
 
 # Unit testing relies on using doubles because it needs test the object in isolation (not dependant on any other object).
-# The BinarySearch or FindNumber class doesn't care if it is given an actual class object.
+# The BinarySearch or FindNumber class doesn't care if it is given an actual random_number class object.
 # It only cares that it is given an object that can respond to certain methods.
 # This concept is called polymorphism
 # https://www.geeksforgeeks.org/polymorphism-in-ruby/
 
 # In the file, 14_find_number, you wrote tests for #make_guess, #game_over?, and #update_range.
-# We will not re-write them for this example, but the answer tests are at the bottom of this file, since FindNumber is now called BinarySearch
+# We will not re-write them for this example. If you'd like to see them again, they are at the bottom of this file.
 
 describe BinarySearch do
-  subject(:game) { described_class.new(0, 9, random_number) }
-  # A class called RandomNumber now exists, therefore it should be updated to an 'verifying double', like an 'instance_double'
-  # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles/using-an-instance-double
-  let(:random_number) { instance_double('random_number', value: 8) }
-
-  # The #computer_guess method calls 4 different methods (#make_guess, #display_guess, #game_over? and #update_range).
-
-  # The #display_guess method is a protected method and does not need to be tested in unit testing.
-  # For this test, the #display_guess method an example of a method may take a long time to complete, such as connecting to a database.
-  # To test #computer_guess, we are going to stub #display_guess so that this unit test can run quickly and efficently.
-  # https://relishapp.com/rspec/rspec-mocks/v/2-99/docs/method-stubs
-
-  describe '#computer_guess' do
-    it 'should loop until guess equals 8' do
-      # These 3 lines are stubs of the #display_guess method. For this test, a loop will call this method 3 times.
-      allow(game).to receive(:display_guess).with(1) # the turn count = 1
-      allow(game).to receive(:display_guess).with(2) # the turn count = 2
-      allow(game).to receive(:display_guess).with(3) # the turn count = 3
-      game.computer_guess
-      guess = game.guess
-      expect(guess).to eq(8)
-    end
-    # Now comment out the 3 stubs above and re-run the test.
-    # The #display guess method includes sleep(3) to mimic a method that takes a long time to complete, such as connecting to a database.
+  describe '#max_guesses' do
+    subject(:game) { described_class.new(0, 9, random_number) }
+    # A class called RandomNumber now exists, therefore it should be updated to an 'verifying double', like an 'instance_double'
+    # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles/using-an-instance-double
+    let(:random_number) { instance_double('random_number', value: 8) }
 
     # ASSIGNMENT
 
-    # Change the #make_guess method (lib/15_binary_search) to include sleep, with any number that you'd like.
-    # Then create a method stub for it that will return the correct value of each guess.
-    # By providing the return values to test, the time of the test is shortened.
-
-    it 'should loop until guess equals 8' do
-      # Make 1 stub for #make_guess that will return the correct value of each guess.
-      allow(game).to receive(:make_guess).and_return(4, 7, 8) # REMOVE
-      # These 3 lines are a stub of the #display_guess method.
-      allow(game).to receive(:display_guess).with(1)
-      allow(game).to receive(:display_guess).with(2)
-      allow(game).to receive(:display_guess).with(3)
-      game.computer_guess
-      guess = game.guess
-      expect(guess).to eq(8)
+    # Write one test for #max_guesses (hint: it will be 4 with the above game subject)
+    # This is using the formula to calculate the maximum number of guesses for a binary search
+    context 'when max is 9 and min is 0' do # REMOVE
+      it 'should be 4' do
+        max_guesses = game.max_guesses
+        expect(max_guesses).to be(4) # REMOVE
+      end
     end
   end
 
-  # STUB puts so that it doesn't show up when test runs.
+  # The #computer_turns method calls 4 different methods (#make_guess, #display_guess, #game_over? and #update_range).
+
+  # The #display_guess method is a protected method and does not need to be tested in unit testing.
+  # For this test, the #display_guess method an example of a method may take a long time to complete, such as connecting to a database.
+  # To test #computer_turns, we are going to stub #display_guess so that this unit test can run quickly and efficiently.
+  # https://relishapp.com/rspec/rspec-mocks/v/2-99/docs/method-stubs
+
+  describe '#computer_turns' do
+    subject(:game) { described_class.new(0, 9, random_number) }
+    let(:random_number) { instance_double('random_number', value: 8) }
+
+    context 'when using a stub for display_guess' do
+      it 'should loop until guess equals 8' do
+        # These 3 lines are stubs of the #display_guess method. For this test, a loop will call this method 3 times.
+        allow(game).to receive(:display_guess).with(1) # for the turn count = 1 loop
+        allow(game).to receive(:display_guess).with(2) # for the turn count = 2 loop
+        allow(game).to receive(:display_guess).with(3) # for the turn count = 3 loop
+        game.computer_turns
+        guess = game.guess
+        expect(guess).to eq(8)
+      end
+      # Now comment out the 3 stubs above and re-run the test.
+      # The #display guess method includes sleep(3) to mimic a method that takes a long time to complete, such as connecting to a database.
+    end
+
+    # ASSIGNMENT
+
+    # Change the #make_guess method in the file: lib/15_binary_search to include sleep, with any number that you'd like.
+
+    # Create a method stub for #make_guess that will return the correct value of 3 guesses.
+    # In the display_guess stub the return value of the method was not neccesary
+    # The stub for #make_guess requires a return value to break the loop in #computer_turns.
+
+    context 'when using a stub for display_guess and make_guess' do
+      it 'should loop until guess equals 8' do
+        # Make 1 stub for #make_guess that will return the values of 4, 7, 8 (the mid-point of min & max)
+        allow(game).to receive(:make_guess).and_return(4, 7, 8) # REMOVE
+        # These 3 lines are a stub of the #display_guess method.
+        allow(game).to receive(:display_guess).with(1)
+        allow(game).to receive(:display_guess).with(2)
+        allow(game).to receive(:display_guess).with(3)
+        game.computer_turns
+        guess = game.guess
+        expect(guess).to eq(8)
+      end
+    end
+  end
+
+  # ASSIGNMENT
+
+  # Write 1 test for the #start method. It will be similar to #computer_turns.
+  # Can you remove the two puts statements from outputting during the test?
+
   describe '#start' do
-    it 'should loop until guess equals 8' do
+    # REMOVE THE ENTIRE CONTENTS OF THIS SECTION FOR THE ASSIGNMENT:
+    subject(:game) { described_class.new(0, 9, random_number) }
+    let(:random_number) { instance_double('random_number', value: 1) }
+
+    it 'should loop until guess equals 1' do
       allow(game).to receive(:puts).twice # REMOVE
+      allow(game).to receive(:make_guess).and_return(4, 1) # REMOVE
       allow(game).to receive(:display_guess).with(1) # REMOVE
       allow(game).to receive(:display_guess).with(2) # REMOVE
-      allow(game).to receive(:display_guess).with(3) # REMOVE
       game.start
       guess = game.guess
-      expect(guess).to eq(8)
+      expect(guess).to eq(1)
     end
   end
 end
 
-# These tests are from spec_answers/14_find_number_answer (with instance_double)
+# These tests are updated from the previous #14 example (with instance_double)
 
 # describe BinarySearch do
 #   describe '#make_guess' do
