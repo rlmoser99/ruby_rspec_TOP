@@ -5,13 +5,13 @@ describe String do
   let(:favorite_food) { String.new('tacos') }
 
   # remove the 'x' before running this test
-  it 'should equal tacos' do
+  it 'is equal to tacos' do
     expect(favorite_food).to eq('tacos')
   end
 
   # remove the 'x' before running this test
-  context 'when favorite_food is updated' do
-    it 'should equal your favorite food' do
+  context 'when favorite food is updated' do
+    it 'updates the favorite food' do
       # Change the favorite_food let variable
       favorite_food = 'fajitas'
       # Write a test that will pass

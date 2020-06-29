@@ -9,7 +9,7 @@ describe Array do
   context 'when subject is implicitly defined' do
     # type matchers:
     # https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/type-matchers
-    it 'should be an Array' do
+    it 'is an Array' do
       expect(subject).to be_a(Array)
     end
     # One-line syntax that does the same as the above test.
@@ -19,7 +19,7 @@ describe Array do
 
   # There are many predicate matchers to use, for example:
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/predicate-matchers
-  it 'should be empty' do
+  it 'is empty' do
     expect(subject).to be_empty
   end
   # One-line syntax that does the same as the above test.
@@ -29,7 +29,7 @@ describe Array do
   context 'when a let variable is declared inside a context block' do
     let(:numbers) { [3, 8, 9] }
 
-    it 'should change the length from 3 to 2' do
+    it 'updates the length from 3 to 2' do
       expect(numbers.length).to eq(3)
       numbers.pop
       expect(numbers.length).to eq(2)
@@ -50,7 +50,7 @@ end
 describe Array do
   context 'when updating an implicit subject' do
     # remove the 'x' before running this test
-    xit 'should be empty then have length of 1' do
+    xit 'updates length from 0 to 1' do
       expect(subject).to be_empty
       # update the implicit subject to make this test pass
       expect(subject.length).to eq(1)
@@ -61,12 +61,12 @@ describe Array do
     # Make a let variable that will pass both tests.
 
     # remove the 'x' before running this test
-    xit 'should have length of 3' do
+    xit 'has length of 3' do
       expect(lucky_numbers.length).to eq(3)
     end
 
     # remove the 'x' before running this test
-    xit 'should have sum of 42' do
+    xit 'has sum of 42' do
       expect(lucky_numbers.sum).to eq(42)
     end
   end
