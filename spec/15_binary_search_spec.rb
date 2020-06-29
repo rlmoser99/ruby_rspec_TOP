@@ -50,7 +50,7 @@ describe BinarySearch do
     let(:random_number) { instance_double('random_number', value: 8) }
 
     context 'when using a stub for display_guess' do
-      it 'should loop until guess equals 8' do
+      it 'will loop until guess equals 8' do
         # These 3 lines are stubs of the #display_guess method. For this test, a loop will call this method 3 times.
         allow(game).to receive(:display_guess).with(1) # for the turn count = 1 loop
         allow(game).to receive(:display_guess).with(2) # for the turn count = 2 loop
@@ -73,7 +73,7 @@ describe BinarySearch do
 
     context 'when using a stub for display_guess and make_guess' do
       # remove the 'x' before running this test
-      xit 'should loop until guess equals 8' do
+      xit 'will loop until guess equals 8' do
         # Make 1 stub for #make_guess that will return the values of 4, 7, 8 (the mid-point of min & max)
 
         # Write the 3 stubs for #display_guess
@@ -102,14 +102,14 @@ end
 #     let(:random_number) { instance_double('random_number', value: 8) }
 
 #     context 'when min is 0 and max is 9' do
-#       it 'should be 4' do
+#       it 'is 4' do
 #         guess = game.make_guess
 #         expect(guess).to eq(4)
 #       end
 #     end
 
 #     context 'when min is 5 and max is 9' do
-#       it 'should be 7' do
+#       it 'is 7' do
 #         game.min = 5
 #         guess = game.make_guess
 #         expect(guess).to eq(7)
@@ -117,7 +117,7 @@ end
 #     end
 
 #     context 'when min is 8 and max is 9' do
-#       it 'should be 8' do
+#       it 'is 8' do
 #         game.min = 8
 #         guess = game.make_guess
 #         expect(guess).to eq(8)
@@ -125,7 +125,7 @@ end
 #     end
 
 #     context 'when min is 0 and max is 3' do
-#       it 'should be 1' do
+#       it 'is 1' do
 #         game.max = 3
 #         guess = game.make_guess
 #         expect(guess).to eq(1)
@@ -133,7 +133,7 @@ end
 #     end
 
 #     context 'when min and max both equal 3' do
-#       it 'should be 3' do
+#       it 'is 3' do
 #         game.min = 3
 #         game.max = 3
 #         guess = game.make_guess
@@ -147,14 +147,14 @@ end
 #     subject(:game) { described_class.new(0, 9, random_number) }
 
 #     context 'when guess and random_number.value equal' do
-#       it 'should be game over' do
+#       it 'is game over' do
 #         game.guess = 3
 #         expect(game).to be_game_over
 #       end
 #     end
 
 #     context 'when guess and random_number.value is not equal' do
-#       it 'should not be game over' do
+#       it 'is not game over' do
 #         game.guess = 4
 #         expect(game).to_not be_game_over
 #       end
@@ -166,7 +166,7 @@ end
 #     subject(:game) { described_class.new(0, 9, random_number) }
 
 #     context 'when the guess is 4' do
-#       it 'should only update min' do
+#       it 'will only update min' do
 #         game.guess = 4
 #         game.update_range
 #         minimum = game.min
@@ -177,7 +177,7 @@ end
 #     end
 
 #     context 'when the guess is 9' do
-#       it 'should only update max' do
+#       it 'will only update max' do
 #         game.guess = 9
 #         game.update_range
 #         minimum = game.min
@@ -188,7 +188,7 @@ end
 #     end
 
 #     context 'when the guess is 7, with min=5 and max=8' do
-#       it 'should update min to the same value as max' do
+#       it 'will update min to the same value as max' do
 #         game.min = 5
 #         game.max = 8
 #         game.guess = 7

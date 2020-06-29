@@ -11,14 +11,14 @@ require_relative '../lib/10_drink'
 describe Drink do
   # The Drink class needs to have an attr_reader for :type
   context 'when using default initialization' do
-    it 'should be water' do
+    it 'is water' do
       expect(subject.type).to eq('water')
     end
   end
 
   context 'when specifying the type' do
     subject(:my_drink) { Drink.new('coffee') }
-    it 'should be coffee' do
+    it 'is coffee' do
       expect(my_drink.type).to eq('coffee')
     end
   end
@@ -26,7 +26,7 @@ describe Drink do
   context 'when changing the type inside an example' do
     # When changing the type inside an example, the Drink class needs to have an attr_accessor for :type
     subject(:my_drink) { Drink.new('coffee') }
-    it 'should change to tea' do
+    it 'changes to tea' do
       my_drink.type = 'tea'
       expect(my_drink.type).to eq('tea')
     end
@@ -36,7 +36,7 @@ describe Drink do
   # For example, as applications develop, class names are subject to change. Drink could be changed to 'Beverage'.
   context 'when limiting future code changes' do
     subject(:my_drink) { described_class.new('juice') }
-    it 'should be juice' do
+    it 'is juice' do
       expect(my_drink.type).to eq('juice')
     end
   end
@@ -49,21 +49,21 @@ describe Drink do
 
   context 'when my drink is new' do
     # remove the 'x' before running this test
-    xit 'should have 16 ounces' do
+    xit 'has 16 ounces' do
     end
 
     # remove the 'x' before running this test
-    xit 'should be full' do
+    xit 'is full' do
     end
   end
 
   context 'when my drink only has 12 ounces' do
     # remove the 'x' before running this test
-    xit 'should have 12 ounces' do
+    xit 'has 12 ounces' do
     end
 
     # remove the 'x' before running this test
-    xit 'should not be full' do
+    xit 'is not full' do
     end
   end
 end

@@ -46,7 +46,7 @@ describe Cat do
   end
 
   # remove the 'x' before running this test
-  it 'should not be hungry' do
+  it 'is not hungry' do
     expect(lucy).to_not be_hungry
   end
 end

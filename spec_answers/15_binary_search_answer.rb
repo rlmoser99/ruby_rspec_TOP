@@ -35,7 +35,7 @@ describe BinarySearch do
     # Write one test for #max_guesses (hint: it will be 4 with the above game subject & let variable)
     # This is using the formula to calculate the maximum number of guesses for a binary search
     context 'when max is 9 and min is 0' do
-      it 'should be 4' do
+      it 'is 4' do
         max_guesses = game.max_guesses
         expect(max_guesses).to be(4)
       end
@@ -54,7 +54,7 @@ describe BinarySearch do
     let(:random_number) { instance_double('random_number', value: 8) }
 
     context 'when using a stub for display_guess' do
-      it 'should loop until guess equals 8' do
+      it 'will loop until guess equals 8' do
         # These 3 lines are stubs of the #display_guess method. For this test, a loop will call this method 3 times.
         allow(game).to receive(:display_guess).with(1) # for the turn count = 1 loop
         allow(game).to receive(:display_guess).with(2) # for the turn count = 2 loop
@@ -76,7 +76,7 @@ describe BinarySearch do
     # The stub for #make_guess requires a return value to break the loop in #computer_turns.
 
     context 'when using a stub for display_guess and make_guess' do
-      it 'should loop until guess equals 8' do
+      it 'will loop until guess equals 8' do
         # Make 1 stub for #make_guess that will return the values of 4, 7, 8 (the mid-point of min & max)
         allow(game).to receive(:make_guess).and_return(4, 7, 8)
         # Write the 3 stubs for #display_guess
@@ -99,7 +99,7 @@ describe BinarySearch do
     subject(:game) { described_class.new(0, 9, random_number) }
     let(:random_number) { instance_double('random_number', value: 1) }
 
-    it 'should loop until guess equals 1' do
+    it 'will loop until guess equals 1' do
       allow(game).to receive(:puts).twice
       allow(game).to receive(:make_guess).and_return(4, 1)
       allow(game).to receive(:display_guess).with(1)
@@ -110,3 +110,5 @@ describe BinarySearch do
     end
   end
 end
+
+# rubocop:enable Layout/LineLength, Metrics/BlockLength

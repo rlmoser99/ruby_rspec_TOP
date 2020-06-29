@@ -20,7 +20,7 @@ describe Dog do
 
   context 'when dog has name and color, but no breed' do
     # https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/have-attributes-matcher
-    it 'should have name, breed & color attributes' do
+    it 'has name, breed & color attributes' do
       expect(subject).to have_attributes(name: 'Toby', breed: nil, color: 'brown')
     end
   end
@@ -28,7 +28,7 @@ describe Dog do
   context 'when using magic matchers' do
     # When using a method that returns a boolean value & does not take any parameters, you can use magic matchers
     # http://testing-for-beginners.rubymonstas.org/rspec/matchers.html
-    it 'should be sleeping' do
+    it 'is sleeping' do
       expect(toby).to be_sleeping
     end
   end
@@ -44,7 +44,7 @@ describe Dog do
   end
 
   # remove the 'x' before running this test
-  xit 'should not be barking' do
+  xit 'is not barking' do
   end
 end
 # rubocop:enable Layout/LineLength

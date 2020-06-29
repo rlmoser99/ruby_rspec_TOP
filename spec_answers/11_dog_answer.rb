@@ -44,7 +44,7 @@ describe Dog do
   end
 
   # remove the 'x' before running this test
-  it 'should not be barking' do
+  it 'is not barking' do
     expect(ollie).to_not be_barking
   end
 end

@@ -29,10 +29,12 @@ describe FindNumber do
       let(:random_number) { double('random_number') }
       subject(:game) { described_class.new(0, 9, random_number) }
 
-      it 'should be 8' do
-        allow(random_number).to receive(:value).and_return(8)
-        solution = game.answer.value
-        expect(solution).to eq(8)
+      context 'when random_answer.value is 8' do
+        it 'is 8' do
+          allow(random_number).to receive(:value).and_return(8)
+          solution = game.answer.value
+          expect(solution).to eq(8)
+        end
       end
     end
 
@@ -44,9 +46,11 @@ describe FindNumber do
       let(:random_number) { double('random_number', value: 3) }
       subject(:game) { described_class.new(0, 9, random_number) }
 
-      it 'should be 3' do
-        solution = game.answer.value
-        expect(solution).to eq(3)
+      context 'when random_answer.value is 3' do
+        it 'is 3' do
+          solution = game.answer.value
+          expect(solution).to eq(3)
+        end
       end
     end
 
@@ -55,8 +59,10 @@ describe FindNumber do
       let(:random_number) { double('random_number', value: 5) }
       subject(:game_solution) { described_class.new(0, 9, random_number).answer.value }
 
-      it 'should be 5' do
-        expect(game_solution).to eq(5)
+      context 'when random_answer.value is 5' do
+        it 'is 5' do
+          expect(game_solution).to eq(5)
+        end
       end
     end
   end
@@ -111,7 +117,7 @@ describe FindNumber do
 
     # Write a test that would expect game to NOT be_game_over when a guess does NOT equal the random_number.value above
 
-    context 'when guess and random_number.value is not equal' do
+    context 'when guess and random_number.value does not equal' do
     end
   end
 
