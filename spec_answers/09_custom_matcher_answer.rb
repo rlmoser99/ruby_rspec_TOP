@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Layout/LineLength
+
 # ASSIGNMENT
 
 describe 'simple word palindrome test' do
@@ -30,3 +32,5 @@ describe 'simple word palindrome test' do
     end
   end
 end
+
+# rubocop:enable Layout/LineLength
