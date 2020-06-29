@@ -7,7 +7,7 @@ describe Hash do
   subject(:favorites) { { color: 'blue', food: 'fajitas' } }
 
   context 'when you implicitly define the subject' do
-    it 'should be correct with subject or variable' do
+    it 'works with subject or variable' do
       expect(subject[:food]).to eq('fajitas')
       # Using the explicit name is semantically easier to read, therefore preferred.
       expect(favorites[:food]).to eq('fajitas')
@@ -17,7 +17,7 @@ describe Hash do
   # The include matcher works on any object that would responds to #include? method
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/include-matcher
   context 'when changing favorite color to forest green' do
-    it 'should include green' do
+    it 'includes green' do
       favorites[:color] = 'forest green'
       expect(favorites[:color]).to include('green')
     end
@@ -32,11 +32,11 @@ describe Hash do
       }
     end
 
-    it 'should be true' do
+    it 'has remote start' do
       expect(car_features[:remote_start?]).to be true
     end
 
-    it 'should be false' do
+    it 'does not have assisted steering' do
       expect(car_features[:assisted_steering?]).to be false
     end
   end
@@ -56,17 +56,17 @@ describe Hash do
   end
 
   # remove the 'x' before running this test
-  xit 'should be newer than 2015' do
+  xit 'is newer than 2015' do
     # Write a test that verifies above statement
   end
 
   # remove the 'x' before running this test
-  xit 'should have a parking camera' do
+  xit 'has a parking camera' do
     # Write a test that verifies above statement
   end
 
   # remove the 'x' before running this test
-  xit 'should not have assisted steering' do
+  xit 'does not have assisted steering' do
     # Write a test that verifies above statement
   end
 end

@@ -13,14 +13,14 @@ describe 'differences between eq, eql, equal, and be' do
     let(:your_score) { 10 }
 
     context 'eq only looks at value' do
-      it 'should be eq to each other' do
+      it 'is eq to each other' do
         expect(my_score).to eq(your_score)
       end
     end
 
     # my_score is a Float and your_score is an Integer
     context 'eql looks at type & value' do
-      it 'should not be eql to each other' do
+      it 'is not eql to each other' do
         expect(my_score).not_to eql(your_score)
       end
     end
@@ -32,7 +32,7 @@ describe 'differences between eq, eql, equal, and be' do
     let(:my_kids_borrow) { my_car }
 
     context 'eql looks at type & value' do
-      it 'should be eq to each other' do
+      it 'is eq to each other' do
         expect(my_car).to eql(your_car)
         expect(my_kids_borrow).to eql(your_car)
       end
@@ -41,16 +41,16 @@ describe 'differences between eq, eql, equal, and be' do
     # some prefer to use 'be' over 'equal' because it semantically makes sense.
     # expect(first_item).to be(second_item)
     context 'be and equal cares about object identity' do
-      it 'should be/equal the same car' do
+      it 'is comparing the same car' do
         expect(my_car).to equal(my_kids_borrow)
         expect(my_car).to be(my_kids_borrow)
       end
 
-      it 'should not be/equal your car' do
+      it 'is not comparing the same car' do
         expect(my_car).not_to be(your_car)
       end
 
-      it 'should not be/equal any other 2017 red Jetta' do
+      it 'is not comparing the same car' do
         expect(my_car).not_to equal([2017, 'red', 'Jetta'])
       end
     end

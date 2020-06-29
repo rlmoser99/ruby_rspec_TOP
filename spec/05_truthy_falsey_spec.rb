@@ -6,7 +6,7 @@
 # https://eddyluten.com/rspec-be_truthy-exists-or-be-true
 describe 'truthy and falsy' do
   context 'almost everything is truthy' do
-    it 'should be truthy' do
+    it 'is truthy' do
       expect('foo').to be_truthy
       expect(7).to be_truthy
       expect(0).to be_truthy
@@ -20,7 +20,7 @@ describe 'truthy and falsy' do
   end
 
   context 'only false and nil are falsy' do
-    it 'should be falsy' do
+    it 'is falsy' do
       expect(false).to be_falsy
       expect(nil).to be_falsy
     end
