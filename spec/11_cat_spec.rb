@@ -20,16 +20,8 @@ describe Cat do
 
   context 'when cat has name and breed, but no color' do
     # https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/have-attributes-matcher
-    it 'should have name, breed & color attributes' do
+    it 'has name, breed & color attributes' do
       expect(subject).to have_attributes(name: 'Oscar', breed: 'Maine Coon', color: nil)
-    end
-  end
-
-  context 'when using magic matchers' do
-    # When using a method that returns a boolean value & does not take any parameters, you can use magic matchers
-    # http://testing-for-beginners.rubymonstas.org/rspec/matchers.html
-    it 'should be hiding' do
-      expect(oscar).to be_hiding
     end
   end
 end
@@ -43,7 +35,12 @@ describe Cat do
   context '' do
   end
 
-  xit 'should not be hungry' do
+  # remove the 'x' before running this test
+  xit 'is not hungry' do
+  end
+
+  # remove the 'x' before running this test
+  xit 'is hiding' do
   end
 end
 # rubocop:enable Layout/LineLength

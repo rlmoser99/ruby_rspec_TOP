@@ -46,11 +46,12 @@ custom matcher
 
 ## 10_drinks_spec
 default parameters\
+magic_matchers\
 described class
 
 ## 11_shared_example with pets
+shared examples\
 have_attributes\
-magic_matchers\
 respond_to
 
 ## 12_magic_seven
@@ -66,34 +67,19 @@ output matcher
 TDD with doubles\
 Add method names to: subject { described_class.new.game_solution }
 
-# CURRENT WORK IN PROGRESS FILE:
-
 ## 15_binary_search
 Changing TDD Double to Instance Double\
 Stubbing a method\
 Polymorphism concept
 
-# FUTURE - CAN NOT COVER EVERYTHING!!!
-
-## Resources on Doubles to include in files:
-https://martinfowler.com/bliki/TestDouble.html
-https://www.tutorialspoint.com/rspec/rspec_test_doubles.htm
-http://testing-for-beginners.rubymonstas.org/test_doubles.html
-https://relishapp.com/rspec/rspec-mocks/v/3-2/docs/configuring-responses
-
-## Review TOP resources to make sure that this material is consistent:
-http://www.betterspecs.org/
-Also, check to for consistent use of describe and context
-
-## Review connect_four student projects to see if anything else should be covered:
-game.instance_variable_set
+# CURRENT WORK IN PROGRESS FILE:
+?
 
 # Not Going to Cover?
 be_within matcher\
 cover matcher\
 throw_symbol matcher\
 yield matcher\
-output matcher\
 shared_context\
 raise-error matcher\
 .not_to with errors\

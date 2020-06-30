@@ -44,7 +44,7 @@ describe FindNumber do
 
     # Write a test that would expect #make_guess to return the middle number of the min and max values (rounded down)
     context 'when min is 0 and max is 9' do
-      it 'should be 4' do
+      it 'returns 4' do
         guess = game.make_guess
         expect(guess).to eq(4)
       end
@@ -55,7 +55,7 @@ describe FindNumber do
     # Write a test for each of the following contexts:
 
     context 'when min is 5 and max is 9' do
-      it 'should be 7' do
+      it 'returns 7' do
         game.min = 5
         guess = game.make_guess
         expect(guess).to eq(7)
@@ -63,7 +63,7 @@ describe FindNumber do
     end
 
     context 'when min is 8 and max is 9' do
-      it 'should be 8' do
+      it 'returns 8' do
         game.min = 8
         guess = game.make_guess
         expect(guess).to eq(8)
@@ -71,7 +71,7 @@ describe FindNumber do
     end
 
     context 'when min is 0 and max is 3' do
-      it 'should be 1' do
+      it 'returns 1' do
         game.max = 3
         guess = game.make_guess
         expect(guess).to eq(1)
@@ -79,7 +79,7 @@ describe FindNumber do
     end
 
     context 'when min and max both equal 3' do
-      it 'should be 3' do
+      it 'returns 3' do
         game.min = 3
         game.max = 3
         guess = game.make_guess
@@ -99,7 +99,7 @@ describe FindNumber do
     # Write a test that would expect game to be_game_over when a guess equals the random_number.value above
 
     context 'when guess and random_number.value equal' do
-      it 'should be game over' do
+      it 'is game over' do
         game.guess = 3
         expect(game).to be_game_over
       end
@@ -109,8 +109,8 @@ describe FindNumber do
 
     # Write a test that would expect game to NOT be_game_over when a guess does NOT equal the random_number.value above
 
-    context 'when guess and random_number.value is not equal' do
-      it 'should not be game over' do
+    context 'when guess and random_number.value does not equal' do
+      it 'is not game over' do
         game.guess = 4
         expect(game).to_not be_game_over
       end
@@ -128,7 +128,7 @@ describe FindNumber do
     # Note: this example game starts off with min = 0 and max = 9 due to the { described_class.new(0, 9, random_number) }
 
     context 'when the guess is 4' do
-      it 'should only update min' do
+      it 'will only update min' do
         game.guess = 4
         game.update_range
         minimum = game.min
@@ -139,7 +139,7 @@ describe FindNumber do
     end
 
     context 'when the guess is 9' do
-      it 'should only update max' do
+      it 'will only update max' do
         game.guess = 9
         game.update_range
         minimum = game.min
@@ -156,7 +156,7 @@ describe FindNumber do
     # Write a test for any 'edge cases' that you can think of, for example:
 
     context 'when the guess is 7, with min=5 and max=8' do
-      it 'should update min to the same value as max' do
+      it 'will update min to the same value as max' do
         game.min = 5
         game.max = 8
         game.guess = 7

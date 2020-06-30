@@ -39,7 +39,7 @@ describe 'simple word palindrome test' do
 
   context 'when racecar and rotator is used' do
     # remove the 'x' before running this test
-    xit 'should be a palindrome' do
+    xit 'is a palindrome' do
       expect(racecar).to be_a_palindrome
       expect(rotator).to be_a_palindrome
     end
@@ -47,7 +47,7 @@ describe 'simple word palindrome test' do
 
   context 'when spaceship and palindrome is used' do
     # remove the 'x' before running this test
-    xit 'should not be a palindrome' do
+    xit 'is not a palindrome' do
       expect(spaceship).not_to be_a_palindrome
       expect(palindrome).not_to be_a_palindrome
     end

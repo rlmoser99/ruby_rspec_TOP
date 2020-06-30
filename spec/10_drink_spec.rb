@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Layout/LineLength
+# rubocop:disable Layout/LineLength, Metrics/BlockLength
 
 # Now that the basics are covered, we are going to use a typical work-flow.
 # The class being tested will be located in a different file:
@@ -9,35 +9,72 @@
 require_relative '../lib/10_drink'
 
 describe Drink do
-  # The Drink class needs to have an attr_reader for :type
-  context 'when using default initialization' do
-    it 'should be water' do
-      expect(subject.type).to eq('water')
+  describe '#initialize' do
+    # The Drink class needs to have an attr_reader for :type
+    context 'when using default initialization' do
+      it 'is water' do
+        expect(subject.type).to eq('water')
+      end
+
+      it 'has 16 ounces' do
+        expect(subject.ounces).to eq(16)
+      end
+    end
+
+    context 'when specifying the type and ounces' do
+      subject(:my_drink) { Drink.new('coffee', 8) }
+
+      it 'is coffee' do
+        expect(my_drink.type).to eq('coffee')
+      end
+
+      it 'has 8 ounces' do
+        expect(subject.ounces).to eq(8)
+      end
+    end
+
+    context 'when changing the type inside an example' do
+      # When changing the type inside an example, the Drink class needs to have an attr_accessor for :type
+      subject(:my_drink) { Drink.new('coffee') }
+
+      it 'changes to tea' do
+        my_drink.type = 'tea'
+        expect(my_drink.type).to eq('tea')
+      end
+    end
+
+    # Use 'described_class' instead of the class name, to limit the code that will need to be changed if/when it changes.
+    # For example, as applications develop, class names are subject to change. Drink could be changed to 'Beverage'.
+    # If that change was made, then every time that the word 'Drink' was used would have to be changed to 'Beverage'
+    context 'when limiting future code changes' do
+      subject(:my_drink) { described_class.new('juice') }
+
+      it 'is juice' do
+        expect(my_drink.type).to eq('juice')
+      end
     end
   end
 
-  context 'when specifying the type' do
-    subject(:my_drink) { Drink.new('coffee') }
-    it 'should be coffee' do
-      expect(my_drink.type).to eq('coffee')
-    end
-  end
+  describe '#full?' do
+    context 'when using magic matchers' do
+      # When using a method that returns a boolean value & does not take any parameters, you can use magic matchers
+      # http://testing-for-beginners.rubymonstas.org/rspec/matchers.html
 
-  context 'when changing the type inside an example' do
-    # When changing the type inside an example, the Drink class needs to have an attr_accessor for :type
-    subject(:my_drink) { Drink.new('coffee') }
-    it 'should change to tea' do
-      my_drink.type = 'tea'
-      expect(my_drink.type).to eq('tea')
-    end
-  end
+      context 'when using default initialization' do
+        subject(:my_drink) { described_class.new }
 
-  # Use 'described_class' instead of the class name, to limit the code that will need to be changed if/when it changes.
-  # For example, as applications develop, class names are subject to change. Drink could be changed to 'Beverage'.
-  context 'when limiting future code changes' do
-    subject(:my_drink) { described_class.new('juice') }
-    it 'should be juice' do
-      expect(my_drink.type).to eq('juice')
+        it 'is full' do
+          expect(my_drink).to be_full
+        end
+      end
+
+      context 'when drink has 8 ounces' do
+        subject(:my_drink) { Drink.new('coffee', 8) }
+
+        it 'is not full' do
+          expect(my_drink).not_to be_full
+        end
+      end
     end
   end
 end
@@ -45,27 +82,33 @@ end
 # ASSIGNMENT
 
 describe Drink do
-  # For both contexts, write a subject & 2 tests that expresses each of the following statements
+  # Create an explicit subject, using 'described_class' and your choice of beverage type.
 
-  context 'when my drink is new' do
-    # remove the 'x' before running this test
-    xit 'should have 16 ounces' do
-    end
+  describe '#initialize' do
+    context 'when type is specified and ounces is default' do
+      # remove the 'x' before running this test
+      xit 'is your choice of beverage' do
+      end
 
-    # remove the 'x' before running this test
-    xit 'should be full' do
+      # remove the 'x' before running this test
+      xit 'has 16 ounces' do
+      end
     end
   end
 
-  context 'when my drink only has 12 ounces' do
-    # remove the 'x' before running this test
-    xit 'should have 12 ounces' do
+  describe '#full?' do
+    context 'when drink has 16 ounces' do
+      # remove the 'x' before running this test
+      xit 'is full' do
+      end
     end
 
-    # remove the 'x' before running this test
-    xit 'should not be full' do
+    context 'when drink does not have 16 ounces' do
+      # remove the 'x' before running this test
+      xit 'is not full' do
+      end
     end
   end
 end
 
-# rubocop:enable Layout/LineLength
+# rubocop:enable Layout/LineLength, Metrics/BlockLength

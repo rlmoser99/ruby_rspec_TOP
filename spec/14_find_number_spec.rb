@@ -11,13 +11,16 @@ require_relative '../lib/14_find_number'
 
 # Doubles are useful in TDD because you can create test functionality that is not coded yet.
 
+# Doubles can be a confusing concept, so here are several resources to check out:
+# https://www.tutorialspoint.com/rspec/rspec_test_doubles.htm
 # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/basics/test-doubles
+# http://testing-for-beginners.rubymonstas.org/test_doubles.html
 
 # In this file, we will be testing the 'FindNumber' class.
 # An instance of 'FindNumber' is initialized with a 'RandomNumber' object.
 # Since we have not written the 'RandomNumber' class, we will use a double to 'mock' it.
 
-# FYI: Doubles are used in many different ways - Dummy, Fake, Stubs, Spies, Mocks
+# Doubles are used in many different ways - Dummy, Fake, Stubs, Spies, Mocks
 # https://martinfowler.com/bliki/TestDouble.html
 
 describe FindNumber do
@@ -29,10 +32,12 @@ describe FindNumber do
       let(:random_number) { double('random_number') }
       subject(:game) { described_class.new(0, 9, random_number) }
 
-      it 'should be 8' do
-        allow(random_number).to receive(:value).and_return(8)
-        solution = game.answer.value
-        expect(solution).to eq(8)
+      context 'when random_answer.value is 8' do
+        it 'returns 8' do
+          allow(random_number).to receive(:value).and_return(8)
+          solution = game.answer.value
+          expect(solution).to eq(8)
+        end
       end
     end
 
@@ -44,9 +49,11 @@ describe FindNumber do
       let(:random_number) { double('random_number', value: 3) }
       subject(:game) { described_class.new(0, 9, random_number) }
 
-      it 'should be 3' do
-        solution = game.answer.value
-        expect(solution).to eq(3)
+      context 'when random_answer.value is 3' do
+        it 'returns 3' do
+          solution = game.answer.value
+          expect(solution).to eq(3)
+        end
       end
     end
 
@@ -55,8 +62,10 @@ describe FindNumber do
       let(:random_number) { double('random_number', value: 5) }
       subject(:game_solution) { described_class.new(0, 9, random_number).answer.value }
 
-      it 'should be 5' do
-        expect(game_solution).to eq(5)
+      context 'when random_answer.value is 5' do
+        it 'returns 5' do
+          expect(game_solution).to eq(5)
+        end
       end
     end
   end
@@ -111,7 +120,7 @@ describe FindNumber do
 
     # Write a test that would expect game to NOT be_game_over when a guess does NOT equal the random_number.value above
 
-    context 'when guess and random_number.value is not equal' do
+    context 'when guess and random_number.value does not equal' do
     end
   end
 

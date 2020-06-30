@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Layout/LineLength
+
 # ASSIGNMENT
 
 describe 'simple word palindrome test' do
@@ -16,7 +18,7 @@ describe 'simple word palindrome test' do
 
   context 'when racecar and rotator is used' do
     # remove the 'x' before running this test
-    it 'should be a palindrome' do
+    it 'is a palindrome' do
       expect(racecar).to be_a_palindrome
       expect(rotator).to be_a_palindrome
     end
@@ -24,9 +26,11 @@ describe 'simple word palindrome test' do
 
   context 'when spaceship and palindrome is used' do
     # remove the 'x' before running this test
-    it 'should not be a palindrome' do
+    it 'is not a palindrome' do
       expect(spaceship).not_to be_a_palindrome
       expect(palindrome).not_to be_a_palindrome
     end
   end
 end
+
+# rubocop:enable Layout/LineLength

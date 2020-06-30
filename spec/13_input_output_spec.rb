@@ -20,7 +20,7 @@ describe NumberGame do
   subject(:game) { described_class.new }
 
   describe '#initialize' do
-    it 'should be a number 0 - 9' do
+    it 'is a number 0 - 9' do
       solution = game.solution
       expect(solution).to be >= 0
       expect(solution).to be < 10
@@ -29,13 +29,13 @@ describe NumberGame do
     # ASSIGNMENT
     # Write one test for game.solution that uses 'satisfy' instead of <, >, =
     # remove the 'x' before running this test
-    xit 'should be a number between 0 and 9' do
+    xit 'is a number between 0 and 9' do
     end
   end
 
   describe '#game_over?' do
     context 'when user guess is correct' do
-      it 'should be game over' do
+      it 'is game over' do
         game.solution = 5
         game.guess = '5'
         expect(game).to be_game_over
@@ -46,7 +46,7 @@ describe NumberGame do
     # Write one test for when game.game_solution does not equal correct_guess?
     context 'when user guess is not correct' do
       # remove the 'x' before running this test
-      xit 'should not be game over' do
+      xit 'is not game over' do
       end
     end
   end
@@ -57,7 +57,7 @@ describe NumberGame do
     # The player_input is used in the game as an argument passed into #verify_input.
     # Note: this recursive method will repeat until a valid argument is given, due to a regex check.
     context 'when given a valid input as argument' do
-      it 'should return valid input' do
+      it 'returns valid input' do
         user_input = '3'
         verified_input = game.verify_input(user_input)
         expect(verified_input).to eq('3')
@@ -74,7 +74,7 @@ describe NumberGame do
 
   describe '#final_message' do
     context 'when count is 1' do
-      it 'should output correct phrase' do
+      it 'outputs correct phrase' do
         game.count = 1
         lucky_phrase = "LUCKY GUESS!\n"
         # The output matcher needs a block of code to assert
@@ -85,7 +85,7 @@ describe NumberGame do
     # ASSIGNMENT
     context 'when count is 2-3' do
       # remove the 'x' before running this test
-      xit 'should output correct phrase' do
+      xit 'outputs correct phrase' do
         game.count = 3
         congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
         # Write the expect statement for this test
@@ -96,7 +96,7 @@ describe NumberGame do
     # ASSIGNMENT
     context 'when count is 4 and over' do
       # remove the 'x' before running this test
-      xit 'should output correct phrase' do
+      xit 'outputs correct phrase' do
         # Write the conditions to make this test pass
         expect { game.final_message }.to output(phrase).to_stdout
       end
