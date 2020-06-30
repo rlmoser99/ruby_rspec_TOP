@@ -11,13 +11,16 @@ require_relative '../lib/14_find_number'
 
 # Doubles are useful in TDD because you can create test functionality that is not coded yet.
 
+# Doubles can be a confusing concept, so here are several resources to check out:
+# https://www.tutorialspoint.com/rspec/rspec_test_doubles.htm
 # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/basics/test-doubles
+# http://testing-for-beginners.rubymonstas.org/test_doubles.html
 
 # In this file, we will be testing the 'FindNumber' class.
 # An instance of 'FindNumber' is initialized with a 'RandomNumber' object.
 # Since we have not written the 'RandomNumber' class, we will use a double to 'mock' it.
 
-# FYI: Doubles are used in many different ways - Dummy, Fake, Stubs, Spies, Mocks
+# Doubles are used in many different ways - Dummy, Fake, Stubs, Spies, Mocks
 # https://martinfowler.com/bliki/TestDouble.html
 
 describe FindNumber do

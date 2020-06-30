@@ -47,5 +47,10 @@ describe Dog do
   it 'is not barking' do
     expect(ollie).to_not be_barking
   end
+
+  # remove the 'x' before running this test
+  it 'is sleeping' do
+    expect(ollie).to be_sleeping
+  end
 end
 # rubocop:enable Layout/LineLength

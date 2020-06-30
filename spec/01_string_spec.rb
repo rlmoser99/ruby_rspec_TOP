@@ -10,13 +10,13 @@ describe String do
   # Use a context block to make your tests clear and well organized.
   # It is not required, but it is generally used to explain any conditionals
   # should start with words like: if, when, unless, with, without, for, before, after, during
-  context 'when let variable is used' do
+  context 'when a let variable is used' do
     it 'is the value of assigned let variable' do
       expect(favorite_color).to eq('blue')
     end
   end
 
-  context 'when let variables values change inside an example' do
+  context 'when the value of a let variable changes inside an example' do
     it 'is the updated value of the let variable' do
       expect(favorite_color).to eq('blue')
       favorite_color = 'navy blue'

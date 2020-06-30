@@ -16,7 +16,8 @@ require_relative '../lib/15_random_number'
 # Therefore, using a 'verifying double' makes a test more stable.
 
 # Unit testing relies on using doubles to test the object in isolation (not dependant on any other object).
-# One important concept to understand is the BinarySearch or FindNumber class doesn't care if it is given an actual random_number class object, it only cares that it is given an object that can respond to certain methods.
+# One important concept to understand is the BinarySearch or FindNumber class doesn't care if it is given an actual random_number class object.
+# It only cares that it is given an object that can respond to certain methods.
 # This concept is called polymorphism
 # https://www.geeksforgeeks.org/polymorphism-in-ruby/
 
@@ -50,17 +51,19 @@ describe BinarySearch do
     let(:random_number) { instance_double('random_number', value: 8) }
 
     context 'when using a stub for display_guess' do
-      it 'will loop until guess equals 8' do
-        # These 3 lines are stubs of the #display_guess method. For this test, a loop will call this method 3 times.
-        allow(game).to receive(:display_guess).with(1) # for the turn count = 1 loop
-        allow(game).to receive(:display_guess).with(2) # for the turn count = 2 loop
-        allow(game).to receive(:display_guess).with(3) # for the turn count = 3 loop
-        game.computer_turns
-        guess = game.guess
-        expect(guess).to eq(8)
+      context 'when random_number.value is 8' do
+        it 'will loop until guess equals 8' do
+          # These 3 lines are stubs of the #display_guess method. For this test, a loop will call this method 3 times.
+          allow(game).to receive(:display_guess).with(1) # for the turn count = 1 loop
+          allow(game).to receive(:display_guess).with(2) # for the turn count = 2 loop
+          allow(game).to receive(:display_guess).with(3) # for the turn count = 3 loop
+          game.computer_turns
+          guess = game.guess
+          expect(guess).to eq(8)
+        end
+        # Now comment out the 3 stubs above and re-run the test.
+        # The #display guess method includes sleep(3) to mimic a method that takes a long time to complete, such as connecting to a database.
       end
-      # Now comment out the 3 stubs above and re-run the test.
-      # The #display guess method includes sleep(3) to mimic a method that takes a long time to complete, such as connecting to a database.
     end
 
     # ASSIGNMENT
@@ -72,15 +75,17 @@ describe BinarySearch do
     # The stub for #make_guess requires a return value to break the loop in #computer_turns.
 
     context 'when using a stub for display_guess and make_guess' do
-      # remove the 'x' before running this test
-      xit 'will loop until guess equals 8' do
-        # Make 1 stub for #make_guess that will return the values of 4, 7, 8 (the mid-point of min & max)
+      context 'when random_number.value is 8' do
+        # remove the 'x' before running this test
+        xit 'will loop until guess equals 8' do
+          # Make 1 stub for #make_guess that will return the values of 4, 7, 8 (the mid-point of min & max)
 
-        # Write the 3 stubs for #display_guess
+          # Write the 3 stubs for #display_guess
 
-        game.computer_turns
-        guess = game.guess
-        expect(guess).to eq(8)
+          game.computer_turns
+          guess = game.guess
+          expect(guess).to eq(8)
+        end
       end
     end
   end
@@ -94,7 +99,7 @@ describe BinarySearch do
   end
 end
 
-# These tests are updated from the previous #14 example (with instance_double)
+# These tests are updated from the previous #14 example (with instance_doubles)
 
 # describe BinarySearch do
 #   describe '#make_guess' do

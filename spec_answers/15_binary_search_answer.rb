@@ -54,17 +54,19 @@ describe BinarySearch do
     let(:random_number) { instance_double('random_number', value: 8) }
 
     context 'when using a stub for display_guess' do
-      it 'will loop until guess equals 8' do
-        # These 3 lines are stubs of the #display_guess method. For this test, a loop will call this method 3 times.
-        allow(game).to receive(:display_guess).with(1) # for the turn count = 1 loop
-        allow(game).to receive(:display_guess).with(2) # for the turn count = 2 loop
-        allow(game).to receive(:display_guess).with(3) # for the turn count = 3 loop
-        game.computer_turns
-        guess = game.guess
-        expect(guess).to eq(8)
+      context 'when random_number.value is 8' do
+        it 'will loop until guess equals 8' do
+          # These 3 lines are stubs of the #display_guess method. For this test, a loop will call this method 3 times.
+          allow(game).to receive(:display_guess).with(1) # for the turn count = 1 loop
+          allow(game).to receive(:display_guess).with(2) # for the turn count = 2 loop
+          allow(game).to receive(:display_guess).with(3) # for the turn count = 3 loop
+          game.computer_turns
+          guess = game.guess
+          expect(guess).to eq(8)
+        end
+        # Now comment out the 3 stubs above and re-run the test.
+        # The #display guess method includes sleep(3) to mimic a method that takes a long time to complete, such as connecting to a database.
       end
-      # Now comment out the 3 stubs above and re-run the test.
-      # The #display guess method includes sleep(3) to mimic a method that takes a long time to complete, such as connecting to a database.
     end
 
     # ASSIGNMENT
@@ -76,16 +78,19 @@ describe BinarySearch do
     # The stub for #make_guess requires a return value to break the loop in #computer_turns.
 
     context 'when using a stub for display_guess and make_guess' do
-      it 'will loop until guess equals 8' do
-        # Make 1 stub for #make_guess that will return the values of 4, 7, 8 (the mid-point of min & max)
-        allow(game).to receive(:make_guess).and_return(4, 7, 8)
-        # Write the 3 stubs for #display_guess
-        allow(game).to receive(:display_guess).with(1)
-        allow(game).to receive(:display_guess).with(2)
-        allow(game).to receive(:display_guess).with(3)
-        game.computer_turns
-        guess = game.guess
-        expect(guess).to eq(8)
+      context 'when random_number.value is 8' do
+        # remove the 'x' before running this test
+        it 'will loop until guess equals 8' do
+          # Make 1 stub for #make_guess that will return the values of 4, 7, 8 (the mid-point of min & max)
+          allow(game).to receive(:make_guess).and_return(4, 7, 8)
+          # Write the 3 stubs for #display_guess
+          allow(game).to receive(:display_guess).with(1)
+          allow(game).to receive(:display_guess).with(2)
+          allow(game).to receive(:display_guess).with(3)
+          game.computer_turns
+          guess = game.guess
+          expect(guess).to eq(8)
+        end
       end
     end
   end
@@ -96,17 +101,19 @@ describe BinarySearch do
   # Bonus: Can you remove the two puts statements from outputting when the test is run?
 
   describe '#start' do
-    subject(:game) { described_class.new(0, 9, random_number) }
-    let(:random_number) { instance_double('random_number', value: 1) }
+    context 'when random_number.value is 1' do
+      subject(:game) { described_class.new(0, 9, random_number) }
+      let(:random_number) { instance_double('random_number', value: 1) }
 
-    it 'will loop until guess equals 1' do
-      allow(game).to receive(:puts).twice
-      allow(game).to receive(:make_guess).and_return(4, 1)
-      allow(game).to receive(:display_guess).with(1)
-      allow(game).to receive(:display_guess).with(2)
-      game.start
-      guess = game.guess
-      expect(guess).to eq(1)
+      it 'will loop until guess equals 1' do
+        allow(game).to receive(:puts).twice
+        allow(game).to receive(:make_guess).and_return(4, 1)
+        allow(game).to receive(:display_guess).with(1)
+        allow(game).to receive(:display_guess).with(2)
+        game.start
+        guess = game.guess
+        expect(guess).to eq(1)
+      end
     end
   end
 end

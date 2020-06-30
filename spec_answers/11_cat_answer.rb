@@ -49,5 +49,10 @@ describe Cat do
   it 'is not hungry' do
     expect(lucy).to_not be_hungry
   end
+
+  # remove the 'x' before running this test
+  it 'is hiding' do
+    expect(lucy).to be_hiding
+  end
 end
 # rubocop:enable Layout/LineLength
