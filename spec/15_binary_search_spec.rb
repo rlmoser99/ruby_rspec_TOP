@@ -107,14 +107,14 @@ end
 #     let(:random_number) { instance_double('random_number', value: 8) }
 
 #     context 'when min is 0 and max is 9' do
-#       it 'is 4' do
+#       it 'returns 4' do
 #         guess = game.make_guess
 #         expect(guess).to eq(4)
 #       end
 #     end
 
 #     context 'when min is 5 and max is 9' do
-#       it 'is 7' do
+#       it 'returns 7' do
 #         game.min = 5
 #         guess = game.make_guess
 #         expect(guess).to eq(7)
@@ -122,7 +122,7 @@ end
 #     end
 
 #     context 'when min is 8 and max is 9' do
-#       it 'is 8' do
+#       it 'returns 8' do
 #         game.min = 8
 #         guess = game.make_guess
 #         expect(guess).to eq(8)
@@ -130,7 +130,7 @@ end
 #     end
 
 #     context 'when min is 0 and max is 3' do
-#       it 'is 1' do
+#       it 'returns 1' do
 #         game.max = 3
 #         guess = game.make_guess
 #         expect(guess).to eq(1)
@@ -138,7 +138,7 @@ end
 #     end
 
 #     context 'when min and max both equal 3' do
-#       it 'is 3' do
+#       it 'returns 3' do
 #         game.min = 3
 #         game.max = 3
 #         guess = game.make_guess

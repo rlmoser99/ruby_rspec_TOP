@@ -33,7 +33,7 @@ describe FindNumber do
       subject(:game) { described_class.new(0, 9, random_number) }
 
       context 'when random_answer.value is 8' do
-        it 'is 8' do
+        it 'returns 8' do
           allow(random_number).to receive(:value).and_return(8)
           solution = game.answer.value
           expect(solution).to eq(8)
@@ -50,7 +50,7 @@ describe FindNumber do
       subject(:game) { described_class.new(0, 9, random_number) }
 
       context 'when random_answer.value is 3' do
-        it 'is 3' do
+        it 'returns 3' do
           solution = game.answer.value
           expect(solution).to eq(3)
         end
@@ -63,7 +63,7 @@ describe FindNumber do
       subject(:game_solution) { described_class.new(0, 9, random_number).answer.value }
 
       context 'when random_answer.value is 5' do
-        it 'is 5' do
+        it 'returns 5' do
           expect(game_solution).to eq(5)
         end
       end

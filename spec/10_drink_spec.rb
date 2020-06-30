@@ -23,6 +23,7 @@ describe Drink do
 
     context 'when specifying the type and ounces' do
       subject(:my_drink) { Drink.new('coffee', 8) }
+
       it 'is coffee' do
         expect(my_drink.type).to eq('coffee')
       end
@@ -35,6 +36,7 @@ describe Drink do
     context 'when changing the type inside an example' do
       # When changing the type inside an example, the Drink class needs to have an attr_accessor for :type
       subject(:my_drink) { Drink.new('coffee') }
+
       it 'changes to tea' do
         my_drink.type = 'tea'
         expect(my_drink.type).to eq('tea')
@@ -46,6 +48,7 @@ describe Drink do
     # If that change was made, then every time that the word 'Drink' was used would have to be changed to 'Beverage'
     context 'when limiting future code changes' do
       subject(:my_drink) { described_class.new('juice') }
+
       it 'is juice' do
         expect(my_drink.type).to eq('juice')
       end
