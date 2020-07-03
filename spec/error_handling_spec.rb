@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength, Layout/LineLength
+
 # NumberPickGame has small, isolated methods that are easy to test
 class NumberPickGame
   attr_accessor :solution, :count, :guess
@@ -68,6 +70,13 @@ describe NumberPickGame do
       expect(game).to receive(:final_message).once
       game.play_game
     end
+
+    # it 'plays the game number 2' do
+    #   game.play_game
+    #   expect(game).to have_received(:puts).once
+    #   expect(game).to have_received(:player_turns).once
+    #   expect(game).to have_received(:final_message).once
+    # end
   end
 
   describe '#player_turns' do
@@ -100,26 +109,28 @@ describe NumberPickGame do
   end
 
   describe '#player_guess' do
+    # WARNING: .not_to raise_error(SpecificErrorClass)` risks false positives, since literally any other error would cause the expectation to pass, including those raised by Ruby (e.g. NoMethodError, NameError and ArgumentError), meaning the code you are intending to test may not even get reached. Instead consider using `expect { }.not_to raise_error`
     context 'when guess is valid' do
       it 'raises no errors and guess is correct' do
         user_input = '3'
         allow(game).to receive(:player_input).and_return(user_input)
         expect { game.player_guess }.not_to raise_error
+        expect(game).not_to receive(:puts).with('Invalid input')
         guess = game.guess
         expect(guess).to eq('3')
-        # WARNING: .not_to raise_error(SpecificErrorClass)` risks false positives, since literally any other error would cause the expectation to pass, including those raised by Ruby (e.g. NoMethodError, NameError and ArgumentError), meaning the code you are intending to test may not even get reached. Instead consider using `expect { }.not_to raise_error`
       end
     end
 
-    # Can not test for an error that was rescued.
+    # Can not test for an error that was rescued, only the conditions that would happen during rescue.
+    # Fensus said 'An error would only be raised if it's raised in your rescue. Because you rescue and don't subsequently raise it again, nothing from the outside would ever know an error is raised (because it isnt). So you couldn't test for an error raising if you wanted to with your current code.'
     context 'when guess is not valid' do
       it 'rescues the errors and prompts user for valid input' do
         letter_input = 'd'
         number_input = '2'
         allow(game).to receive(:player_input).and_return(letter_input, number_input)
-        expect(game).to receive(:puts)
+        expect(game).to receive(:puts).once.with('Invalid input')
         expect(game).to receive(:player_input).twice
-        game.player_guess
+        expect { game.player_guess }.not_to raise_error
         guess = game.guess
         expect(guess).to eq('2')
       end
@@ -127,10 +138,9 @@ describe NumberPickGame do
   end
 end
 
-# Tests written in input_output test file.
+# Previous tests written in input_output test file.
 describe NumberPickGame do
   subject(:game) { described_class.new }
-  class InvalidInputError < StandardError; end
 
   describe '#initialize' do
     matcher :be_between_zero_and_nine do
@@ -161,3 +171,5 @@ describe NumberPickGame do
     end
   end
 end
+
+# rubocop:enable Metrics/BlockLength, Layout/LineLength
