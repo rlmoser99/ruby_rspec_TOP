@@ -27,13 +27,15 @@ describe NumberGame do
     end
 
     # ASSIGNMENT
-    # Write one test for game.solution that uses 'satisfy' instead of <, >, =
+    # Write a similar test as the one above, that uses a custom matcher (instead of <, >, =)
+    matcher :be_between_zero_and_nine do
+      match { |number| number.between?(0, 9) }
+    end
+
     # remove the 'x' before running this test
     it 'is a number between 0 and 9' do
       solution = game.solution
-      expect(solution).to satisfy do |number|
-        number.between?(0, 9)
-      end
+      expect(solution).to be_between_zero_and_nine
     end
   end
 

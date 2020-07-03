@@ -27,7 +27,7 @@ describe NumberGame do
     end
 
     # ASSIGNMENT
-    # Write one test for game.solution that uses 'satisfy' instead of <, >, =
+    # Write a similar test as the one above, that uses a custom matcher (instead of <, >, =)
     # remove the 'x' before running this test
     xit 'is a number between 0 and 9' do
     end
