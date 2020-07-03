@@ -61,32 +61,41 @@ describe NumberPickGame do
   subject(:game) { described_class.new }
   class InvalidInputError < StandardError; end
 
-  describe '#initialize' do
-    matcher :be_between_zero_and_nine do
-      match { |number| number.between?(0, 9) }
-    end
-
-    it 'is a number between 0 and 9' do
-      solution = game.solution
-      expect(solution).to be_between_zero_and_nine
+  describe '#play_game' do
+    it 'plays the game' do
+      expect(game).to receive(:puts).once
+      expect(game).to receive(:player_turns).once
+      expect(game).to receive(:final_message).once
+      game.play_game
     end
   end
 
-  describe '#game_over?' do
-    context 'when user guess is correct' do
-      it 'is game over' do
-        game.solution = 5
-        game.guess = '5'
-        expect(game).to be_game_over
-      end
+  describe '#player_turns' do
+    it 'plays one round' do
+      allow(game).to receive(:player_guess)
+      allow(game).to receive(:game_over?).and_return(true)
+      game.player_turns
+      count = game.count
+      expect(count).to eq(1)
+      expect(game).to have_received(:player_guess).once
     end
 
-    context 'when user guess is not correct' do
-      it 'is not game over' do
-        game.solution = 5
-        game.guess = '2'
-        expect(game).to_not be_game_over
-      end
+    it 'plays two rounds' do
+      allow(game).to receive(:player_guess)
+      allow(game).to receive(:game_over?).and_return(false, true)
+      game.player_turns
+      count = game.count
+      expect(count).to eq(2)
+      expect(game).to have_received(:player_guess).twice
+    end
+
+    it 'plays seven rounds' do
+      allow(game).to receive(:player_guess)
+      allow(game).to receive(:game_over?).and_return(false, false, false, false, false, false, true)
+      game.player_turns
+      count = game.count
+      expect(count).to eq(7)
+      expect(game).to have_received(:player_guess).exactly(7).times
     end
   end
 
@@ -113,6 +122,41 @@ describe NumberPickGame do
         game.player_guess
         guess = game.guess
         expect(guess).to eq('2')
+      end
+    end
+  end
+end
+
+# Tests written in input_output test file.
+describe NumberPickGame do
+  subject(:game) { described_class.new }
+  class InvalidInputError < StandardError; end
+
+  describe '#initialize' do
+    matcher :be_between_zero_and_nine do
+      match { |number| number.between?(0, 9) }
+    end
+
+    it 'is a number between 0 and 9' do
+      solution = game.solution
+      expect(solution).to be_between_zero_and_nine
+    end
+  end
+
+  describe '#game_over?' do
+    context 'when user guess is correct' do
+      it 'is game over' do
+        game.solution = 5
+        game.guess = '5'
+        expect(game).to be_game_over
+      end
+    end
+
+    context 'when user guess is not correct' do
+      it 'is not game over' do
+        game.solution = 5
+        game.guess = '2'
+        expect(game).to_not be_game_over
       end
     end
   end
