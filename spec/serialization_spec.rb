@@ -9,6 +9,10 @@ module Database
     @filename = "#{create_filename}.yaml"
     File.open("cipher/#{@filename}", 'w') { |file| file.write save_to_yaml }
     display_file_location
+  rescue SystemCallError => e
+    puts "Error while writing to file #{@filename}."
+    puts e
+    # raise SystemCallError
   end
 
   def save_to_yaml
@@ -68,15 +72,44 @@ class CaesarBreaker
 end
 
 # phrase = CaesarBreaker.new('Ebiil, Tloia!')
-# puts phrase.decoded_message
+
+# # https://relishapp.com/rspec/rspec-core/docs/helper-methods/define-helper-methods-in-a-module
+
+RSpec.configure do |c|
+  c.include Database
+end
 
 describe CaesarBreaker do
   subject(:phrase) { described_class.new('Ebiil, Tloia!') }
 
-  describe '#initialize' do
-    it 'is a CaesarBreaker' do
+  # describe '#initialize' do
+  #   it 'is a CaesarBreaker' do
+  #     expect_any_instance_of(CaesarBreaker).to receive(:create_decode_messages)
+  #     expect(phrase).to be_a(CaesarBreaker)
+  #   end
+  # end
+
+  describe '#save_message' do
+    # it 'responds to save_message' do
+    #   allow(phrase).to receive(:display_file_location)
+    #   expect(phrase).to respond_to(:save_message)
+    # end
+
+    it 'saves a file without raising an error' do
       expect_any_instance_of(CaesarBreaker).to receive(:create_decode_messages)
-      expect(phrase).to be_a(CaesarBreaker)
+      expect(phrase).to receive(:create_filename)
+      expect(File).to exist('/Users/rmoser/projects/odin_on_rails/ruby_rspec_TOP/spec/cipher/EbiilTloia.yaml')
+      expect(phrase).to receive(:display_file_location)
+      expect { phrase.save_message }.not_to raise_error
     end
+
+    # it 'raises an error' do
+    #   expect_any_instance_of(CaesarBreaker).to receive(:create_decode_messages)
+    #   allow(File).to receive(:open).and_raise(Errno::ENOENT)
+    #   # allow(YAML).to receive(:dump).and_raise(Errno::ENOENT)
+    #   # expect { phrase.save_message }.to raise_error
+    #   # expect { phrase.save_message }.to raise(Errno::ENOENT)
+    #   expect { phrase.save_message }.to raise(SystemCallError
+    # end
   end
 end
