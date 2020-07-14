@@ -61,6 +61,7 @@ Arrange, Act & Assert testing pattern
 Important to write small, isolated methods to test\
 Unnecessary to test puts and gets\
 Use 'gets methods' as parameters in another method that is tested\
+stubbing a method\
 output matcher
 
 ## 14_find_number
