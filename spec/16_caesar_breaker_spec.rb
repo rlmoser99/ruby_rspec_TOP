@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative '../lib/16_caesar_breaker'
-# require_relative '../lib/16_database'
 
 describe CaesarBreaker do
   subject(:phrase) { described_class.new('Ebiil, Tloia!') }
@@ -79,15 +78,6 @@ describe CaesarBreaker do
       # expect(phrase).to receive(:puts).once.with('Error while writing to file .yaml.')
       expect { phrase.save_decrypted_messages }.not_to raise_error
     end
-
-    # it 'rescues an error' do
-    #   expect_any_instance_of(CaesarBreaker).to receive(:create_decode_messages)
-    #   expect(phrase).to receive(:create_filename)
-    #   allow(File).to receive(:open).and_raise(Errno::ENOENT)
-    #   expect(phrase).to receive(:puts).once.with('Error while writing to file .yaml.')
-    #   # error_message = '#<Errno::ENOENT: No such file or directory>'
-    #   phrase.save_message
-    # end
   end
 
   describe '#save_to_yaml' do
