@@ -43,7 +43,7 @@ describe NumberGame do
     end
 
     # ASSIGNMENT
-    # Write one test for when game.game_solution does not equal correct_guess?
+    # Write one test for when game.solution does not equal correct_guess?
     context 'when user guess is not correct' do
       # remove the 'x' before running this test
       xit 'is not game over' do
@@ -51,11 +51,14 @@ describe NumberGame do
     end
   end
 
-  describe '#verify_input' do
-    # The method that asks for 'player_input' is not tested because it is a protected method and it unneccessary to test methods that only contain puts and/or gets. However, at the bottom of the answer file is an example of how to test the #player_input method if it were not protected.
+  # The #player_input method is used in the game as an argument passed into the verify_input method.
+  # The #player_input method is not tested because it is a protected method.
+  # In addition, it is unneccessary to test methods that only contain puts and/or gets.
+  # However, at the bottom of the answer file is an example of how to test the #player_input method if it were not protected.
 
-    # The player_input is used in the game as an argument passed into #verify_input.
-    # Note: this recursive method will repeat until a valid argument is given, due to a regex check.
+  describe '#verify_input' do
+    # Note: this recursive method will repeat until #valid_input? is true
+
     context 'when given a valid input as argument' do
       it 'returns valid input' do
         user_input = '3'
@@ -63,7 +66,39 @@ describe NumberGame do
         expect(verified_input).to eq('3')
       end
     end
-    # At the bottom of the answer file is an example of how to test the #verify_input method 'faking' an in-valid argument.
+
+    # In order to test #verify_input receiving an invalid input, we need to use a stub or 'fake' returning a valid input.
+    # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/stub-with-substitute-implementation
+
+    # In addition, we can test that the game received :puts with the error message one time.
+
+    context 'when given invalid input once before valid input' do
+      it 'loops once and returns valid input' do
+        letter_input = 'g'
+        number_input = '5'
+        allow(game).to receive(:player_input).and_return(number_input)
+        expect(game).to receive(:puts).once.with('Input error!')
+        verified_input = game.verify_input(letter_input)
+        expect(verified_input).to eq('5')
+      end
+    end
+
+    # ASSIGNMENT
+    context 'when given invalid input twice before valid input' do
+      # remove the 'x' before running this test
+      xit 'loops twice and returns valid input' do
+        letter_input = 'h'
+        number_input = '3'
+        # Create another invalid input (anything except a digit between 0-9).
+
+        # Create a stub method to receive :player_input and return your invalid input and the number_input
+
+        # Create an expectation that :puts will be recieved twice with the error message
+
+        verified_input = game.verify_input(letter_input)
+        expect(verified_input).to eq(number_input)
+      end
+    end
   end
 
   # It is unneccessary to write tests for methods that only contain puts statements, like #final_message.

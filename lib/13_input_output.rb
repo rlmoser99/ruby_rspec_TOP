@@ -88,7 +88,7 @@ class NumberGame
   end
 
   def valid_input?(input)
-    input.match(/^[0-9]$/)
+    input.match?(/^[0-9]$/)
   end
 end
 

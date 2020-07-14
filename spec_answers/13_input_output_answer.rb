@@ -60,11 +60,13 @@ describe NumberGame do
     end
   end
 
+  # The #player_input method is used in the game as an argument passed into the verify_input method.
+  # The #player_input method is not tested because it is a protected method.
+  # In addition, it is unneccessary to test methods that only contain puts and/or gets.
+  # However, at the bottom of the answer file is an example of how to test the #player_input method if it were not protected.
   describe '#verify_input' do
-    # The method that asks for 'player_input' is not tested because it is a protected method and it unneccessary to test methods that only contain puts and/or gets. However, at the bottom of the answer file is an example of how to test the #player_input method if it were not protected.
+    # Note: this recursive method will repeat until #valid_input? is true
 
-    # The player_input is used in the game as an argument passed into the verify_input method.
-    # Note: this recursive method will repeat until a valid argument is given, due to a regex check.
     context 'when given a valid input as argument' do
       it 'returns valid input' do
         user_input = '3'
@@ -72,7 +74,34 @@ describe NumberGame do
         expect(verified_input).to eq('3')
       end
     end
-    # At the bottom of the answer file is an example of how to test the #verify_input method 'faking' an in-valid argument.
+
+    # In order to test #verify_input receiving an invalid input, we need to use a stub or 'fake' returning a valid input.
+    # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/stub-with-substitute-implementation
+
+    # In addition, we can test that the game received :puts with the error message one time.
+
+    context 'when given invalid input once before valid input' do
+      it 'loops once and returns valid input' do
+        letter_input = 'g'
+        number_input = '5'
+        allow(game).to receive(:player_input).and_return(number_input)
+        expect(game).to receive(:puts).once.with('Input error!')
+        verified_input = game.verify_input(letter_input)
+        expect(verified_input).to eq('5')
+      end
+    end
+
+    context 'when given invalid input twice before valid input' do
+      it 'loops twice and returns valid input' do
+        letter_input = 'h'
+        symbol_input = '@'
+        number_input = '3'
+        allow(game).to receive(:player_input).and_return(symbol_input, number_input)
+        expect(game).to receive(:puts).twice.with('Input error!')
+        verified_input = game.verify_input(letter_input)
+        expect(verified_input).to eq('3')
+      end
+    end
   end
 
   # It is unneccessary to write tests for methods that only contain puts statements, like #final_message.
@@ -117,35 +146,17 @@ describe NumberGame do
   # This method is a PROTECTED method and it does NOT need to be tested.
   # This method is only used as parameter for the #verify_input method.
   # It is unneccessary to test methods that only contain puts and/or gets because they are well-tested in the standard ruby library.
-  # However, if this test was public (instead of protected) and you had to test it, you'll need to create a stub for the gets method
+  # However, if this test was public (instead of protected) and you had to test it, you'll need to create a stub for the puts & gets method
   # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/stub-with-substitute-implementation
 
   # describe '#player_input' do
-  #   it 'outputs a phrase' do
-  #     prompt = "Choose 1-digit between 0-9\n"
-  #     expect { game.player_input }.to output(prompt).to_stdout
-  #   end
-
-  #   it 'is equal to the return value of the gets method stub' do
-  #     allow(game).to receive(:gets).and_return('3')
-  #     input = game.player_input
-  #     expect(input).to eq('3')
-  #   end
-  # end
-
-  # This test is not neccessary, because this recursive method will repeat until a valid argument is given, due to a regex check.
-  # This test uses a stub to 'fake' that when it receives verify_method that it returns 7 no matter what.
-  # Therefore, this test really only proves that the stub works, not that the method works!
-
-  # describe '#verify_input' do
-  #   context 'when using a stub to fake an in-valid input as argument' do
-  #     it 'returns valid input' do
-  #       user_input = 'g'
-  #       allow(game).to receive(:verify_input).and_return('5')
-  #       verified_input = game.verify_input(user_input)
-  #       expect(game).to have_received(:verify_input).with('g')
-  #       expect(verified_input).to eq('5')
-  #     end
+  #   it 'returns player input' do
+  #     prompt = 'Choose 1-digit between 0-9'
+  #     user_input = '3'
+  #     allow(game).to receive(:puts).once.with(prompt)
+  #     allow(game).to receive(:gets).and_return(user_input)
+  #     result = game.player_input
+  #     expect(result).to eq('3')
   #   end
   # end
 end
