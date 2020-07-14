@@ -117,19 +117,17 @@ describe NumberGame do
   # This method is a PROTECTED method and it does NOT need to be tested.
   # This method is only used as parameter for the #verify_input method.
   # It is unneccessary to test methods that only contain puts and/or gets because they are well-tested in the standard ruby library.
-  # However, if this test was public (instead of protected) and you had to test it, you'll need to create a stub for the gets method
+  # However, if this test was public (instead of protected) and you had to test it, you'll need to create a stub for the puts & gets method
   # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/stub-with-substitute-implementation
 
   # describe '#player_input' do
-  #   it 'outputs a phrase' do
-  #     prompt = "Choose 1-digit between 0-9\n"
-  #     expect { game.player_input }.to output(prompt).to_stdout
-  #   end
-
-  #   it 'is equal to the return value of the gets method stub' do
-  #     allow(game).to receive(:gets).and_return('3')
-  #     input = game.player_input
-  #     expect(input).to eq('3')
+  #   it 'returns player input' do
+  #     prompt = 'Choose 1-digit between 0-9'
+  #     user_input = '3'
+  #     allow(game).to receive(:puts).once.with(prompt)
+  #     allow(game).to receive(:gets).and_return(user_input)
+  #     result = game.player_input
+  #     expect(result).to eq('3')
   #   end
   # end
 
@@ -137,16 +135,29 @@ describe NumberGame do
   # This test uses a stub to 'fake' that when it receives verify_method that it returns 7 no matter what.
   # Therefore, this test really only proves that the stub works, not that the method works!
 
-  # describe '#verify_input' do
-  #   context 'when using a stub to fake an in-valid input as argument' do
-  #     it 'returns valid input' do
-  #       user_input = 'g'
-  #       allow(game).to receive(:verify_input).and_return('5')
-  #       verified_input = game.verify_input(user_input)
-  #       expect(game).to have_received(:verify_input).with('g')
-  #       expect(verified_input).to eq('5')
-  #     end
-  #   end
-  # end
+  describe '#verify_input' do
+    context 'when using a stub to fake an in-valid input as argument' do
+      it 'returns valid input' do
+        user_input = 'g'
+        allow(game).to receive(:verify_input).and_return('5')
+        verified_input = game.verify_input(user_input)
+        expect(game).to have_received(:verify_input).with('g')
+        expect(verified_input).to eq('5')
+      end
+
+      # it 'returns valid input' do
+      #   user_input = 'g'
+      #   expect(game).to receive(:valid_input?).with(user_input).and_return(false)
+      #   expect(game).to receive(:puts).once.with('Input error!')
+      #   # expect(game).to receive(:puts).once.with('Choose 1-digit between 0-9')
+      #   allow(game).to receive(:player_input).and_return('5')
+      #   allow(game).to receive(:verify_input).and_return('5')
+      #   game.verify_input(user_input)
+      #   # expect(game).to have_received(:verify_input).with('g')
+      #   # verified_input = game.verify_input(user_input)
+      #   # expect(verified_input).to eq('5')
+      # end
+    end
+  end
 end
 # rubocop:enable Layout/LineLength, Metrics/BlockLength
