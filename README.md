@@ -1,5 +1,5 @@
 # Playground of rspec testing examples
-There is a knowledge gap between reading the rspec documentation and fully understanding how utilize this powerful tool. The idea behind this repository is to create a 'playground' of examples for TOP students get more experience.
+There is a knowledge gap between reading the rspec documentation and fully understanding how to utilize this powerful tool. The idea behind this repository is to create a 'playground' of examples for TOP students to get more experience.
 
 ## Running Tests
 Since this repository is full of tests, it is recommended to only run rspec tests on one individual file at at time. For example, to run the first test file from the root of this directory:
