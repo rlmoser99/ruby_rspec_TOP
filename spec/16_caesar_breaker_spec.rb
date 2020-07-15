@@ -2,19 +2,20 @@
 
 require_relative '../lib/16_caesar_breaker'
 
+# rubocop:disable Layout/LineLength
+
+# Let's write tests for an entire class & the included module.
+# Many of these methods could actually be private methods for this class, which do not need to be tested.
+# However, testing
+
 describe CaesarBreaker do
   subject(:phrase) { described_class.new('Ebiil, Tloia!') }
 
-  describe '#initialize' do
-    it 'has a message to decrypt' do
-      expect(phrase.message).to eq('Ebiil, Tloia!')
-    end
+  # You do not need to test #initialize if it is only creating instance variables.
+  # This can cause the test to be fragile, breaking anytime an instance variable name is changed.
 
-    it 'has no decrypted_messages result' do
-      expect(phrase.decrypted_messages).to be_empty
-    end
-  end
-
+  # To test #decrypt, we will need to move 'Assert' before 'Act', which is an example of mocking.
+  # http://testing-for-beginners.rubymonstas.org/test_doubles.html
   describe '#decrypt' do
     it 'calls create_decrypted_messages and save_decrypted_messages' do
       expect(phrase).to receive(:create_decrypted_messages)
@@ -23,6 +24,7 @@ describe CaesarBreaker do
     end
   end
 
+  # ASSIGNMENT
   describe '#create_decrypted_messages' do
     it 'creates 25 decrypted messages' do
       phrase.create_decrypted_messages
@@ -48,6 +50,7 @@ describe CaesarBreaker do
       expect(result).to eq('B')
     end
 
+    # ASSIGNMENT
     it 'does not shift non-letters' do
       character = '?'
       base = 65
@@ -57,29 +60,37 @@ describe CaesarBreaker do
     end
   end
 
+  # MODULE TESTING: Some prefer testing modules using a dummy class.
+  # https://mixandgo.com/learn/how-to-test-ruby-modules-with-rspec
+  # Modules can also be tested in a class that includes it.
+
   describe '#save_decrypted_messages' do
+    # This method has a rescue block in case an error occurs.
+    # Let's test that this method can run without raising an error
+    # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/raise-error-matcher
+
     it 'saves a file without raising an error' do
-      expect(phrase).to receive(:create_filename)
+      expect { phrase.save_decrypted_messages }.not_to raise_error
+    end
+
+    # The test above outputs two lines from #display_file_location.
+    # So, let stub out that method to clean up the test output.
+    it 'saves a file without raising an error' do
       expect(phrase).to receive(:display_file_location)
       expect { phrase.save_decrypted_messages }.not_to raise_error
     end
 
+    # When a method rescues an error, the method will still not raise an error.
+    # Therefore, you test the conditions that would happen if an error was rescued.
     it 'rescues an error' do
-      expect(phrase).to receive(:create_filename)
       allow(File).to receive(:open).and_raise(Errno::ENOENT)
+      expect(phrase).not_to receive(:display_file_location)
       expect(phrase).to receive(:puts).twice
-      phrase.save_decrypted_messages
-    end
-
-    it 'rescues an error' do
-      expect(phrase).to receive(:create_filename)
-      allow(File).to receive(:open).and_raise(Errno::ENOENT)
-      expect(phrase).to receive(:puts).twice
-      # expect(phrase).to receive(:puts).once.with('Error while writing to file .yaml.')
       expect { phrase.save_decrypted_messages }.not_to raise_error
     end
   end
 
+  # ASSIGNMENT
   describe '#save_to_yaml' do
     it 'dumps to yaml' do
       expect(YAML).to receive(:dump)
@@ -94,6 +105,7 @@ describe CaesarBreaker do
     end
   end
 
+  # ASSIGNMENT
   describe '#display_file_location' do
     it 'displays the file location' do
       message = phrase.message
@@ -103,3 +115,4 @@ describe CaesarBreaker do
     end
   end
 end
+# rubocop:enable Layout/LineLength
