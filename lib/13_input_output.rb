@@ -50,13 +50,17 @@ class NumberGame
 
   def play_game
     puts "Let's play a game called 'Guess a random number!'"
+    player_turns
+    final_message
+  end
+
+  def player_turns
     @count = 0
     loop do
       @guess = verify_input(player_input)
       @count += 1
       break if game_over?
     end
-    final_message
   end
 
   def verify_input(number)
