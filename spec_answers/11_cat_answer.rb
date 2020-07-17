@@ -22,7 +22,7 @@ describe Cat do
     # When using a method that returns a boolean value & does not take any parameters, you can use magic matchers
     # https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/have-attributes-matcher
     it 'has name, breed & color attributes' do
-      expect(subject).to have_attributes(name: 'Oscar', breed: 'Maine Coon', color: nil)
+      expect(oscar).to have_attributes(name: 'Oscar', breed: 'Maine Coon', color: nil)
     end
   end
 

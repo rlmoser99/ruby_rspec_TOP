@@ -1,20 +1,11 @@
 # frozen_string_literal: true
 
 # rubocop:disable Layout/LineLength, Metrics/BlockLength
+
 describe Hash do
-  # It is recommended to implicitly define the subject with an alias
-  # https://relishapp.com/rspec/rspec-core/docs/subject/explicit-subject
   subject(:favorites) { { color: 'blue', food: 'fajitas' } }
 
-  context 'when you implicitly define the subject' do
-    it 'works with subject or variable' do
-      expect(subject[:food]).to eq('fajitas')
-      # Using the explicit name is semantically easier to read, therefore preferred.
-      expect(favorites[:food]).to eq('fajitas')
-    end
-  end
-
-  # The include matcher works on any object that would responds to #include? method
+  # As you discovered in the last assignment, the include matcher works on any object that would respond to #include? method
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/include-matcher
   context 'when changing favorite color to forest green' do
     it 'includes green' do
@@ -23,6 +14,13 @@ describe Hash do
     end
   end
 
+  context 'when a favorite movie is not in the hash' do
+    it 'is nil' do
+      expect(favorites[:movie]).to be_nil
+    end
+  end
+
+  # Use the 'be' matcher when testing for true or false values
   context 'when testing for true or false values' do
     let(:car_features) do
       {

@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 describe Array do
-  it 'is empty' do
-    # Write a test that verifies if subject is empty
-    expect(subject).to be_empty
-  end
-
   context 'when my_array has perfect values' do
     # Write a let variable 'my_array' that passes all tests
     let(:my_array) { [-7, 42, 101, 98] }

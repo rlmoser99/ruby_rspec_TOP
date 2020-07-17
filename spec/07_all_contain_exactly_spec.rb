@@ -2,52 +2,58 @@
 
 # rubocop:disable Layout/LineLength
 
-# In a typical work-flow, the describe keyword is given a class name or a string argument.
-# But for these simple examples, we will be directly passing in an array or string object.
-describe [11, 17, 21] do
+# Using the 'all' matcher and the 'contain_exactly' matcher will look at every item in 'numbers'
+describe Array do
+  let(:numbers) { [11, 17, 21] }
+
   it 'is all odd numbers' do
-    expect(subject).to all(be_odd)
+    expect(numbers).to all(be_odd)
   end
 
   it 'is all under 25' do
-    expect(subject).to all(be < 25)
+    expect(numbers).to all(be < 25)
   end
 
   it 'contains exactly 21, 11, 17' do
     # The order does not matter
-    expect(subject).to contain_exactly(21, 11, 17)
+    expect(numbers).to contain_exactly(21, 11, 17)
   end
 end
 
-describe 'spaceship' do
-  it 'starts with space' do
-    expect(subject).to start_with('s')
-    expect(subject).to start_with('spa')
-    expect(subject).to start_with('space')
-    expect(subject).to start_with('spaceship')
+describe String do
+  let(:sample_word) { 'spaceship' }
+
+  it 'starts with any number of letters up to the entire word' do
+    expect(sample_word).to start_with('s')
+    expect(sample_word).to start_with('spa')
+    expect(sample_word).to start_with('space')
+    expect(sample_word).to start_with('spaceship')
   end
 
-  it 'ends with ship' do
-    expect(subject).to end_with('p')
-    expect(subject).to end_with('hip')
-    expect(subject).to end_with('ship')
-    expect(subject).to end_with('spaceship')
+  it 'ends with any number of letters up to the entire word' do
+    expect(sample_word).to end_with('p')
+    expect(sample_word).to end_with('hip')
+    expect(sample_word).to end_with('ship')
+    expect(sample_word).to end_with('spaceship')
   end
 end
 
-describe [:a, :b, :c, :d, :e] do
-  it 'starts with :a and ends with :e' do
-    expect(subject).to start_with(:a).and end_with(:e)
+describe Array do
+  let(:symbol_array) { %i[a b c d e] }
+
+  it 'starts with a and ends with e' do
+    expect(symbol_array).to start_with(:a).and end_with(:e)
   end
 
-  it 'starts with :a and includes :c' do
-    expect(subject).to start_with(:a).and include(:c)
+  it 'starts with a and includes c' do
+    expect(symbol_array).to start_with(:a).and include(:c)
   end
 end
 
 # ASSIGNMENT
 
-describe [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] do
+describe Array do
+  let(:fibonacci_sequence) { [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] }
   # Write a test that expresses each of the following statements
 
   # remove the 'x' before running this test
