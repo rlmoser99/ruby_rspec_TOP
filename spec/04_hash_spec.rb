@@ -14,7 +14,7 @@ describe Hash do
     end
   end
 
-  # The include matcher works on any object that would responds to #include? method
+  # The include matcher works on any object that would respond to #include? method
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/include-matcher
   context 'when changing favorite color to forest green' do
     it 'includes green' do
