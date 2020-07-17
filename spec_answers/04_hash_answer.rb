@@ -3,7 +3,7 @@
 describe Hash do
   subject(:my_car) do
     {
-      make: 'Volkswagon',
+      make: 'Volkswagen',
       model: 'Jetta',
       year: 2017,
       parking_camera?: true,

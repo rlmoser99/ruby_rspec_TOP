@@ -6,6 +6,9 @@ describe Array do
   # 'subject' will be an instance of that class.
   # https://relishapp.com/rspec/rspec-core/v/2-11/docs/subject/implicitly-defined-subject
 
+  # Note: Using an implicit subject is not recommended for most situations.
+  # The next lesson will cover explicit subjects, which is recommended over an implicit subject.
+
   context 'when subject is implicitly defined' do
     # type matchers:
     # https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/type-matchers

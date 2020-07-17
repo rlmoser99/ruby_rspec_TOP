@@ -10,10 +10,12 @@ put conditional information in the 'context' string
 
 ## 2_array_spec
 implicitly defined 'subject'\
+note on explicit 'subject'\
 one-lines syntax\
 predicate matchers
 
 ## 3_number_spec
+explicit 'subject'\
 comparison matchers\
 .not_to instead of .to\
 (assignment has 'include')
@@ -30,7 +32,6 @@ truthy and falsy\
 eq & eql & equal & be
 
 ## 7_all_contain_exactly
-put objects in describe\
 all matcher\
 contain_exactly matcher\
 start_with\

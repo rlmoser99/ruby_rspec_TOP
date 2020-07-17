@@ -10,14 +10,16 @@ require_relative '../lib/10_drink'
 
 describe Drink do
   describe '#initialize' do
-    # The Drink class needs to have an attr_reader for :type
+    # The Drink class needs to have an attr_reader for :type and :ounces
     context 'when using default initialization' do
+      subject(:default_drink) { Drink.new }
+
       it 'is water' do
-        expect(subject.type).to eq('water')
+        expect(default_drink.type).to eq('water')
       end
 
       it 'has 16 ounces' do
-        expect(subject.ounces).to eq(16)
+        expect(default_drink.ounces).to eq(16)
       end
     end
 
@@ -29,7 +31,7 @@ describe Drink do
       end
 
       it 'has 8 ounces' do
-        expect(subject.ounces).to eq(8)
+        expect(my_drink.ounces).to eq(8)
       end
     end
 
