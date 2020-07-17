@@ -49,9 +49,15 @@ describe CaesarBreaker do
     end
   end
 
-  # MODULE TESTING: Some prefer testing modules using a dummy class.
+  # MODULE TESTING: There are several ways to test methods inside a module.
+
+  # Some prefer explicitly including it in the configuration option
+  # https://relishapp.com/rspec/rspec-core/docs/helper-methods/define-helper-methods-in-a-module
+
+  # Some prefer testing modules using a dummy class.
   # https://mixandgo.com/learn/how-to-test-ruby-modules-with-rspec
-  # Modules can also be tested in a class that includes it.
+
+  # Modules can also be tested in a class that includes it, which is how the following tests work.
 
   describe '#save_decrypted_messages' do
     # This method has a rescue block in case an error occurs.
