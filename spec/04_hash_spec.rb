@@ -5,8 +5,7 @@
 describe Hash do
   subject(:favorites) { { color: 'blue', food: 'fajitas' } }
 
-  # As you discovered in the last assignment, the include matcher works on any object that would respond to #include? method
-  # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/include-matcher
+  # As you discovered in the last assignment, the include matcher works on any object that would respond to #include? method # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/include-matcher
   context 'when changing favorite color to forest green' do
     it 'includes green' do
       favorites[:color] = 'forest green'
@@ -45,7 +44,7 @@ end
 describe Hash do
   subject(:my_car) do
     {
-      make: 'Volkswagon',
+      make: 'Volkswagen',
       model: 'Jetta',
       year: 2017,
       parking_camera?: true,
