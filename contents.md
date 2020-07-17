@@ -81,6 +81,7 @@ testing rescued error
 
 # TO DO:
 before and after hooks\
+game.instance_variable_set\
 Check all tests that they are only testing one thing at a time.
 
 # CURRENT WORK IN PROGRESS FILE:
@@ -92,8 +93,5 @@ cover matcher\
 throw_symbol matcher\
 yield matcher\
 shared_context\
-raise-error matcher\
-.not_to with errors\
 custom error message - expect(card.suit).to eq(comparison), Expected #{comparison}, not #{card.suit}."\
-before and after hooks\
 spies
