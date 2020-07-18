@@ -1,7 +1,3 @@
-# Each file:
-should introduce at least once new concept.\
-should have an assignment to complete that covers any previous material.
-
 ## 1_string_spec
 let variables\
 let variables can change\
@@ -67,6 +63,8 @@ output matcher
 
 ## 14_find_number
 TDD with doubles\
+before and after hooks\
+instance_variable_set\
 Add method names to: subject { described_class.new.game_solution }
 
 ## 15_binary_search
@@ -74,21 +72,13 @@ Changing TDD Double to Instance Double\
 Stubbing a method\
 Polymorphism concept
 
-## caesar_breaker - NUMBER ORDER TBD = #14???
+## 16_caesar_breaker
 modules\
 mocking - assert before act\
 not_to raise_error\
 testing rescued error
 
-# TO DO:
-before and after hooks\
-game.instance_variable_set\
-Check all tests that they are only testing one thing at a time.
-
-# CURRENT WORK IN PROGRESS FILE:
-?
-
-# Not Going to Cover?
+# Not Going to Cover
 be_within matcher\
 cover matcher\
 throw_symbol matcher\
