@@ -26,10 +26,10 @@ require_relative '../lib/15_random_number'
 
 describe BinarySearch do
   describe '#max_guesses' do
-    subject(:game) { described_class.new(0, 9, random_number) }
+    subject(:game_six) { described_class.new(0, 9, random_six) }
     # A class called RandomNumber now exists, therefore it should be updated to an 'verifying double', like an 'instance_double'
     # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles/using-an-instance-double
-    let(:random_number) { instance_double('random_number', value: 6) }
+    let(:random_six) { instance_double('random_number', value: 6) }
 
     # ASSIGNMENT
 
@@ -47,18 +47,18 @@ describe BinarySearch do
   # https://relishapp.com/rspec/rspec-mocks/v/2-99/docs/method-stubs
 
   describe '#computer_turns' do
-    subject(:game) { described_class.new(0, 9, random_number) }
-    let(:random_number) { instance_double('random_number', value: 8) }
+    subject(:game_eight) { described_class.new(0, 9, random_eight) }
+    let(:random_eight) { instance_double('random_number', value: 8) }
 
     context 'when using a stub for display_guess' do
-      context 'when random_number.value is 8' do
+      context 'when random_number value is 8' do
         it 'will loop until guess equals 8' do
           # These 3 lines are stubs of the #display_guess method. For this test, a loop will call this method 3 times.
-          allow(game).to receive(:display_guess).with(1) # for the turn count = 1 loop
-          allow(game).to receive(:display_guess).with(2) # for the turn count = 2 loop
-          allow(game).to receive(:display_guess).with(3) # for the turn count = 3 loop
-          game.computer_turns
-          guess = game.guess
+          allow(game_eight).to receive(:display_guess).with(1) # for the turn count = 1 loop
+          allow(game_eight).to receive(:display_guess).with(2) # for the turn count = 2 loop
+          allow(game_eight).to receive(:display_guess).with(3) # for the turn count = 3 loop
+          game_eight.computer_turns
+          guess = game_eight.guess
           expect(guess).to eq(8)
         end
         # Now comment out the 3 stubs above and re-run the test.
@@ -75,15 +75,15 @@ describe BinarySearch do
     # The stub for #make_guess requires a return value to break the loop in #computer_turns.
 
     context 'when using a stub for display_guess and make_guess' do
-      context 'when random_number.value is 8' do
+      context 'when random_number value is 8' do
         # remove the 'x' before running this test
         xit 'will loop until guess equals 8' do
           # Make 1 stub for #make_guess that will return the values of 4, 7, 8 (the mid-point of min & max)
 
           # Write the 3 stubs for #display_guess
 
-          game.computer_turns
-          guess = game.guess
+          game_eight.computer_turns
+          guess = game_eight.guess
           expect(guess).to eq(8)
         end
       end
@@ -148,34 +148,34 @@ end
 #   end
 
 #   describe '#game_over?' do
-#     let(:random_number) { instance_double('random_number', value: 3) }
-#     subject(:game) { described_class.new(0, 9, random_number) }
+#     let(:random_three) { instance_double('random_number', value: 3) }
+#     subject(:game_three) { described_class.new(0, 9, random_three) }
 
-#     context 'when guess and random_number.value equal' do
+#     context 'when guess and random_number equal' do
 #       it 'is game over' do
-#         game.guess = 3
-#         expect(game).to be_game_over
+#         game_three.guess = 3
+#         expect(game_three).to be_game_over
 #       end
 #     end
 
-#     context 'when guess and random_number.value is not equal' do
+#     context 'when guess and random_number does not equal' do
 #       it 'is not game over' do
-#         game.guess = 4
-#         expect(game).to_not be_game_over
+#         game_three.guess = 4
+#         expect(game_three).to_not be_game_over
 #       end
 #     end
 #   end
 
 #   describe '#update_range' do
-#     let(:random_number) { instance_double('random_number', value: 8) }
-#     subject(:game) { described_class.new(0, 9, random_number) }
+#     let(:random_eight) { instance_double('random_number', value: 8) }
+#     subject(:game_eight) { described_class.new(0, 9, random_eight) }
 
 #     context 'when the guess is 4' do
 #       it 'will only update min' do
-#         game.guess = 4
-#         game.update_range
-#         minimum = game.min
-#         maximum = game.max
+#         game_eight.guess = 4
+#         game_eight.update_range
+#         minimum = game_eight.min
+#         maximum = game_eight.max
 #         expect(minimum).to eq(5)
 #         expect(maximum).to eq(9)
 #       end
@@ -183,10 +183,10 @@ end
 
 #     context 'when the guess is 9' do
 #       it 'will only update max' do
-#         game.guess = 9
-#         game.update_range
-#         minimum = game.min
-#         maximum = game.max
+#         game_eight.guess = 9
+#         game_eight.update_range
+#         minimum = game_eight.min
+#         maximum = game_eight.max
 #         expect(minimum).to eq(0)
 #         expect(maximum).to eq(8)
 #       end
@@ -194,12 +194,12 @@ end
 
 #     context 'when the guess is 7, with min=5 and max=8' do
 #       it 'will update min to the same value as max' do
-#         game.min = 5
-#         game.max = 8
-#         game.guess = 7
-#         game.update_range
-#         minimum = game.min
-#         maximum = game.max
+#         game_eight.min = 5
+#         game_eight.max = 8
+#         game_eight.guess = 7
+#         game_eight.update_range
+#         minimum = game_eight.min
+#         maximum = game_eight.max
 #         expect(minimum).to eq(8)
 #         expect(maximum).to eq(8)
 #       end
