@@ -50,9 +50,6 @@ describe BinarySearch do
   # https://relishapp.com/rspec/rspec-mocks/v/2-99/docs/method-stubs
 
   describe '#computer_turns' do
-    subject(:game) { described_class.new(0, 9, random_number) }
-    let(:random_number) { instance_double('random_number', value: 8) }
-
     subject(:game_eight) { described_class.new(0, 9, random_eight) }
     let(:random_eight) { instance_double('random_number', value: 8) }
 

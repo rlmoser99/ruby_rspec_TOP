@@ -193,10 +193,13 @@ end
 #     end
 
 #     context 'when the guess is 7, with min=5 and max=8' do
-#       it 'will update min to the same value as max' do
-#         game_eight.min = 5
-#         game_eight.max = 8
-#         game_eight.guess = 7
+#       before do
+#         game_eight.instance_variable_set(:@min, 5)
+#         game_eight.instance_variable_set(:@max, 8)
+#         game_eight.instance_variable_set(:@guess, 7)
+#       end
+
+#       it 'updates min to the same value as max' do
 #         game_eight.update_range
 #         minimum = game_eight.min
 #         maximum = game_eight.max
