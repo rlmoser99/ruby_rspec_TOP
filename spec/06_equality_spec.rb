@@ -32,7 +32,7 @@ describe 'differences between eq, eql, equal, and be' do
     let(:my_kids_borrow) { my_car }
 
     context 'eql looks at type & value' do
-      it 'is eq to each other' do
+      it 'is eql to each other' do
         expect(my_car).to eql(your_car)
         expect(my_kids_borrow).to eql(your_car)
       end
