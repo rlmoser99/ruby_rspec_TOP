@@ -13,7 +13,7 @@ class SingleDigit
 end
 
 describe SingleDigit do
-  # It is recommended to implicitly define the subject with a descriptive name.
+  # It is recommended to explicitly define the subject with a descriptive name.
   # Then, use the descriptive name, instead of 'subject' in the tests.
   # https://relishapp.com/rspec/rspec-core/docs/subject/explicit-subject
   subject(:random_digit) { SingleDigit.new }
