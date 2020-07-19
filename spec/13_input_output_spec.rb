@@ -5,7 +5,7 @@ require_relative '../lib/13_input_output'
 # rubocop:disable Layout/LineLength, Metrics/BlockLength
 
 # Ruby code that was written before you learned how to use rpsec, may be nearly impossible to test.
-# For example, in the 12_input_output file, there are two identical games - ImpossibleTestGame and NumberGame.
+# For example, in the 13_input_output file, there are two identical games - ImpossibleTestGame and NumberGame.
 # Take a look at both games and look for the differences that may make it easier or harder to test.
 
 # One key difference is that NumberGame has smaller, isolated methods.
