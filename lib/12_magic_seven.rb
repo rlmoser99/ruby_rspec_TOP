@@ -2,7 +2,8 @@
 
 # Given any number, the final number will always be 7
 class MagicSeven
-  attr_reader :random_number, :step_one, :step_two, :step_three, :step_four, :step_five
+  attr_reader :random_number, :step_one, :step_two, :step_three, :step_four,
+              :step_five
 
   def initialize
     @random_number = rand(0..20)

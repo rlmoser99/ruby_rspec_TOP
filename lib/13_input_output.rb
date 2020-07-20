@@ -3,7 +3,7 @@
 # Game that is nearly impossible to test.
 # Therefore is re-written below (NumberGame) with isolated methods easy to test
 class ImpossibleTestGame
-  attr_writer :solution, :count, :guess
+  attr_reader :solution, :count, :guess
 
   def initialize
     @solution = rand(0..9)
