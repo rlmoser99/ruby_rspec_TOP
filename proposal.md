@@ -10,6 +10,7 @@ To equip students with additional RSpec practice before doing TDD with Connect F
 - Writing small and isolated methods.
 - Using a testing pattern, such as 'Arrange Act, and Assert'.
 - Correctly using an explicit subject.
+- How to set test conditions without making attr_accessor for instance_variables
 - Methods that only use puts and/or gets can be unnecessary to test.
 - How and when to use stubs, doubles, verifying doubles, etc.
 
@@ -19,7 +20,7 @@ To equip students with additional RSpec practice before doing TDD with Connect F
 
 I recently went through the RSpec section and I really struggled to do TDD for the Connect Four project. I know that TOP's curriculum will not cover everything that one needs to know and I try to embrace this challenge. So, I did a lot of online research and found a lot of answers that were specific to using RSpec with a Rails project. It was hard to correlate the answers that I found to Ruby, and to know if the answers were pointing me in the right direction. 
 
-Therefore, I looked at student solution's spec files to find Ruby RSpec examples. I wanted to find a good example of using stubs or doubles in a test, but after looking at several files, it felt like finding a needle in a haystack. 
+Therefore, I looked at student solution's spec files to find Ruby RSpec examples. I wanted to find a good example of using stubs or doubles in a test, but after looking at multiple files, it felt like finding a needle in a haystack. 
 
 Finally, I decided to spend a few dollars on a Ruby/RSpec video tutorial on Udemy (by Boris Paskhaver). Overall, it was a terrible experience, however the tutorial had a github repo full of example tests. I found these hands-on tests to be very helpful. A few of the examples that I am using in this playground were inspired by that tutorial, but have been completed changed.
 
@@ -54,7 +55,7 @@ When I first started working on this 'playground', I imagined that it would be a
 
 Earlier in the Ruby curriculum, we learn that we can make any method private that is not accessed outside of the class. 
 
-However, what should happen when there is a private method that is also critical to the project?
+However, what should happen when there is a private method that is also critical to the project? For example, my tic_tac_toe game class. Everything but one method is private. However, 'critical methods' are now private, like creating two players, switching the current players, and taking turns until specific board conditions.
 
  I know that there is ways to test private methods, but this point is not very clear at this point in the curriculum.
 
