@@ -5,7 +5,7 @@
 
 # base class for a pet
 class Pet
-  attr_accessor :name, :breed, :color
+  attr_reader :name, :breed, :color
 
   def initialize(name, breed = nil, color = nil)
     @name = name

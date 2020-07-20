@@ -80,7 +80,7 @@ describe MagicSeven do
       it 'returns 7' do
         # Hint: this test will need to 'arrange' two variables
         previous_step = 10
-        game.random_number = 3
+        game.instance_variable_set(:@random_number, 3)
         result = game.subtract_random_number(previous_step)
         expect(result).to eq(7)
       end
@@ -93,7 +93,7 @@ describe MagicSeven do
     context 'when the random number is 19' do
       # remove the 'x' before running this test
       it 'will always return 7' do
-        game.random_number = 19
+        game.instance_variable_set(:@random_number, 19)
         result = game.play
         expect(result).to eq(7)
       end
@@ -102,7 +102,7 @@ describe MagicSeven do
     context 'when the random number is 1001' do
       # remove the 'x' before running this test
       it 'will always return 7' do
-        game.random_number = 1001
+        game.instance_variable_set(:@random_number, 1001)
         result = game.play
         expect(result).to eq(7)
       end
@@ -111,7 +111,7 @@ describe MagicSeven do
     context 'when the random number is 987,654,321' do
       # remove the 'x' before running this test
       it 'will always return 7' do
-        game.random_number = 987_654_321
+        game.instance_variable_set(:@random_number, 987_654_321)
         result = game.play
         expect(result).to eq(7)
       end
