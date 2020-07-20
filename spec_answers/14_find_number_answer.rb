@@ -6,7 +6,7 @@
 
 # class for computer to find random number
 class FindNumber
-  attr_accessor :answer, :min, :max, :guess
+  attr_reader :answer, :min, :max
 
   def initialize(min, max, answer = RandomNumber.new(min, max))
     @min = min
@@ -23,7 +23,7 @@ class FindNumber
   end
 
   def update_range
-    guess < answer.value ? @min = guess + 1 : @max = guess - 1
+    @guess < answer.value ? @min = @guess + 1 : @max = @guess - 1
   end
 end
 
@@ -56,7 +56,8 @@ describe FindNumber do
 
     context 'when min is 5 and max is 9' do
       it 'returns 7' do
-        game.min = 5
+        game.instance_variable_set(:@min, 5)
+        # game.min = 5
         guess = game.make_guess
         expect(guess).to eq(7)
       end
@@ -64,7 +65,8 @@ describe FindNumber do
 
     context 'when min is 8 and max is 9' do
       it 'returns 8' do
-        game.min = 8
+        # game.min = 8
+        game.instance_variable_set(:@min, 8)
         guess = game.make_guess
         expect(guess).to eq(8)
       end
@@ -72,7 +74,8 @@ describe FindNumber do
 
     context 'when min is 0 and max is 3' do
       it 'returns 1' do
-        game.max = 3
+        # game.max = 3
+        game.instance_variable_set(:@max, 3)
         guess = game.make_guess
         expect(guess).to eq(1)
       end
@@ -80,8 +83,10 @@ describe FindNumber do
 
     context 'when min and max both equal 3' do
       it 'returns 3' do
-        game.min = 3
-        game.max = 3
+        # game.min = 3
+        # game.max = 3
+        game.instance_variable_set(:@min, 3)
+        game.instance_variable_set(:@max, 3)
         guess = game.make_guess
         expect(guess).to eq(3)
       end
@@ -101,7 +106,8 @@ describe FindNumber do
 
     context 'when guess and random_number equal' do
       it 'is game over' do
-        game_three.guess = 3
+        # game_three.guess = 3
+        game_three.instance_variable_set(:@guess, 3)
         expect(game_three).to be_game_over
       end
     end
@@ -112,7 +118,8 @@ describe FindNumber do
 
     context 'when guess and random_number does not equal' do
       it 'is not game over' do
-        game_three.guess = 4
+        # game_three.guess = 4
+        game_three.instance_variable_set(:@guess, 4)
         expect(game_three).to_not be_game_over
       end
     end
@@ -132,7 +139,8 @@ describe FindNumber do
 
     context 'when the guess is 4' do
       it 'will only update min' do
-        game_eight.guess = 4
+        # game_eight.guess = 4
+        game_eight.instance_variable_set(:@guess, 4)
         game_eight.update_range
         minimum = game_eight.min
         maximum = game_eight.max
@@ -143,7 +151,8 @@ describe FindNumber do
 
     context 'when the guess is 9' do
       it 'will only update max' do
-        game_eight.guess = 9
+        # game_eight.guess = 9
+        game_eight.instance_variable_set(:@guess, 9)
         game_eight.update_range
         minimum = game_eight.min
         maximum = game_eight.max
@@ -162,8 +171,6 @@ describe FindNumber do
       # It is not required to use a before hook in this example, but it is a great tool to 'Arrange' test(s).
       # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
 
-      # It is not required to use 'instance_variable_set' either, but this is another tool to 'Arrange' test(s).
-      # https://apidock.com/ruby/Object/instance_variable_set
       before do
         game_eight.instance_variable_set(:@min, 5)
         game_eight.instance_variable_set(:@max, 8)
