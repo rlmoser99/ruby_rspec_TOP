@@ -36,11 +36,11 @@ describe Drink do
     end
 
     context 'when changing the type inside an example' do
-      # When changing the type inside an example, the Drink class needs to have an attr_accessor for :type
       subject(:my_drink) { Drink.new('coffee') }
 
       it 'changes to tea' do
-        my_drink.type = 'tea'
+        # Changing the value of an instance_variable without an attr_accessor
+        my_drink.instance_variable_set(:@type, 'tea')
         expect(my_drink.type).to eq('tea')
       end
     end

@@ -33,7 +33,7 @@ describe Drink do
     context 'when drink does not have 16 ounces' do
       # remove the 'x' before running this test
       it 'is not full' do
-        my_drink.ounces = 12
+        my_drink.instance_variable_set(:@ounces, 12)
         expect(my_drink).to_not be_full
       end
     end

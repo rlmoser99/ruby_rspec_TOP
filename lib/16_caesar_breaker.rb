@@ -4,8 +4,7 @@ require_relative '../lib/16_database'
 
 # breaks the Ceaser Cipher code
 class CaesarBreaker
-  attr_reader :message
-  attr_accessor :decrypted_messages
+  attr_reader :message, :decrypted_messages
   include Database
 
   CODE_SHIFTS = (1..25).to_a

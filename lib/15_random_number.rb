@@ -2,7 +2,7 @@
 
 # class to generate random number
 class RandomNumber
-  attr_accessor :value
+  attr_reader :value
 
   def initialize(minimum, maximum)
     sleep(3)

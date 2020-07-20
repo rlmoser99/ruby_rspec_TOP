@@ -153,8 +153,6 @@ describe FindNumber do
       # It is not required to use a before hook in this example, but it is a great tool to 'Arrange' test(s).
       # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
 
-      # It is not required to use 'instance_variable_set' either, but this is another tool to 'Arrange' test(s).
-      # https://apidock.com/ruby/Object/instance_variable_set
       before do
         game_eight.instance_variable_set(:@min, 5)
         game_eight.instance_variable_set(:@max, 8)

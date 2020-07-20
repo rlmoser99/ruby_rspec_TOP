@@ -2,7 +2,7 @@
 
 # very basic Drink class
 class Drink
-  attr_accessor :type, :ounces
+  attr_reader :type, :ounces
 
   def initialize(type = 'water', ounces = 16)
     @type = type

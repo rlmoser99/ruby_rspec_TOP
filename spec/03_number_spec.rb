@@ -5,7 +5,7 @@
 # In a typical work-flow, the class being tested will be located in a different file.
 # But for this simple example, let's keep everything together.
 class SingleDigit
-  attr_accessor :number
+  attr_reader :number
 
   def initialize
     @number = rand(1..9)
@@ -35,8 +35,9 @@ describe SingleDigit do
 
     context 'when random number is 3' do
       it 'is odd and less than 10' do
-        # Note: the number attribute must have a setter method (for example: attr_accessor).
-        random_digit.number = 3
+        # To set-up a test with the conditions needed, you can set the instance_variable.
+        # https://apidock.com/ruby/Object/instance_variable_set
+        random_digit.instance_variable_set(:@number, 3)
         expect(random_digit.number).to be_odd.and be < 10
       end
     end

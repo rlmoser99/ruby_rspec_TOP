@@ -4,7 +4,7 @@ require_relative '../lib/15_random_number'
 
 # class for computer to find random number
 class BinarySearch
-  attr_accessor :answer, :min, :max, :guess
+  attr_reader :answer, :min, :max, :guess
 
   def initialize(min, max, answer = RandomNumber.new(min, max))
     @min = min

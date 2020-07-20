@@ -42,8 +42,8 @@ describe NumberGame do
   describe '#game_over?' do
     context 'when user guess is correct' do
       it 'is game over' do
-        game.solution = 5
-        game.guess = '5'
+        game.instance_variable_set(:@solution, 5)
+        game.instance_variable_set(:@guess, '5')
         expect(game).to be_game_over
       end
     end
@@ -53,8 +53,8 @@ describe NumberGame do
     context 'when user guess is not correct' do
       # remove the 'x' before running this test
       it 'is not game over' do
-        game.solution = 5
-        game.guess = '2'
+        game.instance_variable_set(:@solution, 5)
+        game.instance_variable_set(:@guess, '2')
         expect(game).to_not be_game_over
       end
     end
@@ -113,7 +113,7 @@ describe NumberGame do
   describe '#final_message' do
     context 'when count is 1' do
       it 'outputs correct phrase' do
-        game.count = 1
+        game.instance_variable_set(:@count, 1)
         lucky_phrase = "LUCKY GUESS!\n"
         # The output matcher needs a block of code to assert
         expect { game.final_message }.to output(lucky_phrase).to_stdout
@@ -124,7 +124,7 @@ describe NumberGame do
     context 'when count is 2-3' do
       # remove the 'x' before running this test
       it 'outputs correct phrase' do
-        game.count = 3
+        game.instance_variable_set(:@count, 3)
         congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
         # Write the expect statement for this test
         expect { game.final_message }.to output(congrats_phrase).to_stdout
@@ -136,7 +136,7 @@ describe NumberGame do
       # remove the 'x' before running this test
       it 'outputs correct phrase' do
         # Write the conditions to make this test pass
-        game.count = 7
+        game.instance_variable_set(:@count, 7)
         hard_phrase = "That was hard. It took you 7 guesses!\n"
         expect { game.final_message }.to output(hard_phrase).to_stdout
       end
