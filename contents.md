@@ -13,6 +13,7 @@ predicate matchers
 ## 3_number_spec
 explicit 'subject'\
 comparison matchers\
+instance_variable_set\
 .not_to instead of .to\
 (assignment has 'include')
 
@@ -43,6 +44,7 @@ custom matcher
 
 ## 10_drinks_spec
 default parameters\
+instance_variable_set\
 magic_matchers\
 described class
 
@@ -64,7 +66,6 @@ output matcher
 ## 14_find_number
 TDD with doubles\
 before and after hooks\
-instance_variable_set\
 Add method names to: subject { described_class.new.game_solution }
 
 ## 15_binary_search
