@@ -75,18 +75,22 @@ describe NumberGame do
       end
     end
 
-    # In order to test #verify_input receiving an invalid input, we need to use a stub or 'fake' returning a valid input.
-    # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/stub-with-substitute-implementation
-
-    # In addition, we can test that the game received :puts with the error message one time.
+    # In order to test #verify_input receiving an invalid input, we need to use a method stub.
+    # In this example, the method stub will return the valid input, 'number_input', which will be the final result of this test.
+    # To stub this method, you 'allow' the test subject (game) to receive the :method_name and to return a specific value.
+    # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/allow-with-a-simple-return-value
+    # http://testing-for-beginners.rubymonstas.org/test_doubles.html
 
     context 'when given invalid input once before valid input' do
       it 'loops once and returns valid input' do
         letter_input = 'g'
         number_input = '5'
         allow(game).to receive(:player_input).and_return(number_input)
+        # Due to the loop, we can test that the game received :puts with the error message one time.
         expect(game).to receive(:puts).once.with('Input error!')
+        # This method starts with the invalid parameter (letter_input = 'g')
         verified_input = game.verify_input(letter_input)
+        # However, the result of 'verified_input' is the valid parameter (number_input = '5')
         expect(verified_input).to eq('5')
       end
     end
