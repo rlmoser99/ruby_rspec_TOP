@@ -57,7 +57,6 @@ describe FindNumber do
     context 'when min is 5 and max is 9' do
       it 'returns 7' do
         game.instance_variable_set(:@min, 5)
-        # game.min = 5
         guess = game.make_guess
         expect(guess).to eq(7)
       end
@@ -65,7 +64,6 @@ describe FindNumber do
 
     context 'when min is 8 and max is 9' do
       it 'returns 8' do
-        # game.min = 8
         game.instance_variable_set(:@min, 8)
         guess = game.make_guess
         expect(guess).to eq(8)
@@ -74,7 +72,6 @@ describe FindNumber do
 
     context 'when min is 0 and max is 3' do
       it 'returns 1' do
-        # game.max = 3
         game.instance_variable_set(:@max, 3)
         guess = game.make_guess
         expect(guess).to eq(1)
@@ -83,8 +80,6 @@ describe FindNumber do
 
     context 'when min and max both equal 3' do
       it 'returns 3' do
-        # game.min = 3
-        # game.max = 3
         game.instance_variable_set(:@min, 3)
         game.instance_variable_set(:@max, 3)
         guess = game.make_guess
@@ -106,7 +101,6 @@ describe FindNumber do
 
     context 'when guess and random_number equal' do
       it 'is game over' do
-        # game_three.guess = 3
         game_three.instance_variable_set(:@guess, 3)
         expect(game_three).to be_game_over
       end
@@ -118,7 +112,6 @@ describe FindNumber do
 
     context 'when guess and random_number does not equal' do
       it 'is not game over' do
-        # game_three.guess = 4
         game_three.instance_variable_set(:@guess, 4)
         expect(game_three).to_not be_game_over
       end
@@ -139,7 +132,6 @@ describe FindNumber do
 
     context 'when the guess is 4' do
       it 'will only update min' do
-        # game_eight.guess = 4
         game_eight.instance_variable_set(:@guess, 4)
         game_eight.update_range
         minimum = game_eight.min
@@ -151,7 +143,6 @@ describe FindNumber do
 
     context 'when the guess is 9' do
       it 'will only update max' do
-        # game_eight.guess = 9
         game_eight.instance_variable_set(:@guess, 9)
         game_eight.update_range
         minimum = game_eight.min
