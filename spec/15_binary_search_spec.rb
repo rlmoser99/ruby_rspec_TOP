@@ -167,28 +167,40 @@ end
 #   end
 
 #   describe '#update_range' do
-#     let(:random_eight) { instance_double('random_number', value: 8) }
+#     let(:random_eight) { double('random_number', value: 8) }
 #     subject(:game_eight) { described_class.new(0, 9, random_eight) }
 
 #     context 'when the guess is 4' do
-#       it 'will only update min' do
+#       before do
 #         game_eight.instance_variable_set(:@guess, 4)
 #         game_eight.update_range
+#       end
+
+#       it 'updates min' do
 #         minimum = game_eight.min
-#         maximum = game_eight.max
 #         expect(minimum).to eq(5)
+#       end
+
+#       it 'does not update max' do
+#         maximum = game_eight.max
 #         expect(maximum).to eq(9)
 #       end
 #     end
 
 #     context 'when the guess is 9' do
-#       it 'will only update max' do
+#       before do
 #         game_eight.instance_variable_set(:@guess, 9)
 #         game_eight.update_range
-#         minimum = game_eight.min
+#       end
+
+#       it 'updates max' do
 #         maximum = game_eight.max
-#         expect(minimum).to eq(0)
 #         expect(maximum).to eq(8)
+#       end
+
+#       it 'does not update min' do
+#         minimum = game_eight.min
+#         expect(minimum).to eq(0)
 #       end
 #     end
 
@@ -197,13 +209,16 @@ end
 #         game_eight.instance_variable_set(:@min, 5)
 #         game_eight.instance_variable_set(:@max, 8)
 #         game_eight.instance_variable_set(:@guess, 7)
+#         game_eight.update_range
 #       end
 
 #       it 'updates min to the same value as max' do
-#         game_eight.update_range
 #         minimum = game_eight.min
-#         maximum = game_eight.max
 #         expect(minimum).to eq(8)
+#       end
+
+#       it 'does not update max' do
+#         maximum = game_eight.max
 #         expect(maximum).to eq(8)
 #       end
 #     end

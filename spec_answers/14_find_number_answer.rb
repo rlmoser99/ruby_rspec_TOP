@@ -131,24 +131,39 @@ describe FindNumber do
     # Note: this example game starts off with min = 0 and max = 9 due to the { described_class.new(0, 9, random_eight) }
 
     context 'when the guess is 4' do
-      it 'will only update min' do
+      # When using the same 'Arrange' part of a test, you can utilize before hooks to set-up the test conditions.
+      # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
+
+      before do
         game_eight.instance_variable_set(:@guess, 4)
         game_eight.update_range
+      end
+
+      it 'updates min' do
         minimum = game_eight.min
-        maximum = game_eight.max
         expect(minimum).to eq(5)
+      end
+
+      it 'does not update max' do
+        maximum = game_eight.max
         expect(maximum).to eq(9)
       end
     end
 
     context 'when the guess is 9' do
-      it 'will only update max' do
+      before do
         game_eight.instance_variable_set(:@guess, 9)
         game_eight.update_range
-        minimum = game_eight.min
+      end
+
+      it 'updates max' do
         maximum = game_eight.max
-        expect(minimum).to eq(0)
         expect(maximum).to eq(8)
+      end
+
+      it 'does not update min' do
+        minimum = game_eight.min
+        expect(minimum).to eq(0)
       end
     end
 
@@ -159,20 +174,20 @@ describe FindNumber do
     # Write a test for any 'edge cases' that you can think of, for example:
 
     context 'when the guess is 7, with min=5 and max=8' do
-      # It is not required to use a before hook in this example, but it is a great tool to 'Arrange' test(s).
-      # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
-
       before do
         game_eight.instance_variable_set(:@min, 5)
         game_eight.instance_variable_set(:@max, 8)
         game_eight.instance_variable_set(:@guess, 7)
+        game_eight.update_range
       end
 
       it 'updates min to the same value as max' do
-        game_eight.update_range
         minimum = game_eight.min
-        maximum = game_eight.max
         expect(minimum).to eq(8)
+      end
+
+      it 'does not update max' do
+        maximum = game_eight.max
         expect(maximum).to eq(8)
       end
     end

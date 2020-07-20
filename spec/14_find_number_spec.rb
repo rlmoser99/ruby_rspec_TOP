@@ -138,6 +138,19 @@ describe FindNumber do
     # Note: this example game starts off with min = 0 and max = 9 due to the { described_class.new(0, 9, random_eight) }
 
     context 'when the guess is 4' do
+      # When using the same 'Arrange' part of a test, you can utilize before hooks to set-up the test conditions.
+      # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
+
+      before do
+        game_eight.instance_variable_set(:@guess, 4)
+        game_eight.update_range
+      end
+
+      xit 'updates min' do
+      end
+
+      xit 'does not update max' do
+      end
     end
 
     context 'when the guess is 9' do
@@ -150,16 +163,10 @@ describe FindNumber do
     # Write a test for any 'edge cases' that you can think of, for example:
 
     context 'when the guess is 7, with min=5 and max=8' do
-      # It is not required to use a before hook in this example, but it is a great tool to 'Arrange' test(s).
-      # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
-
-      before do
-        game_eight.instance_variable_set(:@min, 5)
-        game_eight.instance_variable_set(:@max, 8)
-        game_eight.instance_variable_set(:@guess, 7)
+      xit 'updates min to the same value as max' do
       end
 
-      xit 'updates min to the same value as max' do
+      xit 'does not update max' do
       end
     end
   end
