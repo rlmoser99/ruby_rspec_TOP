@@ -65,7 +65,7 @@ output matcher
 
 ## 14_find_number
 TDD with doubles\
-before and after hooks\
+before hooks\
 Add method names to: subject { described_class.new.game_solution }
 
 ## 15_binary_search

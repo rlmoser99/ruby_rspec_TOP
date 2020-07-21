@@ -4,29 +4,29 @@ require_relative '../lib/14_find_number'
 
 # rubocop:disable Layout/LineLength, Metrics/BlockLength
 
-# Let's take a look at test-driven development (TDD) technique called mocking.
-# Mocking uses a 'double', which is a generic ruby object.
-# Doubles are strict, which means you must specify (allow) any messages that it can receive.
-# If the double receives a message that has not been allowed, it will trigger an error.
+# Let's take a look at test-driven development (TDD) technique of using a 'double'.
+# A 'double' is a generic ruby object, that stands in for the real object, like a stunt-double.
 
-# Doubles are useful in TDD because you can create test functionality that is not coded yet.
+# Doubles are very useful in TDD because you can create test functionality that is not coded yet.
 
-# Doubles can be a confusing concept, so here are several resources to check out:
-# https://www.tutorialspoint.com/rspec/rspec_test_doubles.htm
-# https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/basics/test-doubles
-# http://testing-for-beginners.rubymonstas.org/test_doubles.html
-
-# In this file, we will be testing the 'FindNumber' class.
+# In this example, we will be testing the class 'FindNumber'. Look at the lib/14_find_number.rb file.
 # An instance of 'FindNumber' is initialized with a 'RandomNumber' object.
-# Since we have not written the 'RandomNumber' class, we will use a double to 'mock' it.
 
-# Doubles are used in many different ways - Dummy, Fake, Stubs, Spies, Mocks
-# https://martinfowler.com/bliki/TestDouble.html
+# The 'RandomNumber' class has not been written, so we will use a double for it in these tests.
+# https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/basics/test-doubles
+
+# Learning about doubles can be very confusing, because many resources use doubles/mocks/stubs interchangably.
+# If you want to dig a little deeper, here are a few additional resources to check out:
+# https://www.tutorialspoint.com/rspec/rspec_test_doubles.htm
+# https://www.codewithjason.com/rspec-mocks-stubs-plain-english/
 
 describe FindNumber do
   # There are two ways to specify the messages that a double can receive.
 
   describe '#initialize' do
+    # Doubles are strict, which means you must specify (allow) any messages that it can receive.
+    # If the double receives a message that has not been allowed, it will trigger an error.
+
     # This first example creates the double, then allows specific methods.
     context 'when creating the double and allowing method(s) in two steps' do
       let(:random_number) { double('random_number') }
@@ -72,15 +72,28 @@ describe FindNumber do
 end
 
 # ASSIGNMENT
-# This assignment is going to be writing tests & writing code to make those tests pass.
+# For this assignment you will be doing TDD for 3 methods - '#make_guess, '#make_guess, and #update_range
 
-# The basic idea of 'FindNumber' is to program a computer to guess a random_number, using binary search.
-# Remember the binary search video that you watched in the Computer Science section
-# https://www.youtube.com/watch?v=T98PIp4omUA
-# The computer will update min and max values to help find the correct number.
+# After you have some experience using TDD, you can use the typical Red-Green-Refactor workflow.
+# https://thoughtbot.com/upcase/videos/red-green-refactor-by-example
+
+# Since this is probably your first experience with TDD, let's extend the workflow to include a few more steps:
+# 1. Read & understand the requirement for one method at a time.
+# 2. Write one test for that method that you think will pass.
+# 3. Write the method that fulfills the requirement.
+# 4. Run the test that you wrote. If it doesn't pass, re-do steps 1-3
+# 5. When your first test is passing, write the additional tests in the assignment.
+# 6. Run all of the tests. If they all don't pass, re-do steps 3-5.
+# 7. Optional: Refactor your code and/or tests, making sure to have all tests passing.
 
 describe FindNumber do
   # ASSIGNMENT: METHOD #1
+
+  # The basic idea of 'FindNumber' is to program a computer to guess a random_number, using binary search.
+  # Remember the binary search video that you watched in the Computer Science section
+  # https://www.youtube.com/watch?v=T98PIp4omUA
+  # The computer will update min and max values to help find the correct number.
+
   describe '#make_guess' do
     subject(:game) { described_class.new(0, 9, random_number) }
     # Create a random_number double & allow it to receive 'value' and return 8 in one of the two ways explained above
