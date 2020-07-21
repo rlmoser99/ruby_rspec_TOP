@@ -2,19 +2,18 @@
 
 # Given any number, the final number will always be 7
 class MagicSeven
-  attr_reader :random_number, :step_one, :step_two, :step_three, :step_four,
-              :step_five
+  attr_reader :random_number
 
   def initialize
     @random_number = rand(0..20)
   end
 
   def play
-    @step_one = add_nine(random_number)
-    @step_two = multiply_by_two(step_one)
-    @step_three = minus_four(step_two)
-    @step_four = divide_by_two(step_three)
-    @step_five = subtract_random_number(step_four)
+    step_one = add_nine(random_number)
+    step_two = multiply_by_two(step_one)
+    step_three = minus_four(step_two)
+    step_four = divide_by_two(step_three)
+    subtract_random_number(step_four)
   end
 
   def add_nine(number)
@@ -38,6 +37,10 @@ class MagicSeven
   end
 
   def display_result
+    step_one = add_nine(random_number)
+    step_two = multiply_by_two(step_one)
+    step_three = minus_four(step_two)
+    step_four = divide_by_two(step_three)
     puts <<~HEREDOC
 
       MAGIC SEVEN
@@ -59,9 +62,10 @@ class MagicSeven
           #{step_three} / 2 = #{step_four}
 
       5. Take #4 answer and subtract the original random number:
-          #{step_four} - #{random_number} = #{step_five}
+          #{step_four} - #{random_number} = #{subtract_random_number(step_four)}
 
       Step #5 will always be 7!
+
     HEREDOC
   end
 end
