@@ -9,7 +9,7 @@ require_relative '../lib/14_find_number'
 
 # Doubles are very useful in TDD because you can create test functionality that is not coded yet.
 
-# In this example, we will testing the class 'FindNumber'. Look at the lib/14_find_number.rb file.
+# In this example, we will be testing the class 'FindNumber'. Look at the lib/14_find_number.rb file.
 # An instance of 'FindNumber' is initialized with a 'RandomNumber' object.
 
 # The 'RandomNumber' class has not been written, so we will use a double for it in these tests.
