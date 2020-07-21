@@ -7,11 +7,11 @@ class ImpossibleTestGame
 
   def initialize
     @solution = rand(0..9)
+    @count = 0
   end
 
   def play_game
     puts "Let's play a game called 'Guess a random number!'"
-    @count = 0
     loop do
       player_input
       @count += 1
@@ -46,6 +46,7 @@ class NumberGame
 
   def initialize
     @solution = rand(0..9)
+    @count = 0
   end
 
   def play_game
@@ -55,7 +56,6 @@ class NumberGame
   end
 
   def player_turns
-    @count = 0
     loop do
       @guess = verify_input(player_input)
       @count += 1
