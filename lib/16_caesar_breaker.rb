@@ -34,8 +34,9 @@ class CaesarBreaker
   end
 
   def character_shift(char, base, shift)
-    if char.ord.between?(65, 90) || char.ord.between?(97, 122)
-      rotation = (((char.ord - base) + shift) % 26) + base
+    char_num = char.ord
+    if char_num.between?(65, 90) || char_num.between?(97, 122)
+      rotation = (((char_num - base) + shift) % 26) + base
       rotation.chr
     else
       char
