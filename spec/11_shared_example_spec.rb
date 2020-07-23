@@ -2,8 +2,8 @@
 
 # rubocop:disable Layout/LineLength
 
-# Not only will the class being tested be located in a different file,
-# but there are multiple classes for this example. All files begin with '11_'
+# There are two classes and multiple files for this example.
+# All files begin with '11_'
 
 # To learn more about the use of shared examples, check out the documentation:
 # https://relishapp.com/rspec/rspec-core/docs/example-groups/shared-examples
