@@ -4,19 +4,23 @@ require_relative '../lib/12_magic_seven'
 
 # rubocop:disable Layout/LineLength, Metrics/BlockLength
 
-# Before learning any more complexities to testing, let's take a look at a standard testing pattern - Arrange Act, and Assert
+# Before learning any more complexities to testing, let's take a look at a standard testing 
+#  pattern - Arrange Act, and Assert
 # https://youtu.be/sCthIEOaMI8
 
-# 1. Arrange -> set-up the test (for example: initializing objects, let variables, updating values of instance variables, etc.)
+# 1. Arrange -> set-up the test (for example: initializing objects, let variables, updating 
+#    values of instance variables, etc.)
 # 2. Act -> executing the logic to test (for example: calling a method to run)
 # 3. Assert -> expect the results of arrange & act
 
 # The tests in this example are fairly easy to understand and may seem ridiculous to use A-A-A
 # However, tests should be easily understood by someone that is not familiar with the code.
 
-# NOTE: When you start using A-A-A to format your tests, it will feel counter-intuitive to DRY (don't repeat yourself)
+# NOTE: When you start using A-A-A to format your tests, it will feel counter-intuitive to 
+#  DRY (don't repeat yourself)
 # Creating tests that are easy to read is very important, therefore using repetition is neccessary.
-# When you start working on a existing code base, you will often become familiar with the code by reading the tests.
+# When you start working on a existing code base, you will often become familiar with the code
+#  by reading the tests.
 
 describe MagicSeven do
   # This next line should be very familiar and it is part of the 'Arrange' step.
