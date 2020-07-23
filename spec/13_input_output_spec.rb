@@ -77,6 +77,10 @@ describe NumberGame do
       letter_input = 'g'
       number_input = '5'
 
+      before do
+        allow(game).to receive(:player_input).and_return(number_input)
+      end
+
       it 'loops once until it receives valid input' do
         allow(game).to receive(:player_input).and_return(number_input)
         # The stub below will remove the 'Input error!' from appearing in the test output
@@ -101,10 +105,12 @@ describe NumberGame do
       number_input = '3'
       # Create another invalid input (anything except a digit between 0-9).
 
+      before do
+        # Create a stub method to receive :player_input and return your invalid input and the number_input
+      end
+
       # remove the 'x' before running this test
       xit 'loops twice until it receives valid input' do
-        # Create a stub method to receive :player_input and return your invalid input and the number_input
-
         # Creating a stub method for :puts is optional
 
         verified_input = game.verify_input(letter_input)

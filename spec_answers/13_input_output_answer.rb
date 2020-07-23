@@ -85,8 +85,11 @@ describe NumberGame do
       letter_input = 'g'
       number_input = '5'
 
-      it 'loops once until it receives valid input' do
+      before do
         allow(game).to receive(:player_input).and_return(number_input)
+      end
+
+      it 'loops once until it receives valid input' do
         # The stub below will remove the 'Input error!' from appearing in the test output
         allow(game).to receive(:puts)
         # This method starts with the invalid parameter (letter_input = 'g')
@@ -96,7 +99,6 @@ describe NumberGame do
       end
 
       it 'displays error message once' do
-        allow(game).to receive(:player_input).and_return(number_input)
         # Due to the loop, we can test that the game received :puts with the error message one time.
         expect(game).to receive(:puts).once.with('Input error!')
         game.verify_input(letter_input)
@@ -109,15 +111,17 @@ describe NumberGame do
       symbol_input = '@'
       number_input = '3'
 
-      it 'loops twice until it receives valid input' do
+      before do
         allow(game).to receive(:player_input).and_return(symbol_input, number_input)
+      end
+
+      it 'loops twice until it receives valid input' do
         allow(game).to receive(:puts).twice
         verified_input = game.verify_input(letter_input)
         expect(verified_input).to eq('3')
       end
 
       it 'displays error message twice' do
-        allow(game).to receive(:player_input).and_return(symbol_input, number_input)
         expect(game).to receive(:puts).twice.with('Input error!')
         game.verify_input(letter_input)
       end
