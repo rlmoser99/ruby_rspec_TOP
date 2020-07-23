@@ -20,11 +20,11 @@ To equip students with additional RSpec practice before doing TDD with Connect F
 
 I recently went through the RSpec section and I really struggled to do TDD for the Connect Four project. I know that TOP's curriculum will not cover everything that one needs to know and I try to embrace this challenge. So, I did a lot of online research and found a lot of answers that were specific to using RSpec with a Rails project. It was hard to correlate the answers that I found to Ruby, and to know if the answers were pointing me in the right direction. 
 
-Therefore, I looked at student solution's spec files to find Ruby RSpec examples. I wanted to find a good example of using stubs or doubles in a test, but after looking at multiple files, it felt like finding a needle in a haystack. 
+Therefore, I looked at student solution's spec files to find Ruby RSpec examples. I wanted to find a good example of using stubs or doubles in a test, but after looking at multiple student's projects, it felt like finding a needle in a haystack. 
 
 Finally, I decided to spend a few dollars on a Ruby/RSpec video tutorial on Udemy (by Boris Paskhaver). Overall, it was a terrible experience, however the tutorial had a github repo full of example tests. I found these hands-on tests to be very helpful. A few of the examples that I am using in this playground were inspired by that tutorial, but have been completed changed.
 
-It is hard to TDD a project, when you are unfamiliar with the tool that you need to use. The assignment to write tests for Tic Tac Toe specifically states `Try using mocks/doubles to isolate method`, but if you look at student solutions it is hard to find any of them using mocks/doubles. I think students just focus on creating tests for their `critical methods` and move on. However, I believe it is important to make sure students understand using mocks/doubles before they attempt to TDD Connect Four. As I stated previously, it is hard to find a Connect Four student solution that is using mocks/doubles either. 
+It is hard to TDD a project, when you are unfamiliar with the tool that you need to use. The assignment to write tests for Tic Tac Toe specifically states `Try using mocks/doubles to isolate methods`, but if you look at student solutions it is hard to find any of them using mocks/doubles. I think students just focus on creating tests for their `critical methods` and move on. However, I believe it is important to make sure students understand using mocks/doubles before they attempt to TDD Connect Four. As I stated previously, it is hard to find a Connect Four student solution that is using mocks/doubles either. 
 
 If students had additional practice using RSpec, specifically mocks and doubles, then we will see an increase of the number of student solutions for Tic Tac Toe and Connect Four that are using them. 
 
@@ -34,7 +34,9 @@ If students had additional practice using RSpec, specifically mocks and doubles,
 
 ## Suggested implementation
 
-When I first started working on this 'playground', I imagined that it would be an additional resource in the [Testing Your Ruby Code lesson](https://www.theodinproject.com/courses/ruby-programming/lessons/testing-your-ruby-code). However, it could be beneficial as an assignment after writing tests for Caesar Cipher and before Tic Tac Toe. 
+When I first started working on this 'playground', I imagined that it would be an additional resource in the [Testing Your Ruby Code lesson](https://www.theodinproject.com/courses/ruby-programming/lessons/testing-your-ruby-code). However, after talking with people struggling with writing tests, I think it should be an assignment after writing tests for Caesar Cipher and before Tic Tac Toe. 
+
+In addition, I believe the Sandi Metz video should come before doing tests for Tic Tac Toe. This video is very useful to teach what methods should be tested. This 'playground' does not focus on what tests should be written, because the exercises are very simple and uses a minimal number of classes. However, it is possible to add an exercise that focuses on unit testing.
 
 (Suggested implementation for the proposal, how will this be implemented? if you like, include examples or diagrams that can help explain. If it is a change in flow or management, specify what it should be changed to and how will that look. This doesn't have to be detailed implementation although it is encouraged but at the very least you as the author of the proposal should have an implementation idea in mind.)
 
@@ -53,7 +55,11 @@ When I first started working on this 'playground', I imagined that it would be a
 
 ## Additional
 
+Early on I had told a few people about this repo in the #ruby-testing channel. And I have privately told a few students about it. At this time, I know that andrewjh271, aaron-contreras, tenacious-qi, Natty, and msespos have or are currently going through them.
+
 Earlier in the Ruby curriculum, we learn that we can make any method private that is not accessed outside of the class. 
+
+The Sandi Metz video instructs that methods that send messages to other objects should be tested that the method is sent. 
 
 However, what should happen when there is a private method that is also critical to the project? For example, my tic_tac_toe game class. Everything but one method is private. However, 'critical methods' are now private, like creating two players, switching the current players, and taking turns until specific board conditions.
 
