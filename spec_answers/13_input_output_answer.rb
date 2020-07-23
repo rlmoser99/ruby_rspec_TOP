@@ -82,28 +82,48 @@ describe NumberGame do
     # http://testing-for-beginners.rubymonstas.org/test_doubles.html
 
     context 'when given invalid input once before valid input' do
-      it 'loops once and returns valid input' do
-        letter_input = 'g'
-        number_input = '5'
+      letter_input = 'g'
+      number_input = '5'
+
+      before do
         allow(game).to receive(:player_input).and_return(number_input)
-        # Due to the loop, we can test that the game received :puts with the error message one time.
-        expect(game).to receive(:puts).once.with('Input error!')
+      end
+
+      it 'loops once until it receives valid input' do
+        # The stub below will remove the 'Input error!' from appearing in the test output
+        allow(game).to receive(:puts)
         # This method starts with the invalid parameter (letter_input = 'g')
         verified_input = game.verify_input(letter_input)
         # However, the result of 'verified_input' is the valid parameter (number_input = '5')
         expect(verified_input).to eq('5')
       end
+
+      it 'displays error message once' do
+        # Due to the loop, we can test that the game received :puts with the error message one time.
+        expect(game).to receive(:puts).once.with('Input error!')
+        game.verify_input(letter_input)
+      end
     end
 
+    # ASSIGNMENT
     context 'when given invalid input twice before valid input' do
-      it 'loops twice and returns valid input' do
-        letter_input = 'h'
-        symbol_input = '@'
-        number_input = '3'
+      letter_input = 'h'
+      symbol_input = '@'
+      number_input = '3'
+
+      before do
         allow(game).to receive(:player_input).and_return(symbol_input, number_input)
-        expect(game).to receive(:puts).twice.with('Input error!')
+      end
+
+      it 'loops twice until it receives valid input' do
+        allow(game).to receive(:puts).twice
         verified_input = game.verify_input(letter_input)
         expect(verified_input).to eq('3')
+      end
+
+      it 'displays error message twice' do
+        expect(game).to receive(:puts).twice.with('Input error!')
+        game.verify_input(letter_input)
       end
     end
   end
