@@ -26,10 +26,10 @@ describe Dog do
   end
 end
 
-# ASSIGNMENT - complete either Cat or Dog assignment
+# ASSIGNMENT - complete either Cat or Dog assignment (see 11_cat_spec.rb for Cat assignment)
 
 describe Dog do
-  # create a subject with your choice of cat name and optional breed/color
+  # create a subject with your choice of dog name and optional breed/color
 
   # write a test using the second shared_example to test that dog should respond to talk
   context '' do

@@ -28,4 +28,6 @@ RSpec.shared_examples 'shared method name' do
   end
 end
 
+# For assignments see 11_cat_spec.rb or 11_dog_spec.rb - do the assignments in one of those files
+
 # rubocop:enable Layout/LineLength

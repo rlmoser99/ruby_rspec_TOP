@@ -26,7 +26,7 @@ describe Cat do
   end
 end
 
-# ASSIGNMENT - complete either Cat or Dog assignment
+# ASSIGNMENT - complete either Cat or Dog assignment (see 11_dog_spec.rb for Dog assignment)
 
 describe Cat do
   # create a subject with your choice of cat name and optional breed/color
