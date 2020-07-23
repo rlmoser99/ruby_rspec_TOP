@@ -17,8 +17,14 @@ describe CaesarBreaker do
   # To test #decrypt, we will need to move 'Assert' before 'Act', which is an example of mocking.
   # http://testing-for-beginners.rubymonstas.org/test_doubles.html
   describe '#decrypt' do
-    it 'calls create_decrypted_messages and save_decrypted_messages' do
+    it 'calls create_decrypted_messages' do
       expect(phrase).to receive(:create_decrypted_messages)
+      allow(phrase).to receive(:save_decrypted_messages)
+      phrase.decrypt
+    end
+
+    it 'calls save_decrypted_messages' do
+      allow(phrase).to receive(:create_decrypted_messages)
       expect(phrase).to receive(:save_decrypted_messages)
       phrase.decrypt
     end
@@ -64,24 +70,41 @@ describe CaesarBreaker do
     # Let's test that this method can run without raising an error
     # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/raise-error-matcher
 
-    it 'saves a file without raising an error' do
-      expect { phrase.save_decrypted_messages }.not_to raise_error
-    end
+    context 'when it saves a file' do
+      it 'does not raise an error' do
+        expect { phrase.save_decrypted_messages }.not_to raise_error
+      end
 
-    # The test above outputs two lines from #display_file_location.
-    # So, let stub out that method to clean up the test output.
-    it 'saves a file without raising an error' do
-      expect(phrase).to receive(:display_file_location)
-      expect { phrase.save_decrypted_messages }.not_to raise_error
+      # The test above outputs two lines from #display_file_location.
+      # So, let stub out that method to clean up the test output.
+      it 'does not raise an error' do
+        allow(phrase).to receive(:display_file_location)
+        expect { phrase.save_decrypted_messages }.not_to raise_error
+      end
     end
 
     # When a method rescues an error, the method will still not raise an error.
     # Therefore, you test the conditions that would happen if an error was rescued.
-    it 'rescues an error' do
-      allow(File).to receive(:open).and_raise(Errno::ENOENT)
-      expect(phrase).not_to receive(:display_file_location)
-      expect(phrase).to receive(:puts).twice
-      expect { phrase.save_decrypted_messages }.not_to raise_error
+    context 'when rescuing an error' do
+      before do
+        allow(File).to receive(:open).and_raise(Errno::ENOENT)
+      end
+
+      it 'does not raise an error' do
+        allow(phrase).to receive(:puts).twice
+        expect { phrase.save_decrypted_messages }.not_to raise_error
+      end
+
+      it 'does not display file location' do
+        expect(phrase).not_to receive(:display_file_location)
+        allow(phrase).to receive(:puts).twice
+        phrase.save_decrypted_messages
+      end
+
+      it 'displays error rescue message' do
+        expect(phrase).to receive(:puts).twice
+        phrase.save_decrypted_messages
+      end
     end
   end
 
