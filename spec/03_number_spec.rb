@@ -29,7 +29,7 @@ describe SingleDigit do
   # The above test can be compounded together, so that you test two things in one test.
   context 'when tests can be compounded' do
     it 'is greater than 0 and less than 10' do
-      # side note: rspec would run, but rubocop didnt like (be >= 1).and be < 6
+      # side note: rspec would run, but rubocop didnt like (be >= 1).and be < 10
       expect(random_digit.number).to be_positive.and be < 10
     end
 
