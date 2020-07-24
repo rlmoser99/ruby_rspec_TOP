@@ -1,20 +1,18 @@
 | Title | Author | Date |
 | --- | --- | --- |
-| Title of proposal | `Rachel Moser` | July 2020 |
+| Addition of RSpec Playground | `Rachel Moser` | July 2020 |
 
-# PROPOSAL NAME
+# Addition of RSpec Playground
 
 ## Summary
 
-To equip students with additional RSpec practice before doing TDD with Connect Four. Currently, I believe students do not understand several concepts, such as: 
+The purpose of the 'RSpec Playground' is to equip students with additional practice before doing TDD with Connect Four. In addition, I believe students do not understand several important concepts, such as: 
 - Writing small and isolated methods.
 - Using a testing pattern, such as 'Arrange Act, and Assert'.
 - Correctly using an explicit subject.
-- How to set test conditions without making attr_accessor for instance_variables
-- Methods that only use puts and/or gets can be unnecessary to test.
-- How and when to use stubs, doubles, verifying doubles, etc.
-
-(Brief explanation of the proposal.)
+- How to create different test conditions
+- How to stub methods - either class methods or puts/gets (and that it can be unnecessary to test puts/gets).
+- How to use doubles, verifying doubles, etc.
 
 ## Motivation
 
@@ -22,23 +20,17 @@ I recently went through the RSpec section and I really struggled to do TDD for t
 
 Therefore, I looked at student solution's spec files to find Ruby RSpec examples. I wanted to find a good example of using stubs or doubles in a test, but after looking at multiple student's projects, it felt like finding a needle in a haystack. 
 
-Finally, I decided to spend a few dollars on a Ruby/RSpec video tutorial on Udemy (by Boris Paskhaver). Overall, it was a terrible experience, however the tutorial had a github repo full of example tests. I found these hands-on tests to be very helpful. A few of the examples that I am using in this playground were inspired by that tutorial, but have been completed changed.
+Finally, I decided to purchase an inexpensive Ruby/RSpec video tutorial on Udemy (by Boris Paskhaver). Overall, it was a terrible experience, however the tutorial had a github repo full of example tests. I found that these hands-on tests were the most helpful. A few of the examples that I am using in this playground were inspired by that tutorial, but have been completed changed.
 
 It is hard to TDD a project, when you are unfamiliar with the tool that you need to use. The assignment to write tests for Tic Tac Toe specifically states `Try using mocks/doubles to isolate methods`, but if you look at student solutions it is hard to find any of them using mocks/doubles. I think students just focus on creating tests for their `critical methods` and move on. However, I believe it is important to make sure students understand using mocks/doubles before they attempt to TDD Connect Four. As I stated previously, it is hard to find a Connect Four student solution that is using mocks/doubles either. 
 
 If students had additional practice using RSpec, specifically mocks and doubles, then we will see an increase of the number of student solutions for Tic Tac Toe and Connect Four that are using them. 
 
-(Explain the motivation behind this proposal. What is the purpose of this change or implementation? What does it solve? What is the expected outcome of this proposal?)
-
-(Make sure to express the motivation of this proposal in the best way you can so that if the change or implementation that is suggested here is not accepted, this motivation can be used to come up with an alternative solution.)
-
 ## Suggested implementation
 
-When I first started working on this 'playground', I imagined that it would be an additional resource in the [Testing Your Ruby Code lesson](https://www.theodinproject.com/courses/ruby-programming/lessons/testing-your-ruby-code). However, after talking with people struggling with writing tests, I think it should be an assignment after writing tests for Caesar Cipher and before Tic Tac Toe. 
+When I first started working on this 'playground', I imagined that it would be an additional resource in the [Testing Your Ruby Code lesson](https://www.theodinproject.com/courses/ruby-programming/lessons/testing-your-ruby-code). However, after talking with other people struggling with writing tests, I think it should be an assignment after writing tests for Caesar Cipher and before Tic Tac Toe. 
 
-In addition, I believe the Sandi Metz video should come before doing tests for Tic Tac Toe. This video is very useful to teach what methods should be tested. This 'playground' does not focus on what tests should be written, because the exercises are very simple and uses a minimal number of classes. However, it is possible to add an exercise that focuses on unit testing.
-
-(Suggested implementation for the proposal, how will this be implemented? if you like, include examples or diagrams that can help explain. If it is a change in flow or management, specify what it should be changed to and how will that look. This doesn't have to be detailed implementation although it is encouraged but at the very least you as the author of the proposal should have an implementation idea in mind.)
+In addition, I believe the Sandi Metz video should come before doing tests for Tic Tac Toe. I included a link in the last file because it is very useful to teach what methods should be tested. This 'playground' does not focus on what tests should be written, because the exercises are very simple and uses a minimal number of classes. 
 
 ## Drawbacks
 
@@ -55,20 +47,9 @@ In addition, I believe the Sandi Metz video should come before doing tests for T
 
 ## Additional
 
-Early on I had told a few people about this repo in the #ruby-testing channel. And I have privately told a few students about it. At this time, I know that andrewjh271, aaron-contreras, tenacious-qi, Natty, and msespos have or are currently going through them.
+Early on I had told a few people about this repo in the #ruby-testing channel. In addition, I have privately told a few students about it. At this time, I know that andrewjh271, aaron-contreras, tenacious-qi, Natty, and msespos have or are currently going through them.
 
-Earlier in the Ruby curriculum, we learn that we can make any method private that is not accessed outside of the class. 
-
-The Sandi Metz video instructs that methods that send messages to other objects should be tested that the method is sent. 
-
-However, what should happen when there is a private method that is also critical to the project? For example, my tic_tac_toe game class. Everything but one method is private. However, 'critical methods' are now private, like creating two players, switching the current players, and taking turns until specific board conditions.
-
- I know that there is ways to test private methods, but this point is not very clear at this point in the curriculum.
-
-One 'unanswered' question that I have is how to find the balance between making methods that are not accessed outside of the class to be private and to test all critical methods.
-
-
-(This can be any unanswered questions, things that still need to considered or solved about the implentation, any reference links to the initial ideation such as a [Discourse Forum](https://forum.theodinproject.com/c/sprints), discussions or anything else.)
+This playground needs a thorough review by someone a lot more familiar with RSpec. Even though I have spent two months learning RSpec, I do not feel 100% confident in some of my explanations & I have 0 'real-world' experience.
 
 ## Status
 - [x] Proposed
