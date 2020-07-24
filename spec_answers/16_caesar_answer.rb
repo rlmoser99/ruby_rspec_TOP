@@ -18,8 +18,8 @@ describe CaesarBreaker do
   # http://testing-for-beginners.rubymonstas.org/test_doubles.html
   describe '#decrypt' do
     it 'calls create_decrypted_messages' do
-      expect(phrase).to receive(:create_decrypted_messages)
       allow(phrase).to receive(:save_decrypted_messages)
+      expect(phrase).to receive(:create_decrypted_messages)
       phrase.decrypt
     end
 
