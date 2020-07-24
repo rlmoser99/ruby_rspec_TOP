@@ -61,11 +61,11 @@ Important to write small, isolated methods to test\
 Unnecessary to test puts and gets\
 Use 'gets methods' as parameters in another method that is tested\
 stubbing a method\
+before hooks\
 output matcher
 
 ## 14_find_number
 TDD with doubles\
-before hooks\
 Add method names to: subject { described_class.new.game_solution }
 
 ## 15_binary_search

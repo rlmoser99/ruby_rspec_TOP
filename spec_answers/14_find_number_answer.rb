@@ -163,10 +163,6 @@ describe FindNumber do
     # 0 and 9 in: { described_class.new(0, 9, random_eight) }
 
     context 'when the guess is 4' do
-      # When using the same 'Arrange' part of a test, you can utilize before
-      # hooks to set-up the test conditions.
-      # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
-
       before do
         game_eight.instance_variable_set(:@guess, 4)
         game_eight.update_range

@@ -8,8 +8,8 @@ require_relative '../lib/16_caesar_breaker'
 
 # If you have watched the 'Magic Tricks of Testing' video, you will know that
 # you do not have to test every single method in unit testing. Methods do not
-# need to be tested if they are only sent to self or if it sends an outgoing
-# query message.
+# need to be tested if they are only sent to self or if it only sends an
+# outgoing query message.
 # https://youtu.be/URSWYvyc42M
 
 # However, testing every method in this example offers good practice and
@@ -22,8 +22,7 @@ describe CaesarBreaker do
   # variables. This can cause the test to be fragile, breaking anytime an
   # instance variable name is changed.
 
-  # To test #decrypt, we will need to move 'Assert' before 'Act', which is an
-  # example of mocking.
+  # To test #decrypt, we will need to move 'Assert' before 'Act' again.
   # http://testing-for-beginners.rubymonstas.org/test_doubles.html
   describe '#decrypt' do
     it 'calls create_decrypted_messages' do
@@ -69,7 +68,7 @@ describe CaesarBreaker do
 
     # ASSIGNMENT
 
-    # Write the following test using a special character
+    # Write the following test using a special character.
     it 'does not shift non-letters' do
       character = '?'
       base = 65
@@ -81,7 +80,7 @@ describe CaesarBreaker do
 
   # MODULE TESTING: There are several ways to test methods inside a module.
 
-  # Some prefer explicitly including it in the configuration option
+  # Some prefer explicitly including it in the configuration option.
   # https://relishapp.com/rspec/rspec-core/docs/helper-methods/define-helper-methods-in-a-module
 
   # Some prefer testing modules using a dummy class.
@@ -92,7 +91,7 @@ describe CaesarBreaker do
 
   describe '#save_decrypted_messages' do
     # This method has a rescue block in case an error occurs.
-    # Let's test that this method can run without raising an error
+    # Let's test that this method can run without raising an error.
     # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/raise-error-matcher
 
     context 'when it saves a file' do

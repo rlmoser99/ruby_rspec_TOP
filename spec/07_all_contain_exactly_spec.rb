@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-# rubocop:disable Layout/LineLength
+# Using the 'all' matcher and the 'contain_exactly' matcher will look at every
+# item in 'numbers'.
 
-# Using the 'all' matcher and the 'contain_exactly' matcher will look at every item in 'numbers'
 describe Array do
   let(:numbers) { [11, 17, 21] }
 
@@ -15,7 +15,7 @@ describe Array do
   end
 
   it 'contains exactly 21, 11, 17' do
-    # The order does not matter
+    # The order does not matter.
     expect(numbers).to contain_exactly(21, 11, 17)
   end
 end
@@ -54,7 +54,7 @@ end
 
 describe Array do
   let(:fibonacci_sequence) { [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] }
-  # Write a test that expresses each of the following statements
+  # Write a test that expresses each of the following statements.
 
   # remove the 'x' before running this test
   xit 'includes 21 and ends with 89' do
@@ -64,4 +64,3 @@ describe Array do
   xit 'starts with 0, 1, 1, 2 and all are under 100' do
   end
 end
-# rubocop:enable Layout/LineLength

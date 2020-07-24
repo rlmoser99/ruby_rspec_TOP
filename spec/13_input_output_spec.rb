@@ -29,8 +29,8 @@ describe NumberGame do
     end
 
     # ASSIGNMENT
-    # Write a similar test as the one above, that uses a custom matcher
-    # (instead of <, >, =)
+    # Write a similar test as the one above, that uses a custom matcher,
+    # instead of <, >, =.
 
     # remove the 'x' before running this test
     xit 'is a number between 0 and 9' do
@@ -62,7 +62,7 @@ describe NumberGame do
   # example of how to test the #player_input method if it were not protected.
 
   describe '#verify_input' do
-    # Note: this recursive method will repeat until #valid_input? is true
+    # Note: this recursive method will repeat until #valid_input? is true.
 
     context 'when given a valid input as argument' do
       it 'returns valid input' do
@@ -84,26 +84,30 @@ describe NumberGame do
       letter_input = 'g'
       number_input = '5'
 
+      # When using the same 'Arrange' part of a test, you can utilize before
+      # hooks to set-up the test conditions.
+      # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
+
       before do
         allow(game).to receive(:player_input).and_return(number_input)
       end
 
       it 'loops once until it receives valid input' do
-        allow(game).to receive(:player_input).and_return(number_input)
         # The stub below will remove the 'Input error!' from appearing in the
         # test output.
         allow(game).to receive(:puts)
         # This method starts with the invalid parameter (letter_input = 'g')
         verified_input = game.verify_input(letter_input)
-        # However, the result of 'verified_input' is the valid parameter
+        # However, the result of 'verified_input' is the valid parameter.
         # (number_input = '5')
         expect(verified_input).to eq('5')
       end
 
       it 'displays error message once' do
-        allow(game).to receive(:player_input).and_return(number_input)
         # Due to the loop, we can test that the game received :puts with the
-        # error message one time.
+        # error message one time. In order to do this, we will need to move
+        # 'Assert' before 'Act', which is an example of mocking.
+        # http://testing-for-beginners.rubymonstas.org/test_doubles.html
         expect(game).to receive(:puts).once.with('Input error!')
         game.verify_input(letter_input)
       end
@@ -139,7 +143,7 @@ describe NumberGame do
   # ruby library & is already well tested. Plus, most 'real world
   # applications' don't even output like this except to loggers.
 
-  # However, here is an example of how to test 'puts' using the output matcher
+  # However, here is an example of how to test 'puts' using the output matcher.
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/output-matcher
 
   describe '#final_message' do
@@ -147,7 +151,7 @@ describe NumberGame do
       it 'outputs correct phrase' do
         game.instance_variable_set(:@count, 1)
         lucky_phrase = "LUCKY GUESS!\n"
-        # The output matcher needs a block of code to assert
+        # The output matcher needs a block of code to assert.
         expect { game.final_message }.to output(lucky_phrase).to_stdout
       end
     end
@@ -158,7 +162,7 @@ describe NumberGame do
       xit 'outputs correct phrase' do
         game.instance_variable_set(:@count, 3)
         congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
-        # Write the expect statement for this test
+        # Write the expect statement for this test.
         congrats_phrase # Use congrats_phrase variable
       end
     end
@@ -167,7 +171,7 @@ describe NumberGame do
     context 'when count is 4 and over' do
       # remove the 'x' before running this test
       xit 'outputs correct phrase' do
-        # Write the conditions to make this test pass
+        # Write the conditions to make this test pass.
         expect { game.final_message }.to output(phrase).to_stdout
       end
     end

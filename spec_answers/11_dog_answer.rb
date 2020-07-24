@@ -3,17 +3,18 @@
 require_relative '../lib/11_dog'
 require_relative '../spec/11_shared_example_spec'
 
-# rubocop:disable Layout/LineLength
+# This example has a 'Pet' class with two sub-classes 'Cat' and 'Dog'.
+# There is a spec file for cat & dog (each file begins with '11_').
 
-# There are two classes and multiple files for this example.
-# All files begin with '11_'
+# In addition, there is a third spec file called '11_shared_example'.
+# This file has two tests that are used in both the cat & dog spec files.
 
 describe Dog do
   subject(:toby) { described_class.new('Toby', nil, 'brown') }
 
-  # Check out the file: 11_shared_examples_spec.rb
-  # This test references that file's first test in the 'include_examples' line
-  # The shared_example_spec file has further information
+  # Check out the file: 11_shared_examples_spec.rb.
+  # This test references that file's first test in the 'include_examples' line.
+  # The shared_example_spec file has further information.
   context 'when Dog is a child class of Pet' do
     include_examples 'base class method name'
   end
@@ -24,21 +25,14 @@ describe Dog do
       expect(toby).to have_attributes(name: 'Toby', breed: nil, color: 'brown')
     end
   end
-
-  context 'when using magic matchers' do
-    # When using a method that returns a boolean value & does not take any parameters, you can use magic matchers
-    # http://testing-for-beginners.rubymonstas.org/rspec/matchers.html
-    it 'is sleeping' do
-      expect(toby).to be_sleeping
-    end
-  end
 end
 
 describe Dog do
-  # create a subject with your choice of cat name and optional breed/color
+  # Create a subject with your choice of cat name and optional breed/color.
   subject(:ollie) { described_class.new('Ollie', nil, 'white') }
 
-  # write a test using the second shared_example to test that dog should respond to talk
+  # Write a test using the second shared_example to test that dog should
+  # respond to talk ('WOOF!').
   context 'when Dog has method name shared with other classes' do
     include_examples 'shared method name'
   end
@@ -53,4 +47,3 @@ describe Dog do
     expect(ollie).to be_sleeping
   end
 end
-# rubocop:enable Layout/LineLength

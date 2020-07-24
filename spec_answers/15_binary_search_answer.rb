@@ -36,7 +36,7 @@ describe BinarySearch do
   describe '#max_guesses' do
     subject(:game_six) { described_class.new(0, 9, random_six) }
     # A class called RandomNumber now exists, therefore it should be updated to
-    # an 'verifying double', like an 'instance_double'
+    # an 'verifying double', like an 'instance_double'.
     # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles/using-an-instance-double
     let(:random_six) { instance_double('random_number', value: 6) }
 
@@ -103,9 +103,9 @@ describe BinarySearch do
         # remove the 'x' before running this test
         it 'will loop until guess equals 8' do
           # Make 1 stub for #make_guess that will return the values of 4, 7, 8
-          # (the mid-point of min & max)
+          # (the mid-point of min & max).
           allow(game_eight).to receive(:make_guess).and_return(4, 7, 8)
-          # Write the 3 stubs for #display_guess
+          # Write the 3 stubs for #display_guess.
           allow(game_eight).to receive(:display_guess).with(1)
           allow(game_eight).to receive(:display_guess).with(2)
           allow(game_eight).to receive(:display_guess).with(3)

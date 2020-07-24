@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-# rubocop:disable Layout/LineLength
-
 require_relative '../lib/10_drink'
 
 describe Drink do
-  # Create an explicit subject, using 'described_class' and your choose of beverage type.
+  # Create an explicit subject, using 'described_class' and your choice of
+  # beverage type.
   subject(:my_drink) { described_class.new('tea') }
 
   describe '#initialize' do
@@ -23,21 +22,20 @@ describe Drink do
   end
 
   describe '#full?' do
-    context 'when drink has 16 ounces' do
+    context 'when drink has 16 ounces or more' do
       # remove the 'x' before running this test
       it 'is full' do
         expect(my_drink).to be_full
       end
     end
 
-    context 'when drink does not have 16 ounces' do
+    context 'when drink has less than 16 ounces' do
       # remove the 'x' before running this test
       it 'is not full' do
+        # You will need to set the instance_variable for this example.
         my_drink.instance_variable_set(:@ounces, 12)
         expect(my_drink).to_not be_full
       end
     end
   end
 end
-
-# rubocop:enable Layout/LineLength
