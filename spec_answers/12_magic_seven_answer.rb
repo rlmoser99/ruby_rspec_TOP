@@ -60,11 +60,11 @@ describe MagicSeven do
   # ASSIGNMENT
   # Write a test for each of the following methods:
 
-  describe '#minus_four' do
+  describe '#subtract_four' do
     context 'when the previous step is 10' do
       it 'returns 6' do
         previous_step = 10
-        result = game.minus_four(previous_step)
+        result = game.subtract_four(previous_step)
         expect(result).to eq(6)
       end
     end
@@ -80,12 +80,10 @@ describe MagicSeven do
     end
   end
 
-  # The last method of this 'magic seven' game should always be seven.
+  # The following tests will need you to set the value of the random_number
   describe '#subtract_random_number' do
     context 'when the previous step is 10 and random_number is 3' do
-      # remove the 'x' before running this test
       it 'returns 7' do
-        # Hint: this test will need to 'arrange' two variables.
         previous_step = 10
         game.instance_variable_set(:@random_number, 3)
         result = game.subtract_random_number(previous_step)

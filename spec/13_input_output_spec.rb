@@ -84,12 +84,15 @@ describe NumberGame do
       letter_input = 'g'
       number_input = '5'
 
+      # When using the same 'Arrange' part of a test, you can utilize before
+      # hooks to set-up the test conditions.
+      # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
+
       before do
         allow(game).to receive(:player_input).and_return(number_input)
       end
 
       it 'loops once until it receives valid input' do
-        allow(game).to receive(:player_input).and_return(number_input)
         # The stub below will remove the 'Input error!' from appearing in the
         # test output.
         allow(game).to receive(:puts)
@@ -101,9 +104,10 @@ describe NumberGame do
       end
 
       it 'displays error message once' do
-        allow(game).to receive(:player_input).and_return(number_input)
         # Due to the loop, we can test that the game received :puts with the
-        # error message one time.
+        # error message one time. In order to do this, we will need to move
+        # 'Assert' before 'Act', which is an example of mocking.
+        # http://testing-for-beginners.rubymonstas.org/test_doubles.html
         expect(game).to receive(:puts).once.with('Input error!')
         game.verify_input(letter_input)
       end

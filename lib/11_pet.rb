@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
-# Not only will the class being tested be located in a different file,
-# but there are multiple classes for this example. All files begin with '11_'
+# This example has a 'Pet' class with two sub-classes 'Cat' and 'Dog'.
+# There is a spec file for cat & dog (each file begins with '11_').
+
+# In addition, there is a third spec file called '11_shared_example'.
+# This file has two tests that are used in both the cat & dog spec files.
 
 # base class for a pet
 class Pet

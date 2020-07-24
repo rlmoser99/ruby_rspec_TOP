@@ -22,8 +22,7 @@ describe CaesarBreaker do
   # variables. This can cause the test to be fragile, breaking anytime an
   # instance variable name is changed.
 
-  # To test #decrypt, we will need to move 'Assert' before 'Act', which is an
-  # example of mocking.
+  # To test #decrypt, we will need to move 'Assert' before 'Act' again.
   # http://testing-for-beginners.rubymonstas.org/test_doubles.html
   describe '#decrypt' do
     it 'calls create_decrypted_messages' do

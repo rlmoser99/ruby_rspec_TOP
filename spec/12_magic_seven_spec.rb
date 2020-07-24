@@ -61,38 +61,32 @@ describe MagicSeven do
   # ASSIGNMENT
   # Write a test for each of the following methods:
 
-  describe '#minus_four' do
+  describe '#subtract_four' do
   end
 
   describe '#divide_by_two' do
   end
 
-  # The last method of this 'magic seven' game should always be seven.
+  # The following tests will need you to set the value of the random_number
   describe '#subtract_random_number' do
-    context 'when ...' do
-      # remove the 'x' before running this test
-      xit 'returns 7' do
-        # Hint: this test will need to 'arrange' two variables.
-      end
-    end
   end
 
   # The #play method will always return seven!
   # Test this game, by using any positive integer as the random_number.
   describe '#play' do
-    context 'when ...' do
+    context 'when the random number is ...' do
       # remove the 'x' before running this test
       xit 'will always return 7' do
       end
     end
 
-    context 'when ...' do
+    context 'when the random number is ...' do
       # remove the 'x' before running this test
       xit 'will always return 7' do
       end
     end
 
-    context 'when ...' do
+    context 'when the random number is ...' do
       # remove the 'x' before running this test
       xit 'will always return 7' do
       end

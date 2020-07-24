@@ -10,6 +10,6 @@ class Drink
   end
 
   def full?
-    ounces == 16
+    ounces >= 16
   end
 end

@@ -22,16 +22,17 @@ describe Drink do
   end
 
   describe '#full?' do
-    context 'when drink has 16 ounces' do
+    context 'when drink has 16 ounces or more' do
       # remove the 'x' before running this test
       it 'is full' do
         expect(my_drink).to be_full
       end
     end
 
-    context 'when drink does not have 16 ounces' do
+    context 'when drink has less than 16 ounces' do
       # remove the 'x' before running this test
       it 'is not full' do
+        # You will need to set the instance_variable for this example.
         my_drink.instance_variable_set(:@ounces, 12)
         expect(my_drink).to_not be_full
       end

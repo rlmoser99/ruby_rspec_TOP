@@ -11,7 +11,7 @@ class MagicSeven
   def play
     step_one = add_nine(random_number)
     step_two = multiply_by_two(step_one)
-    step_three = minus_four(step_two)
+    step_three = subtract_four(step_two)
     step_four = divide_by_two(step_three)
     subtract_random_number(step_four)
   end
@@ -24,7 +24,7 @@ class MagicSeven
     number * 2
   end
 
-  def minus_four(number)
+  def subtract_four(number)
     number - 4
   end
 
@@ -39,13 +39,13 @@ class MagicSeven
   def display_result
     step_one = add_nine(random_number)
     step_two = multiply_by_two(step_one)
-    step_three = minus_four(step_two)
+    step_three = subtract_four(step_two)
     step_four = divide_by_two(step_three)
     puts <<~HEREDOC
 
       MAGIC SEVEN
 
-      Magic Seven can take any random number and turn that number into the number 7, using the same five mathematical equations!
+      Magic Seven can take any random number and turn that number into the number 7, using the same five mathematical operations!
 
       For example, let's start with the random number: #{random_number}.
 
@@ -55,14 +55,14 @@ class MagicSeven
       2. Take #1 answer and multiply by two:
           #{step_one} * 2 = #{step_two}
 
-      3. Take #2 answer and minus four:
+      3. Take #2 answer and subtract four:
           #{step_two} - 4 = #{step_three}
 
       4. Take #3 answer and divide by two:
           #{step_three} / 2 = #{step_four}
 
       5. Take #4 answer and subtract the original random number:
-          #{step_four} - #{random_number} = #{subtract_random_number(step_four)}
+          #{step_four} - #{random_number} = #{play}
 
       Step #5 will always be 7!
 

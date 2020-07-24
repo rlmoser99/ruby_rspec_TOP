@@ -3,8 +3,11 @@
 require_relative '../lib/11_dog'
 require_relative '../spec/11_shared_example_spec'
 
-# There are two classes and multiple files for this example.
-# All files begin with '11_'
+# This example has a 'Pet' class with two sub-classes 'Cat' and 'Dog'.
+# There is a spec file for cat & dog (each file begins with '11_').
+
+# In addition, there is a third spec file called '11_shared_example'.
+# This file has two tests that are used in both the cat & dog spec files.
 
 describe Dog do
   subject(:toby) { described_class.new('Toby', nil, 'brown') }
@@ -29,7 +32,7 @@ describe Dog do
   subject(:ollie) { described_class.new('Ollie', nil, 'white') }
 
   # Write a test using the second shared_example to test that dog should
-  # respond to talk.
+  # respond to talk ('WOOF!').
   context 'when Dog has method name shared with other classes' do
     include_examples 'shared method name'
   end

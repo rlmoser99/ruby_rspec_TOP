@@ -105,15 +105,16 @@ describe Drink do
   end
 
   describe '#full?' do
-    context 'when drink has 16 ounces' do
+    context 'when drink has 16 ounces or more' do
       # remove the 'x' before running this test
       xit 'is full' do
       end
     end
 
-    context 'when drink does not have 16 ounces' do
+    context 'when drink has less than 16 ounces' do
       # remove the 'x' before running this test
       xit 'is not full' do
+        # You will need to set the instance_variable for this example.
       end
     end
   end

@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
-# There are two classes and multiple files for this example.
-# All files begin with '11_'
+# This example has a 'Pet' class with two sub-classes 'Cat' and 'Dog'.
+# There is a spec file for cat & dog (each file begins with '11_').
+
+# In addition, there is a third spec file called '11_shared_example'.
+# This file has two tests that are used in both the cat & dog spec files.
 
 # To learn more about the use of shared examples, check out the documentation:
 # https://relishapp.com/rspec/rspec-core/docs/example-groups/shared-examples
@@ -22,7 +25,7 @@ end
 
 RSpec.shared_examples 'shared method name' do
   # This test can be used in Cat and Dog because the same method name is used
-  # in both classes.
+  # in both classes ('meow' or 'WOOF!').
   context 'when method name is the same in multiple classes' do
     it 'responds to talk' do
       expect(subject).to respond_to(:talk)
