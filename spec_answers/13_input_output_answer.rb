@@ -29,8 +29,8 @@ describe NumberGame do
     end
 
     # ASSIGNMENT
-    # Write a similar test as the one above, that uses a custom matcher
-    # (instead of <, >, =)
+    # Write a similar test as the one above, that uses a custom matcher,
+    # instead of <, >, =.
     matcher :be_between_zero_and_nine do
       match { |number| number.between?(0, 9) }
     end
@@ -70,7 +70,7 @@ describe NumberGame do
   # example of how to test the #player_input method if it were not protected.
 
   describe '#verify_input' do
-    # Note: this recursive method will repeat until #valid_input? is true
+    # Note: this recursive method will repeat until #valid_input? is true.
 
     context 'when given a valid input as argument' do
       it 'returns valid input' do
@@ -102,7 +102,7 @@ describe NumberGame do
         allow(game).to receive(:puts)
         # This method starts with the invalid parameter (letter_input = 'g')
         verified_input = game.verify_input(letter_input)
-        # However, the result of 'verified_input' is the valid parameter
+        # However, the result of 'verified_input' is the valid parameter.
         # (number_input = '5')
         expect(verified_input).to eq('5')
       end
@@ -146,7 +146,7 @@ describe NumberGame do
   # ruby library & is already well tested. Plus, most 'real world
   # applications' don't even output like this except to loggers.
 
-  # However, here is an example of how to test 'puts' using the output matcher
+  # However, here is an example of how to test 'puts' using the output matcher.
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/output-matcher
 
   describe '#final_message' do
@@ -154,7 +154,7 @@ describe NumberGame do
       it 'outputs correct phrase' do
         game.instance_variable_set(:@count, 1)
         lucky_phrase = "LUCKY GUESS!\n"
-        # The output matcher needs a block of code to assert
+        # The output matcher needs a block of code to assert.
         expect { game.final_message }.to output(lucky_phrase).to_stdout
       end
     end
@@ -165,7 +165,7 @@ describe NumberGame do
       it 'outputs correct phrase' do
         game.instance_variable_set(:@count, 3)
         congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
-        # Write the expect statement for this test
+        # Write the expect statement for this test.
         expect { game.final_message }.to output(congrats_phrase).to_stdout
       end
     end
@@ -174,7 +174,7 @@ describe NumberGame do
     context 'when count is 4 and over' do
       # remove the 'x' before running this test
       it 'outputs correct phrase' do
-        # Write the conditions to make this test pass
+        # Write the conditions to make this test pass.
         game.instance_variable_set(:@count, 7)
         hard_phrase = "That was hard. It took you 7 guesses!\n"
         expect { game.final_message }.to output(hard_phrase).to_stdout
@@ -184,8 +184,10 @@ describe NumberGame do
 
   # This method is a PROTECTED method and it does NOT need to be tested.
   # This method is only used as parameter for the #verify_input method.
-  # It is unneccessary to test methods that only contain puts and/or gets because they are well-tested in the standard ruby library.
-  # However, if this test was public (instead of protected) and you had to test it, you'll need to create a stub for the puts & gets method
+  # It is unneccessary to test methods that only contain puts and/or gets
+  # because they are well-tested in the standard ruby library. However, if this
+  # test was public (instead of protected) and you had to test it, you'll need
+  # to create a stub for the puts & gets method.
   # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/stub-with-substitute-implementation
 
   # describe '#player_input' do

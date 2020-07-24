@@ -4,7 +4,7 @@
 
 describe 'lucky numbers with rotate! method' do
   subject(:lucky_numbers) { [3, 7, 13, 31, 42] }
-  # Write a test that expresses each of the following statements
+  # Write a test that expresses each of the following statements.
 
   context 'when rotating the array of lucky numbers' do
     # remove the 'x' before running this test

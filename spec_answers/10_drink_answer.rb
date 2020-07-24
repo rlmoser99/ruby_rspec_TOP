@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-# rubocop:disable Layout/LineLength
-
 require_relative '../lib/10_drink'
 
 describe Drink do
-  # Create an explicit subject, using 'described_class' and your choose of beverage type.
+  # Create an explicit subject, using 'described_class' and your choice of
+  # beverage type.
   subject(:my_drink) { described_class.new('tea') }
 
   describe '#initialize' do
@@ -39,5 +38,3 @@ describe Drink do
     end
   end
 end
-
-# rubocop:enable Layout/LineLength

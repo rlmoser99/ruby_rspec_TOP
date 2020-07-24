@@ -2,10 +2,10 @@
 
 # rubocop:disable Metrics/BlockLength
 
-# 'eq' checks for equal VALUE
-# 'eql' checks for equal VALUE and TYPE
-# 'equal' checks for OBJECT IDENTITY
-# 'be' checks for OBJECT IDENTITY
+# 'eq' checks for equal VALUE.
+# 'eql' checks for equal VALUE and TYPE.
+# 'equal' checks for OBJECT IDENTITY.
+# 'be' checks for OBJECT IDENTITY.
 
 describe 'differences between eq, eql, equal, and be' do
   context 'my_score vs. your_score' do
@@ -18,7 +18,7 @@ describe 'differences between eq, eql, equal, and be' do
       end
     end
 
-    # my_score is a Float and your_score is an Integer
+    # my_score is a Float and your_score is an Integer.
     context 'eql looks at type & value' do
       it 'is not eql to each other' do
         expect(my_score).not_to eql(your_score)
@@ -38,7 +38,7 @@ describe 'differences between eq, eql, equal, and be' do
       end
     end
 
-    # some prefer to use 'be' over 'equal' because it semantically makes sense.
+    # Some prefer to use 'be' over 'equal' because it semantically makes sense.
     # expect(first_item).to be(second_item)
     context 'be and equal cares about object identity' do
       it 'is comparing the same car' do
@@ -63,7 +63,7 @@ describe 'equality assignment' do
   let(:amy) { { fav_color: 'blue', fav_food: 'tacos' } }
   let(:bob) { { fav_color: 'blue', fav_food: 'tacos' } }
   let(:copy_cat) { amy }
-  # Write a test that expresses each of the following statements
+  # Write a test that expresses each of the following statements.
 
   # remove the 'x' before running this test
   xit 'amy is eq to bob' do

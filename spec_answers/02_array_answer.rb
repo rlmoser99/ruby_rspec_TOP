@@ -5,7 +5,7 @@ describe Array do
     # remove the 'x' before running this test
     it 'updates length from 0 to 1' do
       expect(subject).to be_empty
-      # update the implicit subject to make this test past
+      # Update the implicit subject to make this test past.
       subject << 21
       expect(subject.length).to eq(1)
     end

@@ -12,9 +12,9 @@ describe String do
   # remove the 'x' before running this test
   context 'when favorite food is updated' do
     it 'updates the favorite food' do
-      # Change the favorite_food let variable
+      # Change the favorite_food let variable.
       favorite_food = 'fajitas'
-      # Write a test that will pass
+      # Write a test that will pass.
       expect(favorite_food).to eq('fajitas')
     end
   end
