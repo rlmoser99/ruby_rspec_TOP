@@ -5,8 +5,8 @@ require_relative '../spec/11_shared_example_spec'
 
 # rubocop:disable Layout/LineLength
 
-# Not only will the class being tested be located in a different file,
-# but there are multiple classes for this example. All files begin with '11_'
+# There are two classes and multiple files for this example.
+# All files begin with '11_'
 
 describe Dog do
   subject(:toby) { described_class.new('Toby', nil, 'brown') }
@@ -26,10 +26,10 @@ describe Dog do
   end
 end
 
-# ASSIGNMENT - complete either Cat or Dog assignment
+# ASSIGNMENT - complete either Cat or Dog assignment (see 11_cat_spec.rb for Cat assignment)
 
 describe Dog do
-  # create a subject with your choice of cat name and optional breed/color
+  # create a subject with your choice of dog name and optional breed/color
 
   # write a test using the second shared_example to test that dog should respond to talk
   context '' do
