@@ -36,6 +36,8 @@ class MagicSeven
     number - random_number
   end
 
+  # This method is not used in testing. It's purpose is to show how the game
+  # works, if you run it in the console.
   def display_result
     step_one = add_nine(random_number)
     step_two = multiply_by_two(step_one)
