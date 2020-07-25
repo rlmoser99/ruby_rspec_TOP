@@ -6,8 +6,8 @@ require_relative '../lib/13_input_output'
 
 # Ruby code that was written before you learned how to use rpsec, may be nearly
 # impossible to test. For example, in the 13_input_output file, there are two
-# identical games - ImpossibleTestGame and NumberGame. Take a look at both games
-# and look for the differences that may make it easier or harder to test.
+# identical games - ImpossibleToTestGame and NumberGame. Take a look at both
+# game and look for the differences that may make it easier or harder to test.
 
 # One key difference is that NumberGame has smaller, isolated methods.
 
@@ -17,6 +17,12 @@ require_relative '../lib/13_input_output'
 # Therefore, if you are new to testing, be open to refactoring your previous
 # code to make writing testing easier. As you learn testing, you are also
 # learning how to write better testable methods.
+
+# The tests in this file are going to become longer than previous examples.
+# To get your bearings, remember to reference the following lines:
+# describe -> Name of the method that is being tested.
+# context ->  Explains the conditions of the test.
+# it ->       Explains the results of the test.
 
 describe NumberGame do
   subject(:game) { described_class.new }
@@ -61,8 +67,11 @@ describe NumberGame do
   # contain puts and/or gets. However, at the bottom of the answer file is an
   # example of how to test the #player_input method if it were not protected.
 
+  # Since we do not have to test #player_input, let's test #verify_input.
+
   describe '#verify_input' do
-    # Note: this recursive method will repeat until #valid_input? is true.
+    # Note: #verify_input is a recursive method that will repeat until
+    # #valid_input? is true.
 
     context 'when given a valid input as argument' do
       it 'returns valid input' do
@@ -89,6 +98,7 @@ describe NumberGame do
       # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
 
       before do
+        # The stub below will return the number_input when called.
         allow(game).to receive(:player_input).and_return(number_input)
       end
 
@@ -96,10 +106,12 @@ describe NumberGame do
         # The stub below will remove the 'Input error!' from appearing in the
         # test output.
         allow(game).to receive(:puts)
-        # This method starts with the invalid parameter (letter_input = 'g')
+
+        # This test starts with the invalid parameter (letter_input = 'g').
         verified_input = game.verify_input(letter_input)
-        # However, the result of 'verified_input' is the valid parameter.
-        # (number_input = '5')
+
+        # The result of 'verified_input' is the valid parameter, because
+        # of the player_input stub in the before hook (number_input = '5').
         expect(verified_input).to eq('5')
       end
 
@@ -120,6 +132,8 @@ describe NumberGame do
       # Create another invalid input (anything except a digit between 0-9).
 
       before do
+        # A method stub can be called multiple times and return different values.
+        # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/returning-a-value
         # Create a stub method to receive :player_input and return your invalid
         # input and the number_input.
       end
@@ -160,10 +174,10 @@ describe NumberGame do
     context 'when count is 2-3' do
       # remove the 'x' before running this test
       xit 'outputs correct phrase' do
-        game.instance_variable_set(:@count, 3)
+        # Set the instance variable of count
+
         congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
-        # Write the expect statement for this test.
-        congrats_phrase # Use congrats_phrase variable
+        expect { game.final_message }.to output(congrats_phrase).to_stdout
       end
     end
 
@@ -171,8 +185,7 @@ describe NumberGame do
     context 'when count is 4 and over' do
       # remove the 'x' before running this test
       xit 'outputs correct phrase' do
-        # Write the conditions to make this test pass.
-        expect { game.final_message }.to output(phrase).to_stdout
+        # Write the entire test for the conditions in the context.
       end
     end
   end
