@@ -18,6 +18,12 @@ require_relative '../lib/13_input_output'
 # code to make writing testing easier. As you learn testing, you are also
 # learning how to write better testable methods.
 
+# The tests in this file are going to become longer than previous examples.
+# To get your bearings, remember to reference the following lines:
+# describe -> Name of the method that is being tested.
+# context ->  Explains the conditions of the test.
+# it ->       Explains the results of the test.
+
 describe NumberGame do
   subject(:game) { described_class.new }
 
@@ -60,6 +66,8 @@ describe NumberGame do
   # protected method. In addition, it is unneccessary to test methods that only
   # contain puts and/or gets. However, at the bottom of the answer file is an
   # example of how to test the #player_input method if it were not protected.
+
+  # Since we do not have to test #player_input, let's test #verify_input.
 
   describe '#verify_input' do
     # Note: #verify_input is a recursive method that will repeat until
