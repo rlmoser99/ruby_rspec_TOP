@@ -6,7 +6,7 @@ require_relative '../lib/13_input_output'
 
 # Ruby code that was written before you learned how to use rpsec, may be nearly
 # impossible to test. For example, in the 13_input_output file, there are two
-# identical games - ImpossibleTestGame and NumberGame. Take a look at both games
+# identical games - ImpossibleToTestGame and NumberGame. Take a look at both games
 # and look for the differences that may make it easier or harder to test.
 
 # One key difference is that NumberGame has smaller, isolated methods.
@@ -120,6 +120,8 @@ describe NumberGame do
       # Create another invalid input (anything except a digit between 0-9).
 
       before do
+        # A method stub can be called multiple times and return different values.
+        # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/returning-a-value
         # Create a stub method to receive :player_input and return your invalid
         # input and the number_input.
       end
@@ -160,10 +162,10 @@ describe NumberGame do
     context 'when count is 2-3' do
       # remove the 'x' before running this test
       xit 'outputs correct phrase' do
-        game.instance_variable_set(:@count, 3)
+        # Set the instance variable of count
+
         congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
-        # Write the expect statement for this test.
-        congrats_phrase # Use congrats_phrase variable
+        expect { game.final_message }.to output(congrats_phrase).to_stdout
       end
     end
 
@@ -171,8 +173,7 @@ describe NumberGame do
     context 'when count is 4 and over' do
       # remove the 'x' before running this test
       xit 'outputs correct phrase' do
-        # Write the conditions to make this test pass.
-        expect { game.final_message }.to output(phrase).to_stdout
+        # Write the entire test for the conditions in the context.
       end
     end
   end

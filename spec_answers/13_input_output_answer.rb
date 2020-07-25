@@ -6,7 +6,7 @@ require_relative '../lib/13_input_output'
 
 # Ruby code that was written before you learned how to use rpsec, may be nearly
 # impossible to test. For example, in the 13_input_output file, there are two
-# identical games - ImpossibleTestGame and NumberGame. Take a look at both games
+# identical games - ImpossibleToTestGame and NumberGame. Take a look at both games
 # and look for the differences that may make it easier or harder to test.
 
 # One key difference is that NumberGame has smaller, isolated methods.
@@ -180,7 +180,7 @@ describe NumberGame do
     context 'when count is 4 and over' do
       # remove the 'x' before running this test
       it 'outputs correct phrase' do
-        # Write the conditions to make this test pass.
+        # Write the entire test for the conditions in the context.
         game.instance_variable_set(:@count, 7)
         hard_phrase = "That was hard. It took you 7 guesses!\n"
         expect { game.final_message }.to output(hard_phrase).to_stdout
@@ -198,7 +198,7 @@ describe NumberGame do
 
   # describe '#player_input' do
   #   it 'returns player input' do
-  #     prompt = 'Choose 1-digit between 0-9'
+  #     prompt = 'Choose a digit between 0 and 9'
   #     user_input = '3'
   #     allow(game).to receive(:puts).once.with(prompt)
   #     allow(game).to receive(:gets).and_return(user_input)

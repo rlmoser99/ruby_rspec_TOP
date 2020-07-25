@@ -2,7 +2,7 @@
 
 # Game that is nearly impossible to test.
 # Therefore is re-written below (NumberGame) with isolated methods easy to test
-class ImpossibleTestGame
+class ImpossibleToTestGame
   attr_reader :solution, :count, :guess
 
   def initialize
@@ -22,7 +22,7 @@ class ImpossibleTestGame
 
   def player_input
     loop do
-      puts 'Choose 1-digit between 0-9'
+      puts 'Choose a digit between 0 and 9'
       @guess = gets.chomp
       break if @guess.match(/^[0-9]$/)
     end
@@ -87,7 +87,7 @@ class NumberGame
   protected
 
   def player_input
-    puts 'Choose 1-digit between 0-9'
+    puts 'Choose a digit between 0 and 9'
     gets.chomp
   end
 
