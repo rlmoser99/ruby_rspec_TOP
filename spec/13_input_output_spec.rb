@@ -6,8 +6,8 @@ require_relative '../lib/13_input_output'
 
 # Ruby code that was written before you learned how to use rpsec, may be nearly
 # impossible to test. For example, in the 13_input_output file, there are two
-# identical games - ImpossibleToTestGame and NumberGame. Take a look at both games
-# and look for the differences that may make it easier or harder to test.
+# identical games - ImpossibleToTestGame and NumberGame. Take a look at both
+# game and look for the differences that may make it easier or harder to test.
 
 # One key difference is that NumberGame has smaller, isolated methods.
 
@@ -62,7 +62,8 @@ describe NumberGame do
   # example of how to test the #player_input method if it were not protected.
 
   describe '#verify_input' do
-    # Note: this recursive method will repeat until #valid_input? is true.
+    # Note: #verify_input is a recursive method that will repeat until
+    # #valid_input? is true.
 
     context 'when given a valid input as argument' do
       it 'returns valid input' do
@@ -89,6 +90,7 @@ describe NumberGame do
       # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
 
       before do
+        # The stub below will return the number_input when called.
         allow(game).to receive(:player_input).and_return(number_input)
       end
 
@@ -96,10 +98,12 @@ describe NumberGame do
         # The stub below will remove the 'Input error!' from appearing in the
         # test output.
         allow(game).to receive(:puts)
-        # This method starts with the invalid parameter (letter_input = 'g')
+
+        # This test starts with the invalid parameter (letter_input = 'g').
         verified_input = game.verify_input(letter_input)
-        # However, the result of 'verified_input' is the valid parameter.
-        # (number_input = '5')
+
+        # The result of 'verified_input' is the valid parameter, because
+        # of the player_input stub in the before hook (number_input = '5').
         expect(verified_input).to eq('5')
       end
 
