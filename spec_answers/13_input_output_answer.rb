@@ -18,6 +18,12 @@ require_relative '../lib/13_input_output'
 # code to make writing testing easier. As you learn testing, you are also
 # learning how to write better testable methods.
 
+# The tests in this file are going to become longer than previous examples.
+# To get your bearings, remember to reference the following lines:
+# describe -> Name of the method that is being tested.
+# context ->  Explains the conditions of the test.
+# it ->       Explains the results of the test.
+
 describe NumberGame do
   subject(:game) { described_class.new }
 
@@ -69,8 +75,11 @@ describe NumberGame do
   # contain puts and/or gets. However, at the bottom of the answer file is an
   # example of how to test the #player_input method if it were not protected.
 
+  # Since we do not have to test #player_input, let's test #verify_input.
+
   describe '#verify_input' do
-    # Note: this recursive method will repeat until #valid_input? is true.
+    # Note: #verify_input is a recursive method that will repeat until
+    # #valid_input? is true.
 
     context 'when given a valid input as argument' do
       it 'returns valid input' do
@@ -97,6 +106,7 @@ describe NumberGame do
       # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
 
       before do
+        # The stub below will return the number_input when called.
         allow(game).to receive(:player_input).and_return(number_input)
       end
 
@@ -104,8 +114,10 @@ describe NumberGame do
         # The stub below will remove the 'Input error!' from appearing in the
         # test output.
         allow(game).to receive(:puts)
+
         # This method starts with the invalid parameter (letter_input = 'g')
         verified_input = game.verify_input(letter_input)
+
         # However, the result of 'verified_input' is the valid parameter.
         # (number_input = '5')
         expect(verified_input).to eq('5')
@@ -129,6 +141,8 @@ describe NumberGame do
       symbol_input = '@'
 
       before do
+        # A method stub can be called multiple times and return different values.
+        # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/returning-a-value
         # Create a stub method to receive :player_input and return your invalid
         # input and the number_input.
         allow(game).to receive(:player_input).and_return(symbol_input, number_input)
@@ -169,9 +183,9 @@ describe NumberGame do
     context 'when count is 2-3' do
       # remove the 'x' before running this test
       it 'outputs correct phrase' do
+        # Set the instance variable of count
         game.instance_variable_set(:@count, 3)
         congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
-        # Write the expect statement for this test.
         expect { game.final_message }.to output(congrats_phrase).to_stdout
       end
     end
