@@ -40,11 +40,11 @@ I am confident that once these exercises are reviewed by an experienced RSpec us
 
 ## Alternatives
 
-(Are there any alternative implementations to this? What else can be done?)
+I searched for an alternative and could not find an better option than the Udemy course that I completed. 
 
 ## Additional
 
-Early on I had told a few people about this repo in the #ruby-testing channel. In addition, I have privately told a few students about it. At this time, I know that andrewjh271, aaron-contreras, tenacious-qi, Natty, and msespos have or are currently going through them.
+Early on I had told a few people about this repo in the #ruby-testing channel. In addition, I have privately told a few students about it. At this time, I know that andrewjh271, aaron-contreras, tenacious-qi, Natty, msespos, and Pandenok have or are currently going through them.
 
 This playground needs a thorough review by someone a lot more familiar with RSpec. Even though I have spent two months learning RSpec, I do not feel 100% confident in some of my explanations & I have 0 'real-world' experience.
 
