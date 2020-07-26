@@ -18,7 +18,7 @@ The purpose of the 'RSpec Playground' is to equip students with additional pract
 
 I recently went through the RSpec section and I really struggled to do TDD for the Connect Four project. I know that TOP's curriculum will not cover everything that one needs to know and I try to embrace this challenge. So, I did a lot of online research and found a lot of answers that were specific to using RSpec with a Rails project. It was hard to correlate the answers that I found to Ruby, and to know if the answers were pointing me in the right direction. 
 
-Therefore, I looked at student solution's spec files to find Ruby RSpec examples. I wanted to find a good example of using stubs or doubles in a test, but after looking at multiple student's projects, it felt like finding a needle in a haystack. 
+Therefore, I looked at student solution's spec files to find Ruby RSpec examples. I wanted to find a good example of using doubles in a test, but after looking at multiple student's projects, it felt like finding a needle in a haystack. 
 
 Finally, I decided to purchase an inexpensive Ruby/RSpec video tutorial on Udemy (by Boris Paskhaver). Overall, it was a terrible experience, however the tutorial had a github repo full of example tests. I found that these hands-on tests were the most helpful. A few of the examples that I am using in this playground were inspired by that tutorial, but have been completed changed.
 
@@ -34,12 +34,9 @@ In addition, I believe the Sandi Metz video should come before doing tests for T
 
 ## Drawbacks
 
-(Are there any drawbacks to this proposal? consider the following:)
+The only drawback to adding this to the curriculum is that we may be answering more questions about these exercises. I have asked people to go through them to help me eliminate the confusing areas. However, learning testing, especially the use of doubles/stubs/mocks can be very confusing no matter how good.
 
-- Complexities or time consuming.
-- Amount of people needed to develop or availability of your own time.
-- Impact of the current state.
-- Will users need to change their flow? in what way?
+I am confident that once these exercises are reviewed by an experienced RSpec user, that any confusion 
 
 ## Alternatives
 
