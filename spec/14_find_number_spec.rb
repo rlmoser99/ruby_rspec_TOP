@@ -4,8 +4,9 @@ require_relative '../lib/14_find_number'
 
 # rubocop:disable Layout/LineLength, Metrics/BlockLength
 
-# Let's take a look at test-driven development (TDD) technique of using a
-# 'double'. A 'double' is a generic ruby object, that stands in for the real
+# This file is going to focus on test-driven development (TDD). One important
+# TDD technique is using a 'double' for any object outside of the class being
+# tested. A 'double' is a generic ruby object, that stands in for the real
 # object, like a stunt-double.
 
 # Doubles are very useful in TDD because you can create test functionality that
@@ -107,17 +108,18 @@ describe FindNumber do
   # The computer will update min and max values to help find the correct number.
 
   describe '#make_guess' do
-    subject(:game) { described_class.new(0, 9, random_number) }
-    # Create a random_number double & allow it to receive 'value' and return 8
-    # in one of the two ways explained above.
+    # Create a random_number double & allow it to receive 'value' and return any
+    # number between 0 and 9 in one of the two ways explained above.
 
-    # Write a test that would expect #make_guess to return the middle number of
+    subject(:game) { described_class.new(0, 9, random_number) }
+
+    # Write a test that would expect #make_guess to return the average of
     # the min and max values (rounded down).
     context 'when min is 0 and max is 9' do
     end
 
     # Write a method in 14_find_number.rb called #make_guess that returns the
-    # middle number of the min and max values.
+    # average of the min and max values (rounded down).
 
     # Write a test for each of the following contexts:
 
@@ -138,16 +140,19 @@ describe FindNumber do
   describe '#game_over?' do
     # In a long test file, it can be helpful to declare variables in each
     # describe block, to make the tests more read-able. When creating another
-    # instance of the random number and/or subject, use a different name to
+    # instance of the random number and/or subject, use a meaningful name to
     # differentiate between instances.
 
-    # Create a subject and random_number double & allow it to receive 'value'
-    # and return any number from the min - max.
+    # Create a subject and random_number double with a meaningful name.
+    # A helpful tip is to combine the purpose of the test and the object.
+    # Like, ending_number & ending_game or completing_random & completing_game.
+
+    # Allow the double to receive 'value' and return a number from the min-max.
 
     # Write a test that would expect game to be_game_over when a guess equals
     # the random_number double's value above.
 
-    context 'when guess and random_number equal' do
+    context 'when guess and random_number are equal' do
     end
 
     # Write a method in 14_find_number.rb called #game_over? that returns true
@@ -156,30 +161,32 @@ describe FindNumber do
     # Write a test that would expect game to NOT be_game_over when a guess does
     # NOT equal the random_number double's value above.
 
-    context 'when a guess does not equal random_number' do
+    context 'when guess and random_number are not equal' do
     end
   end
 
   # ASSIGNMENT: METHOD #3
   describe '#update_range' do
-    # When naming different instances of subject or let variables, use
-    # meaningful names. This is not the best example, but it is better then
-    # naming them 'new_game', 'game2', 'next_number', or 'random_num'
-    let(:random_eight) { double('random_number', value: 8) }
-    subject(:game_eight) { described_class.new(0, 9, random_eight) }
+    let(:updating_number) { double('random_number', value: 8) }
+    subject(:updating_game) { described_class.new(0, 9, updating_number) }
 
-    # Write a test for #update_range that for each of the following scenerios:
-    # 1. If the guess is less than the solution, then the min would update to
-    # one more than the guess & max stays the same.
-    # 2. If the guess is greater than the solution, then the max would update to
-    # one less than the guess & min stays the same.
-    # Note: this example game starts off with min = 0 and max = 9 due to the
-    # 0 and 9 in: { described_class.new(0, 9, random_eight) }
+    # Write four tests for #update_range that tests the values of min and max.
 
-    context 'when the guess is 4' do
+    # When the guess is less than the answer:
+    # - min will update to one more than the guess
+    # - max stays the same.
+
+    # When the guess is more than the answer:
+    # - min stays the same
+    # - max will update to one less than the guess
+
+    # Note: updating_game in each context block starts off with
+    # min = 0 and max = 9.
+
+    context 'when the guess is less than the answer' do
       before do
-        game_eight.instance_variable_set(:@guess, 4)
-        game_eight.update_range
+        updating_game.instance_variable_set(:@guess, 4)
+        updating_game.update_range
       end
 
       xit 'updates min' do
@@ -189,19 +196,26 @@ describe FindNumber do
       end
     end
 
-    context 'when the guess is 9' do
+    context 'when the guess is more than the answer' do
+      xit 'does not update min' do
+      end
+
+      xit 'updates max' do
+      end
     end
 
     # Now, write the method in 14_find_number.rb called #update_range that will
     # do the following:
-    # 1. If the guess is less than the solution, then the min would update to
-    # one more than the guess.
-    # 2. If the guess is greater than the solution, then the max would update to
-    # one less than the guess.
+
+    # When the guess is less than the answer:
+    # - min will update to one more than the guess
+
+    # When the guess is not less than the answer:
+    # - max will update to one less than the guess
 
     # Write a test for any 'edge cases' that you can think of, for example:
 
-    context 'when the guess is 7, with min=5 and max=8' do
+    context 'when the guess is 7, min=5, and max=8' do
       xit 'updates min to the same value as max' do
       end
 
