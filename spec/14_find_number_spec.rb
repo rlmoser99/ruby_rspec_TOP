@@ -80,7 +80,7 @@ end
 
 # ASSIGNMENT
 # For this assignment you will be doing TDD for 3 methods - #make_guess,
-# #make_guess, and #update_range.
+# #game_over?, and #update_range.
 
 # After you have some experience using TDD, you can use the typical
 # Red-Green-Refactor workflow.
