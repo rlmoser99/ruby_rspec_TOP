@@ -34,11 +34,11 @@ require_relative '../lib/15_random_number'
 
 describe BinarySearch do
   describe '#max_guesses' do
-    subject(:game_six) { described_class.new(0, 9, random_six) }
+    let(:guessing_number) { instance_double('random_number', value: 6) }
+    subject(:guessing_game) { described_class.new(0, 9, guessing_number) }
     # A class called RandomNumber now exists, therefore it should be updated to
     # an 'verifying double', like an 'instance_double'.
     # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles/using-an-instance-double
-    let(:random_six) { instance_double('random_number', value: 6) }
 
     # ASSIGNMENT
 
@@ -47,7 +47,7 @@ describe BinarySearch do
     # maximum number of guesses for a binary search.
     context 'when max is 9 and min is 0' do
       it 'is 4' do
-        max_guesses = game_six.max_guesses
+        max_guesses = guessing_game.max_guesses
         expect(max_guesses).to be(4)
       end
     end
@@ -64,8 +64,8 @@ describe BinarySearch do
   # https://relishapp.com/rspec/rspec-mocks/v/2-99/docs/method-stubs
 
   describe '#computer_turns' do
-    subject(:game_eight) { described_class.new(0, 9, random_eight) }
-    let(:random_eight) { instance_double('random_number', value: 8) }
+    let(:computer_number) { instance_double('random_number', value: 8) }
+    subject(:computer_game) { described_class.new(0, 9, computer_number) }
 
     context 'when using a stub for display_guess' do
       context 'when random_number value is 8' do
@@ -73,13 +73,13 @@ describe BinarySearch do
           # These 3 lines are stubs of the #display_guess method. For this test,
           # a loop will call this method 3 times.
           # for the turn count = 1 loop
-          allow(game_eight).to receive(:display_guess).with(1)
+          allow(computer_game).to receive(:display_guess).with(1)
           # for the turn count = 2 loop
-          allow(game_eight).to receive(:display_guess).with(2)
+          allow(computer_game).to receive(:display_guess).with(2)
           # for the turn count = 3 loop
-          allow(game_eight).to receive(:display_guess).with(3)
-          game_eight.computer_turns
-          guess = game_eight.guess
+          allow(computer_game).to receive(:display_guess).with(3)
+          computer_game.computer_turns
+          guess = computer_game.guess
           expect(guess).to eq(8)
         end
         # Now comment out the 3 stubs above and re-run the test.
@@ -104,13 +104,13 @@ describe BinarySearch do
         it 'will loop until guess equals 8' do
           # Make 1 stub for #make_guess that will return the values of 4, 7, 8
           # (the mid-point of min & max).
-          allow(game_eight).to receive(:make_guess).and_return(4, 7, 8)
+          allow(computer_game).to receive(:make_guess).and_return(4, 7, 8)
           # Write the 3 stubs for #display_guess.
-          allow(game_eight).to receive(:display_guess).with(1)
-          allow(game_eight).to receive(:display_guess).with(2)
-          allow(game_eight).to receive(:display_guess).with(3)
-          game_eight.computer_turns
-          guess = game_eight.guess
+          allow(computer_game).to receive(:display_guess).with(1)
+          allow(computer_game).to receive(:display_guess).with(2)
+          allow(computer_game).to receive(:display_guess).with(3)
+          computer_game.computer_turns
+          guess = computer_game.guess
           expect(guess).to eq(8)
         end
       end
@@ -124,16 +124,16 @@ describe BinarySearch do
 
   describe '#start' do
     context 'when random_number value is 1' do
-      subject(:game_one) { described_class.new(0, 9, random_one) }
-      let(:random_one) { instance_double('random_number', value: 1) }
+      let(:start_number) { instance_double('random_number', value: 1) }
+      subject(:start_game) { described_class.new(0, 9, start_number) }
 
       it 'will loop until guess equals 1' do
-        allow(game_one).to receive(:puts).twice
-        allow(game_one).to receive(:make_guess).and_return(4, 1)
-        allow(game_one).to receive(:display_guess).with(1)
-        allow(game_one).to receive(:display_guess).with(2)
-        game_one.start
-        guess = game_one.guess
+        allow(start_game).to receive(:puts).twice
+        allow(start_game).to receive(:make_guess).and_return(4, 1)
+        allow(start_game).to receive(:display_guess).with(1)
+        allow(start_game).to receive(:display_guess).with(2)
+        start_game.start
+        guess = start_game.guess
         expect(guess).to eq(1)
       end
     end
