@@ -170,15 +170,20 @@ describe FindNumber do
     let(:updating_number) { double('random_number', value: 8) }
     subject(:updating_game) { described_class.new(0, 9, updating_number) }
 
-    # Write a test for #update_range that for each of the following scenerios:
-    # 1. If the guess is less than the solution, then the min would update to
-    # one more than the guess & max stays the same.
-    # 2. If the guess is greater than the solution, then the max would update to
-    # one less than the guess & min stays the same.
-    # Note: this example game starts off with min = 0 and max = 9 due to the
-    # 0 and 9 in: { described_class.new(0, 9, updating_number) }
+    # Write four tests for #update_range that tests the values of min and max.
 
-    context 'when the guess is 4' do
+    # When the guess is less than the answer:
+    # - min will update to one more than the guess
+    # - max stays the same.
+
+    # When the guess is more than the answer:
+    # - min stays the same
+    # - max will update to one less than the guess
+
+    # Note: updating_game in each context block starts off with
+    # min = 0 and max = 9.
+
+    context 'when the guess is less than the answer' do
       before do
         updating_game.instance_variable_set(:@guess, 4)
         updating_game.update_range
@@ -191,19 +196,26 @@ describe FindNumber do
       end
     end
 
-    context 'when the guess is 9' do
+    context 'when the guess is more than the answer' do
+      xit 'does not update min' do
+      end
+
+      xit 'updates max' do
+      end
     end
 
     # Now, write the method in 14_find_number.rb called #update_range that will
     # do the following:
-    # 1. If the guess is less than the solution, then the min would update to
-    # one more than the guess.
-    # 2. If the guess is greater than the solution, then the max would update to
-    # one less than the guess.
+
+    # When the guess is less than the answer:
+    # - min will update to one more than the guess
+
+    # When the guess is not less than the answer:
+    # - max will update to one less than the guess
 
     # Write a test for any 'edge cases' that you can think of, for example:
 
-    context 'when the guess is 7, with min=5 and max=8' do
+    context 'when the guess is 7, min=5, and max=8' do
       xit 'updates min to the same value as max' do
       end
 
