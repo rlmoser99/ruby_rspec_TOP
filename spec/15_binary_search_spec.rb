@@ -22,7 +22,7 @@ require_relative '../lib/15_random_number'
 # Therefore, using a 'verifying double' makes a test more stable.
 
 # Unit testing relies on using doubles to test the object in isolation (not
-# dependant on any other object). One important concept to understand is the
+# dependent on any other object). One important concept to understand is the
 # BinarySearch or FindNumber class doesn't care if it is given an actual
 # random_number class object. It only cares that it is given an object that
 # can respond to certain methods. This concept is called polymorphism
