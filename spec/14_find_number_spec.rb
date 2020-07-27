@@ -116,7 +116,7 @@ describe FindNumber do
     context 'when min is 0 and max is 9' do
     end
 
-    # Write a method in 13_find_number.rb called #make_guess that returns the
+    # Write a method in 14_find_number.rb called #make_guess that returns the
     # middle number of the min and max values.
 
     # Write a test for each of the following contexts:
@@ -150,7 +150,7 @@ describe FindNumber do
     context 'when guess and random_number equal' do
     end
 
-    # Write a method in 13_find_number.rb called #game_over? that returns true
+    # Write a method in 14_find_number.rb called #game_over? that returns true
     # when a guess equals the value of the random_number.
 
     # Write a test that would expect game to NOT be_game_over when a guess does
@@ -192,7 +192,7 @@ describe FindNumber do
     context 'when the guess is 9' do
     end
 
-    # Now, write the method in 13_find_number.rb called #update_range that will
+    # Now, write the method in 14_find_number.rb called #update_range that will
     # do the following:
     # 1. If the guess is less than the solution, then the min would update to
     # one more than the guess.
