@@ -117,8 +117,10 @@ describe FindNumber do
     # instance of the random number and/or subject, use a meaningful name to
     # differentiate between instances.
 
-    # Create a subject and random_number double with a meaningful name. Such as,
-    # ending_number & ending_game or completing_random & completing_game
+    # Create a subject and random_number double with a meaningful name.
+    # A helpful tip is to combine the purpose of the test and the object.
+    # Like, ending_number & ending_game or completing_random & completing_game.
+
     # Allow the double to receive 'value' and return a number from the min-max.
 
     let(:ending_number) { double('random_number', value: 3) }

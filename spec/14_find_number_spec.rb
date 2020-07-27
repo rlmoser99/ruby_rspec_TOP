@@ -2,7 +2,7 @@
 
 require_relative '../lib/14_find_number'
 
-# rubocop:disable Metrics/BlockLength
+# rubocop:disable Layout/LineLength, Metrics/BlockLength
 
 # This file is going to focus on test-driven development (TDD). One important
 # TDD technique is using a 'double' for any object outside of the class being
@@ -225,4 +225,4 @@ describe FindNumber do
   end
 end
 
-# rubocop:enable Metrics/BlockLength
+# rubocop:enable Layout/LineLength, Metrics/BlockLength
