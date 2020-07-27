@@ -156,7 +156,7 @@ describe FindNumber do
     # Write a test that would expect game to NOT be_game_over when a guess does
     # NOT equal the random_number double's value above.
 
-    context 'when guess and random_number does not equal' do
+    context 'when a guess does not equal random_number' do
     end
   end
 
