@@ -16,7 +16,7 @@ You will need [rspec](https://rspec.info/) installed on your computer.
 ## Start
 The lessons are numbered 01 - 16, in the **spec** folder. The answers are available in the spec_answer folder. Beginning with lesson 10, there are file(s) in the lib folder. 
 
-Start with the file: <pre><code>spec/01_string_spec.rb</code></pre>
+Start with the file: <code>spec/01_string_spec.rb</code>
 
 ## Running Tests
 Since this repository is full of tests, it is recommended to only run rspec tests on one individual file at at time. For example, to run the first test file from the root of this directory:
