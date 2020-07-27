@@ -1,10 +1,27 @@
-# Playground of rspec testing examples
-There is a knowledge gap between reading the rspec documentation and fully understanding how to utilize this powerful tool. The idea behind this repository is to create a 'playground' of examples for TOP students to get more experience.
+# RSpec Playground
+The purpose of this repository is to provide 'hands-on' examples of tests. This playground covers many topics, but it does not cover everything that RSpec is capable of testing. 
+
+## Topics
+These lessons build foundational knowledge on the following topics:
+- Let Variables
+- Implicit and Explicit Subject
+- Setting values for instance variables to create test conditions
+- 'Arrange, Act & Assert' testing pattern
+- Stubs, Mocks, and Doubles
+- Test Driven Development
+
+## Prerequisite
+You will need [rspec](https://rspec.info/) installed on your computer. 
+
+## Start
+The lessons are numbered 01 - 16, in the **spec** folder. There are answers available in the spec_answer folder. Starting with file 10, there will be file(s) in the lib folder. 
+
+Start with the file: pre><code>spec/01_string_spec.rb</code></pre>
 
 ## Running Tests
 Since this repository is full of tests, it is recommended to only run rspec tests on one individual file at at time. For example, to run the first test file from the root of this directory:
 
-<pre><code>rpsec spec/01_string_spec.rb</code></pre>
+<pre><code>rspec spec/01_string_spec.rb</code></pre>
 
 Tip: If you have tab completion set-up, you can hit 'tab' after the first few characters of the file name.
 
