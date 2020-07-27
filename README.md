@@ -6,7 +6,7 @@ These lessons build foundational knowledge on the following topics:
 - Let Variables
 - Implicit and Explicit Subject
 - Setting values for instance variables to create test conditions
-- 'Arrange, Act & Assert' testing pattern
+- The 'Arrange, Act & Assert' testing pattern
 - Stubs, Mocks, and Doubles
 - Test Driven Development
 
@@ -14,9 +14,9 @@ These lessons build foundational knowledge on the following topics:
 You will need [rspec](https://rspec.info/) installed on your computer. 
 
 ## Start
-The lessons are numbered 01 - 16, in the **spec** folder. There are answers available in the spec_answer folder. Starting with file 10, there will be file(s) in the lib folder. 
+The lessons are numbered 01 - 16, in the **spec** folder. The answers are available in the spec_answer folder. Beginning with lesson 10, there are file(s) in the lib folder. 
 
-Start with the file: pre><code>spec/01_string_spec.rb</code></pre>
+Start with the file: <pre><code>spec/01_string_spec.rb</code></pre>
 
 ## Running Tests
 Since this repository is full of tests, it is recommended to only run rspec tests on one individual file at at time. For example, to run the first test file from the root of this directory:
