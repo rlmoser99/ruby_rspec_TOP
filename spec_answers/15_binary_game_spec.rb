@@ -34,18 +34,18 @@ describe BinaryGame do
   end
 
   describe '#computer_random' do
+    let(:computer_number) { instance_double('random_number', value: 79) }
+
     it 'creates a new RandomNumber' do
-      expect(RandomNumber).to receive(:new).with(1, 100)
+      expect(RandomNumber).to receive(:new).with(1, 100).and_return(computer_number)
       allow(game).to receive(:puts)
-      allow(game.random_number).to receive(:value).and_return(79)
       allow(BinarySearch).to receive(:new)
       game.computer_random
     end
 
     it 'creates a new BinarySearch' do
-      allow(RandomNumber).to receive(:new).with(1, 100)
+      allow(RandomNumber).to receive(:new).with(1, 100).and_return(computer_number)
       allow(game).to receive(:puts)
-      allow(game.random_number).to receive(:value).and_return(79)
       expect(BinarySearch).to receive(:new).with(1, 100, 79)
       game.computer_random
     end

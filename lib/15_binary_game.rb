@@ -5,12 +5,12 @@ require_relative '../lib/15_binary_search'
 
 # class for computer to find random number
 class BinaryGame
-  attr_reader :range, :random_number, :game
+  attr_reader :range, :random_number, :search
 
   def initialize
     @range = (1..100).to_a
     @random_number = nil
-    @game = nil
+    @search = nil
   end
 
   def start
@@ -25,10 +25,10 @@ class BinaryGame
     puts "The computer will find it in \e[32m#{max_guesses}\e[0m guesses or less!\n\n"
     loop do
       display_range
-      puts "Guess ##{count} -> \e[32m#{game.make_guess}\e[0m"
-      break if game.game_over?
+      puts "Guess ##{count} -> \e[32m#{search.make_guess}\e[0m"
+      break if search.game_over?
 
-      game.update_range
+      search.update_range
       count += 1
     end
   end
@@ -39,13 +39,13 @@ class BinaryGame
 
   def user_random
     @random_number = verify_input(player_input)
-    @game = BinarySearch.new(range[0], range[-1], random_number)
+    @search = BinarySearch.new(range[0], range[-1], random_number)
   end
 
   def computer_random
     @random_number = RandomNumber.new(range[0], range[-1])
     puts "The computer-generated random number is: \e[32m#{random_number.value}\e[0m!"
-    @game = BinarySearch.new(range[0], range[-1], random_number.value)
+    @search = BinarySearch.new(range[0], range[-1], random_number.value)
   end
 
   protected
@@ -60,9 +60,9 @@ class BinaryGame
   end
 
   def print_number(number)
-    if number == (game.min + game.max) / 2
+    if number == (search.min + search.max) / 2
       print "\e[32m#{number} \e[0m"
-    elsif number.between?(game.min, game.max)
+    elsif number.between?(search.min, search.max)
       print "#{number} "
     else
       print "\e[91m#{number} \e[0m"
