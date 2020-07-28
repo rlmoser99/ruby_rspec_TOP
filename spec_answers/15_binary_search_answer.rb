@@ -2,8 +2,7 @@
 
 require_relative '../lib/15_binary_search'
 require_relative '../lib/15_random_number'
-
-# rubocop:disable Metrics/BlockLength
+require_relative '../lib/15_display_data'
 
 # The files for this example (#15) builds on the TDD files from #14.
 # The FindNumber class is now called BinarySearch, which is a more accurate
@@ -31,113 +30,102 @@ require_relative '../lib/15_random_number'
 # In the file, 14_find_number, you wrote tests for #make_guess, #game_over?, and
 # #update_range. We will not re-write them for this example. If you'd like to
 # see them again, they are at the bottom of this file.
+# before do
+#   game.instance_variable_set(:@answer, instance_double(RandomNumber))
+#   game.instance_variable_set(:@display, instance_double(DisplayData))
+# end
 
 describe BinarySearch do
+  subject(:game) { described_class.new(0, 9) }
+
+  before do
+    game.instance_variable_set(:@answer, double(RandomNumber))
+    # game.instance_variable_set(:@display, instance_double(DisplayData))
+    # game.instance_variable_set(:@display, double(DisplayData))
+  end
+
   describe '#max_guesses' do
-    let(:guessing_number) { instance_double('random_number', value: 6) }
-    subject(:guessing_game) { described_class.new(0, 9, guessing_number) }
-    # A class called RandomNumber now exists, therefore it should be updated to
-    # an 'verifying double', like an 'instance_double'.
-    # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles/using-an-instance-double
-
-    # ASSIGNMENT
-
-    # Write one test for #max_guesses (hint: it will be 4 with the above game
-    # subject & let variable). This is using the formula to calculate the
-    # maximum number of guesses for a binary search.
-    context 'when max is 9 and min is 0' do
+    context 'when min = 0 and max = 9' do
       it 'is 4' do
-        max_guesses = guessing_game.max_guesses
+        max_guesses = game.max_guesses
+        # Better name here?
         expect(max_guesses).to be(4)
       end
     end
-  end
 
-  # The #computer_turns method calls 4 different methods (#make_guess,
-  # #display_guess, #game_over? and #update_range).
-
-  # The #display_guess method is a protected method and does not need to be
-  # tested in unit testing. For this test, the #display_guess method an example
-  # of a method may take a long time to complete, such as connecting to a
-  # database. To test #computer_turns, we are going to stub #display_guess
-  # so that this unit test can run quickly and efficiently.
-  # https://relishapp.com/rspec/rspec-mocks/v/2-99/docs/method-stubs
-
-  describe '#computer_turns' do
-    let(:computer_number) { instance_double('random_number', value: 8) }
-    subject(:computer_game) { described_class.new(0, 9, computer_number) }
-
-    context 'when using a stub for display_guess' do
-      context 'when random_number value is 8' do
-        it 'will loop until guess equals 8' do
-          # These 3 lines are stubs of the #display_guess method. For this test,
-          # a loop will call this method 3 times.
-          # for the turn count = 1 loop
-          allow(computer_game).to receive(:display_guess).with(1)
-          # for the turn count = 2 loop
-          allow(computer_game).to receive(:display_guess).with(2)
-          # for the turn count = 3 loop
-          allow(computer_game).to receive(:display_guess).with(3)
-          computer_game.computer_turns
-          guess = computer_game.guess
-          expect(guess).to eq(8)
-        end
-        # Now comment out the 3 stubs above and re-run the test.
-        # The #display guess method includes sleep(3) to mimic a method that
-        # takes a long time to complete, such as connecting to a database.
+    context 'when min = 1 and max = 100' do
+      before do
+        game.instance_variable_set(:@min, 1)
+        game.instance_variable_set(:@max, 100)
       end
-    end
 
-    # ASSIGNMENT
-
-    # Change the #make_guess method in the file: lib/15_binary_search to include
-    # sleep, with any number that you'd like.
-
-    # Create a method stub for #make_guess that will return the correct value of
-    # 3 guesses. In the display_guess stub the return value of the method was
-    # not neccesary. The stub for #make_guess requires a return value to break
-    # the loop in #computer_turns.
-
-    context 'when using a stub for display_guess and make_guess' do
-      context 'when random_number value is 8' do
-        # remove the 'x' before running this test
-        it 'will loop until guess equals 8' do
-          # Make 1 stub for #make_guess that will return the values of 4, 7, 8
-          # (the mid-point of min & max).
-          allow(computer_game).to receive(:make_guess).and_return(4, 7, 8)
-          # Write the 3 stubs for #display_guess.
-          allow(computer_game).to receive(:display_guess).with(1)
-          allow(computer_game).to receive(:display_guess).with(2)
-          allow(computer_game).to receive(:display_guess).with(3)
-          computer_game.computer_turns
-          guess = computer_game.guess
-          expect(guess).to eq(8)
-        end
+      it 'is 7' do
+        max_guesses = game.max_guesses
+        # better_name here!
+        expect(max_guesses).to be(7)
       end
     end
   end
-
-  # ASSIGNMENT
-
-  # Write at least 1 test for the #start method.
-  # Bonus: Remove the two puts statements from outputting when the test is run.
 
   describe '#start' do
-    context 'when random_number value is 1' do
-      let(:start_number) { instance_double('random_number', value: 1) }
-      subject(:start_game) { described_class.new(0, 9, start_number) }
+    before do
+      # game.instance_variable_set(:@answer, instance_double(RandomNumber))
+    end
 
-      it 'will loop until guess equals 1' do
-        allow(start_game).to receive(:puts).twice
-        allow(start_game).to receive(:make_guess).and_return(4, 1)
-        allow(start_game).to receive(:display_guess).with(1)
-        allow(start_game).to receive(:display_guess).with(2)
-        start_game.start
-        guess = start_game.guess
-        expect(guess).to eq(1)
-      end
+    it 'shows range' do
+      game.instance_variable_set(:@display, double(DisplayData))
+      # allow(game.answer).to receive(:value).and_return(4)
+      allow(game).to receive(:computer_turns)
+      # allow(game.display).to receive(:show_range).with(0, 9)
+      # allow(game.display).to receive(:show_answer).with(4)
+      # allow(game.display).to receive(:show_count).with(1)
+      expect(game.display).to receive(:show_range).with(0, 9)
+      game.start
     end
   end
-end
 
-# rubocop:enable Metrics/BlockLength
+  # describe '#computer_turns' do
+  #   context 'when first guess is correct' do
+  #     before do
+  #       allow(game.answer).to receive(:value).and_return(4)
+  #       allow(game.display).to receive(:show_guess).with(1, 4)
+  #       allow(game).to receive(:make_guess).and_return(4)
+  #       allow(game).to receive(:game_over?).and_return(true)
+  #     end
+
+  #     it 'loops one time' do
+  #       expect(game.display).to receive(:show_guess).with(1, 4)
+  #       game.computer_turns
+  #       # expect(game.answer.value).to eq(4)
+  #     end
+  #   end
+  # end
+
+  # describe '#computer_turns' do
+  #   before do
+  #     game.instance_variable_set(:@answer, instance_double(RandomNumber))
+  #     game.instance_variable_set(:@display, instance_double(DisplayData))
+  #     # game.instance_variable_set(:@guess, 7)
+  #     allow(game).to receive(:make_guess).and_return(4, 8)
+  #     allow(game.display).to receive(:show_guess).with(1, 4)
+  #     allow(game.display).to receive(:show_guess).with(2, 8)
+  #     allow(game.answer).to receive(:value).and_return(8)
+  #     allow(game).to receive(:game_over?).and_return(true, false)
+  #     allow(game).to receive(:update_range)
+  #   end
+
+  #   context 'when using a stub for display_guess' do
+  #     context 'when random_number value is 8' do
+  #       it 'will loop until guess equals 8' do
+  #         expect(game.display).to receive(:show_guess).with(1, 4)
+  #         expect(game.display).to receive(:show_guess).with(2, 8)
+  #         # expect(game.display).to receive(:show_guess).with(1, 4)
+  #         # expect(game.display).to receive(:show_guess).with(2, 7)
+  #         # expect(game.display).to receive(:show_guess).with(3, 8)
+  #         game.computer_turns
+  #         # expect(game.answer.value).to eq(8)
+  #       end
+  #     end
+  #   end
+  # end
+end

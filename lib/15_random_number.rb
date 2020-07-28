@@ -5,7 +5,7 @@ class RandomNumber
   attr_reader :value
 
   def initialize(minimum, maximum)
-    sleep(3)
+    # sleep(3)
     @value = rand(minimum..maximum)
   end
 end

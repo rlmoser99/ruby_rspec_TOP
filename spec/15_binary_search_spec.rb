@@ -39,7 +39,7 @@ describe BinarySearch do
     # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles/using-an-instance-double
     let(:guessing_number) { instance_double('random_number', value: 6) }
     subject(:guessing_game) { described_class.new(0, 9, random_six) }
-    
+
     # ASSIGNMENT
 
     # Write one test for #max_guesses (hint: it will be 4 with the above game
