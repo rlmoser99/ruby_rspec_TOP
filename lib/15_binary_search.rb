@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# class for computer to find random number
+# class for computer to find the answer using a binary search
 class BinarySearch
   attr_reader :min, :max, :answer, :guess
 

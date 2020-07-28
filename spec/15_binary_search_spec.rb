@@ -5,44 +5,44 @@ require_relative '../lib/15_random_number'
 
 describe BinarySearch do
   describe '#make_guess' do
-    subject(:game) { described_class.new(0, 9, 8) }
+    subject(:guess_game) { described_class.new(0, 9, 8) }
 
     context 'when min is 0 and max is 9' do
       it 'returns 4' do
-        guess = game.make_guess
+        guess = guess_game.make_guess
         expect(guess).to eq(4)
       end
     end
 
     context 'when min is 5 and max is 9' do
       it 'returns 7' do
-        game.instance_variable_set(:@min, 5)
-        guess = game.make_guess
+        guess_game.instance_variable_set(:@min, 5)
+        guess = guess_game.make_guess
         expect(guess).to eq(7)
       end
     end
 
     context 'when min is 8 and max is 9' do
       it 'returns 8' do
-        game.instance_variable_set(:@min, 8)
-        guess = game.make_guess
+        guess_game.instance_variable_set(:@min, 8)
+        guess = guess_game.make_guess
         expect(guess).to eq(8)
       end
     end
 
     context 'when min is 0 and max is 3' do
       it 'returns 1' do
-        game.instance_variable_set(:@max, 3)
-        guess = game.make_guess
+        guess_game.instance_variable_set(:@max, 3)
+        guess = guess_game.make_guess
         expect(guess).to eq(1)
       end
     end
 
     context 'when min and max both equal 3' do
       it 'returns 3' do
-        game.instance_variable_set(:@min, 3)
-        game.instance_variable_set(:@max, 3)
-        guess = game.make_guess
+        guess_game.instance_variable_set(:@min, 3)
+        guess_game.instance_variable_set(:@max, 3)
+        guess = guess_game.make_guess
         expect(guess).to eq(3)
       end
     end
