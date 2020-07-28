@@ -2,12 +2,13 @@
 
 describe String do
   # The let method is passed a block that computes the value of the variable.
-  # It will only be called when the variable is needed (known as: lazy loading).
+  # It will only be called when the variable is needed.
+  # This is known as lazy loading.
   let(:favorite_color) { String.new('blue') }
 
   # Use a context block to make your tests clear and well organized.
   # It is not required, but it is generally used to explain any conditionals.
-  # Here are some examples of words that context should start with:
+  # Here are some examples of words you should start your context block with:
   # if, when, unless, with, without, for, before, after, during
 
   context 'when a let variable is used' do

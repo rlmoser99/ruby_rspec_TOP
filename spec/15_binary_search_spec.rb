@@ -5,46 +5,47 @@ require_relative '../lib/15_random_number'
 
 # rubocop:disable Metrics/BlockLength
 
-# The files for this example (#15) builds on the TDD files from #14.
+# The files for this example (#15) build on the TDD files from #14.
 # The FindNumber class is now called BinarySearch, which is a more accurate
 # description.
 
 # After TDD is complete, the classes and methods that were used as a test
-# double, should be updated to be a 'verifying double' Using a 'verifying
-# double' is preferred, because they will produce an error if does not exist
-# on the actual class.
+# double should be updated to be a 'verifying double.' Using a 'verifying
+# double' is preferred, because doubles can produce an error if they do
+# not exist in the actual class.
 
 # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles
 
 # It is common for method and variable names to change during development.
 # For example, random_number.value could change to rand_num.number
 
-# Therefore, using a 'verifying double' makes a test more stable.
+# Therefore using a 'verifying double' makes a test more stable.
 
-# Unit testing relies on using doubles to test the object in isolation (not
-# dependent on any other object). One important concept to understand is the
-# BinarySearch or FindNumber class doesn't care if it is given an actual
-# random_number class object. It only cares that it is given an object that
-# can respond to certain methods. This concept is called polymorphism
+# Unit testing relies on using doubles to test the object in isolation (i.e.,
+# not dependent on any other object). One important concept to understand is
+# that the BinarySearch or FindNumber class doesn't care if it is given an\
+# actual random_number class object. It only cares that it is given an object
+# that can respond to certain methods. This concept is called polymorphism.
 # https://www.geeksforgeeks.org/polymorphism-in-ruby/
 
-# In the file, 14_find_number, you wrote tests for #make_guess, #game_over?, and
-# #update_range. We will not re-write them for this example. If you'd like to
-# see them again, they are at the bottom of this file.
+# In the file 14_find_number you wrote tests for #make_guess, #game_over?, and
+# #update_range. We will not rewrite them for this example. If you'd like to
+# see them again, they are at the bottom of this file (commented out).
 
 describe BinarySearch do
   describe '#max_guesses' do
-    # A class called RandomNumber now exists, therefore it should be updated to
-    # an 'verifying double', like an 'instance_double'.
+    # A class called RandomNumber now exists; therefore it should be updated to
+    # a 'verifying double', e.g. an 'instance_double'.
     # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles/using-an-instance-double
     let(:guessing_number) { instance_double('random_number', value: 6) }
     subject(:guessing_game) { described_class.new(0, 9, random_six) }
     
     # ASSIGNMENT
 
-    # Write one test for #max_guesses (hint: it will be 4 with the above game
-    # subject & let variable). This is using the formula to calculate the
-    # maximum number of guesses for a binary search.
+    # Write one test for #max_guesses, where you are using the formula
+    # to calculate the maximum number of guesses for a binary search.
+    # (Hint: given the above game subject & let variable, #max_guesses will
+    # return 4).
     context 'when max is 9 and min is 0' do
     end
   end
@@ -53,10 +54,10 @@ describe BinarySearch do
   # #display_guess, #game_over? and #update_range).
 
   # The #display_guess method is a protected method and does not need to be
-  # tested in unit testing. For this test, the #display_guess method an example
-  # of a method may take a long time to complete, such as connecting to a
-  # database. To test #computer_turns, we are going to stub #display_guess
-  # so that this unit test can run quickly and efficiently.
+  # tested in unit testing. For this test, the #display_guess method is an
+  # example of a method that may take a long time to complete, such as
+  # connecting to a database. To test #computer_turns, we are going to stub
+  # display_guess so that this unit test can run quickly and efficiently.
   # https://relishapp.com/rspec/rspec-mocks/v/2-99/docs/method-stubs
 
   describe '#computer_turns' do
@@ -86,7 +87,7 @@ describe BinarySearch do
 
     # ASSIGNMENT
 
-    # Change the #make_guess method in the file: lib/15_binary_search to include
+    # Change the #make_guess method in the file lib/15_binary_search to include
     # sleep, with any number that you'd like.
 
     # Create a method stub for #make_guess that will return the correct value of
@@ -114,7 +115,7 @@ describe BinarySearch do
   # ASSIGNMENT
 
   # Write at least 1 test for the #start method.
-  # Bonus: Remove the two puts statements from outputting when the test is run.
+  # Bonus: Prevent the two puts statements from outputting when the test is run.
 
   describe '#start' do
   end

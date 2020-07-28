@@ -4,21 +4,23 @@ require_relative '../lib/13_input_output'
 
 # rubocop:disable Layout/LineLength, Metrics/BlockLength
 
-# Ruby code that was written before you learned how to use rpsec, may be nearly
+# Ruby code that was written before you learned how to use RSpec may be nearly
 # impossible to test. For example, in the 13_input_output file, there are two
-# identical games - ImpossibleToTestGame and NumberGame. Take a look at both
-# game and look for the differences that may make it easier or harder to test.
+# identical games: ImpossibleToTestGame and NumberGame. Take a look at each
+# game and look for differences that may make one easier or harder to test
+# than the other.
 
-# One key difference is that NumberGame has smaller, isolated methods.
+# One key difference between the two is that NumberGame has smaller,
+# isolated methods.
 
 # Small and isolated methods that only do one thing are easier to test.
 # Long methods are like a run-on sentence that should have been divided into 2 or 3 different sentences so that everything could be clearly understood and in this case if a method does many different things it can be difficult to test.
 
-# Therefore, if you are new to testing, be open to refactoring your previous
-# code to make writing testing easier. As you learn testing, you are also
-# learning how to write better testable methods.
+# So if you are new to testing, be open to refactoring your previous
+# code, to make writing tests easier. As you learn testing, you wil also
+# learn how to write better testable methods.
 
-# The tests in this file are going to become longer than previous examples.
+# The tests in this file are longer than the previous examples so far.
 # To get your bearings, remember to reference the following lines:
 # describe -> Name of the method that is being tested.
 # context ->  Explains the conditions of the test.
@@ -28,14 +30,14 @@ describe NumberGame do
   subject(:game) { described_class.new }
 
   describe '#initialize' do
-    it 'is a number 0 - 9' do
+    it 'is a number between 0 and 9' do
       solution = game.solution
       expect(solution).to be >= 0
       expect(solution).to be < 10
     end
 
     # ASSIGNMENT
-    # Write a similar test as the one above, that uses a custom matcher,
+    # Write a similar test to the one above, that uses a custom matcher
     # instead of <, >, =.
 
     # remove the 'x' before running this test
@@ -65,7 +67,8 @@ describe NumberGame do
   # verify_input method. The #player_input method is not tested because it is a
   # protected method. In addition, it is unneccessary to test methods that only
   # contain puts and/or gets. However, at the bottom of the answer file is an
-  # example of how to test the #player_input method if it were not protected.
+  # example of how you would test the #player_input method if it were not
+  # protected.
 
   # Since we do not have to test #player_input, let's test #verify_input.
 
@@ -94,7 +97,7 @@ describe NumberGame do
       number_input = '5'
 
       # When using the same 'Arrange' part of a test, you can utilize before
-      # hooks to set-up the test conditions.
+      # hooks to set up the test conditions.
       # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
 
       before do
@@ -129,7 +132,7 @@ describe NumberGame do
     context 'when given invalid input twice before valid input' do
       letter_input = 'h'
       number_input = '3'
-      # Create another invalid input (anything except a digit between 0-9).
+      # Create another invalid input (anything except a digit between 0 and 9).
 
       before do
         # A method stub can be called multiple times and return different values.
