@@ -30,13 +30,11 @@ If students had additional practice using RSpec, specifically mocks and doubles,
 
 When I first started working on this 'playground', I imagined that it would be an additional resource in the [Testing Your Ruby Code lesson](https://www.theodinproject.com/courses/ruby-programming/lessons/testing-your-ruby-code). However, after talking with other people struggling with writing tests, I think it should be an assignment after writing tests for Caesar Cipher and before Tic Tac Toe. 
 
-In addition, I believe the Sandi Metz video should come before doing tests for Tic Tac Toe. I included a link in the last file because it is very useful to teach what methods should be tested. This 'playground' does not focus on what tests should be written, because the exercises are very simple and uses a minimal number of classes. 
+In addition, I believe the Sandi Metz video should come before doing tests for Tic Tac Toe. I included a link in the second to file because it is very useful to teach what methods should & should not be tested. 
 
 ## Drawbacks
 
-The only drawback to adding this to the curriculum is that we may be answering more questions about these exercises. I have asked people to go through them to help me eliminate the confusing areas. However, learning testing, especially the use of doubles/stubs/mocks can be very confusing no matter how good.
-
-I am confident that once these exercises are reviewed by an experienced RSpec user, that any confusion 
+The only drawback to adding this to the curriculum is that we may be answering more questions about these exercises. I have asked a few Odinites to work through these exercises to help me eliminate the typos and any confusing wording. 
 
 ## Alternatives
 
@@ -44,7 +42,7 @@ I searched for an alternative and could not find an better option than the Udemy
 
 ## Additional
 
-Early on I had told a few people about this repo in the #ruby-testing channel. In addition, I have privately told a few students about it. At this time, I know that andrewjh271, aaron-contreras, tenacious-qi, Natty, msespos, and Pandenok have or are currently going through them.
+I have told a few people about this repo in the #ruby-testing channel. In addition, I have privately told a few students about it. At this time, I know that andrewjh271, aaron-contreras, tenacious-qi, Natty, msespos, and Pandenok have or are currently going through them.
 
 This playground needs a thorough review by someone a lot more familiar with RSpec. Even though I have spent two months learning RSpec, I do not feel 100% confident in some of my explanations & I have 0 'real-world' experience.
 
