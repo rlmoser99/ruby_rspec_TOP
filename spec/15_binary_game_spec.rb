@@ -4,7 +4,7 @@ require_relative '../lib/15_binary_search'
 require_relative '../lib/15_random_number'
 require_relative '../lib/15_binary_game'
 
-# The files for this example (#15) builds on the TDD files from #14.
+# The files for this example (#15) build on the TDD files from #14.
 # The FindNumber class is now called BinarySearch, which is a more accurate
 # description.
 
@@ -14,22 +14,22 @@ require_relative '../lib/15_binary_game'
 # double from the previous file has been removed.
 
 # After TDD is complete, the classes and methods that were used as a test
-# double, should be updated to be a 'verifying double' Using a 'verifying
-# double' is preferred, because they will produce an error if does not exist
-# on the actual class.
+# double should be updated to be a 'verifying double.' Using a 'verifying
+# double' is preferred, because doubles can produce an error if they do
+# not exist in the actual class.
 
 # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles
 
 # It is common for method and variable names to change during development.
 # For example, random_number.value could change to rand_num.number
 
-# Therefore, using a 'verifying double' makes a test more stable.
+# Therefore using a 'verifying double' makes a test more stable.
 
-# Unit testing relies on using doubles to test the object in isolation (not
-# dependant on any other object). One important concept to understand is the
-# BinarySearch or FindNumber class doesn't care if it is given an actual
-# random_number class object. It only cares that it is given an object that
-# can respond to certain methods. This concept is called polymorphism
+# Unit testing relies on using doubles to test the object in isolation (i.e.,
+# not dependent on any other object). One important concept to understand is
+# that the BinarySearch or FindNumber class doesn't care if it is given an\
+# actual random_number class object. It only cares that it is given an object
+# that can respond to certain methods. This concept is called polymorphism.
 # https://www.geeksforgeeks.org/polymorphism-in-ruby/
 
 # In the file, 14_find_number, you wrote tests for #make_guess, #game_over?, and
