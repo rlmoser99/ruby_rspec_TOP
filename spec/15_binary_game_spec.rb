@@ -4,119 +4,197 @@ require_relative '../lib/15_binary_search'
 require_relative '../lib/15_random_number'
 require_relative '../lib/15_binary_game'
 
-# The files for this example (#15) build on the TDD files from #14.
+# The files for this example (#15) builds on the TDD files from #14.
 # The FindNumber class is now called BinarySearch, which is a more accurate
-# description.
+# description (lib/15_binary_search).
 
-# In addition, this example now includes a BinaryGame class. This class is
-# going to let the user decide to input a random number or have the computer
-# generate one (using the RandomNumber class). Therefore, the RandomNumber
-# double from the previous file has been removed.
+# This example has a new class called BinaryGame. This BinaryGame class is going
+# to use the BinarySearch class. In addition, BinaryGame is going to let the
+# user decide to input a random number or have the computer generate one (using
+# the RandomNumber class). Therefore, the RandomNumber double is no longer
+# needed for the BinarySearch spec file. The tests for FindNumber have been
+# updated (spec/15_binary_search).
 
-# After TDD is complete, the classes and methods that were used as a test
-# double should be updated to be a 'verifying double.' Using a 'verifying
-# double' is preferred, because doubles can produce an error if they do
-# not exist in the actual class.
+# For this example, we are going to focus on writing unit tests. It is
+# recommended to watch the video of a talk called 'Magic Tricks of Testing'
+# by Sandi Metz to learn more.
+# https://youtu.be/URSWYvyc42M
 
-# https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles
+# Unit Testing Summary
+# Incoming Query ->         Assert the result
+# Incoming Command ->       Assert the direct public side effects
+# Sent to Self Query ->     Ignore
+# Sent to Self Command ->   Ignore
+# Outgoing Query ->         Ignore
+# Outgoing Command ->       Expect to send
 
-# It is common for method and variable names to change during development.
-# For example, random_number.value could change to rand_num.number
+# The majority of BinaryGame methods are 'sent to self', therefore we can ignore
+# them for unit testing.
 
-# Therefore using a 'verifying double' makes a test more stable.
+# In addition, you do not need to test #initialize if it is only creating
+# instance variables. This can cause the test to be fragile, breaking anytime
+# an instance variable name is changed. If you choose to call methods inside the
+# initialize method, you will need to stub each method for every instance in the
+# tests.
 
-# Unit testing relies on using doubles to test the object in isolation (i.e.,
-# not dependent on any other object). One important concept to understand is
-# that the BinarySearch or FindNumber class doesn't care if it is given an\
-# actual random_number class object. It only cares that it is given an object
-# that can respond to certain methods. This concept is called polymorphism.
-# https://www.geeksforgeeks.org/polymorphism-in-ruby/
-
-# In the file, 14_find_number, you wrote tests for #make_guess, #game_over?, and
-# #update_range. We will not re-write them for this example. If you'd like to
-# see them again, they are now in 15_binary_search_spec.rb (without doubles).
+# That leaves 4 methods to test - #start, #user_random, #computer_random, and
+# #computer_turns.
 
 describe BinaryGame do
-  describe '#max_guesses' do
-    subject(:max_game) { described_class.new }
+  # Incoming Command -> Assert the direct public side effects
+  describe '#start' do
+    context 'when user chooses the random number' do
+      subject(:start_user_game) { described_class.new }
 
-    context 'when the range is default (1 - 100)' do
-      it 'is 7 guesses' do
-        max_guesses = max_game.max_guesses
-        expect(max_guesses).to be(7)
-      end
-    end
+      # To 'Arrange' this test, each of the methods will need to be stubbed, so
+      # that they do not execute. The only method that needs a return value is
+      # #game_mode_selection, which creates the scenario of this test (explained
+      # in context).
 
-    context 'when the range is 1 - 200' do
-      it 'is 8 guesses' do
-        max_game.instance_variable_set(:@range, [1, 200])
-        max_guesses = max_game.max_guesses
-        expect(max_guesses).to be(8)
-      end
-    end
-
-    context 'when the range is 1 - 300' do
-      xit 'is 9 guesses' do
-      end
-    end
-  end
-
-  describe '#user_random' do
-    subject(:user_game) { described_class.new }
-
-    it 'creates a new BinarySearch' do
-      allow(user_game).to receive(:verify_input).and_return(42)
-      allow(user_game).to receive(:player_input).and_return(42)
-      expect(BinarySearch).to receive(:new).with(1, 100, 42)
-      user_game.user_random
-    end
-  end
-
-  describe '#computer_random' do
-    subject(:computer_game) { described_class.new }
-    let(:computer_number) { instance_double(RandomNumber, value: 79) }
-
-    it 'creates a new RandomNumber' do
-      expect(RandomNumber).to receive(:new).with(1, 100).and_return(computer_number)
-      allow(computer_game).to receive(:puts)
-      allow(BinarySearch).to receive(:new)
-      computer_game.computer_random
-    end
-
-    xit 'creates a new BinarySearch' do
-    end
-  end
-
-  describe '#computer_turns' do
-    subject(:turns_game) { described_class.new }
-    let(:turns_search) { instance_double(BinarySearch) }
-
-    before do
-      turns_game.instance_variable_set(:@search, turns_search)
-      allow(turns_game).to receive(:puts)
-      allow(turns_game).to receive(:max_guesses)
-      allow(turns_game).to receive(:display_range)
-    end
-
-    after { turns_game.computer_turns }
-
-    context 'when first guess is correct' do
       before do
-        allow(turns_game.search).to receive(:game_over?).and_return(true)
-        allow(turns_game.search).to receive(:make_guess).and_return(50)
+        allow(start_user_game).to receive(:game_instructions)
+        allow(start_user_game).to receive(:game_mode_selection).and_return(1)
+        allow(start_user_game).to receive(:mode_input)
+        allow(start_user_game).to receive(:user_random)
+        allow(start_user_game).to receive(:computer_turns)
+      end
+
+      # To test if these methods are called, we will be using message
+      # expectations.
+      # https://relishapp.com/rspec/rspec-mocks/docs
+
+      # To set a message expectation, move 'Assert' before 'Act'.
+
+      it 'calls game instructions' do
+        expect(start_user_game).to receive(:game_instructions)
+        start_user_game.start
+      end
+
+      it 'calls user_random' do
+        expect(start_user_game).to receive(:user_random)
+        start_user_game.start
+      end
+
+      it 'calls computer_turns' do
+        expect(start_user_game).to receive(:computer_turns)
+        start_user_game.start
+      end
+    end
+
+    # ASSIGNMENT #1
+    context 'when user chooses a computer-generated random number' do
+      before do
+      end
+
+      xit 'calls game instructions' do
+      end
+
+      xit 'calls computer_random' do
+      end
+
+      xit 'calls computer_turns' do
+      end
+    end
+  end
+
+  # Outgoing Command -> Expect to send
+  describe '#computer_random' do
+    # After TDD is complete, the classes and methods that were used as a test
+    # double should be updated to be a 'verifying double.' Using a 'verifying
+    # double' is preferred, because doubles can produce an error if they do
+    # not exist in the actual class.
+    # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles
+
+    # It is common for method and variable names to change during development.
+    # For example, random_number.value could change to rand_num.number.
+
+    # Therefore using a 'verifying double' makes a test more stable.
+
+    # Unit testing relies on using doubles to test the object in isolation
+    # (i.e., not dependent on any other object). One important concept to
+    # understand is that the BinarySearch or FindNumber class doesn't care if it
+    # is given an actual random_number class object. It only cares that it is
+    # given an object that can respond to certain methods. This concept is
+    # called polymorphism.
+    # https://www.geeksforgeeks.org/polymorphism-in-ruby/
+
+    # Below is the previous generic 'random_number' object used in TDD and the
+    # new verifying instance_double for the RandomNumber class.
+    # let(:random_number) { double('random_number', value: 8) }
+    let(:computer_number) { instance_double(RandomNumber, value: 79) }
+    subject(:computer_game) { described_class.new }
+
+    context 'when user chooses a computer-generated random number' do
+      # The RandomNumber #new stub will need to return the 'computer_number'
+      # double created above.
+      before do
+        allow(RandomNumber).to receive(:new).with(1, 100).and_return(computer_number)
+        allow(computer_game).to receive(:puts)
+        allow(BinarySearch).to receive(:new)
+      end
+
+      it 'creates a new RandomNumber' do
+        expect(RandomNumber).to receive(:new).with(1, 100).and_return(computer_number)
+        computer_game.computer_random
+      end
+
+      it 'creates a new BinarySearch' do
+        expect(BinarySearch).to receive(:new).with(1, 100, 79)
+        computer_game.computer_random
+      end
+    end
+  end
+
+  # ASSIGNMENT #2
+
+  # Outgoing Command -> Expect to send
+  describe '#user_random' do
+    # Create a subject to use to test #user_random.
+
+    context 'when user chooses the random number' do
+      # Look at #user_random and determine any methods need to be stubbed and if
+      # any methods should return anything.
+
+      before do
+      end
+
+      xit 'creates a new BinarySearch' do
+      end
+    end
+  end
+
+  # Outgoing Command -> Expect to send
+  describe '#computer_turns' do
+    context 'when first guess is correct' do
+      subject(:first_game) { described_class.new }
+      let(:first_search) { instance_double(BinarySearch) }
+
+      before do
+        first_game.instance_variable_set(:@binary_search, first_search)
+        allow(first_game).to receive(:puts)
+        allow(first_game).to receive(:max_guesses)
+        allow(first_game).to receive(:display_range)
+        allow(first_game.binary_search).to receive(:game_over?).and_return(true)
+        allow(first_game.binary_search).to receive(:make_guess).and_return(50)
+        allow(first_game.binary_search).to receive(:make_guess).once
       end
 
       it 'sends make_guess once' do
-        expect(turns_game.search).to receive(:make_guess).once
+        expect(first_game.binary_search).to receive(:make_guess).once
+        first_game.computer_turns
       end
 
       it 'does not send update_range' do
-        allow(turns_game.search).to receive(:make_guess)
-        expect(turns_game.search).not_to receive(:update_range)
+        expect(first_game.binary_search).not_to receive(:update_range)
+        first_game.computer_turns
       end
     end
 
+    # ASSIGNMENT #3
     context 'when second guess is correct' do
+      # Set up a scenario for two guesses. Not only will the return values need
+      # to be changed, but there will also be another method to be stubbed.
+
       before do
       end
 
