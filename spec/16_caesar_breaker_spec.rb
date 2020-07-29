@@ -8,7 +8,7 @@ require_relative '../lib/16_caesar_breaker'
 
 # If you have watched the 'Magic Tricks of Testing' video, you will know that
 # you do not have to test every single method in unit testing. Methods do not
-# need to be tested if they are only sent to self or if it only sends an
+# need to be tested if they are only sent to self or if they only send an
 # outgoing query message.
 # https://youtu.be/URSWYvyc42M
 
@@ -19,7 +19,7 @@ describe CaesarBreaker do
   subject(:phrase) { described_class.new('Ebiil, Tloia!') }
 
   # You do not need to test #initialize if it is only creating instance
-  # variables. This can cause the test to be fragile, breaking anytime an
+  # variables. This can cause the test to be fragile, breaking any time an
   # instance variable name is changed.
 
   # To test #decrypt, we will need to move 'Assert' before 'Act' again.
@@ -85,7 +85,7 @@ describe CaesarBreaker do
       end
 
       # The test above outputs two lines from #display_file_location.
-      # So, let stub out that method to clean up the test output.
+      # So, let's stub out that method to clean up the test output.
       it 'does not raise an error' do
         allow(phrase).to receive(:display_file_location)
         expect { phrase.save_decrypted_messages }.not_to raise_error
@@ -93,7 +93,7 @@ describe CaesarBreaker do
     end
 
     # When a method rescues an error, the method will still not raise an error.
-    # Therefore, you test the conditions that happens if an error was rescued.
+    # Therefore you test the conditions that happens if an error was rescued.
     context 'when rescuing an error' do
       before do
         allow(File).to receive(:open).and_raise(Errno::ENOENT)

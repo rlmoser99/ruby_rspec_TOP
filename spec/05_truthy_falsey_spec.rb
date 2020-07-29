@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Do not use 'be_truthy' or 'be_falsey' for methods that should only be
-# evaluated into a Boolean
+# evaluated into a Boolean.
 # https://eddyluten.com/rspec-be_truthy-exists-or-be-true
 
 describe 'truthy and falsy' do

@@ -28,13 +28,13 @@ end
 
 # ASSIGNMENT
 
-describe 'simple word palindrome test' do
+describe 'one word palindrome test' do
   let(:racecar) { 'racecar' }
   let(:spaceship) { 'spaceship' }
   let(:rotator) { 'rotator' }
   let(:palindrome) { 'palindrome' }
 
-  # Write one custom matcher for a simple word palindrome that will pass all
+  # Write one custom matcher for a one word palindrome that will pass all
   # of the following tests.
 
   context 'when a palindrome is used' do
