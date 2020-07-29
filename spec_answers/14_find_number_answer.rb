@@ -28,7 +28,7 @@ class FindNumber
   end
 end
 
-# For this assignment you will be doing TDD for 3 methods - #make_guess,
+# For this assignment you will be doing TDD for 3 methods: #make_guess,
 # #make_guess, and #update_range.
 
 # After you have some experience using TDD, you can use the typical
@@ -37,19 +37,19 @@ end
 
 # Since this is probably your first experience with TDD, let's extend the
 # workflow to include a few more steps:
-# 1. Read & understand the requirement for one method at a time.
-# 2. Write one test for that method that you think will pass.
-# 3. Write the method that fulfills the requirement.
+# 1. Read & understand the requirement for one method only.
+# 2. Write one test for that method that you think it will pass.
+# 3. Write the method to fulfill the requirement.
 # 4. Run the test that you wrote. If it doesn't pass, re-do steps 1-3.
 # 5. When your first test is passing, write the additional tests.
-# 6. Run all of the tests. If they all don't pass, re-do steps 3-5.
-# 7. Optional: Refactor your code and/or tests, with all tests passing.
+# 6. Run all of the tests. If any do not pass, re-do steps 3-5.
+# 7. Optional: Refactor your code and/or tests, keeping all tests passing.
 
 describe FindNumber do
   # ASSIGNMENT: METHOD #1
 
   # The basic idea of 'FindNumber' is to program a computer to guess a
-  # random_number, using binary search. Remember the binary search video
+  # random_number using binary search. Remember the binary search video
   # that you watched in the Computer Science section:
   # https://www.youtube.com/watch?v=T98PIp4omUA
 
@@ -57,7 +57,7 @@ describe FindNumber do
 
   describe '#make_guess' do
     # Create a random_number double & allow it to receive 'value' and return any
-    # number between 0 and 9 in one of the two ways explained above.
+    # number between 0 and 9, in one of the two ways explained above.
 
     let(:random_number) { double('random_number', value: 8) }
     subject(:game) { described_class.new(0, 9, random_number) }
@@ -113,13 +113,13 @@ describe FindNumber do
   # ASSIGNMENT: METHOD #2
   describe '#game_over?' do
     # In a long test file, it can be helpful to declare variables in each
-    # describe block, to make the tests more read-able. When creating another
+    # describe block, to make the tests more readable. When creating another
     # instance of the random number and/or subject, use a meaningful name to
     # differentiate between instances.
 
     # Create a subject and random_number double with a meaningful name.
     # A helpful tip is to combine the purpose of the test and the object.
-    # Like, ending_number & ending_game or completing_random & completing_game.
+    # E.g., ending_number & ending_game or completing_random & completing_game.
 
     # Allow the double to receive 'value' and return a number from the min-max.
 
@@ -155,15 +155,15 @@ describe FindNumber do
     let(:updating_number) { double('random_number', value: 8) }
     subject(:updating_game) { described_class.new(0, 9, updating_number) }
 
-    # Write four tests for #update_range that tests the values of min and max.
+    # Write four tests for #update_range that test the values of min and max.
 
     # When the guess is less than the answer:
-    # - min will update to one more than the guess
-    # - max stays the same.
+    # - min updates to one more than the guess
+    # - max stays the same
 
     # When the guess is more than the answer:
     # - min stays the same
-    # - max will update to one less than the guess
+    # - max updates to one less than the guess
 
     # Note: updating_game in each context block starts off with
     # min = 0 and max = 9.
@@ -206,10 +206,10 @@ describe FindNumber do
     # do the following:
 
     # When the guess is less than the answer:
-    # - min will update to one more than the guess
+    # - min updates to one more than the guess
 
     # When the guess is not less than the answer:
-    # - max will update to one less than the guess
+    # - max updates to one less than the guess
 
     # Write a test for any 'edge cases' that you can think of, for example:
 

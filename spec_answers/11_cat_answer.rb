@@ -35,8 +35,8 @@ describe Cat do
   # Create a subject with your choice of cat name and optional breed/color.
   subject(:lucy) { described_class.new('Lucy', 'British Shorthair') }
 
-  # Write a test using the second shared_example to test that cat should
-  # respond to talk ('meow').
+  # Write a test using the second shared_example to test that cat responds to
+  # talk ('meow').
   context 'when Cat has method name shared with other classes' do
     include_examples 'shared method name'
   end
