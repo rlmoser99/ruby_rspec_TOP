@@ -5,16 +5,16 @@ require_relative '../spec/11_shared_example_spec'
 
 # rubocop:disable Layout/LineLength
 
-# This example has a 'Pet' class with two sub-classes 'Cat' and 'Dog'.
+# This example has a 'Pet' class with two subclasses 'Cat' and 'Dog'.
 # There is a spec file for cat & dog (each file begins with '11_').
 
 # In addition, there is a third spec file called '11_shared_example'.
-# This file has two tests that are used in both the cat & dog spec files.
+# That file has two tests that are used in both the cat & dog spec files.
 
 describe Cat do
   subject(:oscar) { described_class.new('Oscar', 'Maine Coon') }
 
-  # Check out the file: 11_shared_examples_spec.rb.
+  # Check out the file 11_shared_examples_spec.rb.
   # This test references that file's first test in the 'include_examples' line.
   # The shared_example_spec file has further information.
   context 'when Cat is a child class of Pet' do
@@ -35,8 +35,8 @@ end
 describe Cat do
   # Create a subject with your choice of cat name and optional breed/color.
 
-  # Write a test using the second shared_example to test that cat should
-  # respond to talk ('meow').
+  # Write a test using the second shared_example to test that cat responds to
+  # talk ('meow').
   context '' do
   end
 

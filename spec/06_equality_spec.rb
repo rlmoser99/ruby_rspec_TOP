@@ -40,7 +40,7 @@ describe 'differences between eq, eql, equal, and be' do
 
     # Some prefer to use 'be' over 'equal' because it semantically makes sense.
     # expect(first_item).to be(second_item)
-    context 'be and equal cares about object identity' do
+    context 'be and equal care about object identity' do
       it 'is comparing the same car' do
         expect(my_car).to equal(my_kids_borrow)
         expect(my_car).to be(my_kids_borrow)

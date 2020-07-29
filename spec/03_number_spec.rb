@@ -2,8 +2,8 @@
 
 # rubocop:disable Metrics/BlockLength
 
-# In a typical work-flow, the class being tested will be located in a different
-# file. But for this simple example, let's keep everything together.
+# In a typical workflow, the class being tested will be located in a separate
+# file from the tests. But for this simple example, let's keep everything together.
 class SingleDigit
   attr_reader :number
 
@@ -14,11 +14,11 @@ end
 
 describe SingleDigit do
   # It is recommended to explicitly define the subject with a descriptive name.
-  # Then, use the descriptive name, instead of 'subject' in the tests.
+  # Then use the descriptive name, instead of 'subject,' in the tests.
   # https://relishapp.com/rspec/rspec-core/docs/subject/explicit-subject
   subject(:random_digit) { SingleDigit.new }
 
-  # There can be multiple tests in one example block, however it is recommended
+  # There can be multiple tests in one example block; however, it is recommended
   # to test only one thing at a time.
   it 'is greater than or equal to 1 and less than 10' do
     # Comparison matchers are used with 'be' matcher

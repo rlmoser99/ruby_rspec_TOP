@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Using the 'all' matcher and the 'contain_exactly' matcher will look at every
+# The 'all' matcher and the 'contain_exactly' matcher each look at every
 # item in 'numbers'.
 
 describe Array do

@@ -6,27 +6,28 @@ describe Array do
   # https://relishapp.com/rspec/rspec-core/v/2-11/docs/subject/implicitly-defined-subject
 
   # Note: Using an implicit subject is not recommended for most situations.
-  # The next lesson will cover explicit subjects, which is recommended over an
-  # implicit subject.
+  # The next lesson will cover explicit subjects, which are recommended over
+  # implicit subjects.
 
   context 'when subject is implicitly defined' do
-    # type matchers:
+    # Type matchers:
     # https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/type-matchers
     it 'is an Array' do
       expect(subject).to be_a(Array)
     end
-    # One-line syntax that does the same as the above test.
-    # Look at the auto-generated doc string when this test is run (in terminal).
+    # Below is one-line syntax that does the same as the above test.
+    # Look at the doc string that is auto-generated when this test is run
+    # (in a terminal window).
     it { is_expected.to be_a(Array) }
   end
 
-  # There are many predicate matchers to use, for example:
+  # There are many predicate matchers to use. For example:
   # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/predicate-matchers
   it 'is empty' do
     expect(subject).to be_empty
   end
-  # One-line syntax that does the same as the above test.
-  # Look at the auto-generated doc string when this test file is run
+  # Below is one-line syntax that does the same as the above test.
+  # Look at the doc string that is auto-generated when this test is run
   # (in a terminal window).
 
   it { is_expected.to be_empty }
@@ -41,17 +42,17 @@ describe Array do
     end
   end
 
-  # Look at the order of these 5 tests when this test file is run (in terminal).
-  # Why do you think they are in a different order than these tests are written?
+  # Look at the order of the above 5 tests when this test file is run
+  # (in a terminal).
+  # Why do you think they output in a different order than they are written?
 
-  # The tests output in a different order, because each group runs its examples
-  # before running its nested example groups, even if the nested groups are
-  # defined before the examples.
+  # The answer is that each group runs its examples before running its nested
+  # example groups, even if the nested groups are defined before the examples.
   # https://relishapp.com/rspec/rspec-core/v/3-9/docs/command-line/order
 
   # Please note: one-line tests are only recommended when the matcher aligns
-  # exactly with the doc string. However, many ruby-ists prefer explicitly
-  # writing out the test & not using one-line syntax.
+  # exactly with the doc string. Even in that case, many rubyists prefer
+  # explicitly writing out the test & not using one-line syntax.
 end
 
 # ASSIGNMENT
