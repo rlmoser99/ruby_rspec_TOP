@@ -17,7 +17,7 @@ require_relative '../lib/13_input_output'
 # Long methods are like a run-on sentence that should have been divided into 2 or 3 different sentences so that everything could be clearly understood and in this case if a method does many different things it can be difficult to test.
 
 # So if you are new to testing, be open to refactoring your previous
-# code, to make writing tests easier. As you learn testing, you wil also
+# code, to make writing tests easier. As you learn testing, you will also
 # learn how to write better testable methods.
 
 # The tests in this file are longer than the previous examples so far.
