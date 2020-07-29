@@ -4,6 +4,8 @@ require_relative '../lib/15_binary_search'
 require_relative '../lib/15_random_number'
 require_relative '../lib/15_binary_game'
 
+# rubocop:disable Metrics/BlockLength
+
 # The files for this example (#15) builds on the TDD files from #14.
 # The FindNumber class is now called BinarySearch, which is a more accurate
 # description (lib/15_binary_search).
@@ -70,6 +72,13 @@ describe BinaryGame do
         start_user_game.start
       end
 
+      # Using method expectations can be confusing. Stubbing the methods above
+      # does not cause this test to pass, it only 'allows' a method to be
+      # called, if it is called. To test this, let's allow a method that is not
+      # called in #start. Uncomment and move the following line to the before
+      # hook and run the tests. All of the tests should continue to pass.
+      # allow(start_user_game).to receive(:display_range)
+
       it 'calls user_random' do
         expect(start_user_game).to receive(:user_random)
         start_user_game.start
@@ -79,10 +88,22 @@ describe BinaryGame do
         expect(start_user_game).to receive(:computer_turns)
         start_user_game.start
       end
+
+      # Now choose one of these methods used above as a message expectation and
+      # comment it out in the lib/15_binary_game.rb file. Resave the file and
+      # rerun the tests. The test of the method that you commented out should
+      # fail because that method is never called.
+
+      # Before moving on, uncomment that method in the lib/15_binary_game.rb
+      # file to have all tests passing again.
     end
 
     # ASSIGNMENT #1
     context 'when user chooses a computer-generated random number' do
+      # Create a new subject for this scenario.
+
+      # The before hook will be similar to the above test, except the return
+      # value of #game_mode_selection should be 2.
       before do
       end
 
@@ -102,13 +123,9 @@ describe BinaryGame do
     # After TDD is complete, the classes and methods that were used as a test
     # double should be updated to be a 'verifying double.' Using a 'verifying
     # double' is preferred, because doubles can produce an error if they do
-    # not exist in the actual class.
+    # not exist in the actual class. Therefore using a 'verifying double'
+    # makes a test more stable.
     # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles
-
-    # It is common for method and variable names to change during development.
-    # For example, random_number.value could change to rand_num.number.
-
-    # Therefore using a 'verifying double' makes a test more stable.
 
     # Unit testing relies on using doubles to test the object in isolation
     # (i.e., not dependent on any other object). One important concept to
@@ -118,8 +135,9 @@ describe BinaryGame do
     # called polymorphism.
     # https://www.geeksforgeeks.org/polymorphism-in-ruby/
 
-    # Below is the previous generic 'random_number' object used in TDD and the
-    # new verifying instance_double for the RandomNumber class.
+    # Below is the previous generic 'random_number' object used in TDD so that
+    # you can compare it to the new verifying instance_double for the
+    # RandomNumber class.
     # let(:random_number) { double('random_number', value: 8) }
     let(:computer_number) { instance_double(RandomNumber, value: 79) }
     subject(:computer_game) { described_class.new }
@@ -149,12 +167,13 @@ describe BinaryGame do
 
   # Outgoing Command -> Expect to send
   describe '#user_random' do
-    # Create a subject to use to test #user_random.
+    # Create a new subject to test #user_random. When only one scenario is
+    # needed to test a method, the subject can be created in outside of the
+    # context block.
 
     context 'when user chooses the random number' do
       # Look at #user_random and determine any methods need to be stubbed and if
       # any methods should return anything.
-
       before do
       end
 
@@ -166,10 +185,15 @@ describe BinaryGame do
   # Outgoing Command -> Expect to send
   describe '#computer_turns' do
     context 'when first guess is correct' do
-      subject(:first_game) { described_class.new }
+      # This method uses the BinarySearch class, so let's create a double to
+      # continue to test the BinaryGame class in isolation from other classes.
       let(:first_search) { instance_double(BinarySearch) }
+      subject(:first_game) { described_class.new }
 
       before do
+        # Unlike the #computer_random example, where RandomNumber.new returns a
+        # double, this method needs the value of the instance variable
+        # @binary_search to be set to the double created above.
         first_game.instance_variable_set(:@binary_search, first_search)
         allow(first_game).to receive(:puts)
         allow(first_game).to receive(:max_guesses)
@@ -206,3 +230,5 @@ describe BinaryGame do
     end
   end
 end
+
+# rubocop:enable Metrics/BlockLength
