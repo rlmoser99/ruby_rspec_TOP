@@ -27,6 +27,7 @@ describe CaesarBreaker do
   subject(:phrase) { described_class.new('Ebiil, Tloia!') }
 
   # ASSIGNMENT #1
+  # Write the following two tests for #decrypt
 
   # Incoming Command -> Assert the direct public side effects
   describe '#decrypt' do
@@ -38,6 +39,7 @@ describe CaesarBreaker do
   end
 
   # ASSIGNMENT #2
+  # Write the following test for #create_decrypted_messages
 
   # Outgoing Command -> Expect to send
   describe '#create_decrypted_messages' do
@@ -100,6 +102,7 @@ describe CaesarBreaker do
   end
 
   # ASSIGNMENT #3
+  # Write the following test for #save_to_yaml
 
   # Outgoing Command -> Expect to send
   describe '#save_to_yaml' do
