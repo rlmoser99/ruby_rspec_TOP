@@ -21,6 +21,8 @@ module Database
     )
   end
 
+  protected
+
   def create_filename
     message.scan(/\w+/).join
   end

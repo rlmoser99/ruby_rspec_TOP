@@ -1,16 +1,18 @@
 # frozen_string_literal: false
 
 require_relative '../lib/16_database'
+require_relative '../lib/16_caesar_translator'
 
-# breaks the Ceaser Cipher code
+# breaks the Caeser Cipher code
 class CaesarBreaker
-  attr_reader :message, :decrypted_messages
+  attr_reader :message, :decrypted_messages, :translator
   include Database
 
   CODE_SHIFTS = (1..25).to_a
 
   def initialize(message)
     @message = message
+    @translator = CaesarTranslator.new(message)
     @decrypted_messages = []
   end
 
@@ -21,28 +23,10 @@ class CaesarBreaker
 
   def create_decrypted_messages
     CODE_SHIFTS.each do |shift|
-      decrypted_messages << translate(shift)
-    end
-  end
-
-  def translate(shift, result = '')
-    message.each_char do |char|
-      base = char.ord < 91 ? 65 : 97
-      result << character_shift(char, base, shift)
-    end
-    result
-  end
-
-  def character_shift(char, base, shift)
-    char_num = char.ord
-    if char_num.between?(65, 90) || char_num.between?(97, 122)
-      rotation = (((char_num - base) + shift) % 26) + base
-      rotation.chr
-    else
-      char
+      decrypted_messages << @translator.translate(shift)
     end
   end
 end
 
-# phrase = CaesarBreaker.new('Ebiil, Tloia!')
-# phrase.decrypt
+phrase = CaesarBreaker.new('Ebiil, Tloia!')
+phrase.decrypt

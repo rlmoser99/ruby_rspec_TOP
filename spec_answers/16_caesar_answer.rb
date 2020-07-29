@@ -1,80 +1,59 @@
 # frozen_string_literal: true
 
 require_relative '../lib/16_caesar_breaker'
+require_relative '../lib/16_caesar_translator'
 
-# rubocop:disable Layout/LineLength, Metrics/BlockLength
+# rubocop:disable Metrics/BlockLength
 
-# Let's write tests for an entire class & the included module.
+# The CaesarBreaker class creates a yaml file with the 25 possible translations,
+# using a CaesarTranslator class and a Database module. The tests for the
+# CaesarTranslator are in 16_caesar_translator_spec.
 
-# If you have watched the 'Magic Tricks of Testing' video, you will know that
-# you do not have to test every single method in unit testing. Methods do not
-# need to be tested if they are only sent to self or if they only send an
-# outgoing query message.
-# https://youtu.be/URSWYvyc42M
+# Let's write tests for the CaesarBreaker class & the included Database module.
 
-# However, testing every method in this example offers good practice and
-# introduces a few new concepts.
+# Here are the three kinds of methods that need to be tested in unit testing:
+# Incoming Query ->     Assert the result
+# Incoming Command ->   Assert the direct public side effects
+# Outgoing Command ->   Expect to send
 
 describe CaesarBreaker do
+  # The test for CaesarBreaker does not depend on creating different scenarios.
+  # Therefore, we can use same subject instance for these tests.
   subject(:phrase) { described_class.new('Ebiil, Tloia!') }
 
-  # You do not need to test #initialize if it is only creating instance
-  # variables. This can cause the test to be fragile, breaking any time an
-  # instance variable name is changed.
+  # ASSIGNMENT #1
 
-  # To test #decrypt, we will need to move 'Assert' before 'Act' again.
-  # http://testing-for-beginners.rubymonstas.org/test_doubles.html
+  # Incoming Command -> Assert the direct public side effects
   describe '#decrypt' do
-    it 'calls create_decrypted_messages' do
+    before do
       allow(phrase).to receive(:save_decrypted_messages)
+      allow(phrase).to receive(:create_decrypted_messages)
+    end
+
+    it 'calls create_decrypted_messages' do
       expect(phrase).to receive(:create_decrypted_messages)
       phrase.decrypt
     end
 
     it 'calls save_decrypted_messages' do
-      allow(phrase).to receive(:create_decrypted_messages)
       expect(phrase).to receive(:save_decrypted_messages)
       phrase.decrypt
     end
   end
 
-  # ASSIGNMENT
+  # ASSIGNMENT #2
 
-  # Write at least one test for each of the following methods:
+  # Outgoing Command -> Expect to send
   describe '#create_decrypted_messages' do
-    it 'creates 25 decrypted messages' do
+    let(:phrase_translator) { instance_double(CaesarTranslator) }
+
+    before do
+      phrase.instance_variable_set(:@translate, phrase_translator)
+    end
+
+    it 'sends translate 25 times' do
+      expect(phrase.translator).to receive(:translate).exactly(25).times
       phrase.create_decrypted_messages
-      number_of_messages = phrase.decrypted_messages.length
-      expect(number_of_messages).to eq(25)
-    end
-  end
-
-  describe '#translate' do
-    it 'shifts entire phrase' do
-      shift = 1
-      result = phrase.translate(shift)
-      expect(result).to eq('Fcjjm, Umpjb!')
-    end
-  end
-
-  describe '#character_shift' do
-    it 'shifts one letter' do
-      character = 'A'
-      base = 65
-      shift = 1
-      result = phrase.character_shift(character, base, shift)
-      expect(result).to eq('B')
-    end
-
-    # ASSIGNMENT
-
-    # Write the following test using a special character.
-    it 'does not shift non-letters' do
-      character = '?'
-      base = 65
-      shift = 1
-      result = phrase.character_shift(character, base, shift)
-      expect(result).to eq('?')
     end
   end
 
@@ -89,6 +68,7 @@ describe CaesarBreaker do
   # Modules can also be tested in a class that includes it, which is how the
   # following tests work.
 
+  # Incoming Command -> Assert the direct public side effects
   describe '#save_decrypted_messages' do
     # This method has a rescue block in case an error occurs.
     # Let's test that this method can run without raising an error.
@@ -132,37 +112,14 @@ describe CaesarBreaker do
     end
   end
 
-  # ASSIGNMENT
+  # ASSIGNMENT #3
 
-  # Write at least one test for each of the following methods:
+  # Outgoing Command -> Expect to send
   describe '#save_to_yaml' do
     it 'dumps to yaml' do
       expect(YAML).to receive(:dump)
       phrase.save_to_yaml
     end
   end
-
-  describe '#create_filename' do
-    it 'creates filename using letter characters only' do
-      filename = phrase.create_filename
-      expect(filename).to eq('EbiilTloia')
-    end
-  end
-
-  describe '#display_file_location' do
-    it 'displays the success message' do
-      message = phrase.message
-      allow(phrase).to receive(:puts).once.with('The 25 possibilities are saved in a file in 16_cipher/')
-      expect(phrase).to receive(:puts).once.with("'#{message}' has been decoded.")
-      phrase.display_file_location
-    end
-
-    it 'displays the file location' do
-      message = phrase.message
-      allow(phrase).to receive(:puts).once.with("'#{message}' has been decoded.")
-      expect(phrase).to receive(:puts).once.with('The 25 possibilities are saved in a file in 16_cipher/')
-      phrase.display_file_location
-    end
-  end
 end
-# rubocop:enable Layout/LineLength, Metrics/BlockLength
+# rubocop:enable Metrics/BlockLength
