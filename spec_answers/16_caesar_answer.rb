@@ -16,8 +16,13 @@ require_relative '../lib/16_caesar_translator'
 # Incoming Command ->   Assert the direct public side effects
 # Outgoing Command ->   Expect to send
 
+# In this example, you will be writing tests for 3 methods - #decrypt,
+# #create_decrypted_messages, and #save_to_yaml. In addition, you will learn
+# about testing module methods and how to handle testing methods that can raise
+# errors.
+
 describe CaesarBreaker do
-  # The test for CaesarBreaker does not depend on creating different scenarios.
+  # The tests for CaesarBreaker does not depend on creating different scenarios.
   # Therefore, we can use same subject instance for these tests.
   subject(:phrase) { described_class.new('Ebiil, Tloia!') }
 
@@ -92,16 +97,15 @@ describe CaesarBreaker do
     context 'when rescuing an error' do
       before do
         allow(File).to receive(:open).and_raise(Errno::ENOENT)
+        allow(phrase).to receive(:puts).twice
       end
 
       it 'rescues error' do
-        allow(phrase).to receive(:puts).twice
         expect { phrase.save_decrypted_messages }.not_to raise_error
       end
 
       it 'does not display file location' do
         expect(phrase).not_to receive(:display_file_location)
-        allow(phrase).to receive(:puts).twice
         phrase.save_decrypted_messages
       end
 
