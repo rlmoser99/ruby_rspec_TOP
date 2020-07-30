@@ -3,8 +3,6 @@
 require_relative '../lib/16_caesar_breaker'
 require_relative '../lib/16_caesar_translator'
 
-# rubocop:disable Metrics/BlockLength
-
 # The CaesarBreaker class creates a yaml file with the 25 possible translations,
 # using a CaesarTranslator class and a Database module. The tests for the
 # CaesarTranslator are in 16_caesar_translator_spec.
@@ -129,4 +127,3 @@ describe CaesarBreaker do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

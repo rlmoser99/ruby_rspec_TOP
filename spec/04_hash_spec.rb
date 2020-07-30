@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
-
 describe Hash do
   subject(:favorites) { { color: 'blue', food: 'fajitas' } }
 
@@ -69,4 +67,3 @@ describe Hash do
     # Write a test that verifies the above statement.
   end
 end
-# rubocop:enable Metrics/BlockLength

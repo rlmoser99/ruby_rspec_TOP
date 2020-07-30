@@ -4,8 +4,6 @@ require_relative '../lib/15_binary_search'
 require_relative '../lib/15_random_number'
 require_relative '../lib/15_binary_game'
 
-# rubocop:disable Metrics/BlockLength
-
 # The files for this example (#15) builds on the TDD files from #14.
 # The FindNumber class is now called BinarySearch, which is a more accurate
 # description (lib/15_binary_search).
@@ -230,5 +228,3 @@ describe BinaryGame do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

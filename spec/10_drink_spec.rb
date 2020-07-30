@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
-
 # Now that the basics are covered, we are going to use a typical workflow.
 # The class being tested will be located in a different file.
 # If you are using VS Code, you can split the screen to see both files.
@@ -119,5 +117,3 @@ describe Drink do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

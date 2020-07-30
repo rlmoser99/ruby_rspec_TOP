@@ -2,8 +2,6 @@
 
 require_relative '../lib/12_magic_seven'
 
-# rubocop:disable Metrics/BlockLength
-
 # Before learning any more complexities of testing, let's take a look at a
 # standard testing pattern: Arrange, Act, and Assert.
 # https://youtu.be/sCthIEOaMI8
@@ -14,7 +12,7 @@ require_relative '../lib/12_magic_seven'
 # 3. Assert ->  expect the results of arrange & act.
 
 # The tests in this example are fairly easy to understand, and it may seem
-# ridiculous to use A-A-A for them. However, tests should be easily understood 
+# ridiculous to use A-A-A for them. However, tests should be easily understood
 # not just by you, but also by someone that is not familiar with the code.
 
 # NOTE: When you start using A-A-A to format your tests, it will feel
@@ -93,5 +91,3 @@ describe MagicSeven do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

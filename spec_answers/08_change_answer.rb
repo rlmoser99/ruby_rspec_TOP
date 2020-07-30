@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Layout/LineLength
-
 describe 'lucky numbers with rotate! method' do
   subject(:lucky_numbers) { [3, 7, 13, 31, 42] }
   # Write a test that expresses each of the following statements.
@@ -24,4 +22,3 @@ describe 'lucky numbers with rotate! method' do
     end
   end
 end
-# rubocop:enable Layout/LineLength

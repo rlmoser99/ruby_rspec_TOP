@@ -2,8 +2,6 @@
 
 require_relative '../lib/12_magic_seven'
 
-# rubocop:disable Metrics/BlockLength
-
 # Before learning any more complexities of testing, let's take a look at a
 # standard testing pattern: Arrange, Act, and Assert.
 # https://youtu.be/sCthIEOaMI8
@@ -123,5 +121,3 @@ describe MagicSeven do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength
