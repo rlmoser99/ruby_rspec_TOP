@@ -8,11 +8,12 @@ describe 'one word palindrome test' do
   let(:rotator) { 'rotator' }
   let(:palindrome) { 'palindrome' }
 
-  # Write one custom matcher for a one word palindrome that will pass all
-  # of the following tests.
+  # Write a custom matcher that detects a one word palindrome,
+  # using the following block: { |word| word.reverse == word }.
+  # When it is set up correctly, all of the following tests will pass.
 
   matcher :be_a_palindrome do
-    match { |string| string.reverse == string }
+    match { |word| word.reverse == word }
   end
 
   context 'when a palindrome is used' do
