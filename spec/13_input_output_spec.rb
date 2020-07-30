@@ -119,10 +119,11 @@ describe NumberGame do
       end
 
       it 'displays error message once' do
-        # Due to the loop, we can test that the game received :puts with the
-        # error message one time. In order to do this, we will need to move
-        # 'Assert' before 'Act', which is an example of mocking.
-        # http://testing-for-beginners.rubymonstas.org/test_doubles.html
+        # To test if this method is called, we will be using a message
+        # expectation.
+        # https://relishapp.com/rspec/rspec-mocks/docs
+
+        # To set a message expectation, move 'Assert' before 'Act'.
         expect(game).to receive(:puts).once.with('Input error!')
         game.verify_input(letter_input)
       end
