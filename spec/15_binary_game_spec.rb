@@ -141,7 +141,12 @@ describe BinaryGame do
     subject(:computer_game) { described_class.new }
 
     context 'when user chooses a computer-generated random number' do
-      # The RandomNumber #new stub will need to return the 'computer_number'
+      # We will need to create a stub for RandomNumber.new(min, max).
+
+      # First, we need to specify the arguments using matching arguments:
+      # https://relishapp.com/rspec/rspec-mocks/docs/setting-constraints/matching-arguments
+
+      # Second, we need to specify that it should return the 'computer_number'
       # double created above.
       before do
         allow(RandomNumber).to receive(:new).with(1, 100).and_return(computer_number)
