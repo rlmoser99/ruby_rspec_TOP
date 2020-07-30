@@ -3,6 +3,14 @@
 require_relative '../lib/15_binary_search'
 require_relative '../lib/15_random_number'
 
+# rubocop:disable Metrics/BlockLength
+
+# Please see file 15_binary_game_spec.rb for the assignments to complete.
+
+# This spec file is for the BinarySearch class that is used by the BinaryGame
+# class. These tests were written in the last assignment. The FindNumber class
+# has been renamed to BinarySearch, which is a more accurate description.
+
 describe BinarySearch do
   describe '#make_guess' do
     subject(:guess_game) { described_class.new(0, 9, 8) }
@@ -123,3 +131,5 @@ describe BinarySearch do
     end
   end
 end
+
+# rubocop:enable Metrics/BlockLength
