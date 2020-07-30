@@ -44,7 +44,9 @@ I searched for an alternative and could not find an better option than the Udemy
 
 I have told a few people about this repo in the #ruby-testing channel. In addition, I have privately told a few students about it. At this time, I know that andrewjh271, aaron-contreras, tenacious-qi, Natty, msespos, and Pandenok have or are currently going through them.
 
-This playground needs a thorough review by someone a lot more familiar with RSpec. Even though I have spent two months learning RSpec, I do not feel 100% confident in some of my explanations & I have 0 'real-world' experience.
+This playground needs a thorough review by someone a lot more familiar with RSpec. Even though I have spent over two months learning RSpec, I do not feel 100% confident in some of my explanations & I have 0 'real-world' experience. 
+
+For example, the last two files focus on methods that should be tested, based on Sandi Metz talk [Magic Tricks of Testing](https://www.youtube.com/watch?v=URSWYvyc42M). However, I am still uncertain of my understanding of this concept. In my tic-tac-toe game, I have several private methods in my Game class that handle crucial pieces of logic, such as `#player_turns` or `#switch_current_player`. However, these methods are only sent to self or are sending outgoing query messages. Based on my current understanding, these methods do not need to be tested. Having a thorough review by someone that is a lot more familiar with RSpec & Ruby would solidify my confidence in this RSpec playground. 
 
 ## Status
 - [x] Proposed
