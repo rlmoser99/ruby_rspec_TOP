@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
-
 # In a typical workflow, the class being tested will be located in a separate
 # file from the tests. But for this simple example, let's keep everything together.
 class SingleDigit
@@ -89,4 +87,3 @@ describe Array do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

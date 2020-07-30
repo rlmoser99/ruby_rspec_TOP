@@ -2,8 +2,6 @@
 
 require_relative '../lib/13_input_output'
 
-# rubocop:disable Layout/LineLength, Metrics/BlockLength
-
 # Ruby code that was written before you learned how to use RSpec may be nearly
 # impossible to test. For example, in the 13_input_output file, there are two
 # identical games: ImpossibleToTestGame and NumberGame. Take a look at each
@@ -193,4 +191,3 @@ describe NumberGame do
     end
   end
 end
-# rubocop:enable Layout/LineLength, Metrics/BlockLength

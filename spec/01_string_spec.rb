@@ -47,7 +47,6 @@ describe String do
       # Change the favorite_food let variable.
 
       # Write a test that will pass.
-
     end
   end
 end

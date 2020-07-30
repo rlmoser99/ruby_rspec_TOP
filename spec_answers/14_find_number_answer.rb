@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
-
 # All answers for this TDD example are in this file
 # (FindNumber class and rspec tests )
 
@@ -233,5 +231,3 @@ describe FindNumber do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

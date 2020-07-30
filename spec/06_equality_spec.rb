@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
-
 # 'eq' checks for equal VALUE.
 # 'eql' checks for equal VALUE and TYPE.
 # 'equal' checks for OBJECT IDENTITY.
@@ -81,4 +79,3 @@ describe 'equality assignment' do
   xit 'copy_cat is equal to amy' do
   end
 end
-# rubocop:enable Metrics/BlockLength

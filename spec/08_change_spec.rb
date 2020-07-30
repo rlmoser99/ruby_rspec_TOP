@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Layout/LineLength, Metrics/BlockLength
-
 describe Array do
   subject(:drinks) { %w[coffee tea water] }
 
@@ -69,4 +67,3 @@ describe 'lucky numbers with rotate! method' do
     end
   end
 end
-# rubocop:enable Layout/LineLength, Metrics/BlockLength
