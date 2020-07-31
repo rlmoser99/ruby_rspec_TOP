@@ -28,18 +28,27 @@ describe NumberGame do
   subject(:game) { described_class.new }
 
   describe '#initialize' do
-    it 'is a number between 0 and 9' do
-      solution = game.solution
-      expect(solution).to be >= 0
-      expect(solution).to be < 10
-    end
+    context 'when solution is initialized' do
+      it 'is a number greater than or equal to 0' do
+        solution = game.solution
+        expect(solution).to be >= 0
+      end
 
-    # ASSIGNMENT
-    # Write a similar test to the one above, that uses a custom matcher
-    # instead of <, >, =.
+      it 'is a number greater than 9' do
+        solution = game.solution
+        expect(solution).to be < 10
+      end
 
-    # remove the 'x' before running this test
-    xit 'is a number between 0 and 9' do
+      # ASSIGNMENT
+      # Write a similar test to the one above, that uses a custom matcher
+      # instead of <, >, =.
+      matcher :be_between_zero_and_nine do
+        match { |number| number.between?(0, 9) }
+      end
+
+      # remove the 'x' before running this test
+      xit 'is a number between 0 and 9' do
+      end
     end
   end
 

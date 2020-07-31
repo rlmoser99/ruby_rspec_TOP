@@ -26,21 +26,22 @@ describe MagicSeven do
   subject(:game) { described_class.new }
 
   describe '#add_nine' do
+    # This test could be written as below (and it would pass):
     it 'returns 15' do
-      # This test could be written as below (and it would pass):
       expect(game.add_nine(6)).to eq(15)
+    end
 
-      # However, the above test is NOT very readable. For example, it does not
-      # explain where '6' came from. So let's start with explaining
-      # that '6' is the current value of random_number, as part of the
-      # 'Arrange' step.
+    # However, the above test is NOT very readable. For example, it does not
+    # explain where '6' came from. So let's start with explaining
+    # where '6' came from, as part of the 'Arrange' step.
+    it 'returns 15' do
       random_number = 6
 
       # For the 'Act' step, we will be testing the result of the logic of adding
       # nine to the random_number.
       result = game.add_nine(random_number)
 
-      # For the 'Assert' step, we know exactly what to expect the result to be:
+      # For the 'Assert' step, we know exactly we expect the result to be:
       expect(result).to eq(15)
     end
   end

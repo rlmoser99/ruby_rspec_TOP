@@ -21,22 +21,27 @@ describe Array do
     it { is_expected.to be_a(Array) }
   end
 
-  # There are many predicate matchers to use. For example:
-  # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/predicate-matchers
-  it 'is empty' do
-    expect(subject).to be_empty
-  end
-  # Below is one-line syntax that does the same as the above test.
-  # Look at the doc string that is auto-generated when this test is run
-  # (in a terminal window).
+  context 'when using predicate matchers' do
+    # There are many predicate matchers to use. For example:
+    # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/predicate-matchers
+    it 'is empty' do
+      expect(subject).to be_empty
+    end
+    # Below is one-line syntax that does the same as the above test.
+    # Look at the doc string that is auto-generated when this test is run
+    # (in a terminal window).
 
-  it { is_expected.to be_empty }
+    it { is_expected.to be_empty }
+  end
 
   context 'when a let variable is declared inside a context block' do
     let(:numbers) { [3, 8, 9] }
 
-    it 'updates the length from 3 to 2' do
+    it 'has length of 3' do
       expect(numbers.length).to eq(3)
+    end
+
+    it 'changes the length to 2' do
       numbers.pop
       expect(numbers.length).to eq(2)
     end
@@ -59,8 +64,12 @@ end
 describe Array do
   context 'when updating an implicit subject' do
     # remove the 'x' before running this test
-    xit 'updates length from 0 to 1' do
-      expect(subject).to be_empty
+    xit 'is empty' do
+      # Write a test to expect the subject to be empty.
+    end
+
+    # remove the 'x' before running this test
+    xit 'updates length to 1' do
       # Update the implicit subject to make this test pass.
       expect(subject.length).to eq(1)
     end

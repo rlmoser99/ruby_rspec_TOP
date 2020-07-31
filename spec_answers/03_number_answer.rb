@@ -6,14 +6,22 @@ describe Array do
     let(:my_array) { [-7, 42, 101, 98] }
 
     # remove the 'x' before running this test
-    it 'has specific first and last values' do
+    it 'has a specific first value' do
       expect(my_array.first).to be_odd.and be <= -1
+    end
+
+    # remove the 'x' before running this test
+    it 'has a specific last value' do
       expect(my_array.last).to be_even.and be < 99
     end
 
     # remove the 'x' before running this test
-    it 'has specific min and max values' do
+    it 'has a specific min value' do
       expect(my_array.min).not_to be < -9
+    end
+
+    # remove the 'x' before running this test
+    it 'has a specific max value' do
       expect(my_array.max).to be > 100
     end
 
