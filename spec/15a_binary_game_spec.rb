@@ -4,9 +4,18 @@ require_relative '../lib/15a_binary_game'
 require_relative '../lib/15b_binary_search'
 require_relative '../lib/15c_random_number'
 
-# The files for this example (#15) builds on the TDD files from #14.
-# The FindNumber class is now called BinarySearch, which is a more accurate
-# description (lib/15_binary_search).
+# The file order to complete this exercise:
+
+# 1. Familarize yourself with the three lib/15 files.
+#    - lib/15a_binary_game
+#    - lib/15b_binary_search is based on 14_find_number.
+#    - lib/15c_random_numer
+# 2. Check out spec/15b_binary_search_spec is based on 14_find_number_spec.
+# 3. Complete spec/15a_binary_game_spec.
+
+# As noted above, the files for this example (#15) builds on the TDD files
+# from #14. The FindNumber class is now called BinarySearch, which is a more
+# accurate description.
 
 # This example has a new class called BinaryGame. This BinaryGame class is going
 # to use the BinarySearch class. In addition, BinaryGame is going to let the

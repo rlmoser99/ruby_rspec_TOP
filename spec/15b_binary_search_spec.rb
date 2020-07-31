@@ -2,7 +2,14 @@
 
 require_relative '../lib/15b_binary_search'
 
-# Please see file 15_binary_game_spec.rb for the assignments to complete.
+# The file order to complete this exercise:
+
+# 1. Familarize yourself with the three lib/15 files.
+#    - lib/15a_binary_game
+#    - lib/15b_binary_search is based on 14_find_number.
+#    - lib/15c_random_numer
+# 2. Check out spec/15b_binary_search_spec is based on 14_find_number_spec.
+# 3. Complete spec/15a_binary_game_spec.
 
 # This spec file is for the BinarySearch class that is used by the BinaryGame
 # class. These tests were written in the last assignment. The FindNumber class
