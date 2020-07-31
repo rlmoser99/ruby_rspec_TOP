@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# This file can be run in the console, by uncommenting the appropriate
+# commands at the bottom of this file. Be sure to commented them out before
+# running rspec to avoid errors.
+
 # Game that is nearly impossible to test.
 # Rewritten below as the easy-to-test NumberGame class with isolated methods
 class ImpossibleToTestGame

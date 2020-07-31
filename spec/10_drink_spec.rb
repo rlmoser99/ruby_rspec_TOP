@@ -4,7 +4,7 @@
 # for the rest of the playground. The class being tested will be located in
 # a different file.
 
-# The order to complete this exercise:
+# The file order to complete this lesson:
 # 1. Familarize yourself with the class in lib/10_drink.rb
 # 2. Complete spec/10_drink_spec.rb
 

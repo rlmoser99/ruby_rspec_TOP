@@ -6,9 +6,9 @@ require_relative '../spec/11a_shared_example_spec'
 describe Cat do
   subject(:oscar) { described_class.new('Oscar', 'Maine Coon') }
 
-  # Check out the file: 11a_shared_examples_spec.rb.
-  # This test references that file's first test in the 'include_examples' line.
-  # The shared_example_spec file has further information.
+  # Before you begin this file, make sure you have read the shared
+  # example file: 11a_shared_examples_spec.rb. This test references
+  # that file's first test in the below 'include_examples' line.
   context 'when Cat is a child class of Pet' do
     include_examples 'base class method name'
   end

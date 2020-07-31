@@ -3,6 +3,10 @@
 require_relative '../lib/16b_caesar_translator'
 require_relative '../lib/16c_database'
 
+# This file can be run in the console, by uncommenting the appropriate
+# commands at the bottom of this file. Be sure to commented them out before
+# running rspec to avoid errors.
+
 # breaks the Caeser Cipher code
 class CaesarBreaker
   attr_reader :message, :decrypted_messages, :translator

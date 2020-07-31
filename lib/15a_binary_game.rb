@@ -3,6 +3,10 @@
 require_relative '../lib/15c_random_number'
 require_relative '../lib/15b_binary_search'
 
+# This file can be run in the console, by uncommenting the appropriate
+# commands at the bottom of this file. Be sure to commented them out before
+# running rspec to avoid errors.
+
 # class for computer to find random number
 class BinaryGame
   attr_reader :range, :random_number, :binary_search

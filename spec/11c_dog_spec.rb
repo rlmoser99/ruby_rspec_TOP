@@ -3,7 +3,7 @@
 require_relative '../lib/11c_dog'
 require_relative '../spec/11a_shared_example_spec'
 
-# The file order to complete this exercise:
+# The file order to complete this lesson:
 
 # 1. Familarize yourself with the three lib/15 files.
 #    - lib/11a_pet.rb is the parent 'Pet' class of 'Cat' and 'Dog'

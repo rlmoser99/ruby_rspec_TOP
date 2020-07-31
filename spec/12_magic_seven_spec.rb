@@ -2,7 +2,7 @@
 
 require_relative '../lib/12_magic_seven'
 
-# The order to complete this exercise:
+# The file order to complete this lesson:
 # 1. Familarize yourself with the class in lib/12_magic_seven.rb
 # 2. Complete spec/12_magic_seven_spec.rb
 

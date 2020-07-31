@@ -2,7 +2,7 @@
 
 require_relative '../lib/15b_binary_search'
 
-# The file order to complete this exercise:
+# The file order to complete this lesson:
 
 # 1. Familarize yourself with the three lib/15 files.
 #    - lib/15a_binary_game

@@ -2,7 +2,7 @@
 
 require_relative '../lib/14_find_number'
 
-# The order to complete this exercise:
+# The file order to complete this lesson:
 # 1. Familarize yourself with the initialize method in lib/14_find_number.rb
 # 2. Start reading spec/14_find_number_spec.rb, which will also include
 #    instructions to add methods to lib/14_find_number.rb

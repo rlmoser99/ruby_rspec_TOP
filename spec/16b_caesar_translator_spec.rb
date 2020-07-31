@@ -2,7 +2,7 @@
 
 require_relative '../lib/16b_caesar_translator'
 
-# The file order to complete this exercise:
+# The file order to complete this lesson:
 
 # 1. Familarize yourself with the three lib/16 files.
 #    - lib/16a_caesar_breaker
