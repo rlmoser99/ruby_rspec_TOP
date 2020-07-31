@@ -2,13 +2,11 @@
 
 # Now that the basics are covered, we are going to use a typical workflow
 # for the rest of the playground. The class being tested will be located in
-# a different file. For example, the files for this example are:
-# lib/10_drink.rb is the 'Drink' class
-# spec/10_drink_spec.rb has tests for the 'Drink' class
+# a different file.
 
-# The file order to complete this exercise:
-# 1. Familarize yourself with the file in the lib folder.
-# 2. Complete this file.
+# The order to complete this exercise:
+# 1. Familarize yourself with the class in lib/10_drink.rb
+# 2. Complete spec/10_drink_spec.rb
 
 # If you are using VS Code, you can split the screen to see both files at
 # the same time (view menu -> editor layout).
