@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../lib/16_caesar_breaker'
-require_relative '../lib/16_caesar_translator'
+require_relative '../lib/16a_caesar_breaker'
+require_relative '../lib/16b_caesar_translator'
 
 # The CaesarBreaker class creates a yaml file with the 25 possible translations,
 # using a CaesarTranslator class and a Database module. The tests for the

@@ -1,7 +1,7 @@
 # frozen_string_literal: false
 
-require_relative '../lib/16_database'
-require_relative '../lib/16_caesar_translator'
+require_relative '../lib/16b_caesar_translator'
+require_relative '../lib/16c_database'
 
 # breaks the Caeser Cipher code
 class CaesarBreaker
