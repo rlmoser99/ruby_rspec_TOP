@@ -7,8 +7,8 @@ require_relative '../lib/11a_pet'
 # lib/11b_cat.rb is a subclass 'Cat'
 # lib/11c_dog.rb is a subclass 'Dog'
 # spec/11a_shared_example_spec.rb has shared tests for 'Cat' and 'Dog'
-# spec/11b_cat_spec.rb has the tests for subclass 'Cat'
-# spec/11c_dog_spec.rb has the tests for subclass 'Dog'
+# spec/11b_cat_spec.rb has tests for the subclass 'Cat'
+# spec/11c_dog_spec.rb has tests for the subclass 'Dog'
 
 # The file order to complete this exercise:
 # 1. Familarize yourself with the 3 files in the lib folder.
