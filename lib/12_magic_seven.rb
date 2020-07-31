@@ -8,14 +8,6 @@ class MagicSeven
     @random_number = rand(0..20)
   end
 
-  def play
-    step_one = add_nine(random_number)
-    step_two = multiply_by_two(step_one)
-    step_three = subtract_four(step_two)
-    step_four = divide_by_two(step_three)
-    subtract_random_number(step_four)
-  end
-
   def add_nine(number)
     number + 9
   end
@@ -34,6 +26,14 @@ class MagicSeven
 
   def subtract_random_number(number)
     number - random_number
+  end
+
+  def play
+    step_one = add_nine(random_number)
+    step_two = multiply_by_two(step_one)
+    step_three = subtract_four(step_two)
+    step_four = divide_by_two(step_three)
+    subtract_random_number(step_four)
   end
 
   # This method is not used in testing. Its purpose is to show how the game

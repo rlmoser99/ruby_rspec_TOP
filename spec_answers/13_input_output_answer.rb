@@ -2,9 +2,13 @@
 
 require_relative '../lib/13_input_output'
 
+# The order to complete this exercise:
+# 1. Familarize yourself with the two classes in lib/13_input_output.rb
+# 2. Complete spec/13_input_output_spec.rb
+
 # Ruby code that was written before you learned how to use RSpec may be nearly
-# impossible to test. For example, in the 13_input_output file, there are two
-# identical games: ImpossibleToTestGame and NumberGame. Take a look at each
+# impossible to test. For example, in the lib/13_input_output file, there are
+# two identical games: ImpossibleToTestGame and NumberGame. Take a look at each
 # game and look for differences that may make one easier or harder to test
 # than the other.
 

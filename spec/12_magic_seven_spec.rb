@@ -2,6 +2,10 @@
 
 require_relative '../lib/12_magic_seven'
 
+# The order to complete this exercise:
+# 1. Familarize yourself with the class in lib/12_magic_seven.rb
+# 2. Complete spec/12_magic_seven_spec.rb
+
 # Before learning any more complexities of testing, let's take a look at a
 # standard testing pattern: Arrange, Act, and Assert.
 # https://youtu.be/sCthIEOaMI8
@@ -18,6 +22,7 @@ require_relative '../lib/12_magic_seven'
 # NOTE: When you start using A-A-A to format your tests, it will feel
 # strange to not be following DRY (Don't Repeat Yourself). With tests, however,
 # repetition is necessary in order for them to be easy to read.
+
 # When you start working on a existing code base, you will often become familiar
 # with the code by reading the tests.
 
