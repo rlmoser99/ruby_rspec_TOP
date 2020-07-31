@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/15_binary_search'
-require_relative '../lib/15_random_number'
+require_relative '../lib/15b_binary_search'
 
 # Please see file 15_binary_game_spec.rb for the assignments to complete.
 

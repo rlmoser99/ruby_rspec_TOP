@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../lib/15_binary_search'
-require_relative '../lib/15_random_number'
-require_relative '../lib/15_binary_game'
+require_relative '../lib/15a_binary_game'
+require_relative '../lib/15b_binary_search'
+require_relative '../lib/15c_random_number'
 
 # The files for this example (#15) builds on the TDD files from #14.
 # The FindNumber class is now called BinarySearch, which is a more accurate
