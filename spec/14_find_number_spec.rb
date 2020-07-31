@@ -12,7 +12,8 @@ require_relative '../lib/14_find_number'
 
 # In this example, we will be testing the class 'FindNumber'. Look at the
 # lib/14_find_number.rb file. An instance of 'FindNumber' is initialized with
-# a 'RandomNumber' object.
+# a 'RandomNumber' object (unless a third argument is given to the initialize
+# method).
 
 # The 'RandomNumber' class has not been written, so we will use a double for it
 # in these tests.
