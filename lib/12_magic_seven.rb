@@ -36,8 +36,10 @@ class MagicSeven
     number - random_number
   end
 
-  # This method is not used in testing. It's purpose is to show how the game
-  # works, if you run it in the console.
+  # This method is not used in testing. Its purpose is to show how the game
+  # works. Run it in the console to see how, by uncommenting the appropriate
+  # commands at the bottom of this file.
+
   def display_result
     step_one = add_nine(random_number)
     step_two = multiply_by_two(step_one)
@@ -47,9 +49,10 @@ class MagicSeven
 
       MAGIC SEVEN
 
-      Magic Seven can take any random number and turn that number into the number 7, using the same five mathematical operations!
+      Magic Seven can take any random number and turn that number into the
+      number 7, using the same five mathematical operations every time!
 
-      For example, let's start with the random number: #{random_number}.
+      For example, let's start with the random number #{random_number}.
 
       1. Add nine:
           #{random_number} + 9 = #{step_one}

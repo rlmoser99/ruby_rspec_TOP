@@ -16,8 +16,8 @@ require_relative '../lib/12_magic_seven'
 # not just by you, but also by someone that is not familiar with the code.
 
 # NOTE: When you start using A-A-A to format your tests, it will feel
-# strange to not be following DRY (don't repeat yourself). With tests, however,
-# repetition is neccessary in order for them to be easy to read.
+# strange to not be following DRY (Don't Repeat Yourself). With tests, however,
+# repetition is necessary in order for them to be easy to read.
 # When you start working on a existing code base, you will often become familiar
 # with the code by reading the tests.
 
@@ -32,7 +32,8 @@ describe MagicSeven do
 
       # However, the above test is NOT very readable. For example, it does not
       # explain where '6' came from. So let's start with explaining
-      # where '6' came from, as part of the 'Arrange' step.
+      # that '6' is the current value of random_number, as part of the
+      # 'Arrange' step.
       random_number = 6
 
       # For the 'Act' step, we will be testing the result of the logic of adding
@@ -51,7 +52,7 @@ describe MagicSeven do
       it 'returns 16' do
         previous_step = 8 # Arrange
         result = game.multiply_by_two(previous_step) # Act
-        expect(result).to eq(16) # Asserts
+        expect(result).to eq(16) # Assert
       end
     end
   end
@@ -74,19 +75,19 @@ describe MagicSeven do
   describe '#play' do
     context 'when the random number is ...' do
       # remove the 'x' before running this test
-      xit 'will always return 7' do
+      xit 'will return 7' do
       end
     end
 
     context 'when the random number is ...' do
       # remove the 'x' before running this test
-      xit 'will always return 7' do
+      xit 'will return 7' do
       end
     end
 
     context 'when the random number is ...' do
       # remove the 'x' before running this test
-      xit 'will always return 7' do
+      xit 'will return 7' do
       end
     end
   end

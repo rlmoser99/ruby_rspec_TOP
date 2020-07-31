@@ -63,7 +63,7 @@ describe NumberGame do
 
   # The #player_input method is used in the game as an argument passed into the
   # verify_input method. The #player_input method is not tested because it is a
-  # protected method. In addition, it is unneccessary to test methods that only
+  # protected method. In addition, it is unnecessary to test methods that only
   # contain puts and/or gets. However, at the bottom of the answer file is an
   # example of how you would test the #player_input method if it were not
   # protected.
