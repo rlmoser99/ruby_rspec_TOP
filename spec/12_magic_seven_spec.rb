@@ -15,7 +15,7 @@ require_relative '../lib/12_magic_seven'
 # 2. Act ->     execute the logic to test (example: calling a method to run).
 # 3. Assert ->  expect the results of arrange & act.
 
-# The tests in this example are fairly easy to understand, and it may seem
+# The tests in this lesson are fairly easy to understand, and it may seem
 # ridiculous to use A-A-A for them. However, tests should be easily understood
 # not just by you, but also by someone that is not familiar with the code.
 

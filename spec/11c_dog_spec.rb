@@ -12,11 +12,6 @@ require_relative '../spec/11a_shared_example_spec'
 # 2. Review the tests in spec/11a_shared_example_spec.rb
 # 3. Complete either spec/11b_cat_spec.rb or spec/11c_dog_spec.rb
 
-# The file order to complete this exercise:
-# 1. Familarize yourself with the 3 files in the lib folder.
-# 2. Review the tests in spec/11a_shared_example_spec.rb
-# 3. Complete either spec/11b_cat_spec.rb or spec/11c_dog_spec.rb
-
 describe Dog do
   subject(:toby) { described_class.new('Toby', nil, 'brown') }
 

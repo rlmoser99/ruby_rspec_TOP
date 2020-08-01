@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Now that the basics are covered, we are going to use a typical workflow
-# for the rest of the playground. The class being tested will be located in
+# for the rest of the lessons. The class being tested will be located in
 # a different file.
 
 # The file order to complete this lesson:

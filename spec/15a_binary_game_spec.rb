@@ -13,18 +13,18 @@ require_relative '../lib/15c_random_number'
 # 2. Check out spec/15b_binary_search_spec is based on 14_find_number_spec.
 # 3. Complete spec/15a_binary_game_spec.
 
-# As noted above, the files for this example (#15) builds on the TDD files
+# As noted above, the files for this lesson (#15) builds on the TDD files
 # from #14. The FindNumber class is now called BinarySearch, which is a more
 # accurate description.
 
-# This example has a new class called BinaryGame. This BinaryGame class is going
+# This lesson has a new class called BinaryGame. This BinaryGame class is going
 # to use the BinarySearch class. In addition, BinaryGame is going to let the
 # user decide to input a random number or have the computer generate one (using
 # the RandomNumber class). Therefore, the RandomNumber double is no longer
 # needed for the BinarySearch spec file. The tests for FindNumber have been
 # updated (spec/15_binary_search).
 
-# For this example, we are going to focus on writing unit tests. It is
+# For this lesson, we are going to focus on writing unit tests. It is
 # recommended to watch the video of a talk called 'Magic Tricks of Testing'
 # by Sandi Metz to learn more.
 # https://youtu.be/URSWYvyc42M

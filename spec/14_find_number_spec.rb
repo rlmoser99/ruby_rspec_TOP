@@ -15,7 +15,7 @@ require_relative '../lib/14_find_number'
 # Doubles are very useful in TDD because you can create test functionality that
 # is not coded yet with them.
 
-# In this example, we will be testing the class 'FindNumber'. Look at the
+# In this lesson, we will be testing the class 'FindNumber'. Look at the
 # lib/14_find_number.rb file. An instance of 'FindNumber' is initialized with
 # a 'RandomNumber' object (unless a third argument is given to the initialize
 # method).

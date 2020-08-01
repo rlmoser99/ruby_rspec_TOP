@@ -22,7 +22,7 @@ require_relative '../lib/16b_caesar_translator'
 # Incoming Command ->   Assert the direct public side effects
 # Outgoing Command ->   Expect to send
 
-# In this example, you will be writing tests for 3 methods - #decrypt,
+# In this lesson, you will be writing tests for 3 methods - #decrypt,
 # #create_decrypted_messages, and #save_to_yaml. In addition, you will learn
 # about testing module methods and how to handle testing methods that can raise
 # errors.

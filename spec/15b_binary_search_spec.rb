@@ -12,7 +12,7 @@ require_relative '../lib/15b_binary_search'
 # 3. Complete spec/15a_binary_game_spec.
 
 # This spec file is for the BinarySearch class that is used by the BinaryGame
-# class. These tests were written in the last assignment. The FindNumber class
+# class. These tests were written in the last lesson. The FindNumber class
 # has been renamed to BinarySearch, which is a more accurate description.
 
 describe BinarySearch do

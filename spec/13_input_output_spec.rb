@@ -22,7 +22,7 @@ require_relative '../lib/13_input_output'
 # code, to make writing tests easier. As you learn testing, you will also
 # learn how to write better testable methods.
 
-# The tests in this file are longer than the previous examples so far.
+# The tests in this file are longer than the previous lessons so far.
 # To get your bearings, remember to reference the following lines:
 # describe -> Name of the method that is being tested.
 # context ->  Explains the conditions of the test.
