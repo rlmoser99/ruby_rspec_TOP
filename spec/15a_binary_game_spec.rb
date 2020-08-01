@@ -22,7 +22,7 @@ require_relative '../lib/15c_random_number'
 # user decide to input a random number or have the computer generate one (using
 # the RandomNumber class). Therefore, the RandomNumber double is no longer
 # needed for the BinarySearch spec file. The tests for FindNumber have been
-# updated (spec/15_binary_search).
+# updated (spec/15b_binary_search).
 
 # For this lesson, we are going to focus on writing unit tests. It is
 # recommended to watch the video of a talk called 'Magic Tricks of Testing'
@@ -97,11 +97,11 @@ describe BinaryGame do
       end
 
       # Now choose one of these methods used above as a message expectation and
-      # comment it out in the lib/15_binary_game.rb file. Resave the file and
+      # comment it out in the lib/15a_binary_game.rb file. Resave the file and
       # rerun the tests. The test of the method that you commented out should
       # fail because that method is never called.
 
-      # Before moving on, uncomment that method in the lib/15_binary_game.rb
+      # Before moving on, uncomment that method in the lib/15a_binary_game.rb
       # file to have all tests passing again.
     end
 
