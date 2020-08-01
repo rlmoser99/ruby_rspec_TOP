@@ -10,7 +10,7 @@ require_relative '../lib/14_find_number'
 # Doubles are very useful in TDD because you can create test functionality that
 # is not coded yet with them.
 
-# In this example, we will be testing the class 'FindNumber'. Look at the
+# In this lesson, we will be testing the class 'FindNumber'. Look at the
 # lib/14_find_number.rb file. An instance of 'FindNumber' is initialized with
 # a 'RandomNumber' object (unless a third argument is given to the initialize
 # method).
@@ -38,10 +38,10 @@ describe FindNumber do
       let(:random_number) { double('random_number') }
       subject(:game) { described_class.new(0, 9, random_number) }
 
-      context 'when random_answer.value is 8' do
+      context 'when random_number is 8' do
         it 'returns 8' do
           allow(random_number).to receive(:value).and_return(8)
-          solution = game.answer.value
+          solution = game.answer
           expect(solution).to eq(8)
         end
       end
@@ -55,9 +55,9 @@ describe FindNumber do
       let(:random_number) { double('random_number', value: 3) }
       subject(:game) { described_class.new(0, 9, random_number) }
 
-      context 'when random_answer.value is 3' do
+      context 'when random_number is 3' do
         it 'returns 3' do
-          solution = game.answer.value
+          solution = game.answer
           expect(solution).to eq(3)
         end
       end
@@ -67,9 +67,9 @@ describe FindNumber do
     # method names to subject.
     context 'when adding method names to subject for multiple tests' do
       let(:random_number) { double('random_number', value: 5) }
-      subject(:game_solution) { described_class.new(0, 9, random_number).answer.value }
+      subject(:game_solution) { described_class.new(0, 9, random_number).answer }
 
-      context 'when random_answer.value is 5' do
+      context 'when random_number is 5' do
         it 'returns 5' do
           expect(game_solution).to eq(5)
         end
