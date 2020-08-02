@@ -5,11 +5,15 @@ require_relative '../lib/15_random_number'
 
 # rubocop:disable Metrics/BlockLength
 
-# Please see file 15_binary_game_spec.rb for the assignments to complete.
+# Please see 15_binary_game_spec.rb for the assignments to complete.
 
 # This spec file is for the BinarySearch class that is used by the BinaryGame
-# class. These tests were written in the last assignment. The FindNumber class
+# class. These tests were written in Lesson 14. The FindNumber class
 # has been renamed to BinarySearch, which is a more accurate description.
+# Note that BinaryGame is going to let the user decide between inputting a
+# random number and having the computer generate one using the
+# RandomNumber class. This means that the RandomNumber double is no longer
+# needed for this spec file.
 
 describe BinarySearch do
   describe '#make_guess' do
