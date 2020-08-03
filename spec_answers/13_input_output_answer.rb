@@ -33,7 +33,7 @@ describe NumberGame do
       expect(solution).to be < 10
     end
 
-    # ASSIGNMENT
+    # ASSIGNMENT #1
     # Write a similar test to the one above, that uses a custom matcher
     # instead of <, >, =.
     matcher :be_between_zero_and_nine do
@@ -56,7 +56,7 @@ describe NumberGame do
       end
     end
 
-    # ASSIGNMENT
+    # ASSIGNMENT #2
     # Write one test for when game.solution does not equal correct_guess?
     context 'when user guess is not correct' do
       # remove the 'x' before running this test
@@ -135,7 +135,7 @@ describe NumberGame do
       end
     end
 
-    # ASSIGNMENT
+    # ASSIGNMENT #3
     context 'when given invalid input twice before valid input' do
       letter_input = 'h'
       number_input = '3'
@@ -181,7 +181,7 @@ describe NumberGame do
       end
     end
 
-    # ASSIGNMENT
+    # ASSIGNMENT #4
     context 'when count is 2-3' do
       # remove the 'x' before running this test
       it 'outputs correct phrase' do
@@ -192,7 +192,7 @@ describe NumberGame do
       end
     end
 
-    # ASSIGNMENT
+    # ASSIGNMENT #5
     context 'when count is 4 and over' do
       # remove the 'x' before running this test
       it 'outputs correct phrase' do
