@@ -28,7 +28,7 @@ describe SingleDigit do
     expect(random_digit.number).to be < 10
   end
 
-  # The above 2 tests can be compounded together, so that you test two things
+  # The above 2 tests can be compounded together, so that you test two things.
   # in one test at the same time.
   context 'when tests can be compounded' do
     it 'is greater than 0 and less than 10' do

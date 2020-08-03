@@ -4,29 +4,27 @@ require_relative '../lib/15a_binary_game'
 require_relative '../lib/15b_binary_search'
 require_relative '../lib/15c_random_number'
 
-# The file order to complete this lesson:
-
 # 1. Familarize yourself with the three lib/15 files.
 #    - lib/15a_binary_game
-#    - lib/15b_binary_search is based on 14_find_number.
+#    - lib/15b_binary_search which is based on 14_find_number
 #    - lib/15c_random_numer
-# 2. Check out spec/15b_binary_search_spec is based on 14_find_number_spec.
-# 3. Complete spec/15a_binary_game_spec.
+# 2. Look at spec/15b_binary_search_spec which is based on 14_find_number_spec
+# 3. Complete spec/15a_binary_game_spec
 
-# As noted above, the files for this example (#15) builds on the TDD files
+# As noted above, the files for this lesson (#15) build on the TDD files
 # from #14. The FindNumber class is now called BinarySearch, which is a more
 # accurate description.
 
-# This example has a new class called BinaryGame. This BinaryGame class is going
-# to use the BinarySearch class. In addition, BinaryGame is going to let the
-# user decide to input a random number or have the computer generate one (using
-# the RandomNumber class). Therefore, the RandomNumber double is no longer
+# This lesson has a new class called BinaryGame. This BinaryGame class uses
+# the BinarySearch class. In addition, BinaryGame lets the user decide whether
+# to input a random number or have the computer generate one (using
+# the RandomNumber class). This means that the RandomNumber double is no longer
 # needed for the BinarySearch spec file. The tests for FindNumber have been
-# updated (spec/15_binary_search).
+# updated (spec/15b_binary_search).
 
-# For this example, we are going to focus on writing unit tests. It is
-# recommended to watch the video of a talk called 'Magic Tricks of Testing'
-# by Sandi Metz to learn more.
+# For this lesson, we are going to focus on writing unit tests. Start by
+# watching the video linked below, of a talk called 'Magic Tricks of Testing'
+# by Sandi Metz, to learn more.
 # https://youtu.be/URSWYvyc42M
 
 # Now that you have seen the video, the below summary should look familiar.
