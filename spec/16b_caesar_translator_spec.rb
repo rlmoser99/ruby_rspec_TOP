@@ -6,7 +6,7 @@ require_relative '../lib/16b_caesar_translator'
 
 # 1. Familarize yourself with the three lib/16 files.
 #    - lib/16a_caesar_breaker
-#    - lib/16b_caesar_translator is based on the typical CaesarCipher
+#    - lib/16b_caesar_translator which is based on the typical Caesar Cipher
 #    - lib/16c_database (module)
 # 2. Check out the completed tests in spec/16b_caesar_translator.
 # 3. Complete spec/16a_caesar_breaker_spec.
