@@ -119,7 +119,7 @@ describe NumberGame do
       it 'displays error message once' do
         # Due to the loop, we can test that the game received :puts with the
         # error message one time. In order to test if this method is called,
-        # we will be using a message expectation.
+        # we use a message expectation.
         # https://relishapp.com/rspec/rspec-mocks/docs
 
         # To set a message expectation, move 'Assert' before 'Act'.

@@ -3,7 +3,7 @@
 require_relative '../lib/16_database'
 require_relative '../lib/16_caesar_translator'
 
-# breaks the Caeser Cipher code
+# breaks the Caesar Cipher code
 class CaesarBreaker
   attr_reader :message, :decrypted_messages, :translator
   include Database

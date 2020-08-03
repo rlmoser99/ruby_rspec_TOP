@@ -2,7 +2,7 @@
 
 require_relative '../lib/16_caesar_translator'
 
-# Please see file 16_caesar_breaker_spec.rb for the assignments to complete.
+# Please see 16_caesar_breaker_spec.rb for the assignments to complete.
 
 # This spec file is for the CaesarTranslator class, which is used by the
 # CaesarBreaker class.
