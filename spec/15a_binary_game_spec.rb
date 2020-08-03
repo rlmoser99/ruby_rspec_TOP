@@ -29,6 +29,9 @@ require_relative '../lib/15c_random_number'
 # by Sandi Metz to learn more.
 # https://youtu.be/URSWYvyc42M
 
+# Now that you have seen the video, the below summary should look familiar.
+# We will refer to it to determine what to test in this lesson.
+
 # Unit Testing Summary
 # Incoming Query ->         Assert the result
 # Incoming Command ->       Assert the direct public side effects
@@ -57,13 +60,12 @@ describe BinaryGame do
 
       # To 'Arrange' this test, each of the methods will need to be stubbed, so
       # that they do not execute. The only method that needs a return value is
-      # #game_mode_selection, which creates the scenario of this test (explained
-      # in context).
+      # #game_mode_selection, which creates the scenario of this test (this is
+      # explained in the context line).
 
       before do
         allow(start_user_game).to receive(:game_instructions)
         allow(start_user_game).to receive(:game_mode_selection).and_return(1)
-        allow(start_user_game).to receive(:mode_input)
         allow(start_user_game).to receive(:user_random)
         allow(start_user_game).to receive(:computer_turns)
       end
@@ -80,10 +82,11 @@ describe BinaryGame do
       end
 
       # Using method expectations can be confusing. Stubbing the methods above
-      # does not cause this test to pass, it only 'allows' a method to be
-      # called, if it is called. To test this, let's allow a method that is not
-      # called in #start. Uncomment and move the following line to the before
-      # hook and run the tests. All of the tests should continue to pass.
+      # does not cause this test to pass; it only 'allows' a method to be
+      # called, if it is called. To test this fact, let's allow a method that
+      # is not called in #start. Uncomment the line at the bottom of this
+      # paragraph, move it to the before hook, and run the tests.
+      # All of the tests should continue to pass.
       # allow(start_user_game).to receive(:display_range)
 
       it 'calls user_random' do
@@ -142,8 +145,8 @@ describe BinaryGame do
     # called polymorphism.
     # https://www.geeksforgeeks.org/polymorphism-in-ruby/
 
-    # Below is the previous generic 'random_number' object used in TDD so that
-    # you can compare it to the new verifying instance_double for the
+    # Below (commented out) is the previous generic 'random_number' object
+    # used in TDD. Compare it to the new verifying instance_double for the
     # RandomNumber class.
     # let(:random_number) { double('random_number', value: 8) }
     let(:computer_number) { instance_double(RandomNumber, value: 79) }
@@ -160,7 +163,7 @@ describe BinaryGame do
       before do
         allow(RandomNumber).to receive(:new).with(1, 100).and_return(computer_number)
         allow(computer_game).to receive(:puts)
-        allow(BinarySearch).to receive(:new)
+        allow(BinarySearch).to receive(:new).with(1, 100, 79)
       end
 
       it 'creates a new RandomNumber' do
@@ -180,12 +183,12 @@ describe BinaryGame do
   # Outgoing Command -> Expect to send
   describe '#user_random' do
     # Create a new subject to test #user_random. When only one scenario is
-    # needed to test a method, the subject can be created in outside of the
+    # needed to test a method, the subject can be created outside of the
     # context block.
 
     context 'when user chooses the random number' do
-      # Look at #user_random and determine any methods need to be stubbed and if
-      # any methods should return anything.
+      # Look at #user_random and determine any methods that need to be stubbed
+      # and if any methods should return anything.
       before do
       end
 
@@ -230,6 +233,7 @@ describe BinaryGame do
     context 'when second guess is correct' do
       # Set up a scenario for two guesses. Not only will the return values need
       # to be changed, but there will also be another method to be stubbed.
+      # Also, make sure you handle each of the guesses in your scenario.
 
       before do
       end

@@ -14,6 +14,10 @@ require_relative '../lib/15b_binary_search'
 # This spec file is for the BinarySearch class that is used by the BinaryGame
 # class. These tests were written in the last lesson. The FindNumber class
 # has been renamed to BinarySearch, which is a more accurate description.
+# Note that BinaryGame is going to let the user decide between inputting a
+# random number and having the computer generate one using the
+# RandomNumber class. This means that the RandomNumber double is no longer
+# needed for this spec file.
 
 describe BinarySearch do
   describe '#make_guess' do

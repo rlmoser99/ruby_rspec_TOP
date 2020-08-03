@@ -43,10 +43,10 @@ describe FindNumber do
       let(:random_number) { double('random_number') }
       subject(:game) { described_class.new(0, 9, random_number) }
 
-      context 'when random_answer.value is 8' do
+      context 'when random_number is 8' do
         it 'returns 8' do
           allow(random_number).to receive(:value).and_return(8)
-          solution = game.answer.value
+          solution = game.answer
           expect(solution).to eq(8)
         end
       end
@@ -60,9 +60,10 @@ describe FindNumber do
       let(:random_number) { double('random_number', value: 3) }
       subject(:game) { described_class.new(0, 9, random_number) }
 
-      context 'when random_answer.value is 3' do
+
+      context 'when random_number is 3' do
         it 'returns 3' do
-          solution = game.answer.value
+          solution = game.answer
           expect(solution).to eq(3)
         end
       end
@@ -72,9 +73,9 @@ describe FindNumber do
     # method names to subject.
     context 'when adding method names to subject for multiple tests' do
       let(:random_number) { double('random_number', value: 5) }
-      subject(:game_solution) { described_class.new(0, 9, random_number).answer.value }
+      subject(:game_solution) { described_class.new(0, 9, random_number).answer }
 
-      context 'when random_answer.value is 5' do
+      context 'when random_number is 5' do
         it 'returns 5' do
           expect(game_solution).to eq(5)
         end
@@ -96,9 +97,9 @@ end
 # 1. Read & understand the requirement for one method only.
 # 2. Write one test for that method that you think it will pass.
 # 3. Write the method to fulfill the requirement.
-# 4. Run the test that you wrote. If it doesn't pass, re-do steps 1-3.
+# 4. Run the test that you wrote. If it doesn't pass, redo steps 1-3.
 # 5. When your first test is passing, write the additional tests.
-# 6. Run all of the tests. If any do not pass, re-do steps 3-5.
+# 6. Run all of the tests. If any do not pass, redo steps 3-5.
 # 7. Optional: Refactor your code and/or tests, keeping all tests passing.
 
 describe FindNumber do
@@ -117,13 +118,17 @@ describe FindNumber do
 
     subject(:game) { described_class.new(0, 9, random_number) }
 
+    # Before you write the #make_guess method:
     # Write a test that would expect #make_guess to return the average of
     # the min and max values (rounded down).
+    # Don't expect this test to be able to pass as you haven't written
+    # #make_guess yet!
     context 'when min is 0 and max is 9' do
     end
 
-    # Write a method in 14_find_number.rb called #make_guess that returns the
-    # average of the min and max values (rounded down).
+    # Now write a method in 14_find_number.rb called #make_guess that returns
+    # the average of the min and max values (rounded down).
+    # You can now run the above test and it should pass.
 
     # Write a test for each of the following contexts:
 
@@ -147,20 +152,21 @@ describe FindNumber do
     # instance of the random number and/or subject, use a meaningful name to
     # differentiate between instances.
 
-    # Create a subject and random_number double with a meaningful name.
+    # Create a subject and random_number double with meaningful names.
     # A helpful tip is to combine the purpose of the test and the object.
     # E.g., ending_number & ending_game or completing_random & completing_game.
 
-    # Allow the double to receive 'value' and return a number from the min-max.
+    # Allow the double to receive 'value' and return a number from 0 to 9.
 
     # Write a test that would expect game to be_game_over when a guess equals
-    # the random_number double's value above.
+    # the random_number double's value above. Remember that this test will not
+    # be able to pass yet because you haven't written the method!
 
     context 'when guess and random_number are equal' do
     end
 
-    # Write a method in 14_find_number.rb called #game_over? that returns true
-    # when a guess equals the value of the random_number.
+    # Write the corresponding method in 14_find_number.rb called #game_over?
+    # that returns true when a guess equals the value of the random_number.
 
     # Write a test that would expect game to NOT be_game_over when a guess does
     # NOT equal the random_number double's value above.

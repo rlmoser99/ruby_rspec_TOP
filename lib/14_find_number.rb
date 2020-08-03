@@ -2,11 +2,13 @@
 
 # class for computer to find random number
 class FindNumber
-  attr_reader :answer, :min, :max
+  attr_reader :min, :max, :answer, :guess
 
   def initialize(min, max, answer = RandomNumber.new(min, max))
     @min = min
     @max = max
-    @answer = answer
+    # The RandomNumber class will have an instance variable '@value'
+    @answer = answer.value
+    @guess = nil
   end
 end
