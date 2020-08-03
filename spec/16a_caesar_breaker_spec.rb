@@ -28,8 +28,8 @@ require_relative '../lib/16b_caesar_translator'
 # errors.
 
 describe CaesarBreaker do
-  # The tests for CaesarBreaker does not depend on creating different scenarios.
-  # Therefore, we can use same subject instance for these tests.
+  # The tests for CaesarBreaker do not depend on creating different scenarios.
+  # Therefore we can use the same subject instance for all of these tests.
   subject(:phrase) { described_class.new('Ebiil, Tloia!') }
 
   # ASSIGNMENT #1
@@ -65,6 +65,7 @@ describe CaesarBreaker do
   # following tests work.
 
   # Incoming Command -> Assert the direct public side effects
+  # You'll find the below method in 16_database.rb
   describe '#save_decrypted_messages' do
     # This method has a rescue block in case an error occurs.
     # Let's test that this method can run without raising an error.
@@ -75,8 +76,9 @@ describe CaesarBreaker do
         expect { phrase.save_decrypted_messages }.not_to raise_error
       end
 
-      # The test above outputs two lines from #display_file_location.
-      # So, let's stub out that method to clean up the test output.
+      # The test above will pass when you run it, but it will also output
+      # two lines from #display_file_location.
+      # So let's stub out that method to clean up the test output.
       it 'does not raise an error' do
         allow(phrase).to receive(:display_file_location)
         expect { phrase.save_decrypted_messages }.not_to raise_error
@@ -109,6 +111,7 @@ describe CaesarBreaker do
 
   # ASSIGNMENT #3
   # Write the following test for #save_to_yaml
+  # This method is found in 16_database.rb
 
   # Outgoing Command -> Expect to send
   describe '#save_to_yaml' do

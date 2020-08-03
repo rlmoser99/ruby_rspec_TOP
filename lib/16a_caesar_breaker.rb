@@ -7,7 +7,7 @@ require_relative '../lib/16c_database'
 # commands at the bottom of this file. Be sure to commented them out before
 # running rspec to avoid errors.
 
-# breaks the Caeser Cipher code
+# breaks the Caesar Cipher code
 class CaesarBreaker
   attr_reader :message, :decrypted_messages, :translator
   include Database

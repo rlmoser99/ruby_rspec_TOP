@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-# translates a Caeser Cipher code
+# translates a Caesar Cipher code
 class CaesarTranslator
   attr_reader :message
 

@@ -5,7 +5,7 @@
 # running rspec to avoid errors.
 
 # Game that is nearly impossible to test.
-# Rewritten below as the easy-to-test NumberGame class with isolated methods
+# Rewritten below as the easy-to-test NumberGame class with isolated methods.
 class ImpossibleToTestGame
   attr_reader :solution, :count, :guess
 
@@ -43,8 +43,8 @@ class ImpossibleToTestGame
   end
 end
 
-# NumberGame is the exact same game as the above ImpossibleToTestGame
-# NumberGame has small, isolated methods that are easy to test
+# NumberGame is the exact same game as the above ImpossibleToTestGame.
+# NumberGame has small, isolated methods that are easy to test.
 class NumberGame
   attr_reader :solution, :count, :guess
 
