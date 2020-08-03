@@ -19,7 +19,6 @@ describe String do
 
   context 'when the value of a let variable changes inside an example' do
     it 'is the updated value of the let variable' do
-      expect(favorite_color).to eq('blue')
       favorite_color = 'navy blue'
       expect(favorite_color).to eq('navy blue')
     end

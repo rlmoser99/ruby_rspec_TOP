@@ -1,20 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../lib/11_cat'
-require_relative '../spec/11_shared_example_spec'
-
-# This example has a 'Pet' class with two sub-classes 'Cat' and 'Dog'.
-# There is a spec file for cat & dog (each file begins with '11_').
-
-# In addition, there is a third spec file called '11_shared_example'.
-# This file has two tests that are used in both the cat & dog spec files.
+require_relative '../lib/11b_cat'
+require_relative '../spec/11a_shared_example_spec'
 
 describe Cat do
   subject(:oscar) { described_class.new('Oscar', 'Maine Coon') }
 
-  # Check out the file: 11_shared_examples_spec.rb.
-  # This test references that file's first test in the 'include_examples' line.
-  # The shared_example_spec file has further information.
+  # Before you begin this file, make sure you have read the shared
+  # example file: 11a_shared_examples_spec.rb. This test references
+  # that file's first test in the below 'include_examples' line.
   context 'when Cat is a child class of Pet' do
     include_examples 'base class method name'
   end

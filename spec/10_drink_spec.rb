@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
-# Now that the basics are covered, we are going to use a typical workflow.
-# The class being tested will be located in a different file.
-# If you are using VS Code, you can split the screen to see both files.
-# (view menu -> editor layout)
+# Now that the basics are covered, we are going to use a typical workflow
+# for the rest of the lessons. The class being tested will be located in
+# a different file.
+
+# The file order to complete this lesson:
+# 1. Familarize yourself with the class in lib/10_drink.rb
+# 2. Complete spec/10_drink_spec.rb
+
+# If you are using VS Code, you can split the screen to see both files at
+# the same time (view menu -> editor layout).
 
 require_relative '../lib/10_drink'
 

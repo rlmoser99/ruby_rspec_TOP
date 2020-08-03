@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
-require_relative '../lib/15_binary_search'
-require_relative '../lib/15_random_number'
+require_relative '../lib/15b_binary_search'
 
-# rubocop:disable Metrics/BlockLength
+# The file order to complete this lesson:
 
-# Please see 15_binary_game_spec.rb for the assignments to complete.
+# 1. Familarize yourself with the three lib/15 files.
+#    - lib/15a_binary_game
+#    - lib/15b_binary_search is based on 14_find_number.
+#    - lib/15c_random_numer
+# 2. Check out spec/15b_binary_search_spec is based on 14_find_number_spec.
+# 3. Complete spec/15a_binary_game_spec.
 
 # This spec file is for the BinarySearch class that is used by the BinaryGame
-# class. These tests were written in Lesson 14. The FindNumber class
+# class. These tests were written in the last lesson. The FindNumber class
 # has been renamed to BinarySearch, which is a more accurate description.
 # Note that BinaryGame is going to let the user decide between inputting a
 # random number and having the computer generate one using the
@@ -135,5 +139,3 @@ describe BinarySearch do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

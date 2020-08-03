@@ -2,6 +2,10 @@
 
 require_relative '../lib/12_magic_seven'
 
+# The file order to complete this lesson:
+# 1. Familarize yourself with the class in lib/12_magic_seven.rb
+# 2. Complete spec/12_magic_seven_spec.rb
+
 # Before learning any more complexities of testing, let's take a look at a
 # standard testing pattern: Arrange, Act, and Assert.
 # https://youtu.be/sCthIEOaMI8
@@ -18,6 +22,7 @@ require_relative '../lib/12_magic_seven'
 # NOTE: When you start using A-A-A to format your tests, it will feel
 # strange to not be following DRY (don't repeat yourself). With tests, however,
 # repetition is neccessary in order for them to be easy to read.
+
 # When you start working on a existing code base, you will often become familiar
 # with the code by reading the tests.
 
@@ -26,13 +31,15 @@ describe MagicSeven do
   subject(:game) { described_class.new }
 
   describe '#add_nine' do
+    # This test could be written as below (and it would pass):
     it 'returns 15' do
-      # This test could be written as below (and it would pass):
       expect(game.add_nine(6)).to eq(15)
+    end
 
-      # However, the above test is NOT very readable. For example, it does not
-      # explain where '6' came from. So let's start with explaining
-      # where '6' came from, as part of the 'Arrange' step.
+    # However, the above test is NOT very readable. For example, it does not
+    # explain where '6' came from. So let's start with explaining
+    # where '6' came from, as part of the 'Arrange' step.
+    it 'returns 15' do
       random_number = 6
 
       # For the 'Act' step, we will be testing the result of the logic of adding
@@ -43,6 +50,7 @@ describe MagicSeven do
       expect(result).to eq(15)
     end
   end
+
   # In addition, using a context to explain the conditions of the test makes
   # the output more readable.
   describe '#multiply_by_two' do

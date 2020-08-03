@@ -32,6 +32,9 @@ describe 'differences between eq, eql, equal, and be' do
     context 'eql looks at type & value' do
       it 'is eql to each other' do
         expect(my_car).to eql(your_car)
+      end
+
+      it 'is eql to each other' do
         expect(my_kids_borrow).to eql(your_car)
       end
     end
@@ -41,6 +44,9 @@ describe 'differences between eq, eql, equal, and be' do
     context 'be and equal care about object identity' do
       it 'is comparing the same car' do
         expect(my_car).to equal(my_kids_borrow)
+      end
+
+      it 'is comparing the same car' do
         expect(my_car).to be(my_kids_borrow)
       end
 

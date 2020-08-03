@@ -23,18 +23,40 @@ end
 describe String do
   let(:sample_word) { 'spaceship' }
 
-  it 'starts with any number of letters up to the entire word' do
-    expect(sample_word).to start_with('s')
-    expect(sample_word).to start_with('spa')
-    expect(sample_word).to start_with('space')
-    expect(sample_word).to start_with('spaceship')
+  context 'when using start_with' do
+    it 'starts with s' do
+      expect(sample_word).to start_with('s')
+    end
+
+    it 'starts with spa' do
+      expect(sample_word).to start_with('spa')
+    end
+
+    it 'starts with space' do
+      expect(sample_word).to start_with('space')
+    end
+
+    it 'starts with the whole word' do
+      expect(sample_word).to start_with('spaceship')
+    end
   end
 
-  it 'ends with any number of letters up to the entire word' do
-    expect(sample_word).to end_with('p')
-    expect(sample_word).to end_with('hip')
-    expect(sample_word).to end_with('ship')
-    expect(sample_word).to end_with('spaceship')
+  context 'when using end_with' do
+    it 'ends with p' do
+      expect(sample_word).to end_with('p')
+    end
+
+    it 'ends with hip' do
+      expect(sample_word).to end_with('hip')
+    end
+
+    it 'ends with ship' do
+      expect(sample_word).to end_with('ship')
+    end
+
+    it 'ends with the whole word' do
+      expect(sample_word).to end_with('spaceship')
+    end
   end
 end
 

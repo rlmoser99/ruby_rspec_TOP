@@ -1,8 +1,15 @@
 # frozen_string_literal: true
 
-require_relative '../lib/16_caesar_translator'
+require_relative '../lib/16b_caesar_translator'
 
-# Please see 16_caesar_breaker_spec.rb for the assignments to complete.
+# The file order to complete this lesson:
+
+# 1. Familarize yourself with the three lib/16 files.
+#    - lib/16a_caesar_breaker
+#    - lib/16b_caesar_translator is based on the typical CaesarCipher
+#    - lib/16c_database (module)
+# 2. Check out the completed tests in spec/16b_caesar_translator.
+# 3. Complete spec/16a_caesar_breaker_spec.
 
 # This spec file is for the CaesarTranslator class, which is used by the
 # CaesarBreaker class.

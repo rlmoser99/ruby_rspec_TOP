@@ -1,23 +1,32 @@
 # frozen_string_literal: true
 
-require_relative '../lib/15_binary_search'
-require_relative '../lib/15_random_number'
-require_relative '../lib/15_binary_game'
+require_relative '../lib/15a_binary_game'
+require_relative '../lib/15b_binary_search'
+require_relative '../lib/15c_random_number'
 
-# The files for this example (#15) build on the TDD files from #14.
-# The FindNumber class is now called BinarySearch, which is a more accurate
-# description. Find it in lib/15_binary_search
+# The file order to complete this lesson:
 
-# This lesson has a new class called BinaryGame. This BinaryGame class uses
-# the BinarySearch class. In addition, BinaryGame now lets the user decide
-# between inputting a random number and having the computer generate one
-# using the RandomNumber class). This means that the RandomNumber double is
-# no longer needed for the BinarySearch spec file. The tests for FindNumber
-# have been updated accordingly (spec/15_binary_search).
+# 1. Familarize yourself with the three lib/15 files.
+#    - lib/15a_binary_game
+#    - lib/15b_binary_search is based on 14_find_number.
+#    - lib/15c_random_numer
+# 2. Check out spec/15b_binary_search_spec is based on 14_find_number_spec.
+# 3. Complete spec/15a_binary_game_spec.
 
-# For this lesson, we are going to focus on writing unit tests. Before you
-# go any further in the lesson, take the time to watch the video below,
-# of a talk called 'Magic Tricks of Testing' by Sandi Metz, to learn more.
+# As noted above, the files for this example (#15) builds on the TDD files
+# from #14. The FindNumber class is now called BinarySearch, which is a more
+# accurate description.
+
+# This example has a new class called BinaryGame. This BinaryGame class is going
+# to use the BinarySearch class. In addition, BinaryGame is going to let the
+# user decide to input a random number or have the computer generate one (using
+# the RandomNumber class). Therefore, the RandomNumber double is no longer
+# needed for the BinarySearch spec file. The tests for FindNumber have been
+# updated (spec/15_binary_search).
+
+# For this example, we are going to focus on writing unit tests. It is
+# recommended to watch the video of a talk called 'Magic Tricks of Testing'
+# by Sandi Metz to learn more.
 # https://youtu.be/URSWYvyc42M
 
 # Now that you have seen the video, the below summary should look familiar.
@@ -102,19 +111,30 @@ describe BinaryGame do
     # ASSIGNMENT #1
     context 'when user chooses a computer-generated random number' do
       # Create a new subject for this scenario.
+      subject(:start_random_game) { described_class.new }
 
       # The before hook will be similar to the above test, except the return
       # value of #game_mode_selection should be 2.
       before do
+        allow(start_random_game).to receive(:game_instructions)
+        allow(start_random_game).to receive(:game_mode_selection).and_return(2)
+        allow(start_random_game).to receive(:computer_random)
+        allow(start_random_game).to receive(:computer_turns)
       end
 
-      xit 'calls game instructions' do
+      it 'calls game instructions' do
+        expect(start_random_game).to receive(:game_instructions)
+        start_random_game.start
       end
 
-      xit 'calls computer_random' do
+      it 'calls computer_random' do
+        expect(start_random_game).to receive(:computer_random)
+        start_random_game.start
       end
 
-      xit 'calls computer_turns' do
+      it 'calls computer_turns' do
+        expect(start_random_game).to receive(:computer_turns)
+        start_random_game.start
       end
     end
   end
@@ -176,14 +196,20 @@ describe BinaryGame do
     # Create a new subject to test #user_random. When only one scenario is
     # needed to test a method, the subject can be created outside of the
     # context block.
+    subject(:user_game) { described_class.new }
 
     context 'when user chooses the random number' do
       # Look at #user_random and determine any methods that need to be stubbed
       # and if any methods should return anything.
+
       before do
+        allow(user_game).to receive(:random_number_input).and_return(42)
+        allow(user_game).to receive(:player_input)
       end
 
-      xit 'creates a new BinarySearch' do
+      it 'creates a new BinarySearch' do
+        expect(BinarySearch).to receive(:new).with(1, 100, 42)
+        user_game.user_random
       end
     end
   end
@@ -225,14 +251,28 @@ describe BinaryGame do
       # Set up a scenario for two guesses. Not only will the return values need
       # to be changed, but there will also be another method to be stubbed.
       # Also, make sure you handle each of the guesses in your scenario.
+      subject(:second_game) { described_class.new }
+      let(:second_search) { instance_double(BinarySearch) }
 
       before do
+        second_game.instance_variable_set(:@binary_search, second_search)
+        allow(second_game).to receive(:puts)
+        allow(second_game).to receive(:max_guesses)
+        allow(second_game).to receive(:display_range)
+        allow(second_game.binary_search).to receive(:make_guess).and_return(50, 25)
+        allow(second_game.binary_search).to receive(:game_over?).and_return(false, true)
+        allow(second_game.binary_search).to receive(:make_guess).twice
+        allow(second_game.binary_search).to receive(:update_range).once
       end
 
-      xit 'sends make_guess twice' do
+      it 'sends make_guess twice' do
+        expect(second_game.binary_search).to receive(:make_guess).twice
+        second_game.computer_turns
       end
 
-      xit 'sends update_range once' do
+      it 'sends update_range once' do
+        expect(second_game.binary_search).to receive(:update_range).once
+        second_game.computer_turns
       end
     end
   end

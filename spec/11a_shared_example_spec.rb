@@ -1,16 +1,21 @@
 # frozen_string_literal: true
 
-# This example has a 'Pet' class with two sub-classes 'Cat' and 'Dog'.
-# There is a spec file for cat & dog (each file begins with '11_').
+# The file order to complete this lesson:
 
-# In addition, there is a third spec file called '11_shared_example'.
-# This file has two tests that are used in both the cat & dog spec files.
+# 1. Familarize yourself with the three lib/15 files.
+#    - lib/11a_pet.rb is the parent 'Pet' class of 'Cat' and 'Dog'
+#    - lib/11b_cat.rb is a subclass 'Cat'
+#    - lib/11c_dog.rb is a subclass 'Dog'
+# 2. Review the tests in spec/11a_shared_example_spec.rb
+# 3. Complete either spec/11b_cat_spec.rb or spec/11c_dog_spec.rb
 
-# To learn more about the use of shared examples, check out the documentation:
+# Start with reading about the use of shared examples:
 # https://relishapp.com/rspec/rspec-core/docs/example-groups/shared-examples
 
 # These tests are dependent on using the implicit 'subject' when they are
-# included in a spec file.
+# included in another spec file. This file is not intended to be used alone.
+# If you run rspec on this file, there will be 'no examples found' because
+# there is not an implicit subject available.
 
 RSpec.shared_examples 'base class method name' do
   # This test can be used in Cat and Dog because the method comes from the
@@ -32,6 +37,3 @@ RSpec.shared_examples 'shared method name' do
     end
   end
 end
-
-# For assignments, see 11_cat_spec.rb or 11_dog_spec.rb - do the assignments in
-# one of those files.

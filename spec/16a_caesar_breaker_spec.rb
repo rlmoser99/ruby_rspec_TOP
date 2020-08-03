@@ -1,11 +1,19 @@
 # frozen_string_literal: true
 
-require_relative '../lib/16_caesar_breaker'
-require_relative '../lib/16_caesar_translator'
+require_relative '../lib/16a_caesar_breaker'
+require_relative '../lib/16b_caesar_translator'
+
+# The file order to complete this lesson:
+
+# 1. Familarize yourself with the three lib/16 files.
+#    - lib/16a_caesar_breaker
+#    - lib/16b_caesar_translator is based on the typical CaesarCipher
+#    - lib/16c_database (module)
+# 2. Check out the completed tests in spec/16b_caesar_translator.
+# 3. Complete spec/16a_caesar_breaker_spec.
 
 # The CaesarBreaker class creates a yaml file with the 25 possible translations,
-# using a CaesarTranslator class and a Database module. The tests for the
-# CaesarTranslator are in 16_caesar_translator_spec.
+# using a CaesarTranslator class and a Database module.
 
 # Let's write tests for the CaesarBreaker class & the included Database module.
 
@@ -14,7 +22,7 @@ require_relative '../lib/16_caesar_translator'
 # Incoming Command ->   Assert the direct public side effects
 # Outgoing Command ->   Expect to send
 
-# In this example, you will be writing tests for 3 methods - #decrypt,
+# In this lesson, you will be writing tests for 3 methods - #decrypt,
 # #create_decrypted_messages, and #save_to_yaml. In addition, you will learn
 # about testing module methods and how to handle testing methods that can raise
 # errors.
@@ -29,19 +37,10 @@ describe CaesarBreaker do
 
   # Incoming Command -> Assert the direct public side effects
   describe '#decrypt' do
-    before do
-      allow(phrase).to receive(:save_decrypted_messages)
-      allow(phrase).to receive(:create_decrypted_messages)
+    xit 'calls create_decrypted_messages' do
     end
 
-    it 'calls create_decrypted_messages' do
-      expect(phrase).to receive(:create_decrypted_messages)
-      phrase.decrypt
-    end
-
-    it 'calls save_decrypted_messages' do
-      expect(phrase).to receive(:save_decrypted_messages)
-      phrase.decrypt
+    xit 'calls save_decrypted_messages' do
     end
   end
 
@@ -50,15 +49,7 @@ describe CaesarBreaker do
 
   # Outgoing Command -> Expect to send
   describe '#create_decrypted_messages' do
-    let(:phrase_translator) { instance_double(CaesarTranslator) }
-
-    before do
-      phrase.instance_variable_set(:@translate, phrase_translator)
-    end
-
-    it 'sends translate 25 times' do
-      expect(phrase.translator).to receive(:translate).exactly(25).times
-      phrase.create_decrypted_messages
+    xit 'sends translate 25 times' do
     end
   end
 
@@ -102,7 +93,7 @@ describe CaesarBreaker do
         allow(phrase).to receive(:puts).twice
       end
 
-      it 'rescues error' do
+      it 'does not raise an error' do
         expect { phrase.save_decrypted_messages }.not_to raise_error
       end
 
@@ -124,9 +115,7 @@ describe CaesarBreaker do
 
   # Outgoing Command -> Expect to send
   describe '#save_to_yaml' do
-    it 'dumps to yaml' do
-      expect(YAML).to receive(:dump)
-      phrase.save_to_yaml
+    xit 'dumps to yaml' do
     end
   end
 end

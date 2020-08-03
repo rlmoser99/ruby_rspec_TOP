@@ -18,14 +18,17 @@ describe SingleDigit do
 
   # There can be multiple tests in one example block; however, it is recommended
   # to test only one thing at a time.
-  it 'is greater than or equal to 1 and less than 10' do
+  it 'is greater than or equal to 1' do
     # Comparison matchers are used with 'be' matcher
     # https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/comparison-matchers
     expect(random_digit.number).to be >= 1
+  end
+
+  it 'is less than 10' do
     expect(random_digit.number).to be < 10
   end
 
-  # The above test can be compounded together, so that you test two things
+  # The above 2 tests can be compounded together, so that you test two things
   # in one test at the same time.
   context 'when tests can be compounded' do
     it 'is greater than 0 and less than 10' do
@@ -49,9 +52,11 @@ describe SingleDigit do
     it 'is not equal to 10' do
       expect(random_digit.number).not_to eq(10)
     end
+
     it 'is not equal to 0' do
       expect(random_digit.number).not_to be_zero
     end
+
     it 'is not nil' do
       expect(random_digit.number).not_to be_nil
     end
@@ -65,14 +70,22 @@ describe Array do
     # Write a let variable 'my_array' that passes all tests.
 
     # remove the 'x' before running this test
-    xit 'has specific first and last values' do
+    xit 'has a specific first value' do
       expect(my_array.first).to be_odd.and be <= -1
+    end
+
+    # remove the 'x' before running this test
+    xit 'has a specific last value' do
       expect(my_array.last).to be_even.and be < 99
     end
 
     # remove the 'x' before running this test
-    xit 'has specific min and max values' do
+    xit 'has a specific min value' do
       expect(my_array.min).not_to be < -9
+    end
+
+    # remove the 'x' before running this test
+    xit 'has a specific max value' do
       expect(my_array.max).to be > 100
     end
 

@@ -2,9 +2,13 @@
 
 require_relative '../lib/13_input_output'
 
+# The file order to complete this lesson:
+# 1. Familarize yourself with the two classes in lib/13_input_output.rb
+# 2. Complete spec/13_input_output_spec.rb
+
 # Ruby code that was written before you learned how to use RSpec may be nearly
-# impossible to test. For example, in the 13_input_output file, there are two
-# identical games: ImpossibleToTestGame and NumberGame. Take a look at each
+# impossible to test. For example, in the lib/13_input_output file, there are
+# two identical games: ImpossibleToTestGame and NumberGame. Take a look at each
 # game and look for differences that may make one easier or harder to test
 # than the other.
 
@@ -27,23 +31,29 @@ describe NumberGame do
   subject(:game) { described_class.new }
 
   describe '#initialize' do
-    it 'is a number between 0 and 9' do
-      solution = game.solution
-      expect(solution).to be >= 0
-      expect(solution).to be < 10
-    end
+    context 'when solution is initialized' do
+      it 'is a number greater than or equal to 0' do
+        solution = game.solution
+        expect(solution).to be >= 0
+      end
 
-    # ASSIGNMENT #1
-    # Write a similar test to the one above, that uses a custom matcher
-    # instead of <, >, =.
-    matcher :be_between_zero_and_nine do
-      match { |number| number.between?(0, 9) }
-    end
+      it 'is a number greater than 9' do
+        solution = game.solution
+        expect(solution).to be < 10
+      end
 
-    # remove the 'x' before running this test
-    it 'is a number between 0 and 9' do
-      solution = game.solution
-      expect(solution).to be_between_zero_and_nine
+      # ASSIGNMENT #1
+      # Write a similar test to the one above, that uses a custom matcher
+      # instead of <, >, =.
+      matcher :be_between_zero_and_nine do
+        match { |number| number.between?(0, 9) }
+      end
+
+      # remove the 'x' before running this test
+      it 'is a number between 0 and 9' do
+        solution = game.solution
+        expect(solution).to be_between_zero_and_nine
+      end
     end
   end
 
