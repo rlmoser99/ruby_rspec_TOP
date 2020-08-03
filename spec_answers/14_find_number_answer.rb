@@ -5,28 +5,29 @@
 
 # class for computer to find random number
 class FindNumber
-  attr_reader :answer, :min, :max
+  attr_reader :min, :max, :answer, :guess
 
   def initialize(min, max, answer = RandomNumber.new(min, max))
     @min = min
     @max = max
-    @answer = answer
+    @answer = answer.value
+    @guess = nil
   end
 
   def make_guess
-    (min + max) / 2
+    @guess = (min + max) / 2
   end
 
   def game_over?
-    @guess == answer.value
+    guess == answer
   end
 
   def update_range
-    @guess < answer.value ? @min = @guess + 1 : @max = @guess - 1
+    guess < answer ? @min = guess + 1 : @max = guess - 1
   end
 end
 
-# For this assignment you will be doing TDD for 3 methods: #make_guess,
+# For this lesson you will be doing TDD for 3 methods: #make_guess,
 # #make_guess, and #update_range.
 
 # After you have some experience using TDD, you can use the typical
