@@ -9,7 +9,7 @@ describe 'one word palindrome test' do
   let(:palindrome) { 'palindrome' }
 
   # Write a custom matcher that detects a one word palindrome,
-  # using the following block: { |word| word.reverse == word }.
+  # using the following block: { |word| word.reverse == word }
   # When it is set up correctly, all of the following tests will pass.
 
   matcher :be_a_palindrome do
