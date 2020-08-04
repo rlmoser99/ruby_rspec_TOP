@@ -4,6 +4,8 @@ require_relative '../lib/15a_binary_game'
 require_relative '../lib/15b_binary_search'
 require_relative '../lib/15c_random_number'
 
+# The file order to complete this lesson:
+
 # 1. Familarize yourself with the three lib/15 files.
 #    - lib/15a_binary_game
 #    - lib/15b_binary_search which is based on 14_find_number
@@ -58,7 +60,7 @@ describe BinaryGame do
 
       # To 'Arrange' this test, each of the methods will need to be stubbed, so
       # that they do not execute. The only method that needs a return value is
-      # #game_mode_selection, which creates the scenario of this test (this is
+      # #game_mode_selection, which creates the conditions of this test (this is
       # explained in the context line).
 
       before do
@@ -83,8 +85,8 @@ describe BinaryGame do
       # does not cause this test to pass; it only 'allows' a method to be
       # called, if it is called. To test this fact, let's allow a method that
       # is not called in #start. Uncomment the line at the bottom of this
-      # paragraph, move it to the before hook, and run the tests.
-      # All of the tests should continue to pass.
+      # paragraph, move it to the before hook, and run the tests. All of the
+      # tests should continue to pass.
       # allow(start_user_game).to receive(:display_range)
 
       it 'calls user_random' do
@@ -98,17 +100,17 @@ describe BinaryGame do
       end
 
       # Now choose one of these methods used above as a message expectation and
-      # comment it out in the lib/15_binary_game.rb file. Resave the file and
+      # comment it out in the lib/15a_binary_game.rb file. Resave the file and
       # rerun the tests. The test of the method that you commented out should
       # fail because that method is never called.
 
-      # Before moving on, uncomment that method in the lib/15_binary_game.rb
+      # Before moving on, uncomment that method in the lib/15a_binary_game.rb
       # file to have all tests passing again.
     end
 
     # ASSIGNMENT #1
     context 'when user chooses a computer-generated random number' do
-      # Create a new subject for this scenario.
+      # Create a new subject to use in this context block.
       subject(:start_random_game) { described_class.new }
 
       # The before hook will be similar to the above test, except the return
@@ -191,9 +193,9 @@ describe BinaryGame do
 
   # Outgoing Command -> Expect to send
   describe '#user_random' do
-    # Create a new subject to test #user_random. When only one scenario is
-    # needed to test a method, the subject can be created outside of the
-    # context block.
+    # Create a new subject to test #user_random. The subject can be created
+    # outside of the context block when there is only one test condition or
+    # if you are re-using the same subject for multiple context blocks.
     subject(:user_game) { described_class.new }
 
     context 'when user chooses the random number' do
@@ -246,9 +248,9 @@ describe BinaryGame do
 
     # ASSIGNMENT #3
     context 'when second guess is correct' do
-      # Set up a scenario for two guesses. Not only will the return values need
-      # to be changed, but there will also be another method to be stubbed.
-      # Also, make sure you handle each of the guesses in your scenario.
+      # Arrange the conditions of this test to have two guesses. Not only will
+      # there be multiple return values, but there will also be another method
+      # to be stubbed.
       subject(:second_game) { described_class.new }
       let(:second_search) { instance_double(BinarySearch) }
 

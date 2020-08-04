@@ -60,7 +60,7 @@ describe BinaryGame do
 
       # To 'Arrange' this test, each of the methods will need to be stubbed, so
       # that they do not execute. The only method that needs a return value is
-      # #game_mode_selection, which creates the scenario of this test (this is
+      # #game_mode_selection, which creates the conditions of this test (this is
       # explained in the context line).
 
       before do
@@ -85,8 +85,8 @@ describe BinaryGame do
       # does not cause this test to pass; it only 'allows' a method to be
       # called, if it is called. To test this fact, let's allow a method that
       # is not called in #start. Uncomment the line at the bottom of this
-      # paragraph, move it to the before hook, and run the tests.
-      # All of the tests should continue to pass.
+      # paragraph, move it to the before hook, and run the tests. All of the
+      # tests should continue to pass.
       # allow(start_user_game).to receive(:display_range)
 
       it 'calls user_random' do
@@ -110,7 +110,7 @@ describe BinaryGame do
 
     # ASSIGNMENT #1
     context 'when user chooses a computer-generated random number' do
-      # Create a new subject for this scenario.
+      # Create a new subject to use in this context block.
 
       # The before hook will be similar to the above test, except the return
       # value of #game_mode_selection should be 2.
@@ -182,9 +182,9 @@ describe BinaryGame do
 
   # Outgoing Command -> Expect to send
   describe '#user_random' do
-    # Create a new subject to test #user_random. When only one scenario is
-    # needed to test a method, the subject can be created outside of the
-    # context block.
+    # Create a new subject to test #user_random. The subject can be created
+    # outside of the context block when there is only one test condition or
+    # if you are re-using the same subject for multiple context blocks.
 
     context 'when user chooses the random number' do
       # Look at #user_random and determine any methods that need to be stubbed
@@ -231,9 +231,9 @@ describe BinaryGame do
 
     # ASSIGNMENT #3
     context 'when second guess is correct' do
-      # Set up a scenario for two guesses. Not only will the return values need
-      # to be changed, but there will also be another method to be stubbed.
-      # Also, make sure you handle each of the guesses in your scenario.
+      # Arrange the conditions of this test to have two guesses. Not only will
+      # there be multiple return values, but there will also be another method
+      # to be stubbed.
 
       before do
       end
