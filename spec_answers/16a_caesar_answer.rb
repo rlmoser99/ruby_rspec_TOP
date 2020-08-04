@@ -102,14 +102,17 @@ describe CaesarBreaker do
       end
     end
 
-    # When a method rescues an error, the method will still not raise an error.
-    # Therefore you test the conditions that happens if an error was rescued.
+    # Let's simulate an error occuring during #save_decrypted_messages by
+    # allowing File.open to raise an error 'Errno::ENOENT'. This error means
+    # that no such file or directory could be found.
     context 'when rescuing an error' do
       before do
         allow(File).to receive(:open).and_raise(Errno::ENOENT)
         allow(phrase).to receive(:puts).twice
       end
 
+      # When an error is rescued, the method will not raise an error.
+      # Therefore you test the conditions that happens if an error was rescued.
       it 'rescues error' do
         expect { phrase.save_decrypted_messages }.not_to raise_error
       end
