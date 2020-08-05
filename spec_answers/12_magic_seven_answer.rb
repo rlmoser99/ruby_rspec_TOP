@@ -15,13 +15,13 @@ require_relative '../lib/12_magic_seven'
 # 2. Act ->     execute the logic to test (example: calling a method to run).
 # 3. Assert ->  expect the results of arrange & act.
 
-# The tests in this example are fairly easy to understand, and it may seem
+# The tests in this lesson are fairly easy to understand, and it may seem
 # ridiculous to use A-A-A for them. However, tests should be easily understood
 # not just by you, but also by someone that is not familiar with the code.
 
 # NOTE: When you start using A-A-A to format your tests, it will feel
-# strange to not be following DRY (don't repeat yourself). With tests, however,
-# repetition is neccessary in order for them to be easy to read.
+# strange to not be following DRY (Don't Repeat Yourself). With tests, however,
+# repetition is necessary in order for them to be easy to read.
 
 # When you start working on a existing code base, you will often become familiar
 # with the code by reading the tests.
@@ -98,8 +98,8 @@ describe MagicSeven do
     end
   end
 
-  # The #play method will always return seven!
-  # Test this game, by using any positive integer as the random_number.
+  # The #play method will always return seven! Test this game, using any
+  # positive integer as the random_number. Update the context with the number.
   describe '#play' do
     context 'when the random number is 19' do
       # remove the 'x' before running this test

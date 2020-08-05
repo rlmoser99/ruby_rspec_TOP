@@ -61,8 +61,10 @@ describe FindNumber do
     let(:random_number) { double('random_number', value: 8) }
     subject(:game) { described_class.new(0, 9, random_number) }
 
-    # Write a test that would expect #make_guess to return the middle number of
-    # the min and max values (rounded down).
+    # Before you write the #make_guess method:
+    # Write a test that would expect #make_guess to return the average of
+    # the min and max values (rounded down). Don't expect this test to be
+    # able to pass as you haven't written #make_guess yet!
     context 'when min is 0 and max is 9' do
       it 'returns 4' do
         guess = game.make_guess
@@ -70,8 +72,9 @@ describe FindNumber do
       end
     end
 
-    # Write a method in 14_find_number.rb called #make_guess that returns the
-    # average of the min and max values (rounded down).
+    # Now write a method in 14_find_number.rb called #make_guess that returns
+    # the average of the min and max values (rounded down).
+    # You can now run the above test and it should pass.
 
     # Write a test for each of the following contexts:
 
@@ -116,17 +119,18 @@ describe FindNumber do
     # instance of the random number and/or subject, use a meaningful name to
     # differentiate between instances.
 
-    # Create a subject and random_number double with a meaningful name.
+    # Create a subject and random_number double with meaningful names.
     # A helpful tip is to combine the purpose of the test and the object.
     # E.g., ending_number & ending_game or completing_random & completing_game.
 
-    # Allow the double to receive 'value' and return a number from the min-max.
+    # Allow the double to receive 'value' and return a number from 0 to 9.
 
     let(:ending_number) { double('random_number', value: 3) }
     subject(:ending_game) { described_class.new(0, 9, ending_number) }
 
     # Write a test that would expect game to be_game_over when a guess equals
-    # the random_number double's value above.
+    # the random_number double's value above. Remember that this test will not
+    # be able to pass yet because you haven't written the method!
 
     context 'when guess and random_number are equal' do
       it 'is game over' do
@@ -135,8 +139,8 @@ describe FindNumber do
       end
     end
 
-    # Write a method in 14_find_number.rb called #game_over? that returns true
-    # when a guess equals the value of the random_number.
+    # Write the corresponding method in 14_find_number.rb called #game_over?
+    # that returns true when a guess equals the value of the random_number.
 
     # Write a test that would expect game to NOT be_game_over when a guess does
     # NOT equal the random_number double's value above.
