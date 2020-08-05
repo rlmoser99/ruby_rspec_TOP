@@ -9,7 +9,7 @@ require_relative '../lib/15c_random_number'
 def start_game
   game = BinaryGame.new
   mode = game.mode_selection
-  mode == 1 ? game.user_random : game.computer_random
+  game.user_random if mode == 1
   game.find_random_number
 end
 

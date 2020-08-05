@@ -52,92 +52,122 @@ require_relative '../lib/15c_random_number'
 # That leaves 4 methods to test - #start, #user_random, #computer_random, and
 # #computer_turns.
 
+# UPDATE: Do not test #start ->
+# Test: #mode_selection, #user_random, #find_random_number, #create_binary_search
+
 describe BinaryGame do
   # Incoming Command -> Assert the direct public side effects
-  describe '#start' do
-    context 'when user chooses the random number' do
-      subject(:start_user_game) { described_class.new }
+  describe '#mode_selection' do
+    subject(:game_mode) { described_class.new }
 
-      # To 'Arrange' this test, each of the methods will need to be stubbed, so
-      # that they do not execute. The only method that needs a return value is
-      # #game_mode_selection, which creates the conditions of this test (this is
-      # explained in the context line).
+    # To 'Arrange' this test, each of the methods will need to be stubbed, so
+    # that they do not execute. The only method that needs a return value is
+    # #mode_input, which is also the return value of this method.
 
-      before do
-        allow(start_user_game).to receive(:game_instructions)
-        allow(start_user_game).to receive(:game_mode_selection).and_return(1)
-        allow(start_user_game).to receive(:user_random)
-        allow(start_user_game).to receive(:computer_turns)
-      end
-
-      # To test if these methods are called, we will be using message
-      # expectations.
-      # https://relishapp.com/rspec/rspec-mocks/docs
-
-      # To set a message expectation, move 'Assert' before 'Act'.
-
-      it 'calls game instructions' do
-        expect(start_user_game).to receive(:game_instructions)
-        start_user_game.start
-      end
-
-      # Using method expectations can be confusing. Stubbing the methods above
-      # does not cause this test to pass; it only 'allows' a method to be
-      # called, if it is called. To test this fact, let's allow a method that
-      # is not called in #start. Uncomment the line at the bottom of this
-      # paragraph, move it to the before hook, and run the tests. All of the
-      # tests should continue to pass.
-      # allow(start_user_game).to receive(:display_range)
-
-      it 'calls user_random' do
-        expect(start_user_game).to receive(:user_random)
-        start_user_game.start
-      end
-
-      it 'calls computer_turns' do
-        expect(start_user_game).to receive(:computer_turns)
-        start_user_game.start
-      end
-
-      # Now choose one of these methods used above as a message expectation and
-      # comment it out in the lib/15a_binary_game.rb file. Resave the file and
-      # rerun the tests. The test of the method that you commented out should
-      # fail because that method is never called.
-
-      # Before moving on, uncomment that method in the lib/15a_binary_game.rb
-      # file to have all tests passing again.
+    before do
+      allow(game_mode).to receive(:introduction)
+      allow(game_mode).to receive(:mode_choices)
+      user_input = 1
+      allow(game_mode).to receive(:mode_input).and_return(user_input)
     end
 
-    # ASSIGNMENT #1
-    context 'when user chooses a computer-generated random number' do
-      # Create a new subject to use in this context block.
-      subject(:start_random_game) { described_class.new }
-
-      # The before hook will be similar to the above test, except the return
-      # value of #game_mode_selection should be 2.
-      before do
-        allow(start_random_game).to receive(:game_instructions)
-        allow(start_random_game).to receive(:game_mode_selection).and_return(2)
-        allow(start_random_game).to receive(:computer_random)
-        allow(start_random_game).to receive(:computer_turns)
-      end
-
-      it 'calls game instructions' do
-        expect(start_random_game).to receive(:game_instructions)
-        start_random_game.start
-      end
-
-      it 'calls computer_random' do
-        expect(start_random_game).to receive(:computer_random)
-        start_random_game.start
-      end
-
-      it 'calls computer_turns' do
-        expect(start_random_game).to receive(:computer_turns)
-        start_random_game.start
-      end
+    it 'returns user input' do
+      result = game_mode.mode_selection
+      expect(result).to eq(1)
     end
   end
+
+  # Incoming Command -> Assert the direct public side effects
+  # describe '#create_random_number' do
+  #   subject(:random_game) { described_class.new }
+
+  # end
+
+  # Incoming Command -> Assert the direct public side effects
+  # describe '#start' do
+  #   context 'when user chooses the random number' do
+  #     subject(:start_user_game) { described_class.new }
+
+  # To 'Arrange' this test, each of the methods will need to be stubbed, so
+  # that they do not execute. The only method that needs a return value is
+  # #game_mode_selection, which creates the conditions of this test (this is
+  # explained in the context line).
+
+  # before do
+  #   allow(start_user_game).to receive(:game_instructions)
+  #   allow(start_user_game).to receive(:game_mode_selection).and_return(1)
+  #   allow(start_user_game).to receive(:user_random)
+  #   allow(start_user_game).to receive(:computer_turns)
+  # end
+
+  # To test if these methods are called, we will be using message
+  # expectations.
+  # https://relishapp.com/rspec/rspec-mocks/docs
+
+  # To set a message expectation, move 'Assert' before 'Act'.
+
+  # xit 'calls game instructions' do
+  #   expect(start_user_game).to receive(:game_instructions)
+  #   start_user_game.start
+  # end
+
+  # Using method expectations can be confusing. Stubbing the methods above
+  # does not cause this test to pass; it only 'allows' a method to be
+  # called, if it is called. To test this fact, let's allow a method that
+  # is not called in #start. Uncomment the line at the bottom of this
+  # paragraph, move it to the before hook, and run the tests. All of the
+  # tests should continue to pass.
+  # allow(start_user_game).to receive(:display_range)
+
+  # xit 'calls user_random' do
+  #   expect(start_user_game).to receive(:user_random)
+  #   start_user_game.start
+  # end
+
+  # xit 'calls computer_turns' do
+  #   expect(start_user_game).to receive(:computer_turns)
+  #   start_user_game.start
+  # end
+
+  # Now choose one of these methods used above as a message expectation and
+  # comment it out in the lib/15a_binary_game.rb file. Resave the file and
+  # rerun the tests. The test of the method that you commented out should
+  # fail because that method is never called.
+
+  # Before moving on, uncomment that method in the lib/15a_binary_game.rb
+  # file to have all tests passing again.
+  # end
+
+  # ASSIGNMENT #1
+  # context 'when user chooses a computer-generated random number' do
+  # Create a new subject to use in this context block.
+  # subject(:start_random_game) { described_class.new }
+
+  # The before hook will be similar to the above test, except the return
+  # value of #game_mode_selection should be 2.
+  # before do
+  #   allow(start_random_game).to receive(:game_instructions)
+  #   allow(start_random_game).to receive(:game_mode_selection).and_return(2)
+  #   allow(start_random_game).to receive(:computer_random)
+  #   allow(start_random_game).to receive(:computer_turns)
+  # end
+
+  # xit 'calls game instructions' do
+  #   expect(start_random_game).to receive(:game_instructions)
+  #   start_random_game.start
+  # end
+
+  # xit 'calls computer_random' do
+  #   expect(start_random_game).to receive(:computer_random)
+  #   start_random_game.start
+  # end
+
+  # xit 'calls computer_turns' do
+  #   expect(start_random_game).to receive(:computer_turns)
+  #   start_random_game.start
+  # end
+  #   end
+  # end
 
   # Outgoing Command -> Expect to send
   describe '#computer_random' do
@@ -160,7 +190,7 @@ describe BinaryGame do
     # used in TDD. Compare it to the new verifying instance_double for the
     # RandomNumber class.
     # let(:random_number) { double('random_number', value: 8) }
-    let(:computer_number) { instance_double(RandomNumber, value: 79) }
+    # let(:computer_number) { instance_double(RandomNumber, value: 79) }
     subject(:computer_game) { described_class.new }
 
     context 'when user chooses a computer-generated random number' do
@@ -172,19 +202,20 @@ describe BinaryGame do
       # Second, we need to specify that it should return the 'computer_number'
       # double created above.
       before do
-        allow(RandomNumber).to receive(:new).with(1, 100).and_return(computer_number)
-        allow(computer_game).to receive(:puts)
-        allow(BinarySearch).to receive(:new).with(1, 100, 79)
+        # allow(RandomNumber).to receive(:new).with(1, 100).and_return(computer_number)
+        # allow(computer_game).to receive(:puts)
+        # allow(BinarySearch).to receive(:new).with(1, 100, 79)
+        computer_game.instance_variable_set(:@random_number, 79)
       end
 
-      it 'creates a new RandomNumber' do
-        expect(RandomNumber).to receive(:new).with(1, 100).and_return(computer_number)
-        computer_game.computer_random
-      end
+      # it 'creates a new RandomNumber' do
+      #   expect(RandomNumber).to receive(:new).with(1, 100).and_return(computer_number)
+      #   computer_game.computer_random
+      # end
 
       it 'creates a new BinarySearch' do
         expect(BinarySearch).to receive(:new).with(1, 100, 79)
-        computer_game.computer_random
+        computer_game.create_binary_search
       end
     end
   end
@@ -202,14 +233,12 @@ describe BinaryGame do
       # Look at #user_random and determine any methods that need to be stubbed
       # and if any methods should return anything.
 
-      before do
-        allow(user_game).to receive(:random_number_input).and_return(42)
+      it 'updates the random number' do
+        user_random = 42
+        allow(user_game).to receive(:random_number_input).and_return(user_random)
         allow(user_game).to receive(:player_input)
-      end
-
-      it 'creates a new BinarySearch' do
-        expect(BinarySearch).to receive(:new).with(1, 100, 42)
-        user_game.user_random
+        result = user_game.user_random
+        expect(result).to be(42)
       end
     end
   end
@@ -227,9 +256,8 @@ describe BinaryGame do
         # double, this method needs the value of the instance variable
         # @binary_search to be set to the double created above.
         first_game.instance_variable_set(:@binary_search, first_search)
-        allow(first_game).to receive(:puts)
-        allow(first_game).to receive(:max_guesses)
         allow(first_game).to receive(:display_range)
+        allow(first_game).to receive(:puts)
         allow(first_game.binary_search).to receive(:game_over?).and_return(true)
         allow(first_game.binary_search).to receive(:make_guess).and_return(50)
         allow(first_game.binary_search).to receive(:make_guess).once
@@ -256,9 +284,8 @@ describe BinaryGame do
 
       before do
         second_game.instance_variable_set(:@binary_search, second_search)
-        allow(second_game).to receive(:puts)
-        allow(second_game).to receive(:max_guesses)
         allow(second_game).to receive(:display_range)
+        allow(second_game).to receive(:puts)
         allow(second_game.binary_search).to receive(:make_guess).and_return(50, 25)
         allow(second_game.binary_search).to receive(:game_over?).and_return(false, true)
         allow(second_game.binary_search).to receive(:make_guess).twice

@@ -9,35 +9,34 @@ class BinaryGame
 
   def initialize
     @range = (1..100).to_a
-    @random_number = nil
+    @random_number = RandomNumber.new(range[0], range[-1]).value
     @binary_search = nil
-  end
-
-  def computer_random
-    min = range[0]
-    max = range[-1]
-    @random_number = RandomNumber.new(min, max)
-    puts "The computer-generated random number is: \e[32m#{random_number.value}\e[0m!"
-    @binary_search = BinarySearch.new(min, max, random_number.value)
-  end
-
-  def user_random
-    @random_number = random_number_input(player_input)
-    @binary_search = BinarySearch.new(range[0], range[-1], random_number)
-  end
-
-  def find_random_number
-    number = maximum_guesses
-    puts "The computer will find it in \e[32m#{number}\e[0m guesses or less!\n\n"
-    computer_turns
-    puts "As predicted, the computer found it in \e[32m#{number}\e[0m guesses or less!"
-    puts 'Game Over!'
   end
 
   def mode_selection
     introduction
     mode_choices
     mode_input
+  end
+
+  def user_random
+    @random_number = random_number_input(player_input)
+  end
+
+  # Look into counting the number of guesses?
+  def find_random_number
+    puts "The random number is: \e[32m#{@random_number}\e[0m!\n\n"
+    create_binary_search
+    # number = maximum_guesses
+    puts "The computer will find it in \e[32m#{maximum_guesses}\e[0m guesses or less!\n\n"
+    actual_guesses = computer_turns
+    # puts "As predicted, the computer found it in \e[32m#{number}\e[0m guesses or less!"
+    puts 'Game Over! In # of turns:'
+    actual_guesses
+  end
+
+  def create_binary_search
+    @binary_search = BinarySearch.new(range[0], range[-1], @random_number)
   end
 
   def computer_turns
@@ -50,6 +49,7 @@ class BinaryGame
       binary_search.update_range
       count += 1
     end
+    count
   end
 
   protected
