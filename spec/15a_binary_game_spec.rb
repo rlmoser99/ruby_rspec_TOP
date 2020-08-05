@@ -184,7 +184,7 @@ describe BinaryGame do
   describe '#user_random' do
     # Create a new subject to test #user_random. The subject can be created
     # outside of the context block when there is only one test condition or
-    # if you are re-using the same subject for multiple context blocks.
+    # if you are reusing the same subject for multiple context blocks.
 
     context 'when user chooses the random number' do
       # Look at #user_random and determine any methods that need to be stubbed

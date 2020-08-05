@@ -125,12 +125,12 @@ describe FindNumber do
 
     # Allow the double to receive 'value' and return a number from 0 to 9.
 
+    let(:ending_number) { double('random_number', value: 3) }
+    subject(:ending_game) { described_class.new(0, 9, ending_number) }
+
     # Write a test that would expect game to be_game_over when a guess equals
     # the random_number double's value above. Remember that this test will not
     # be able to pass yet because you haven't written the method!
-
-    let(:ending_number) { double('random_number', value: 3) }
-    subject(:ending_game) { described_class.new(0, 9, ending_number) }
 
     context 'when guess and random_number are equal' do
       it 'is game over' do
