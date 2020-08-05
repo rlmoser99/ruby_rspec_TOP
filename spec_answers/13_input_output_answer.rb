@@ -12,7 +12,8 @@ require_relative '../lib/13_input_output'
 # game and look for differences that may make one easier or harder to test
 # than the other.
 
-# One key difference is that NumberGame has smaller, isolated methods.
+# One key difference between the two is that NumberGame has smaller,
+# isolated methods.
 
 # Small and isolated methods that only do one thing are easier to test.
 # Long methods are like a run-on sentence that should have been divided into 2 or 3 different sentences so that everything could be clearly understood and in this case if a method does many different things it can be difficult to test.
@@ -80,7 +81,7 @@ describe NumberGame do
 
   # The #player_input method is used in the game as an argument passed into the
   # verify_input method. The #player_input method is not tested because it is a
-  # protected method. In addition, it is unneccessary to test methods that only
+  # protected method. In addition, it is unnecessary to test methods that only
   # contain puts and/or gets. However, at the bottom of the answer file is an
   # example of how you would test the #player_input method if it were not
   # protected.
@@ -125,11 +126,11 @@ describe NumberGame do
         # test output.
         allow(game).to receive(:puts)
 
-        # This method starts with the invalid parameter (letter_input = 'g')
+        # This test starts with the invalid parameter (letter_input = 'g').
         verified_input = game.verify_input(letter_input)
 
-        # However, the result of 'verified_input' is the valid parameter.
-        # (number_input = '5')
+        # The result of 'verified_input' is the valid parameter, because
+        # of the player_input stub in the before hook (number_input = '5').
         expect(verified_input).to eq('5')
       end
 
@@ -160,12 +161,15 @@ describe NumberGame do
         allow(game).to receive(:player_input).and_return(symbol_input, number_input)
       end
 
+      # remove the 'x' before running this test
       it 'loops twice until it receives valid input' do
+        # Creating a stub method for :puts is optional
         allow(game).to receive(:puts).twice
         verified_input = game.verify_input(letter_input)
         expect(verified_input).to eq('3')
       end
 
+      # remove the 'x' before running this test
       it 'displays error message twice' do
         expect(game).to receive(:puts).twice.with('Input error!')
         game.verify_input(letter_input)
