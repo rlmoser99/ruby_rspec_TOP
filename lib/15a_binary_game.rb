@@ -37,8 +37,9 @@ class BinaryGame
   def binary_search_guesses
     loop do
       display_range
-      puts "Guess ##{turn_count} -> \e[32m#{binary_search.make_guess}\e[0m"
+      binary_search.make_guess
       @turn_count += 1
+      puts "Guess ##{turn_count} -> \e[32m#{binary_search.guess}\e[0m"
       return binary_search.guess if binary_search.game_over?
 
       binary_search.update_range

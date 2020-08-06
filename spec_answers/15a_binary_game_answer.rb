@@ -53,7 +53,8 @@ require_relative '../lib/15c_random_number'
 # #computer_turns.
 
 # UPDATE: Do not test #start, instead ->
-# Test: #mode_selection, #user_random, #find_random_number, #create_binary_search, #binary_search_guesses
+# Test: #mode_selection, #user_random, #find_random_number, #create_binary_search,
+# and #binary_search_guesses
 
 describe BinaryGame do
   # Incoming Command -> Assert the direct public side effects
@@ -89,6 +90,23 @@ describe BinaryGame do
     it 'returns random number' do
       result = game_find.find_random_number
       expect(result).to eq(55)
+    end
+  end
+
+  describe '#find_random_number' do
+    subject(:number_game) { described_class.new }
+    let(:number_search) { instance_double(BinarySearch, guess: 50, answer: 50, min: 1, max: 100, make_guess: 50, game_over?: true) }
+
+    before do
+      number_game.instance_variable_set(:@binary_search, number_search)
+      allow(number_game).to receive(:display_starting_numbers)
+      allow(number_game).to receive(:display_range)
+      allow(number_game).to receive(:create_binary_search).and_return(number_search)
+    end
+
+    it 'returns random number' do
+      result = number_game.find_random_number
+      expect(result).to eq(50)
     end
   end
 
@@ -185,7 +203,7 @@ describe BinaryGame do
   # end
 
   # Outgoing Command -> Expect to send
-  describe '#computer_random' do
+  describe '#create_binary_search' do
     # After TDD is complete, the classes and methods that were used as a test
     # double should be updated to be a 'verifying double.' Using a 'verifying
     # double' is preferred, because doubles can produce an error if they do
@@ -209,24 +227,9 @@ describe BinaryGame do
     subject(:computer_game) { described_class.new }
 
     context 'when user chooses a computer-generated random number' do
-      # We need to create a stub for RandomNumber.new(min, max).
-
-      # First, we need to specify the arguments using matching arguments:
-      # https://relishapp.com/rspec/rspec-mocks/docs/setting-constraints/matching-arguments
-
-      # Second, we need to specify that it should return the 'computer_number'
-      # double created above.
       before do
-        # allow(RandomNumber).to receive(:new).with(1, 100).and_return(computer_number)
-        # allow(computer_game).to receive(:puts)
-        # allow(BinarySearch).to receive(:new).with(1, 100, 79)
         computer_game.instance_variable_set(:@random_number, 79)
       end
-
-      # it 'creates a new RandomNumber' do
-      #   expect(RandomNumber).to receive(:new).with(1, 100).and_return(computer_number)
-      #   computer_game.computer_random
-      # end
 
       it 'creates a new BinarySearch' do
         expect(BinarySearch).to receive(:new).with(1, 100, 79)
