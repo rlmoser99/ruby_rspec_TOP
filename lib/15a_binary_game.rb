@@ -5,12 +5,13 @@
 
 # class for computer to find random number
 class BinaryGame
-  attr_reader :range, :random_number, :binary_search
+  attr_reader :range, :random_number, :binary_search, :turn_count
 
   def initialize
     @range = (1..100).to_a
     @random_number = RandomNumber.new(range[0], range[-1]).value
     @binary_search = nil
+    @turn_count = 0
   end
 
   def mode_selection
@@ -23,33 +24,25 @@ class BinaryGame
     @random_number = random_number_input(player_input)
   end
 
-  # Look into counting the number of guesses?
   def find_random_number
-    puts "The random number is: \e[32m#{@random_number}\e[0m!\n\n"
+    display_starting_numbers
     create_binary_search
-    # number = maximum_guesses
-    puts "The computer will find it in \e[32m#{maximum_guesses}\e[0m guesses or less!\n\n"
-    actual_guesses = computer_turns
-    # puts "As predicted, the computer found it in \e[32m#{number}\e[0m guesses or less!"
-    puts 'Game Over! In # of turns:'
-    actual_guesses
+    binary_search_guesses
   end
 
   def create_binary_search
     @binary_search = BinarySearch.new(range[0], range[-1], @random_number)
   end
 
-  def computer_turns
-    count = 1
+  def binary_search_guesses
     loop do
       display_range
-      puts "Guess ##{count} -> \e[32m#{binary_search.make_guess}\e[0m"
-      break if binary_search.game_over?
+      puts "Guess ##{turn_count} -> \e[32m#{binary_search.make_guess}\e[0m"
+      @turn_count += 1
+      return binary_search.guess if binary_search.game_over?
 
       binary_search.update_range
-      count += 1
     end
-    count
   end
 
   protected
@@ -114,6 +107,15 @@ class BinaryGame
       \e[32m[1]\e[0m Choose the random number
       \e[32m[2]\e[0m Use a randomly-generated number
 
+    HEREDOC
+  end
+
+  def display_starting_numbers
+    puts <<~HEREDOC
+
+      The random number is: \e[32m#{@random_number}\e[0m!
+
+      The computer will find it in \e[32m#{maximum_guesses}\e[0m guesses or less!
     HEREDOC
   end
 

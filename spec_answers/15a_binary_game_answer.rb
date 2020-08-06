@@ -52,8 +52,8 @@ require_relative '../lib/15c_random_number'
 # That leaves 4 methods to test - #start, #user_random, #computer_random, and
 # #computer_turns.
 
-# UPDATE: Do not test #start ->
-# Test: #mode_selection, #user_random, #find_random_number, #create_binary_search
+# UPDATE: Do not test #start, instead ->
+# Test: #mode_selection, #user_random, #find_random_number, #create_binary_search, #binary_search_guesses
 
 describe BinaryGame do
   # Incoming Command -> Assert the direct public side effects
@@ -74,6 +74,21 @@ describe BinaryGame do
     it 'returns user input' do
       result = game_mode.mode_selection
       expect(result).to eq(1)
+    end
+  end
+
+  describe '#find_random_number' do
+    subject(:game_find) { described_class.new }
+
+    before do
+      allow(game_find).to receive(:display_starting_numbers)
+      allow(game_find).to receive(:create_binary_search)
+      allow(game_find).to receive(:binary_search_guesses).and_return(55)
+    end
+
+    it 'returns random number' do
+      result = game_find.find_random_number
+      expect(result).to eq(55)
     end
   end
 
@@ -244,11 +259,11 @@ describe BinaryGame do
   end
 
   # Outgoing Command -> Expect to send
-  describe '#computer_turns' do
+  describe '#binary_search_guesses' do
     context 'when first guess is correct' do
       # This method uses the BinarySearch class, so let's create a double to
       # continue to test the BinaryGame class in isolation from other classes.
-      let(:first_search) { instance_double(BinarySearch) }
+      let(:first_search) { instance_double(BinarySearch, guess: 50) }
       subject(:first_game) { described_class.new }
 
       before do
@@ -265,12 +280,12 @@ describe BinaryGame do
 
       it 'sends make_guess once' do
         expect(first_game.binary_search).to receive(:make_guess).once
-        first_game.computer_turns
+        first_game.binary_search_guesses
       end
 
       it 'does not send update_range' do
         expect(first_game.binary_search).not_to receive(:update_range)
-        first_game.computer_turns
+        first_game.binary_search_guesses
       end
     end
 
@@ -280,7 +295,7 @@ describe BinaryGame do
       # there be multiple return values, but there will also be another method
       # to be stubbed.
       subject(:second_game) { described_class.new }
-      let(:second_search) { instance_double(BinarySearch) }
+      let(:second_search) { instance_double(BinarySearch, guess: 25) }
 
       before do
         second_game.instance_variable_set(:@binary_search, second_search)
@@ -294,12 +309,12 @@ describe BinaryGame do
 
       it 'sends make_guess twice' do
         expect(second_game.binary_search).to receive(:make_guess).twice
-        second_game.computer_turns
+        second_game.binary_search_guesses
       end
 
       it 'sends update_range once' do
         expect(second_game.binary_search).to receive(:update_range).once
-        second_game.computer_turns
+        second_game.binary_search_guesses
       end
     end
   end
