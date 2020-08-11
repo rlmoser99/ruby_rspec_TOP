@@ -9,7 +9,7 @@ class BinaryGame
 
   def initialize
     @range = (1..100).to_a
-    @random_number = RandomNumber.new(range[0], range[-1]).value
+    @random_number = RandomNumber.new(range[0], range[-1])
     @binary_search = nil
     @turn_count = 0
   end
@@ -21,11 +21,11 @@ class BinaryGame
   end
 
   def user_random
-    @random_number = random_number_input(player_input)
+    number_input = random_number_input(player_input)
+    random_number.update_value(number_input)
   end
 
   def find_random_number
-    display_starting_numbers
     create_binary_search
     binary_search_guesses
   end
@@ -94,10 +94,11 @@ class BinaryGame
   def introduction
     puts <<~HEREDOC
 
-      Watch the computer find a number between #{range[0]} and #{range[-1]}.
+      Watch the computer find a number between #{range[0]} and #{range[-1]} using a binary search.
+      The computer will find it in \e[32m#{maximum_guesses}\e[0m guesses or less!
 
-      You can choose the random number or use a computer-generated number.
-      Then watch the computer find that number using a binary search.
+      The computer-generated random number is \e[32m#{@random_number.value}\e[0m.
+      Would you like to choose your own number?
 
     HEREDOC
   end
@@ -105,18 +106,9 @@ class BinaryGame
   def mode_choices
     puts <<~HEREDOC
 
-      \e[32m[1]\e[0m Choose the random number
-      \e[32m[2]\e[0m Use a randomly-generated number
+      \e[32m[1]\e[0m Choose a new number
+      \e[32m[2]\e[0m Keep the randomly-generated number
 
-    HEREDOC
-  end
-
-  def display_starting_numbers
-    puts <<~HEREDOC
-
-      The random number is: \e[32m#{@random_number}\e[0m!
-
-      The computer will find it in \e[32m#{maximum_guesses}\e[0m guesses or less!
     HEREDOC
   end
 

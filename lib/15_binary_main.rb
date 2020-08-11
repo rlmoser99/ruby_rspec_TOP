@@ -11,7 +11,7 @@ def start_game
   mode = game.mode_selection
   game.user_random if mode == 1
   game.find_random_number
-  puts "As predicted, the computer found it in \e[32m#{game.turn_count}\e[0m guesses!"
+  puts "As predicted, the computer found it in #{game.turn_count} guesses!"
 end
 
 start_game

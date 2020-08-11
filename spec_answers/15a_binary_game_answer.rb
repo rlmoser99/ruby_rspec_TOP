@@ -43,6 +43,15 @@ require_relative '../lib/15c_random_number'
 
 # INSERT -> SCRIPT EXPLANATION
 
+# Timato:
+# The API of game would be the methods create_players, play_turns and game_over_message. Those should be tested. start_game is basically a script to automate those. That script could be standalone in another file.
+# In the normal course of testing you'd write an integration test to check all the parts worked together as expected.
+# That's the way I concluded it should work because otherwise testing is a nightmare. To have such a narrow entry point to the class that did everything is a huge pain. I've seen some of the solutions that throw the game loop script in another file to allow someone to start a game quickly
+# If you do want to keep it in Game that is fine btw, don't feel you have to move it, but have the other methods still part of your public API and test them
+# It's not the worst idea to have it inside a class somewhere though because then it's easier to call again if you want to start a new game for example. I've swayed between a separate class handling the DSL side of things like getting player names etc and then running the game or making it a class method in game and then creating a new game and doing the setup which would be easy to call again in that class method. Depends how you are setting up the game.
+# The way I like to think of it though is that you are exposing an API that could be used by others to build their own games. So in tictactoe you can provide the methods for a standard game but someone else could use them to build out their own game loop and do something a bit different. Maybe add in their own custom text etc. The script to run a game is just a convenience to allow someone to run a standard game without the hassle of having to set it up.
+# I could be wrong but I also had to wonder how I was going to write a test for one public method that called 3 - 5 other methods including one that was a loop when I wrote tictactoe and I just can't see how you'd do that easily without a horrible test file which was impossible to read. Usually a sign of a missing extraction
+
 # The majority of BinaryGame methods are 'sent to self', therefore we can ignore
 # them for unit testing.
 
@@ -54,6 +63,8 @@ require_relative '../lib/15c_random_number'
 
 # That leaves 5 methods to test - #mode_selection, #user_random, #find_random_number,
 # #create_binary_search, and #binary_search_guesses
+
+# LOOK AT CHANGING THE RANDOM_NUMBER CLASS TO BE THE NUMBER USER PICKED!!!
 
 describe BinaryGame do
   # Incoming Command -> Assert the direct public side effects
@@ -81,7 +92,6 @@ describe BinaryGame do
     subject(:game_find) { described_class.new }
 
     before do
-      allow(game_find).to receive(:display_starting_numbers)
       allow(game_find).to receive(:create_binary_search)
       allow(game_find).to receive(:binary_search_guesses).and_return(55)
     end
@@ -98,7 +108,6 @@ describe BinaryGame do
 
     before do
       number_game.instance_variable_set(:@binary_search, number_search)
-      allow(number_game).to receive(:display_starting_numbers)
       allow(number_game).to receive(:create_binary_search)
       allow(number_game).to receive(:puts)
       allow(number_game).to receive(:display_range)

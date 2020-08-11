@@ -7,4 +7,8 @@ class RandomNumber
   def initialize(minimum, maximum)
     @value = rand(minimum..maximum)
   end
+
+  def update_value(number)
+    @value = number
+  end
 end
