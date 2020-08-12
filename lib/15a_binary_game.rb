@@ -5,7 +5,7 @@
 
 # class for computer to find random number
 class BinaryGame
-  attr_reader :range, :random_number, :binary_search, :turn_count
+  attr_reader :range, :binary_search, :turn_count
 
   def initialize(min, max, binary_search)
     @range = (min..max).to_a
@@ -13,14 +13,17 @@ class BinaryGame
     @turn_count = 0
   end
 
+  # move to binary_search -> guess count
   def update_turn_count
     @turn_count += 1
   end
 
+  # move to binary_search
   def maximum_guesses
     (Math.log2(range[-1] - range[0]) + 1).to_i
   end
 
+  # Maybe make this break into lines of 10 digits... Return value?
   def display_range
     sleep(2)
     puts ''
