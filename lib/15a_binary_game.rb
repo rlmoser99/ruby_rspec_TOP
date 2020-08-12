@@ -7,46 +7,15 @@
 class BinaryGame
   attr_reader :range, :random_number, :binary_search, :turn_count
 
-  def initialize
-    @range = (1..100).to_a
-    @random_number = RandomNumber.new(range[0], range[-1])
-    @binary_search = nil
+  def initialize(min, max, binary_search)
+    @range = (min..max).to_a
+    @binary_search = binary_search
     @turn_count = 0
   end
 
-  def mode_selection
-    introduction
-    mode_choices
-    mode_input
+  def update_turn_count
+    @turn_count += 1
   end
-
-  def user_random
-    number_input = random_number_input(player_input)
-    random_number.update_value(number_input)
-  end
-
-  def find_random_number
-    create_binary_search
-    binary_search_guesses
-  end
-
-  def create_binary_search
-    @binary_search = BinarySearch.new(range[0], range[-1], @random_number)
-  end
-
-  def binary_search_guesses
-    loop do
-      display_range
-      binary_search.make_guess
-      @turn_count += 1
-      puts "Guess ##{turn_count} -> \e[32m#{binary_search.guess}\e[0m"
-      return binary_search.guess if binary_search.game_over?
-
-      binary_search.update_range
-    end
-  end
-
-  protected
 
   def maximum_guesses
     (Math.log2(range[-1] - range[0]) + 1).to_i
@@ -61,6 +30,8 @@ class BinaryGame
     puts "\n\n"
   end
 
+  protected
+
   def print_number(number)
     if number == (binary_search.min + binary_search.max) / 2
       print "\e[32m#{number} \e[0m"
@@ -69,54 +40,5 @@ class BinaryGame
     else
       print "\e[91m#{number} \e[0m"
     end
-  end
-
-  def random_number_input(number)
-    return number if valid_number?(number)
-
-    puts 'Input error!'
-    random_number_input(player_input)
-  end
-
-  def valid_number?(input)
-    input.between?(1, 100)
-  end
-
-  def valid_mode?(input)
-    input.between?(1, 2)
-  end
-
-  def player_input
-    puts "Enter a number between #{range[0]} and #{range[-1]}"
-    gets.chomp.to_i
-  end
-
-  def introduction
-    puts <<~HEREDOC
-
-      Watch the computer find a number between #{range[0]} and #{range[-1]} using a binary search.
-      The computer will find it in \e[32m#{maximum_guesses}\e[0m guesses or less!
-
-      The computer-generated random number is \e[32m#{@random_number.value}\e[0m.
-      Would you like to choose your own number?
-
-    HEREDOC
-  end
-
-  def mode_choices
-    puts <<~HEREDOC
-
-      \e[32m[1]\e[0m Choose a new number
-      \e[32m[2]\e[0m Keep the randomly-generated number
-
-    HEREDOC
-  end
-
-  def mode_input
-    number = gets.chomp.to_i
-    return number if valid_mode?(number)
-
-    puts 'Input error! Please select 1 or 2.'
-    mode_input
   end
 end
