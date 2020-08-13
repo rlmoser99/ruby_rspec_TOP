@@ -5,14 +5,13 @@
 
 # class for computer to find random number
 class BinaryGame
-  attr_reader :range
-  # :binary_search, :guess_count
+  attr_reader :minimum, :maximum, :guess_count
 
-  def initialize(min, max)
-    @range = (min..max).to_a
-    @random_number = RandomNumber.new(min, max)
-    # @binary_search = nil
-    # @guess_count = 0
+  def initialize(minimum, maximum)
+    @minimum = minimum
+    @maximum = maximum
+    @random_number = RandomNumber.new(minimum, maximum)
+    @guess_count = 0
   end
 
   def confirm_random_number
@@ -22,25 +21,27 @@ class BinaryGame
     @random_number.value
   end
 
-  def update_guess_count
-    @guess_count += 1
+  def binary_search_turns
+    binary_search = BinarySearch.new(@minimum, @maximum, @random_number)
+    loop do
+      display_range(binary_search.min, binary_search.max)
+      binary_search.make_guess
+      @guess_count += 1
+      puts "Guess ##{@guess_count} -> \e[32m#{binary_search.guess}\e[0m\n\n"
+      break if binary_search.game_over?
+
+      binary_search.update_range
+    end
   end
 
   def maximum_guesses
-    (Math.log2(range[-1] - range[0]) + 1).to_i
-  end
-
-  def color_range(pretty_range = [])
-    range.each do |number|
-      pretty_range << color_number(number)
-    end
-    pretty_range
+    (Math.log2(maximum - minimum) + 1).to_i
   end
 
   def introduction
     puts <<~HEREDOC
-  
-      Watch the computer find a number between #{@range[0]} and #{@range[-1]} using a binary search.
+
+      Watch the computer find a number between #{minimum} and #{maximum} using a binary search.
 
       The computer-generated random number is \e[32m#{@random_number.value}\e[0m.
       Would you like to choose your own number?
@@ -54,26 +55,36 @@ class BinaryGame
   def player_input(min, max)
     number = gets.chomp.to_i
     return number if number.between?(min, max)
-  
+
     puts "Input error! Please enter a number between #{min} or #{max}."
     player_input(min, max)
   end
-  
+
   def update_random_number
-    puts "Enter a number between #{range[0]} and #{range[-1]}"
-    number_input = player_input(range[0], range[-1])
+    puts "Enter a number between #{minimum} and #{maximum}"
+    number_input = player_input(minimum, maximum)
     @random_number.update_value(number_input)
+  end
+
+  def display_range(min, max)
+    range = (minimum..maximum).to_a
+    sleep(2)
+    puts
+    range.each do |number|
+      print_number(min, max, number)
+    end
+    puts
   end
 
   protected
 
-  def color_number(number)
-    if number == (binary_search.min + binary_search.max) / 2
-      "\e[32m#{number} \e[0m"
-    elsif number.between?(binary_search.min, binary_search.max)
-      "#{number} "
+  def print_number(min, max, number)
+    if number == (min + max) / 2
+      print "\e[32m#{number} \e[0m"
+    elsif number.between?(min, max)
+      print "#{number} "
     else
-      "\e[91m#{number} \e[0m"
+      print "\e[91m#{number} \e[0m"
     end
   end
 end
