@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/15a_binary_game'
+require_relative '../lib/15a_binary_predictor'
 require_relative '../lib/15b_binary_search'
 require_relative '../lib/15c_random_number'
 
@@ -11,7 +11,7 @@ def set_up(min, max)
   mode = player_input(1, 2)
   update_random_number if mode == 1
   @binary_search = BinarySearch.new(min, max, @random_number)
-  @game = BinaryGame.new(min, max, @binary_search)
+  @predictor = BinaryPredictor.new(min, max, @binary_search)
 end
 
 def player_input(min, max)
@@ -42,20 +42,28 @@ def introduction
   HEREDOC
 end
 
+def print_range(array)
+  sleep(2)
+  array.each do |num|
+    print num
+  end
+  puts
+end
+
 @min = 1
 @max = 100
 @random_number = RandomNumber.new(@min, @max)
 set_up(@min, @max)
-puts "The computer will find it in \e[32m#{@game.maximum_guesses}\e[0m guesses or less!"
+puts "The computer will find \e[32m#{@random_number.value}\e[0m, in #{@predictor.maximum_guesses} guesses or less!\n\n"
 
 loop do
-  @game.display_range
+  print_range(@predictor.color_range)
   @binary_search.make_guess
-  @game.update_turn_count
-  puts "Guess ##{@game.turn_count} -> \e[32m#{@binary_search.guess}\e[0m"
+  @predictor.update_guess_count
+  puts "Guess ##{@predictor.guess_count} -> \e[32m#{@binary_search.guess}\e[0m\n\n"
   break if @binary_search.game_over?
 
   @binary_search.update_range
 end
 
-puts "As predicted, the computer found it in \e[32m#{@game.turn_count}\e[0m guesses!"
+puts "\e[32mAs predicted, the computer found it in #{@predictor.guess_count} guesses!\e[0m"
