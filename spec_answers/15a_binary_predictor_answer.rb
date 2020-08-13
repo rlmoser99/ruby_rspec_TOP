@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/15a_binary_game'
+require_relative '../lib/15a_binary_predictor'
 require_relative '../lib/15b_binary_search'
 require_relative '../lib/15c_random_number'
 
@@ -65,144 +65,201 @@ require_relative '../lib/15c_random_number'
 # #create_binary_search, and #binary_search_guesses
 
 # LOOK AT CHANGING THE RANDOM_NUMBER CLASS TO BE THE NUMBER USER PICKED!!!
+describe BinaryPredictor do
+  let(:binary_search) { instance_double(BinarySearch) }
+  subject(:predictor) { described_class.new(1, 10, binary_search) }
 
-describe BinaryGame do
-  # Incoming Command -> Assert the direct public side effects
-  describe '#mode_selection' do
-    subject(:game_mode) { described_class.new }
-
-    # To 'Arrange' this test, each of the methods will need to be stubbed, so
-    # that they do not execute. The only method that needs a return value is
-    # #mode_input, which is also the return value of this method.
-
-    before do
-      user_input = 1
-      allow(game_mode).to receive(:introduction)
-      allow(game_mode).to receive(:mode_choices)
-      allow(game_mode).to receive(:mode_input).and_return(user_input)
-    end
-
-    it 'returns user input' do
-      result = game_mode.mode_selection
-      expect(result).to eq(1)
+  describe '#update_guess_count' do
+    it 'increases guess count by 1' do
+      expect { predictor.update_guess_count }.to change { predictor.guess_count }.by(1)
     end
   end
 
-  describe '#find_random_number' do
-    subject(:game_find) { described_class.new }
-
-    before do
-      allow(game_find).to receive(:create_binary_search)
-      allow(game_find).to receive(:binary_search_guesses).and_return(55)
+  describe '#update_guess_count' do
+    it 'returns 7' do
+      max = predictor.maximum_guesses
+      expect(max).to eq(4)
     end
 
-    it 'returns random number' do
-      result = game_find.find_random_number
-      expect(result).to eq(55)
-    end
-  end
-
-  describe '#find_random_number' do
-    subject(:number_game) { described_class.new }
-    let(:number_search) { instance_double(BinarySearch, guess: 50, answer: 50, min: 1, max: 100, make_guess: 50, game_over?: true) }
-
-    before do
-      number_game.instance_variable_set(:@binary_search, number_search)
-      allow(number_game).to receive(:create_binary_search)
-      allow(number_game).to receive(:puts)
-      allow(number_game).to receive(:display_range)
+    context 'when range is 1 to 100' do
+      it 'returns 8' do
+        predictor.instance_variable_set(:@range, (1..100).to_a)
+        max = predictor.maximum_guesses
+        expect(max).to eq(7)
+      end
     end
 
-    it 'returns random number' do
-      result = number_game.find_random_number
-      expect(result).to eq(50)
+    context 'when range is 1 to 500' do
+      it 'returns 9' do
+        predictor.instance_variable_set(:@range, (1..500).to_a)
+        max = predictor.maximum_guesses
+        expect(max).to eq(9)
+      end
     end
   end
 
-  # Outgoing Command -> Expect to send
-  describe '#create_binary_search' do
-    subject(:computer_game) { described_class.new }
-
-    context 'when user chooses a computer-generated random number' do
+  describe '#color_range' do
+    context 'when binary search is new' do
       before do
-        computer_game.instance_variable_set(:@random_number, 79)
+        allow(predictor.binary_search).to receive(:min).and_return(1)
+        allow(predictor.binary_search).to receive(:max).and_return(10)
       end
-
-      it 'creates a new BinarySearch' do
-        expect(BinarySearch).to receive(:new).with(1, 100, 79)
-        computer_game.create_binary_search
-      end
-    end
-  end
-
-  # Outgoing Command -> Expect to send
-  describe '#user_random' do
-    # INSERT -> CLASS ENCAPSULATION EXPLANATION
-    subject(:user_game) { described_class.new }
-
-    context 'when user chooses the random number' do
-      it 'updates the random number' do
-        user_random = 42
-        allow(user_game).to receive(:random_number_input).and_return(user_random)
-        allow(user_game).to receive(:player_input)
-        result = user_game.user_random
-        expect(result).to be(42)
+      it 'is what it is' do
+        result = ["1 ", "2 ", "3 ", "4 ", "\e[32m5 \e[0m", "6 ", "7 ", "8 ", "9 ", "10 "]
+        expect(predictor.color_range).to eq(result)
       end
     end
-  end
 
-  # Outgoing Command -> Expect to send
-  describe '#binary_search_guesses' do
-    context 'when first guess is correct' do
-      let(:first_search) { instance_double(BinarySearch, guess: 50) }
-      subject(:first_game) { described_class.new }
-
+    context 'when binary search is new' do
       before do
-        first_game.instance_variable_set(:@binary_search, first_search)
-        allow(first_game).to receive(:display_range)
-        allow(first_game).to receive(:puts)
-        allow(first_game.binary_search).to receive(:game_over?).and_return(true)
-        allow(first_game.binary_search).to receive(:make_guess).and_return(50)
-        allow(first_game.binary_search).to receive(:make_guess).once
+        allow(predictor.binary_search).to receive(:min).and_return(5)
+        allow(predictor.binary_search).to receive(:max).and_return(10)
       end
-
-      it 'sends make_guess once' do
-        expect(first_game.binary_search).to receive(:make_guess).once
-        first_game.binary_search_guesses
-      end
-
-      it 'does not send update_range' do
-        expect(first_game.binary_search).not_to receive(:update_range)
-        first_game.binary_search_guesses
-      end
-    end
-
-    context 'when second guess is correct' do
-      subject(:second_game) { described_class.new }
-      let(:second_search) { instance_double(BinarySearch, guess: 25) }
-
-      before do
-        second_game.instance_variable_set(:@binary_search, second_search)
-        allow(second_game).to receive(:display_range)
-        allow(second_game).to receive(:puts)
-        allow(second_game.binary_search).to receive(:make_guess).and_return(50, 25)
-        allow(second_game.binary_search).to receive(:game_over?).and_return(false, true)
-        allow(second_game.binary_search).to receive(:make_guess).twice
-        allow(second_game.binary_search).to receive(:update_range).once
-      end
-
-      it 'sends make_guess twice' do
-        expect(second_game.binary_search).to receive(:make_guess).twice
-        second_game.binary_search_guesses
-      end
-
-      it 'sends update_range once' do
-        expect(second_game.binary_search).to receive(:update_range).once
-        second_game.binary_search_guesses
+      it 'is what it is' do
+        result =  ["\e[91m1 \e[0m", "\e[91m2 \e[0m", "\e[91m3 \e[0m", "\e[91m4 \e[0m", "5 ", "6 ", "\e[32m7 \e[0m", "8 ", "9 ", "10 "]
+        expect(predictor.color_range).to eq(result)
       end
     end
   end
 end
+
+# describe BinaryGame do
+#   # Incoming Command -> Assert the direct public side effects
+#   describe '#mode_selection' do
+#     subject(:game_mode) { described_class.new }
+
+#     # To 'Arrange' this test, each of the methods will need to be stubbed, so
+#     # that they do not execute. The only method that needs a return value is
+#     # #mode_input, which is also the return value of this method.
+
+#     before do
+#       user_input = 1
+#       allow(game_mode).to receive(:introduction)
+#       allow(game_mode).to receive(:mode_choices)
+#       allow(game_mode).to receive(:mode_input).and_return(user_input)
+#     end
+
+#     it 'returns user input' do
+#       result = game_mode.mode_selection
+#       expect(result).to eq(1)
+#     end
+#   end
+
+#   describe '#find_random_number' do
+#     subject(:game_find) { described_class.new }
+
+#     before do
+#       allow(game_find).to receive(:create_binary_search)
+#       allow(game_find).to receive(:binary_search_guesses).and_return(55)
+#     end
+
+#     it 'returns random number' do
+#       result = game_find.find_random_number
+#       expect(result).to eq(55)
+#     end
+#   end
+
+#   describe '#find_random_number' do
+#     subject(:number_game) { described_class.new }
+#     let(:number_search) { instance_double(BinarySearch, guess: 50, answer: 50, min: 1, max: 100, make_guess: 50, game_over?: true) }
+
+#     before do
+#       number_game.instance_variable_set(:@binary_search, number_search)
+#       allow(number_game).to receive(:create_binary_search)
+#       allow(number_game).to receive(:puts)
+#       allow(number_game).to receive(:display_range)
+#     end
+
+#     it 'returns random number' do
+#       result = number_game.find_random_number
+#       expect(result).to eq(50)
+#     end
+#   end
+
+#   # Outgoing Command -> Expect to send
+#   describe '#create_binary_search' do
+#     subject(:computer_game) { described_class.new }
+
+#     context 'when user chooses a computer-generated random number' do
+#       before do
+#         computer_game.instance_variable_set(:@random_number, 79)
+#       end
+
+#       it 'creates a new BinarySearch' do
+#         expect(BinarySearch).to receive(:new).with(1, 100, 79)
+#         computer_game.create_binary_search
+#       end
+#     end
+#   end
+
+#   # Outgoing Command -> Expect to send
+#   describe '#user_random' do
+#     # INSERT -> CLASS ENCAPSULATION EXPLANATION
+#     subject(:user_game) { described_class.new }
+
+#     context 'when user chooses the random number' do
+#       it 'updates the random number' do
+#         user_random = 42
+#         allow(user_game).to receive(:random_number_input).and_return(user_random)
+#         allow(user_game).to receive(:player_input)
+#         result = user_game.user_random
+#         expect(result).to be(42)
+#       end
+#     end
+#   end
+
+#   # Outgoing Command -> Expect to send
+#   describe '#binary_search_guesses' do
+#     context 'when first guess is correct' do
+#       let(:first_search) { instance_double(BinarySearch, guess: 50) }
+#       subject(:first_game) { described_class.new }
+
+#       before do
+#         first_game.instance_variable_set(:@binary_search, first_search)
+#         allow(first_game).to receive(:display_range)
+#         allow(first_game).to receive(:puts)
+#         allow(first_game.binary_search).to receive(:game_over?).and_return(true)
+#         allow(first_game.binary_search).to receive(:make_guess).and_return(50)
+#         allow(first_game.binary_search).to receive(:make_guess).once
+#       end
+
+#       it 'sends make_guess once' do
+#         expect(first_game.binary_search).to receive(:make_guess).once
+#         first_game.binary_search_guesses
+#       end
+
+#       it 'does not send update_range' do
+#         expect(first_game.binary_search).not_to receive(:update_range)
+#         first_game.binary_search_guesses
+#       end
+#     end
+
+#     context 'when second guess is correct' do
+#       subject(:second_game) { described_class.new }
+#       let(:second_search) { instance_double(BinarySearch, guess: 25) }
+
+#       before do
+#         second_game.instance_variable_set(:@binary_search, second_search)
+#         allow(second_game).to receive(:display_range)
+#         allow(second_game).to receive(:puts)
+#         allow(second_game.binary_search).to receive(:make_guess).and_return(50, 25)
+#         allow(second_game.binary_search).to receive(:game_over?).and_return(false, true)
+#         allow(second_game.binary_search).to receive(:make_guess).twice
+#         allow(second_game.binary_search).to receive(:update_range).once
+#       end
+
+#       it 'sends make_guess twice' do
+#         expect(second_game.binary_search).to receive(:make_guess).twice
+#         second_game.binary_search_guesses
+#       end
+
+#       it 'sends update_range once' do
+#         expect(second_game.binary_search).to receive(:update_range).once
+#         second_game.binary_search_guesses
+#       end
+#     end
+#   end
+# end
 
 # Incoming Command -> Assert the direct public side effects
 # describe '#create_random_number' do
