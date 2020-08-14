@@ -23,51 +23,53 @@ require_relative '../lib/15b_binary_search'
 
 describe BinarySearch do
   describe '#make_guess' do
-    subject(:guess_game) { described_class.new(0, 9, 8) }
+    let(:random_number) { double('random_number', value: 8) }
+    subject(:game) { described_class.new(0, 9, random_number) }
 
     context 'when min is 0 and max is 9' do
       it 'returns 4' do
-        guess = guess_game.make_guess
+        guess = game.make_guess
         expect(guess).to eq(4)
       end
     end
 
     context 'when min is 5 and max is 9' do
       it 'returns 7' do
-        guess_game.instance_variable_set(:@min, 5)
-        guess = guess_game.make_guess
+        game.instance_variable_set(:@min, 5)
+        guess = game.make_guess
         expect(guess).to eq(7)
       end
     end
 
     context 'when min is 8 and max is 9' do
       it 'returns 8' do
-        guess_game.instance_variable_set(:@min, 8)
-        guess = guess_game.make_guess
+        game.instance_variable_set(:@min, 8)
+        guess = game.make_guess
         expect(guess).to eq(8)
       end
     end
 
     context 'when min is 0 and max is 3' do
       it 'returns 1' do
-        guess_game.instance_variable_set(:@max, 3)
-        guess = guess_game.make_guess
+        game.instance_variable_set(:@max, 3)
+        guess = game.make_guess
         expect(guess).to eq(1)
       end
     end
 
     context 'when min and max both equal 3' do
       it 'returns 3' do
-        guess_game.instance_variable_set(:@min, 3)
-        guess_game.instance_variable_set(:@max, 3)
-        guess = guess_game.make_guess
+        game.instance_variable_set(:@min, 3)
+        game.instance_variable_set(:@max, 3)
+        guess = game.make_guess
         expect(guess).to eq(3)
       end
     end
   end
 
   describe '#game_over?' do
-    subject(:ending_game) { described_class.new(0, 9, 3) }
+    let(:ending_number) { double('random_number', value: 3) }
+    subject(:ending_game) { described_class.new(0, 9, ending_number) }
 
     context 'when guess and random_number are equal' do
       it 'is game over' do
@@ -85,7 +87,8 @@ describe BinarySearch do
   end
 
   describe '#update_range' do
-    subject(:updating_game) { described_class.new(0, 9, 8) }
+    let(:updating_number) { double('random_number', value: 8) }
+    subject(:updating_game) { described_class.new(0, 9, updating_number) }
 
     context 'when the guess is less than the answer' do
       before do
