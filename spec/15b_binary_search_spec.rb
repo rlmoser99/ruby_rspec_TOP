@@ -2,6 +2,8 @@
 
 require_relative '../lib/15b_binary_search'
 
+# DOES THIS NEED TO BE REVISITED???
+
 # The file order to complete this lesson:
 
 # 1. Familarize yourself with the three lib/15 files.

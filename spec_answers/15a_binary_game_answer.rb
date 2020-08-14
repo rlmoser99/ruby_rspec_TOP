@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/15a_binary_predictor'
+require_relative '../lib/15a_binary_game'
 require_relative '../lib/15b_binary_search'
 require_relative '../lib/15c_random_number'
 
@@ -64,60 +64,84 @@ require_relative '../lib/15c_random_number'
 # That leaves 5 methods to test - #mode_selection, #user_random, #find_random_number,
 # #create_binary_search, and #binary_search_guesses
 
-# LOOK AT CHANGING THE RANDOM_NUMBER CLASS TO BE THE NUMBER USER PICKED!!!
-describe BinaryPredictor do
-  let(:binary_search) { instance_double(BinarySearch) }
-  subject(:predictor) { described_class.new(1, 10, binary_search) }
+describe BinaryGame do
+  # let(:binary_search) { instance_double(BinarySearch) }
+  subject(:game) { described_class.new(1, 10) }
 
-  describe '#update_guess_count' do
-    it 'increases guess count by 1' do
-      expect { predictor.update_guess_count }.to change { predictor.guess_count }.by(1)
-    end
-  end
-
-  describe '#update_guess_count' do
-    it 'returns 7' do
-      max = predictor.maximum_guesses
-      expect(max).to eq(4)
+  describe '#maximum_guesses' do
+    context 'when minimum = 1 and maximum = 10' do
+      it 'returns 4' do
+        max = game.maximum_guesses
+        expect(max).to eq(4)
+      end
     end
 
-    context 'when range is 1 to 100' do
-      it 'returns 8' do
-        predictor.instance_variable_set(:@range, (1..100).to_a)
-        max = predictor.maximum_guesses
+    context 'when minimum = 1 and maximum = 100' do
+      it 'returns 7' do
+        game.instance_variable_set(:@maximum, 100)
+        max = game.maximum_guesses
         expect(max).to eq(7)
       end
     end
 
-    context 'when range is 1 to 500' do
+    context 'when minimum = 100 and maximum = 500' do
       it 'returns 9' do
-        predictor.instance_variable_set(:@range, (1..500).to_a)
-        max = predictor.maximum_guesses
+        game.instance_variable_set(:@minimum, 100)
+        game.instance_variable_set(:@maximum, 600)
+        max = game.maximum_guesses
         expect(max).to eq(9)
       end
     end
   end
 
-  describe '#color_range' do
-    context 'when binary search is new' do
-      before do
-        allow(predictor.binary_search).to receive(:min).and_return(1)
-        allow(predictor.binary_search).to receive(:max).and_return(10)
-      end
-      it 'is what it is' do
-        result = ["1 ", "2 ", "3 ", "4 ", "\e[32m5 \e[0m", "6 ", "7 ", "8 ", "9 ", "10 "]
-        expect(predictor.color_range).to eq(result)
+  describe '#player_input' do
+    context 'when user input is between parameters' do
+      it 'returns user input' do
+        user_input = '4'
+        allow(game).to receive(:gets).and_return(user_input)
+        result = game.player_input(1, 10)
+        expect(result).to eq(4)
       end
     end
 
-    context 'when binary search is new' do
-      before do
-        allow(predictor.binary_search).to receive(:min).and_return(5)
-        allow(predictor.binary_search).to receive(:max).and_return(10)
+    context 'when first user input is not between parameters' do
+      it 'returns second user input' do
+        letter_input = 'r'
+        user_input = '9'
+        allow(game).to receive(:gets).and_return(letter_input, user_input)
+        allow(game).to receive(:puts).once
+        result = game.player_input(1, 10)
+        expect(result).to eq(9)
       end
-      it 'is what it is' do
-        result =  ["\e[91m1 \e[0m", "\e[91m2 \e[0m", "\e[91m3 \e[0m", "\e[91m4 \e[0m", "5 ", "6 ", "\e[32m7 \e[0m", "8 ", "9 ", "10 "]
-        expect(predictor.color_range).to eq(result)
+    end
+    context 'when first and second user input is not between parameters' do
+      it 'returns third user input' do
+        letter_input = 'r'
+        symbol_input = '$'
+        user_input = '6'
+        allow(game).to receive(:gets).and_return(letter_input, symbol_input, user_input)
+        allow(game).to receive(:puts).twice
+        result = game.player_input(1, 10)
+        expect(result).to eq(6)
+      end
+    end
+  end
+
+  describe '#update_random_number' do
+    context 'when updating value of random number' do
+      let(:random_update) { instance_double(RandomNumber) }
+
+      before do
+        game.instance_variable_set(:@random_number, random_update)
+        allow(game).to receive(:puts)
+        new_number = 76
+        allow(game).to receive(:player_input).with(1, 10).and_return(new_number)
+        allow(game.random_number).to receive(:update_value).with(new_number)
+      end
+
+      it 'sends update_value to random_number' do
+        expect(game.random_number).to receive(:update_value).with(76)
+        game.update_random_number
       end
     end
   end
