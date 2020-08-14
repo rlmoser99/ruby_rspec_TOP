@@ -5,8 +5,6 @@
 
 # class for computer to find random number
 class BinaryGame
-  attr_reader :minimum, :maximum, :random_number, :guess_count
-
   def initialize(minimum, maximum)
     @minimum = minimum
     @maximum = maximum
@@ -14,18 +12,39 @@ class BinaryGame
     @guess_count = 0
   end
 
-  # Public Method *** NOT SURE WHAT TO RETURN / TEST HERE!!!
-  def confirm_random_number
+  # Public Method -> 'Script' Doesn't need to be tested -> Treat inside as public too!
+  def play_game
     introduction
     mode = player_input(1, 2)
     update_random_number if mode == 1
-    @random_number.value
+    puts "\nUsing a binary search, any number can be found in #{maximum_guesses} guesses or less!\n\n"
+    display_binary_search
+    puts "As predicted, the computer found it in #{@guess_count} guesses."
   end
 
-  # REDUCE MODE SELECTION - JUST HAVE USER INPUT A NUMBER OR HIT ENTER.
+  # Inner "Public" Method
+  def player_input(min, max)
+    number = gets.chomp.to_i
+    return number if number.between?(min, max)
 
-  # Public Method
-  def binary_search_turns
+    puts "Input error! Please enter a number between #{min} or #{max}."
+    player_input(min, max)
+  end
+
+  # Inner "Public" Method -> Test that it sends @random_number message
+  def update_random_number
+    puts "Enter a number between #{@minimum} and #{@maximum}"
+    number_input = player_input(@minimum, @maximum)
+    @random_number.update_value(number_input)
+  end
+
+  # Inner "Public" Method
+  def maximum_guesses
+    (Math.log2(@maximum - @minimum) + 1).to_i
+  end
+
+  # Inner "Public" Method -> Test that messages got sent to binary_search
+  def display_binary_search
     binary_search = BinarySearch.new(@minimum, @maximum, @random_number)
     loop do
       display_range(binary_search.min, binary_search.max)
@@ -38,33 +57,13 @@ class BinaryGame
     end
   end
 
-  # DONE
-  def maximum_guesses
-    (Math.log2(maximum - minimum) + 1).to_i
-  end
-
-  # DONE
-  def player_input(min, max)
-    number = gets.chomp.to_i
-    return number if number.between?(min, max)
-
-    puts "Input error! Please enter a number between #{min} or #{max}."
-    player_input(min, max)
-  end
-
-  # DONE
-  def update_random_number
-    puts "Enter a number between #{minimum} and #{maximum}"
-    number_input = player_input(minimum, maximum)
-    @random_number.update_value(number_input)
-  end
-
   protected
 
+  # Inner "Public" Method -> Exception: contains only puts
   def introduction
     puts <<~HEREDOC
 
-      \e[32mWatch the computer find a number between #{minimum} and #{maximum} using a binary search.\e[0m
+      \e[32mWatch the computer find a number between #{@minimum} and #{@maximum} using a binary search.\e[0m
 
       The computer-generated random number is \e[32m#{@random_number.value}\e[0m.
       Would you like to choose your own number?
@@ -76,7 +75,7 @@ class BinaryGame
   end
 
   def display_range(min, max)
-    range = (minimum..maximum).to_a
+    range = (@minimum..@maximum).to_a
     sleep(2)
     puts
     range.each do |number|

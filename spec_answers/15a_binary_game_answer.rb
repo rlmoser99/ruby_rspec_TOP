@@ -68,32 +68,6 @@ describe BinaryGame do
   # let(:binary_search) { instance_double(BinarySearch) }
   subject(:game) { described_class.new(1, 10) }
 
-  describe '#maximum_guesses' do
-    context 'when minimum = 1 and maximum = 10' do
-      it 'returns 4' do
-        max = game.maximum_guesses
-        expect(max).to eq(4)
-      end
-    end
-
-    context 'when minimum = 1 and maximum = 100' do
-      it 'returns 7' do
-        game.instance_variable_set(:@maximum, 100)
-        max = game.maximum_guesses
-        expect(max).to eq(7)
-      end
-    end
-
-    context 'when minimum = 100 and maximum = 500' do
-      it 'returns 9' do
-        game.instance_variable_set(:@minimum, 100)
-        game.instance_variable_set(:@maximum, 600)
-        max = game.maximum_guesses
-        expect(max).to eq(9)
-      end
-    end
-  end
-
   describe '#player_input' do
     context 'when user input is between parameters' do
       it 'returns user input' do
@@ -136,12 +110,84 @@ describe BinaryGame do
         allow(game).to receive(:puts)
         new_number = 76
         allow(game).to receive(:player_input).with(1, 10).and_return(new_number)
-        allow(game.random_number).to receive(:update_value).with(new_number)
+        allow(random_update).to receive(:update_value).with(new_number)
       end
 
       it 'sends update_value to random_number' do
-        expect(game.random_number).to receive(:update_value).with(76)
+        expect(random_update).to receive(:update_value).with(76)
         game.update_random_number
+      end
+    end
+  end
+
+  describe '#maximum_guesses' do
+    context 'when minimum = 1 and maximum = 10' do
+      it 'returns 4' do
+        max = game.maximum_guesses
+        expect(max).to eq(4)
+      end
+    end
+
+    context 'when minimum = 1 and maximum = 100' do
+      it 'returns 7' do
+        game.instance_variable_set(:@maximum, 100)
+        max = game.maximum_guesses
+        expect(max).to eq(7)
+      end
+    end
+
+    context 'when minimum = 100 and maximum = 500' do
+      it 'returns 9' do
+        game.instance_variable_set(:@minimum, 100)
+        game.instance_variable_set(:@maximum, 600)
+        max = game.maximum_guesses
+        expect(max).to eq(9)
+      end
+    end
+  end
+
+  describe '#display_binary_search' do
+    before do
+      allow(game).to receive(:display_range)
+      allow(game).to receive(:puts)
+    end
+
+    context 'when first guess is correct' do
+      let(:first_search) { instance_double(BinarySearch, min: 1, max: 10, guess: 5, make_guess: 5) }
+
+      before do
+        allow(first_search).to receive(:game_over?).and_return(true)
+        allow(BinarySearch).to receive(:new).and_return(first_search)
+      end
+
+      it 'sends make_guess once' do
+        expect(first_search).to receive(:make_guess).once
+        game.display_binary_search
+      end
+
+      it 'does not send update_range' do
+        expect(first_search).not_to receive(:update_range)
+        game.display_binary_search
+      end
+    end
+
+    context 'when second guess is correct' do
+      let(:second_search) { instance_double(BinarySearch, min: 1, max: 10, guess: 5, make_guess: 5) }
+
+      before do
+        allow(second_search).to receive(:update_range)
+        allow(second_search).to receive(:game_over?).and_return(false, true)
+        allow(BinarySearch).to receive(:new).and_return(second_search)
+      end
+
+      it 'sends make_guess twice' do
+        expect(second_search).to receive(:make_guess).twice
+        game.display_binary_search
+      end
+
+      it 'send update_range once' do
+        expect(second_search).to receive(:update_range).once
+        game.display_binary_search
       end
     end
   end
@@ -259,27 +305,27 @@ end
 #     end
 
 #     context 'when second guess is correct' do
-#       subject(:second_game) { described_class.new }
+#       subject(:game) { described_class.new }
 #       let(:second_search) { instance_double(BinarySearch, guess: 25) }
 
 #       before do
-#         second_game.instance_variable_set(:@binary_search, second_search)
-#         allow(second_game).to receive(:display_range)
-#         allow(second_game).to receive(:puts)
-#         allow(second_game.binary_search).to receive(:make_guess).and_return(50, 25)
-#         allow(second_game.binary_search).to receive(:game_over?).and_return(false, true)
-#         allow(second_game.binary_search).to receive(:make_guess).twice
-#         allow(second_game.binary_search).to receive(:update_range).once
+#         game.instance_variable_set(:@binary_search, second_search)
+#         allow(game).to receive(:display_range)
+#         allow(game).to receive(:puts)
+#         allow(game.binary_search).to receive(:make_guess).and_return(50, 25)
+#         allow(game.binary_search).to receive(:game_over?).and_return(false, true)
+#         allow(game.binary_search).to receive(:make_guess).twice
+#         allow(game.binary_search).to receive(:update_range).once
 #       end
 
 #       it 'sends make_guess twice' do
-#         expect(second_game.binary_search).to receive(:make_guess).twice
-#         second_game.binary_search_guesses
+#         expect(game.binary_search).to receive(:make_guess).twice
+#         game.binary_search_guesses
 #       end
 
 #       it 'sends update_range once' do
-#         expect(second_game.binary_search).to receive(:update_range).once
-#         second_game.binary_search_guesses
+#         expect(game.binary_search).to receive(:update_range).once
+#         game.binary_search_guesses
 #       end
 #     end
 #   end
