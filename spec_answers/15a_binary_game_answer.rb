@@ -9,7 +9,7 @@ require_relative '../lib/15c_random_number'
 # 1. Familarize yourself with the four lib/15 files.
 #    - lib/15_binary_main
 #    - lib/15a_binary_game
-#    - lib/15b_binary_search (which is based on 14_find_number)
+#    - lib/15b_binary_search which is based on 14_find_number
 #    - lib/15c_random_numer
 # 2. Read the comments in spec/15b_binary_search_spec
 # 3. Complete spec/15a_binary_game_spec
@@ -21,51 +21,39 @@ require_relative '../lib/15c_random_number'
 # This lesson has a new class called BinaryGame. This BinaryGame class uses
 # the BinarySearch class and visualizes how a binary search works.
 
-# The focus of this lesson is unit testing and will provide general guidelines on determining what methods need to be tested.
+# The focus of this lesson is unit testing, which is testing the behavior of individual methods in isolation.
+# However, every method does not need to be tested, so we will look at some basic guidelines that determine whether or not a method needs to be tested.
+# https://www.artofunittesting.com/definition-of-a-unit-test
 
-# In general, you have 3 types of methods:
-# 1. Command - These are methods that performs an action and/or has a side effect
-# 2. Query - These are methods that returns a value.
-# 3. Script - These are methods that call other methods, usually in a specific order.
+# In general, you probably have 3 types of methods:
+# 1. Command - Methods that performs an action and/or has a side effect.
+# 2. Query - Methods that returns a value.
+# 3. Script - Methods that call other methods, usually in a specific order.
 
-# Methods that need to be tested:
+# Methods that should be tested
 # 1. Public Command Method
 # 2. Public Query Method
-# 3. Command Method inside a Public Script Method
-# 4. Query Method inside a Public Script Method
-# 5. Any method that sends a command message to another class.
+# 3. Command Method called inside a Script Method
+# 4. Query Method called inside a Script Method
+# 5. Any Method with an Outgoing Command
 
-# EXPLAIN 3 & 4 -> LOOK AT TIMATO'S RESPONSE FOR IDEAS
-# WHAT ABOUT PRIVATE LOOPING SCRIPT METHODS???
+# Testing methods that are public is essential, but this also extends to methods that are inside a script. For the games that we are making, script methods are just a convenient way to call the methods needed to play a full game. Since these methods that are needed to play the game, they should be publicly tested methods (even if you previously made them private because they are not technically called outside of the class).
+
+# Any Method with an Outgoing Command is any method that sends a command message to another class.
+
+# There are 3 different tests to write, depending the type of method. Here is a summary of what should be tested, according to each method type.
+# 1. Command Method -> Test the action/side effect
+# 2. Query Method -> Test the return value
+# 3. Method with Outgoing Command -> Test that a message is sent
 
 # There are a handful of methods that you do not need to test.
-# 1. You do not need to test #initialize if it is only creating instance variables. This can cause the test to be fragile, breaking anytime an instance variable name is changed. If you choose to call methods inside the initialize method, you will need to stub each method for every instance in the tests.
+# 1. You do not have to test #initialize if it is only creating instance variables. However, if you call methods inside the initialize method, you might need to test #initialize and/or the inside methods. In addition, you will need to stub the inside method because it will be called when you create an instance of the class.
 
 # 2. Methods that only contain 'puts' or 'gets' because they are well-tested in the standard ruby library.
 
-# 3. Private methods do not need to be tested because they should have test coverage in public methods
-
-# Test behaviours, not implementation.
-# Unit testing is understood as testing small parts of the code in isolation, e.g. testing some class’s methods, maybe using some stubs/mocks to strip dependencies.
-# private methods will be tested through public entry points. Once again, unit testing is not about testing every method in isolation.
-
-# Unit Testing Summary
-# Incoming Query -> Assert the result
-# Incoming Command -> Assert the direct public side effects
-# Outgoing Command -> Expect to send
-
-# INSERT -> SCRIPT EXPLANATION
-
-# In addition, you do not need to test #initialize if it is only creating
-# instance variables. This can cause the test to be fragile, breaking anytime
-# an instance variable name is changed. If you choose to call methods inside the
-# initialize method, you will need to stub each method for every instance in the
-# tests.
-
-# That leaves ??? methods to test
+# 3. Private methods do not need to be tested because they should have test coverage in public methods. (However, as previously discussed, you may have some private methods that are called inside a script method, that should be tested.)
 
 describe BinaryGame do
-  # let(:binary_search) { instance_double(BinarySearch) }
   subject(:game) { described_class.new(1, 10) }
 
   describe '#player_input' do
@@ -148,6 +136,7 @@ describe BinaryGame do
   end
 
   describe '#display_binary_search' do
+    # NEW TEST -> TEST THAT BINARYSEARCH RECEIVES NEW
     before do
       allow(game).to receive(:display_range)
       allow(game).to receive(:puts)
