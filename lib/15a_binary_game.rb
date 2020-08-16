@@ -12,7 +12,6 @@ class BinaryGame
     @guess_count = 0
   end
 
-  # Public Method -> 'Script' Doesn't need to be tested -> Treat inside as public too!
   def play_game
     introduction
     mode = player_input(1, 2)
@@ -22,7 +21,6 @@ class BinaryGame
     puts "As predicted, the computer found it in #{@guess_count} guesses."
   end
 
-  # Inner "Public" Method
   def player_input(min, max)
     number = gets.chomp.to_i
     return number if number.between?(min, max)
@@ -31,19 +29,16 @@ class BinaryGame
     player_input(min, max)
   end
 
-  # Inner "Public" Method -> Test that it sends @random_number message
   def update_random_number
     puts "Enter a number between #{@minimum} and #{@maximum}"
     number_input = player_input(@minimum, @maximum)
     @random_number.update_value(number_input)
   end
 
-  # Inner "Public" Method
   def maximum_guesses
     (Math.log2(@maximum - @minimum) + 1).to_i
   end
 
-  # Inner "Public" Method -> Test that messages got sent to binary_search
   def display_binary_search
     binary_search = BinarySearch.new(@minimum, @maximum, @random_number)
     loop do
@@ -59,7 +54,6 @@ class BinaryGame
 
   protected
 
-  # Inner "Public" Method -> Exception: contains only puts
   def introduction
     puts <<~HEREDOC
 
