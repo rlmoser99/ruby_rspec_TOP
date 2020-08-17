@@ -25,35 +25,35 @@ require_relative '../lib/15c_random_number'
 # However, every method does not need to be tested, so we will look at some basic guidelines that determine whether or not a method needs to be tested.
 # https://www.artofunittesting.com/definition-of-a-unit-test
 
-# In general, you probably have 4 types of methods:
+# In general, you probably have 4 different types of methods:
 # 1. Command - Methods that performs an action and/or has a side effect.
 # 2. Query - Methods that returns a value.
-# 3. Script - Methods that only call other methods without returning anything.
-# 4. Looping Script - Methods that only call other methods without returning anything, but stops looping when certain conditions are met.
+# 3. Script - Methods that only call other methods, usually without returning anything.
+# 4. Looping Script - Methods that only call other methods, usually without returning anything and stopping when certain conditions are met.
 
-# Methods that should be tested
-# 1. Public Command Method
-# 2. Public Query Method
-# 3. Command Method called inside a Script or Looping Script Method
-# 4. Query Method called inside a Script or Looping Script Method
-# 5. Any Method with an Outgoing Command
+# Let's take a look at methods that should always be tested:
 
-# Testing methods that are public is essential, but this also extends to methods that are inside a script or looping script. For the games that we are making, script methods are just a convenient way to call the methods needed to play a full game. Since these methods that are needed to play the game, they should be publicly tested methods (even if you previously made them private because they are not technically called outside of the class).
+# 1. Public Command or Public Query Methods should always be tested, because they are the public interface. Command Methods should test the method's action or side effect. Query Methods should test the method's return value.
 
-# Any Method with an Outgoing Command is any method that sends a command message to another class.
+# 2. Command or Query Methods that are inside a public script or looping script method should always be tested. For the games that we are making, script and looping script methods are just a convenient way to call the methods needed to play a full game. Since these methods are required to play the game, they should be publicly tested methods (even if you previously made them private).
 
-# There are 3 different tests to write, depending the type of method. Here is a summary of what should be tested, according to each method type.
+# 3. Any Method that sends a command message to another class should always test that those messages were sent.
+
+# 4. A Looping Script Method should always test the bahavior of the method. For example, that it stops when certain conditions are met.
+
+# Here is a summary of what should be tested
 # 1. Command Method -> Test the action/side effect
 # 2. Query Method -> Test the return value
 # 3. Method with Outgoing Command -> Test that a message is sent
-# 4. Looping Script -> Test the behavior of the method (for example, it stopping when certain conditions are met).
+# 4. Looping Script Method -> Test the behavior of the method
 
-# There are a handful of methods that you do not need to test.
-# 1. You do not have to test #initialize if it is only creating instance variables. However, if you call methods inside the initialize method, you might need to test #initialize and/or the inside methods. In addition, you will need to stub the inside method because it will be called when you create an instance of the class.
+# There are a handful of methods that you do not need to test:
+
+# 1. You do not have to test #initialize if it is only creating instance variables. However, if you call methods inside the initialize method, you might need to test #initialize and/or the inside methods. In addition, you will need to stub any inside methods because they will be called when you create an instance of the class.
 
 # 2. Methods that only contain 'puts' or 'gets' because they are well-tested in the standard ruby library.
 
-# 3. Private methods do not need to be tested because they should have test coverage in public methods. (However, as previously discussed, you may have some private methods that are called inside a script method, that should be tested.)
+# 3. Private methods do not need to be tested because they should have test coverage in public methods. However, as previously discussed, you may have some private methods that are called inside a script or looping script method, that should be publicly tested methods.
 
 describe BinaryGame do
   subject(:game) { described_class.new(1, 10) }
@@ -111,7 +111,7 @@ describe BinaryGame do
   describe '#update_random_number' do
     # Method with Outgoing Command -> Test that a message is sent
 
-    # Look at the #update_random_number in the BinaryGame class. This method gets the user's input & wants to update the value of the @random_number. If the RandomNumber class has an setter method (like attr_accessor) for @value, we could update @random_number's value inside the BinaryGame class.
+    # Look at the #update_random_number in the BinaryGame class. This method gets the user's input & wants to update the value of the @random_number. If the RandomNumber class had an setter method (like attr_accessor) for @value, we could update @random_number's value inside the BinaryGame class.
     # @random_namber.value = number_input
 
     # However, this breaks the encapsulation of the RandomNumber class. As a general rule, you want to minimize what classes know about other classes. You should not let BinaryGame update the value of a RandomNumber. Instead, you want BinaryGame to just send a message to RandomNumber telling it to update the value.
