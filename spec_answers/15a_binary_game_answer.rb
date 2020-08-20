@@ -78,16 +78,15 @@ require_relative '../lib/15c_random_number'
 # that should be publicly tested methods.
 
 describe BinaryGame do
-  
   describe '#initialize' do
     # Initialize -> No test neccessary, when only creating instance variables.
   end
-  
+
   describe '#play_game' do
     # Public Script Method -> No test neccessary, but all methods inside should
     # be tested.
   end
-  
+
   describe '#player_input' do
     # Located inside #play_game (Public Script Method)
     # Command Method -> Test the action/side effect
@@ -174,7 +173,7 @@ describe BinaryGame do
     # Located inside #play_game (Public Script Method)
     # Query Method -> Test the return value
 
-    context 'when minimum = 1 and maximum = 10' do
+    context 'when game minimum and maximum is 1 and 10' do
       subject(:game_ten) { described_class.new(1, 10) }
 
       it 'returns 4' do
@@ -183,7 +182,7 @@ describe BinaryGame do
       end
     end
 
-    context 'when minimum = 1 and maximum = 100' do
+    context 'when game minimum and maximum is 1 and 100' do
       subject(:game_hundred) { described_class.new(1, 100) }
 
       it 'returns 7' do
@@ -192,8 +191,7 @@ describe BinaryGame do
       end
     end
 
-    
-    context 'when minimum = 100 and maximum = 600' do
+    context 'when game minimum and maximum is 100 and 600' do
       subject(:game_six_hundred) { described_class.new(100, 600) }
 
       it 'returns 9' do
@@ -205,23 +203,26 @@ describe BinaryGame do
 
   describe '#display_binary_search' do
     # Located inside #play_game (Public Script Method)
-    # Script Method -> All methods inside should be tested.
+
     # Method with Outgoing Command -> Test that a message is sent
+
     # Looping Script -> Test the behavior of the method (for example, it
     # stopping when certain conditions are met).
-    
+
+    # DOES THIS NEED TO BE TWO SEPARATE CONTEXTS - CAN THEY SHARE SET-UP?
+
     context 'when first guess is correct' do
       subject(:first_game) { described_class.new(1, 10, first_number) }
       let(:first_number) { instance_double(RandomNumber) }
       let(:first_search) { instance_double(BinarySearch, min: 1, max: 10) }
 
       before do
-        allow(first_search).to receive(:guess).and_return(5)
-        allow(first_game).to receive(:display_range)
-        allow(first_game).to receive(:puts)
-        allow(first_search).to receive(:make_guess).and_return(5)
-        allow(first_search).to receive(:game_over?).and_return(true)
         allow(BinarySearch).to receive(:new).and_return(first_search)
+        allow(first_game).to receive(:display_range)
+        allow(first_search).to receive(:make_guess).and_return(5)
+        allow(first_game).to receive(:puts)
+        allow(first_search).to receive(:guess).and_return(5)
+        allow(first_search).to receive(:game_over?).and_return(true)
       end
 
       it 'creates a new binary search' do
@@ -234,7 +235,7 @@ describe BinaryGame do
         first_game.display_binary_search
       end
 
-      it 'does not send update_range' do
+      it 'stops loop and does not send update_range' do
         expect(first_search).not_to receive(:update_range)
         first_game.display_binary_search
       end
@@ -244,15 +245,15 @@ describe BinaryGame do
       subject(:second_game) { described_class.new(1, 10, second_number) }
       let(:second_number) { instance_double(RandomNumber) }
       let(:second_search) { instance_double(BinarySearch, min: 1, max: 10) }
-          
+
       before do
+        allow(BinarySearch).to receive(:new).and_return(second_search)
         allow(second_game).to receive(:display_range)
+        allow(second_search).to receive(:make_guess).and_return(5)
         allow(second_game).to receive(:puts)
         allow(second_search).to receive(:guess).and_return(5)
-        allow(second_search).to receive(:make_guess).and_return(5)
-        allow(second_search).to receive(:update_range)
         allow(second_search).to receive(:game_over?).and_return(false, true)
-        allow(BinarySearch).to receive(:new).and_return(second_search)
+        allow(second_search).to receive(:update_range)
       end
 
       it 'creates a new binary search' do
@@ -265,7 +266,7 @@ describe BinaryGame do
         second_game.display_binary_search
       end
 
-      it 'send update_range once' do
+      it 'stops loop and only sends update_range once' do
         expect(second_search).to receive(:update_range).once
         second_game.display_binary_search
       end
