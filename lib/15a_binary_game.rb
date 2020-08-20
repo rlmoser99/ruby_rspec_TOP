@@ -5,10 +5,12 @@
 
 # class for computer to find random number
 class BinaryGame
-  def initialize(minimum, maximum)
+  def initialize(minimum, maximum, random_number = RandomNumber.new(minimum, maximum))
     @minimum = minimum
     @maximum = maximum
-    @random_number = RandomNumber.new(minimum, maximum)
+    # SHOULD THIS BE MOVED TO A PRIVATE METHOD TO SET?
+    # MOVE THIS AS A DEFAULT PARAMETER & ADJUST TESTS!!!
+    @random_number = random_number
     @guess_count = 0
   end
 
