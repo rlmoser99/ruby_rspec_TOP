@@ -98,9 +98,9 @@ describe BinaryGame do
         user_input = '4'
         user_number = 4
         allow(player_game).to receive(:gets).and_return(user_input)
-        game_min = 1
-        game_max = 10
-        result = player_game.player_input(game_min, game_max)
+        min = 1
+        max = 10
+        result = player_game.player_input(min, max)
         expect(result).to eq(user_number)
       end
     end
@@ -112,9 +112,9 @@ describe BinaryGame do
         user_number = 9
         allow(player_game).to receive(:gets).and_return(letter, user_input)
         allow(player_game).to receive(:puts).once
-        game_min = 1
-        game_max = 10
-        result = player_game.player_input(game_min, game_max)
+        min = 1
+        max = 10
+        result = player_game.player_input(min, max)
         expect(result).to eq(user_number)
       end
     end
@@ -127,9 +127,9 @@ describe BinaryGame do
         user_number = 6
         allow(player_game).to receive(:gets).and_return(letter, symbol, user_input)
         allow(player_game).to receive(:puts).twice
-        game_min = 1
-        game_max = 10
-        result = player_game.player_input(game_min, game_max)
+        min = 1
+        max = 10
+        result = player_game.player_input(min, max)
         expect(result).to eq(user_number)
       end
     end
@@ -159,7 +159,6 @@ describe BinaryGame do
         allow(game_update).to receive(:puts)
         new_number = 76
         allow(game_update).to receive(:player_input).with(1, 100).and_return(new_number)
-        allow(random_update).to receive(:update_value).with(new_number)
       end
 
       it 'sends update_value to random_number' do

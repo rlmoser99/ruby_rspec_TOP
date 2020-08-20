@@ -96,15 +96,18 @@ describe BinaryGame do
     context 'when user input is between parameters' do
       it 'returns user input' do
         user_input = '4'
-        user_number = 4
         allow(player_game).to receive(:gets).and_return(user_input)
-        game_min = 1
-        game_max = 10
-        result = player_game.player_input(game_min, game_max)
+        min = 1
+        max = 10
+        result = player_game.player_input(min, max)
+        # This method gets a string ('4') and turns into an integer (4).
+        user_number = 4
         expect(result).to eq(user_number)
       end
     end
 
+    # Remember a method stub can be called multiple times and return different values.
+    # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/returning-a-value
     context 'when first user input is not between parameters' do
       it 'returns second user input' do
         letter = 'r'
@@ -112,25 +115,15 @@ describe BinaryGame do
         user_number = 9
         allow(player_game).to receive(:gets).and_return(letter, user_input)
         allow(player_game).to receive(:puts).once
-        game_min = 1
-        game_max = 10
-        result = player_game.player_input(game_min, game_max)
+        min = 1
+        max = 10
+        result = player_game.player_input(min, max)
         expect(result).to eq(user_number)
       end
     end
 
     context 'when first and second user input is not between parameters' do
-      it 'returns third user input' do
-        letter = 'r'
-        symbol = '$'
-        user_input = '6'
-        user_number = 6
-        allow(player_game).to receive(:gets).and_return(letter, symbol, user_input)
-        allow(player_game).to receive(:puts).twice
-        game_min = 1
-        game_max = 10
-        result = player_game.player_input(game_min, game_max)
-        expect(result).to eq(user_number)
+      xit 'returns third user input' do
       end
     end
   end
@@ -152,21 +145,54 @@ describe BinaryGame do
     # update the value. For example: @random_number.update_value(number_input)
 
     context 'when updating value of random number' do
+      # Instead of using a normal double, we are going to use an instance_double. An instance_double is a verifying double that will produce an error if it is used in a way that does not exist in the actual class.
+
+      # HELP!!!
+      # will produce an error if a method is called that does not exist in the actual class.
+      # verifies that any methods being stubbed would be present on an instance of that class.
+
+      # Therefore using a 'verifying double' makes a test more stable.
+      # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles
+
+      # Unit testing relies on using doubles to test the object in isolation
+      # (i.e., not dependent on any other object). One important concept to
+      # understand is that the BinaryGame or FindNumber class doesn't care if it
+      # is given an actual random_number class object. It only cares that it is
+      # given an object that can respond to certain methods. This concept is
+      # called polymorphism.
+      # https://www.geeksforgeeks.org/polymorphism-in-ruby/
+
+      # Below (commented out) is the previous generic 'random_number' object
+      # used in TDD. Compare it to the new verifying instance_double for the
+      # RandomNumber class.
+      # let(:random_number) { double('random_number', value: 8) }
+
       subject(:game_update) { described_class.new(1, 100, random_update) }
-      let(:random_update) { instance_double(RandomNumber) }
+      let(:random_update) { instance_double(RandomNumber, value: 3) }
+
+      # To 'Arrange' this test, two methods will need to be stubbed, so that they do not execute. #player_input will have two parameters and will need to return the new_number.
+
+      # We need to specify the arguments using matching arguments:
+      # https://relishapp.com/rspec/rspec-mocks/docs/setting-constraints/matching-arguments
 
       before do
         allow(game_update).to receive(:puts)
         new_number = 76
         allow(game_update).to receive(:player_input).with(1, 100).and_return(new_number)
-        allow(random_update).to receive(:update_value).with(new_number)
       end
+
+      # To test if #update_value is sent to the RandomNumber instance (random_update) with the correct value (76), we will be using message expectations.
+      # https://relishapp.com/rspec/rspec-mocks/docs
+
+      # To set a message expectation, move 'Assert' before 'Act'.
 
       it 'sends update_value to random_number' do
         expect(random_update).to receive(:update_value).with(76)
         game_update.update_random_number
       end
     end
+
+    # You'll get a chance to use message expectations for #display_binary_search
   end
 
   describe '#maximum_guesses' do
@@ -191,12 +217,10 @@ describe BinaryGame do
       end
     end
 
-    context 'when game minimum and maximum is 100 and 600' do
-      subject(:game_six_hundred) { described_class.new(100, 600) }
+    # ASSIGNMENT
 
-      it 'returns 9' do
-        max = game_six_hundred.maximum_guesses
-        expect(max).to eq(9)
+    context 'when game minimum and maximum is 100 and 600' do
+      xit 'returns 9' do
       end
     end
   end
@@ -225,6 +249,8 @@ describe BinaryGame do
         allow(first_search).to receive(:game_over?).and_return(true)
       end
 
+      # We will be using message expectations again.
+
       it 'creates a new binary search' do
         expect(BinarySearch).to receive(:new).with(1, 10, first_number)
         first_game.display_binary_search
@@ -241,34 +267,16 @@ describe BinaryGame do
       end
     end
 
+    # ASSIGNMENT
+
     context 'when second guess is correct' do
-      subject(:second_game) { described_class.new(1, 10, second_number) }
-      let(:second_number) { instance_double(RandomNumber) }
-      let(:second_search) { instance_double(BinarySearch, min: 1, max: 10) }
-
-      before do
-        allow(BinarySearch).to receive(:new).and_return(second_search)
-        allow(second_game).to receive(:display_range)
-        allow(second_search).to receive(:make_guess).and_return(5)
-        allow(second_game).to receive(:puts)
-        allow(second_search).to receive(:guess).and_return(5)
-        allow(second_search).to receive(:game_over?).and_return(false, true)
-        allow(second_search).to receive(:update_range)
+      xit 'creates a new binary search' do
       end
 
-      it 'creates a new binary search' do
-        expect(BinarySearch).to receive(:new).with(1, 10, second_number)
-        second_game.display_binary_search
+      xit 'sends make_guess twice' do
       end
 
-      it 'sends make_guess twice' do
-        expect(second_search).to receive(:make_guess).twice
-        second_game.display_binary_search
-      end
-
-      it 'stops loop and only sends update_range once' do
-        expect(second_search).to receive(:update_range).once
-        second_game.display_binary_search
+      xit 'stops loop and only sends update_range once' do
       end
     end
   end
@@ -287,3 +295,16 @@ describe BinaryGame do
     # Only contains puts statements -> No test neccessary & can be private.
   end
 end
+
+# Using method expectations can be confusing. Stubbing the methods above
+# does not cause this test to pass; it only 'allows' a method to be
+# called, if it is called. To test this fact, let's allow a method that
+# is not called in #start. Uncomment the line at the bottom of this
+# paragraph, move it to the before hook, and run the tests. All of the
+# tests should continue to pass.
+# allow(game).to receive(:display_range)
+
+# Now choose one of these methods used above as a message expectation and
+# comment it out in the lib/15a_binary_game.rb file. Resave the file and
+# rerun the tests. The test of the method that you commented out should
+# fail because that method is never called.
