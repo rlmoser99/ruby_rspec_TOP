@@ -35,16 +35,6 @@ describe SingleDigit do
       # side note: rspec runs, but rubocop does not like (be >= 1).and be < 10
       expect(random_digit.number).to be_positive.and be < 10
     end
-
-    context 'when random number is 3' do
-      it 'is odd and less than 10' do
-        # To set-up a test with the conditions needed, you can set the
-        # instance_variable.
-        # https://apidock.com/ruby/Object/instance_variable_set
-        random_digit.instance_variable_set(:@number, 3)
-        expect(random_digit.number).to be_odd.and be < 10
-      end
-    end
   end
 
   # Instead of using .to, you can use the inverse built in matcher .not_to
