@@ -8,8 +8,6 @@ class BinaryGame
   def initialize(minimum, maximum, random_number = RandomNumber.new(minimum, maximum))
     @minimum = minimum
     @maximum = maximum
-    # SHOULD THIS BE MOVED TO A PRIVATE METHOD TO SET?
-    # MOVE THIS AS A DEFAULT PARAMETER & ADJUST TESTS!!!
     @random_number = random_number
     @guess_count = 0
   end
@@ -19,7 +17,8 @@ class BinaryGame
     mode = player_input(1, 2)
     update_random_number if mode == 1
     puts "\nUsing a binary search, any number can be found in #{maximum_guesses} guesses or less!\n\n"
-    display_binary_search
+    binary_search = create_binary_search
+    display_binary_search(binary_search)
     puts "As predicted, the computer found it in #{@guess_count} guesses."
   end
 
@@ -41,20 +40,22 @@ class BinaryGame
     (Math.log2(@maximum - @minimum) + 1).to_i
   end
 
-  def display_binary_search
-    binary_search = BinarySearch.new(@minimum, @maximum, @random_number)
-    loop do
-      display_range(binary_search.min, binary_search.max)
-      binary_search.make_guess
-      @guess_count += 1
-      puts "Guess ##{@guess_count} -> \e[32m#{binary_search.guess}\e[0m\n\n"
-      break if binary_search.game_over?
-
-      binary_search.update_range
-    end
+  def create_binary_search
+    BinarySearch.new(@minimum, @maximum, @random_number)
   end
 
-  protected
+  def display_binary_search(binary_search)
+    display_turn_order(binary_search) until binary_search.game_over?
+  end
+
+  def display_turn_order(binary_search)
+    binary_search.make_guess
+    @guess_count += 1
+    display_guess(binary_search)
+    binary_search.update_range
+  end
+
+  private
 
   def introduction
     puts <<~HEREDOC
@@ -70,14 +71,14 @@ class BinaryGame
     HEREDOC
   end
 
-  def display_range(min, max)
+  def display_guess(binary_search)
     range = (@minimum..@maximum).to_a
     sleep(2)
     puts
     range.each do |number|
-      print_number(min, max, number)
+      print_number(binary_search.min, binary_search.max, number)
     end
-    puts
+    puts "\nGuess ##{@guess_count} -> \e[32m#{binary_search.guess}\e[0m\n\n"
   end
 
   def print_number(min, max, number)
