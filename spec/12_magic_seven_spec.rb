@@ -72,7 +72,8 @@ describe MagicSeven do
   describe '#divide_by_two' do
   end
 
-  # The following tests will need you to set the value of the random_number.
+  # The following tests will need you to create new instances of MagicSeven with
+  # a specific value of the random_number.
   describe '#subtract_random_number' do
   end
 
