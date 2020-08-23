@@ -7,11 +7,11 @@
 class FindNumber
   attr_reader :min, :max, :answer, :guess
 
-  def initialize(min, max, answer = RandomNumber.new(min, max))
+  def initialize(min, max, answer = RandomNumber.new(min, max), guess = nil)
     @min = min
     @max = max
     @answer = answer.value
-    @guess = nil
+    @guess = guess
   end
 
   def make_guess
@@ -37,11 +37,11 @@ end
 # Since this is probably your first experience with TDD, let's extend the
 # workflow to include a few more steps:
 # 1. Read & understand the requirement for one method only.
-# 2. Write one test for that method that you think it will pass.
+# 2. Write one test for that method, run the tests to see it fail.
 # 3. Write the method to fulfill the requirement.
-# 4. Run the test that you wrote. If it doesn't pass, re-do steps 1-3.
+# 4. Run the tests again. If it doesn't pass, redo steps 1-3.
 # 5. When your first test is passing, write the additional tests.
-# 6. Run all of the tests. If any do not pass, re-do steps 3-5.
+# 6. Run all of the tests. If any do not pass, redo steps 3-5.
 # 7. Optional: Refactor your code and/or tests, keeping all tests passing.
 
 describe FindNumber do
@@ -79,34 +79,37 @@ describe FindNumber do
     # Write a test for each of the following contexts:
 
     context 'when min is 5 and max is 9' do
+      subject(:game_five) { described_class.new(5, 9, random_number) }
+
       it 'returns 7' do
-        game.instance_variable_set(:@min, 5)
-        guess = game.make_guess
+        guess = game_five.make_guess
         expect(guess).to eq(7)
       end
     end
 
     context 'when min is 8 and max is 9' do
+      subject(:game_eight) { described_class.new(8, 9, random_number) }
+
       it 'returns 8' do
-        game.instance_variable_set(:@min, 8)
-        guess = game.make_guess
+        guess = game_eight.make_guess
         expect(guess).to eq(8)
       end
     end
 
     context 'when min is 0 and max is 3' do
+      subject(:game_zero) { described_class.new(0, 3, random_number) }
+
       it 'returns 1' do
-        game.instance_variable_set(:@max, 3)
-        guess = game.make_guess
+        guess = game_zero.make_guess
         expect(guess).to eq(1)
       end
     end
 
     context 'when min and max both equal 3' do
+      subject(:game_three) { described_class.new(3, 3, random_number) }
+
       it 'returns 3' do
-        game.instance_variable_set(:@min, 3)
-        game.instance_variable_set(:@max, 3)
-        guess = game.make_guess
+        guess = game_three.make_guess
         expect(guess).to eq(3)
       end
     end
@@ -125,16 +128,15 @@ describe FindNumber do
 
     # Allow the double to receive 'value' and return a number from 0 to 9.
 
-    let(:ending_number) { double('random_number', value: 3) }
-    subject(:ending_game) { described_class.new(0, 9, ending_number) }
-
     # Write a test that would expect game to be_game_over when a guess equals
     # the random_number double's value above. Remember that this test will not
     # be able to pass yet because you haven't written the method!
 
     context 'when guess and random_number are equal' do
+      let(:ending_number) { double('random_number', value: 3) }
+      subject(:ending_game) { described_class.new(0, 9, ending_number, 3) }
+
       it 'is game over' do
-        ending_game.instance_variable_set(:@guess, 3)
         expect(ending_game).to be_game_over
       end
     end
@@ -146,17 +148,20 @@ describe FindNumber do
     # NOT equal the random_number double's value above.
 
     context 'when guess and random_number are not equal' do
+      let(:mid_number) { double('random_number', value: 5) }
+      subject(:mid_game) { described_class.new(0, 9, mid_number, 4) }
+
       it 'is not game over' do
-        ending_game.instance_variable_set(:@guess, 4)
-        expect(ending_game).to_not be_game_over
+        expect(mid_game).to_not be_game_over
       end
     end
   end
 
   # ASSIGNMENT: METHOD #3
   describe '#update_range' do
-    let(:updating_number) { double('random_number', value: 8) }
-    subject(:updating_game) { described_class.new(0, 9, updating_number) }
+    # If you share the same random_number double for both multiple context
+    # blocks, you can declare it inside the describe block.
+    let(:range_number) { double('random_number', value: 8) }
 
     # Write four tests for #update_range that test the values of min and max.
 
@@ -172,35 +177,37 @@ describe FindNumber do
     # min = 0 and max = 9.
 
     context 'when the guess is less than the answer' do
+      subject(:low_guess_game) { described_class.new(0, 9, range_number, 4) }
+
       before do
-        updating_game.instance_variable_set(:@guess, 4)
-        updating_game.update_range
+        low_guess_game.update_range
       end
 
       it 'updates min' do
-        minimum = updating_game.min
+        minimum = low_guess_game.min
         expect(minimum).to eq(5)
       end
 
       it 'does not update max' do
-        maximum = updating_game.max
+        maximum = low_guess_game.max
         expect(maximum).to eq(9)
       end
     end
 
     context 'when the guess is more than the answer' do
+      subject(:high_guess_game) { described_class.new(0, 9, range_number, 9) }
+
       before do
-        updating_game.instance_variable_set(:@guess, 9)
-        updating_game.update_range
+        high_guess_game.update_range
       end
 
       it 'does not update min' do
-        minimum = updating_game.min
+        minimum = high_guess_game.min
         expect(minimum).to eq(0)
       end
 
       it 'updates max' do
-        maximum = updating_game.max
+        maximum = high_guess_game.max
         expect(maximum).to eq(8)
       end
     end
@@ -217,20 +224,19 @@ describe FindNumber do
     # Write a test for any 'edge cases' that you can think of, for example:
 
     context 'when the guess is 7, with min=5 and max=8' do
+      subject(:eight_game) { described_class.new(5, 8, range_number, 7) }
+
       before do
-        updating_game.instance_variable_set(:@min, 5)
-        updating_game.instance_variable_set(:@max, 8)
-        updating_game.instance_variable_set(:@guess, 7)
-        updating_game.update_range
+        eight_game.update_range
       end
 
       it 'updates min to the same value as max' do
-        minimum = updating_game.min
+        minimum = eight_game.min
         expect(minimum).to eq(8)
       end
 
       it 'does not update max' do
-        maximum = updating_game.max
+        maximum = eight_game.max
         expect(maximum).to eq(8)
       end
     end
