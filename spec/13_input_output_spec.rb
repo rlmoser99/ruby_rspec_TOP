@@ -58,15 +58,18 @@ describe NumberGame do
 
   describe '#game_over?' do
     context 'when user guess is correct' do
+      # To test this method, we need to set specific values for @solution and
+      # @guess, so we will create a new instance of NumberGame.
+      subject(:game_end) { described_class.new(5, '5') }
+
       it 'is game over' do
-        game.instance_variable_set(:@solution, 5)
-        game.instance_variable_set(:@guess, '5')
-        expect(game).to be_game_over
+        expect(game_end).to be_game_over
       end
     end
 
     # ASSIGNMENT #2
-    # Write one test for when game.solution does not equal correct_guess?
+    # Create a new instance of NumberGame and write a test for when the @guess
+    # does not equal @solution.
     context 'when user guess is not correct' do
       # remove the 'x' before running this test
       xit 'is not game over' do
@@ -76,16 +79,16 @@ describe NumberGame do
 
   # The #player_input method is used in the game as an argument passed into the
   # verify_input method. The #player_input method is not tested because it is a
-  # protected method. In addition, it is unnecessary to test methods that only
+  # private method. In addition, it is unnecessary to test methods that only
   # contain puts and/or gets. However, at the bottom of the answer file is an
   # example of how you would test the #player_input method if it were not
-  # protected.
+  # private.
 
   # Since we do not have to test #player_input, let's test #verify_input.
 
   describe '#verify_input' do
     # Note: #verify_input is a recursive method that will repeat until
-    # #valid_input? is true.
+    # number.match?(/^[0-9]$/) is true.
 
     context 'when given a valid input as argument' do
       it 'returns valid input' do
@@ -178,30 +181,35 @@ describe NumberGame do
 
   describe '#final_message' do
     context 'when count is 1' do
+      # To test this method, we need to set specific values for @solution,
+      # @guess and @count, so we will create a new instance of NumberGame.
+      subject(:game_one) { described_class.new(5, '5', 1) }
+
       it 'outputs correct phrase' do
-        game.instance_variable_set(:@count, 1)
         lucky_phrase = "LUCKY GUESS!\n"
         # The output matcher needs a block of code to assert.
-        expect { game.final_message }.to output(lucky_phrase).to_stdout
+        expect { game_one.final_message }.to output(lucky_phrase).to_stdout
       end
     end
 
     # ASSIGNMENT #4
     context 'when count is 2-3' do
+      # Create a new instance of NumberGame, with specific values for @solution,
+      # @guess, and count.
+
       # remove the 'x' before running this test
       xit 'outputs correct phrase' do
-        # Set the instance variable of count
-
         congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
         expect { game.final_message }.to output(congrats_phrase).to_stdout
       end
     end
 
     # ASSIGNMENT #5
+    # Create a new instance of NumberGame, with specific values for @solution,
+    # @guess, and count. Write a test for the following context.
     context 'when count is 4 and over' do
       # remove the 'x' before running this test
       xit 'outputs correct phrase' do
-        # Write the entire test for the conditions in the context.
       end
     end
   end

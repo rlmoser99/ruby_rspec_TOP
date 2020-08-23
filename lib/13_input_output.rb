@@ -9,9 +9,10 @@
 class ImpossibleToTestGame
   attr_reader :solution, :count, :guess
 
-  def initialize
-    @solution = rand(0..9)
-    @count = 0
+  def initialize(solution = rand(0..9), guess = nil, count = 0)
+    @solution = solution
+    @guess = guess
+    @count = count
   end
 
   def play_game
@@ -48,27 +49,25 @@ end
 class NumberGame
   attr_reader :solution, :count, :guess
 
-  def initialize
-    @solution = rand(0..9)
-    @count = 0
+  def initialize(solution = rand(0..9), guess = nil, count = 0)
+    @solution = solution
+    @guess = guess
+    @count = count
   end
 
   def play_game
     puts "Let's play a game called 'Guess a random number!'"
-    player_turns
+    player_turn until game_over?
     final_message
   end
 
-  def player_turns
-    loop do
-      @guess = verify_input(player_input)
-      @count += 1
-      break if game_over?
-    end
+  def player_turn
+    @guess = verify_input(player_input)
+    @count += 1
   end
 
   def verify_input(number)
-    return number if valid_input?(number)
+    return number if number.match?(/^[0-9]$/)
 
     puts 'Input error!'
     verify_input(player_input)
@@ -88,20 +87,16 @@ class NumberGame
     end
   end
 
-  protected
+  private
 
   def player_input
     puts 'Choose a digit between 0 and 9'
     gets.chomp
-  end
-
-  def valid_input?(input)
-    input.match?(/^[0-9]$/)
   end
 end
 
 # game = NumberGame.new
 # game.play_game
 
-# game = ImpossibleTestGame.new
+# game = ImpossibleToTestGame.new
 # game.play_game
