@@ -4,11 +4,11 @@
 class BinarySearch
   attr_reader :min, :max, :answer, :guess
 
-  def initialize(min, max, answer)
+  def initialize(min, max, answer = RandomNumber.new(min, max), guess = nil)
     @min = min
     @max = max
     @answer = answer.value
-    @guess = nil
+    @guess = guess
   end
 
   def make_guess
