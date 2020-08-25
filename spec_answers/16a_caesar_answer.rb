@@ -5,24 +5,20 @@ require_relative '../lib/16b_caesar_translator'
 
 # The file order to complete this lesson:
 
-# 1. Familarize yourself with the three lib/16 files.
+# 1. Familarize yourself with the four lib/16 files.
+#    - lib/15_binary_main
 #    - lib/16a_caesar_breaker
 #    - lib/16b_caesar_translator which is based on the typical Caesar Cipher
 #    - lib/16c_database (module)
 # 2. Check out the completed tests in spec/16b_caesar_translator.
 # 3. Complete spec/16a_caesar_breaker_spec.
 
-# The CaesarBreaker class creates a yaml file with the 25 possible translations,
-# using a CaesarTranslator class and a Database module.
+# The CaesarBreaker class creates the 25 possible translations (using the
+# CaesarTranslator class) and saves them in a yaml file (using a Database module).
 
 # Let's write tests for the CaesarBreaker class & the included Database module.
 
-# Here are the three kinds of methods that need to be tested in unit testing:
-# Incoming Query ->     Assert the result
-# Incoming Command ->   Assert the direct public side effects
-# Outgoing Command ->   Expect to send
-
-# In this lesson, you will be writing tests for 3 methods - #decrypt,
+# In this lesson, you will be writing tests for 2 methods -
 # #create_decrypted_messages, and #save_to_yaml. In addition, you will learn
 # about testing module methods and how to handle testing methods that can raise
 # errors.
@@ -30,39 +26,28 @@ require_relative '../lib/16b_caesar_translator'
 describe CaesarBreaker do
   # The tests for CaesarBreaker do not depend on creating different conditions.
   # Therefore we can use the same subject instance for most of these tests.
+
+  # SHOULD WE CREATE NEW ONES FOR EACH TEST???
+
   subject(:phrase) { described_class.new('Ebiil, Tloia!') }
 
-  # ASSIGNMENT #1
-  # Write the following two tests for #decrypt
-
-  # Incoming Command -> Assert the direct public side effects
   describe '#decrypt' do
-    before do
-      allow(phrase).to receive(:save_decrypted_messages)
-      allow(phrase).to receive(:create_decrypted_messages)
-    end
-
-    it 'calls create_decrypted_messages' do
-      expect(phrase).to receive(:create_decrypted_messages)
-      phrase.decrypt
-    end
-
-    it 'calls save_decrypted_messages' do
-      expect(phrase).to receive(:save_decrypted_messages)
-      phrase.decrypt
-    end
+    # Public Script Method -> No test neccessary, but all methods inside should
+    # be tested.
   end
 
-  # ASSIGNMENT #2
+  # ASSIGNMENT #1
   # Write the following test for #create_decrypted_messages
 
-  # Outgoing Command -> Expect to send
   describe '#create_decrypted_messages' do
-    let(:translator) { instance_double(CaesarTranslator) }
-    subject(:phrase_create) { described_class.new('Lipps, Asvph!', translator) }
+    # Located inside #decrypt (Public Script Method)
 
-    it 'sends translate 25 times' do
-      expect(phrase_create.translator).to receive(:translate).exactly(25).times
+    # Method with Outgoing Command -> Test that a message is sent
+    let(:translator_create) { instance_double(CaesarTranslator) }
+    subject(:phrase_create) { described_class.new('Lipps, Asvph!', translator_create) }
+
+    it 'sends translate 26 times' do
+      expect(translator_create).to receive(:translate).exactly(26).times
       phrase_create.create_decrypted_messages
     end
   end

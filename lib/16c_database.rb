@@ -6,11 +6,11 @@ require 'yaml'
 module Database
   def save_decrypted_messages
     Dir.mkdir '16_cipher' unless Dir.exist? '16_cipher'
-    @filename = "#{create_filename}.yaml"
-    File.open("16_cipher/#{@filename}", 'w') { |file| file.write save_to_yaml }
-    display_file_location
+    filename = "#{create_filename}.yaml"
+    File.open("16_cipher/#{filename}", 'w') { |file| file.write save_to_yaml }
+    display_file_location(filename)
   rescue SystemCallError => e
-    puts "Error while writing to file #{@filename}."
+    puts "Error while writing to file #{filename}."
     puts e
   end
 
@@ -21,14 +21,14 @@ module Database
     )
   end
 
-  protected
+  private
 
   def create_filename
-    message.scan(/\w+/).join
+    @message.scan(/\w+/).join
   end
 
-  def display_file_location
-    puts "'#{message}' has been decoded."
-    puts "The 25 possibilities are saved in a file in 16_cipher/#{@filename}"
+  def display_file_location(file_name)
+    puts "'#{@message}' has been decoded."
+    puts "The 25 possibilities are saved in a file in 16_cipher/#{file_name}"
   end
 end
