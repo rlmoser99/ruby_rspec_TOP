@@ -195,7 +195,7 @@ describe NumberGame do
     # ASSIGNMENT #4
     context 'when count is 2-3' do
       # Create a new instance of NumberGame, with specific values for @solution,
-      # @guess, and count.
+      # @guess, and @count.
 
       # remove the 'x' before running this test
       xit 'outputs correct phrase' do
@@ -206,7 +206,7 @@ describe NumberGame do
 
     # ASSIGNMENT #5
     # Create a new instance of NumberGame, with specific values for @solution,
-    # @guess, and count. Write a test for the following context.
+    # @guess, and @count. Write a test for the following context.
     context 'when count is 4 and over' do
       # remove the 'x' before running this test
       xit 'outputs correct phrase' do

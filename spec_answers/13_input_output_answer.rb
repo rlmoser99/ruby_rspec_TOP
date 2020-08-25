@@ -204,7 +204,7 @@ describe NumberGame do
     # ASSIGNMENT #4
     context 'when count is 2-3' do
       # Create a new instance of NumberGame, with specific values for @solution,
-      # @guess, and count.
+      # @guess, and @count.
       subject(:game_three) { described_class.new(5, '5', 3) }
 
       # remove the 'x' before running this test
@@ -216,7 +216,7 @@ describe NumberGame do
 
     # ASSIGNMENT #5
     # Create a new instance of NumberGame, with specific values for @solution,
-    # @guess, and count. Write a test for the following context.
+    # @guess, and @count. Write a test for the following context.
     context 'when count is 4 and over' do
       subject(:game_seven) { described_class.new(5, '5', 7) }
 
@@ -228,11 +228,11 @@ describe NumberGame do
     end
   end
 
-  # This method is a private method and it does NOT need to be tested.
+  # This method is a private method and so it does not need to be tested.
   # This method is only used as parameter for the #verify_input method.
   # It is unneccessary to test methods that only contain puts and/or gets
   # because they are well-tested in the standard ruby library. However, if this
-  # test was public (instead of private) and you had to test it, you'll need
+  # test were public (instead of private) and you had to test it, you'd need
   # to create a stub for the puts & gets method.
   # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/stub-with-substitute-implementation
 
