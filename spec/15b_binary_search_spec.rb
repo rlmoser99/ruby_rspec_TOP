@@ -3,8 +3,6 @@
 require_relative '../lib/15b_binary_search'
 require_relative '../lib/15c_random_number'
 
-# DOES THIS NEED TO BE REVISITED???
-
 # The file order to complete this lesson:
 
 # 1. Familarize yourself with the three lib/15 files.
@@ -18,10 +16,10 @@ require_relative '../lib/15c_random_number'
 # class. These tests were written in the last lesson. The FindNumber class
 # has been renamed to BinarySearch, which is a more accurate description.
 
-# After TDD is complete, the classes and methods that were used as a test
-# double should be updated to be a 'verifying double.' Using a 'verifying
-# double' is preferred, because doubles can produce an error if they do
-# not exist in the actual class. Therefore using a 'verifying double'
+# After you have completed your TDD, the classes and methods that were used
+# as a test double should be updated to be a 'verifying double.' Using a
+# 'verifying double' is preferred, because doubles can produce an error if
+# they do not exist in the actual class. Therefore using a 'verifying double'
 # makes a test more stable.
 # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles
 
