@@ -29,7 +29,7 @@ require_relative '../lib/16b_caesar_translator'
 
 describe CaesarBreaker do
   # The tests for CaesarBreaker do not depend on creating different conditions.
-  # Therefore we can use the same subject instance for all of these tests.
+  # Therefore we can use the same subject instance for most of these tests.
   subject(:phrase) { described_class.new('Ebiil, Tloia!') }
 
   # ASSIGNMENT #1
@@ -58,15 +58,12 @@ describe CaesarBreaker do
 
   # Outgoing Command -> Expect to send
   describe '#create_decrypted_messages' do
-    let(:phrase_translator) { instance_double(CaesarTranslator) }
-
-    before do
-      phrase.instance_variable_set(:@translate, phrase_translator)
-    end
+    let(:translator) { instance_double(CaesarTranslator) }
+    subject(:phrase_create) { described_class.new('Lipps, Asvph!', translator) }
 
     it 'sends translate 25 times' do
-      expect(phrase.translator).to receive(:translate).exactly(25).times
-      phrase.create_decrypted_messages
+      expect(phrase_create.translator).to receive(:translate).exactly(25).times
+      phrase_create.create_decrypted_messages
     end
   end
 

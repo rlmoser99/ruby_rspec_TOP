@@ -86,13 +86,15 @@ describe MagicSeven do
     end
   end
 
-  # The following tests will need you to set the value of the random_number.
+  # The following tests will need you to create new instances of MagicSeven with
+  # a specific value for the random_number.
   describe '#subtract_random_number' do
     context 'when the previous step is 10 and random_number is 3' do
+      subject(:game_three) { described_class.new(3) }
+
       it 'returns 7' do
         previous_step = 10
-        game.instance_variable_set(:@random_number, 3)
-        result = game.subtract_random_number(previous_step)
+        result = game_three.subtract_random_number(previous_step)
         expect(result).to eq(7)
       end
     end
@@ -102,28 +104,31 @@ describe MagicSeven do
   # positive integer as the random_number. Update the context with the number.
   describe '#play' do
     context 'when the random number is 19' do
+      subject(:game_ninteen) { described_class.new(19) }
+
       # remove the 'x' before running this test
       it 'will always return 7' do
-        game.instance_variable_set(:@random_number, 19)
-        result = game.play
+        result = game_ninteen.play
         expect(result).to eq(7)
       end
     end
 
     context 'when the random number is 1001' do
+      subject(:game_thousand) { described_class.new(1001) }
+
       # remove the 'x' before running this test
       it 'will always return 7' do
-        game.instance_variable_set(:@random_number, 1001)
-        result = game.play
+        result = game_thousand.play
         expect(result).to eq(7)
       end
     end
 
     context 'when the random number is 987,654,321' do
+      subject(:game_huge) { described_class.new(987_654_321) }
+
       # remove the 'x' before running this test
       it 'will always return 7' do
-        game.instance_variable_set(:@random_number, 987_654_321)
-        result = game.play
+        result = game_huge.play
         expect(result).to eq(7)
       end
     end

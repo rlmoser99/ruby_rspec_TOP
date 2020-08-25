@@ -94,9 +94,9 @@ end
 # Since this is probably your first experience with TDD, let's extend the
 # workflow to include a few more steps:
 # 1. Read & understand the requirement for one method only.
-# 2. Write one test for that method that you think it will pass.
+# 2. Write one test for that method; run the tests to see it fail.
 # 3. Write the method to fulfill the requirement.
-# 4. Run the test that you wrote. If it doesn't pass, redo steps 1-3.
+# 4. Run the tests again. If they don't all pass, redos steps 1-3.
 # 5. When your first test is passing, write the additional tests.
 # 6. Run all of the tests. If any do not pass, redo steps 3-5.
 # 7. Optional: Refactor your code and/or tests, keeping all tests passing.
@@ -122,6 +122,8 @@ describe FindNumber do
     # the min and max values (rounded down). Don't expect this test to be
     # able to pass as you haven't written #make_guess yet!
     context 'when min is 0 and max is 9' do
+      xit 'returns 4' do
+      end
     end
 
     # Now write a method in 14_find_number.rb called #make_guess that returns
@@ -175,8 +177,9 @@ describe FindNumber do
 
   # ASSIGNMENT: METHOD #3
   describe '#update_range' do
-    let(:updating_number) { double('random_number', value: 8) }
-    subject(:updating_game) { described_class.new(0, 9, updating_number) }
+    # If you share the same random_number double for both multiple context
+    # blocks, you can declare it inside the describe block.
+    let(:range_number) { double('random_number', value: 8) }
 
     # Write four tests for #update_range that test the values of min and max.
 
@@ -192,9 +195,10 @@ describe FindNumber do
     # min = 0 and max = 9.
 
     context 'when the guess is less than the answer' do
+      subject(:low_guess_game) { described_class.new(0, 9, range_number, 4) }
+
       before do
-        updating_game.instance_variable_set(:@guess, 4)
-        updating_game.update_range
+        low_guess_game.update_range
       end
 
       xit 'updates min' do

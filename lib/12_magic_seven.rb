@@ -4,8 +4,8 @@
 class MagicSeven
   attr_reader :random_number
 
-  def initialize
-    @random_number = rand(0..20)
+  def initialize(random_number = rand(0..20))
+    @random_number = random_number
   end
 
   def add_nine(number)

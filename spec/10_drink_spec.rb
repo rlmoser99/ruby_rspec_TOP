@@ -29,24 +29,14 @@ describe Drink do
     end
 
     context 'when specifying the type and ounces' do
-      subject(:my_drink) { Drink.new('coffee', 8) }
+      subject(:my_coffee) { Drink.new('coffee', 8) }
 
       it 'is coffee' do
-        expect(my_drink.type).to eq('coffee')
+        expect(my_coffee.type).to eq('coffee')
       end
 
       it 'has 8 ounces' do
-        expect(my_drink.ounces).to eq(8)
-      end
-    end
-
-    context 'when changing the type inside an example' do
-      subject(:my_drink) { Drink.new('coffee') }
-
-      it 'changes to tea' do
-        # Changing the value of an instance_variable without an attr_accessor.
-        my_drink.instance_variable_set(:@type, 'tea')
-        expect(my_drink.type).to eq('tea')
+        expect(my_coffee.ounces).to eq(8)
       end
     end
 
@@ -62,6 +52,10 @@ describe Drink do
       it 'is juice' do
         expect(my_drink.type).to eq('juice')
       end
+
+      it 'has 16 ounces' do
+        expect(my_drink.ounces).to eq(16)
+      end
     end
   end
 
@@ -72,18 +66,18 @@ describe Drink do
       # http://testing-for-beginners.rubymonstas.org/rspec/matchers.html
 
       context 'when using default initialization' do
-        subject(:my_drink) { described_class.new }
+        subject(:default_drink) { described_class.new }
 
         it 'is full' do
-          expect(my_drink).to be_full
+          expect(default_drink).to be_full
         end
       end
 
       context 'when drink has 8 ounces' do
-        subject(:my_drink) { Drink.new('coffee', 8) }
+        subject(:my_coffee) { described_class.new('coffee', 8) }
 
         it 'is not full' do
-          expect(my_drink).not_to be_full
+          expect(my_coffee).not_to be_full
         end
       end
     end
@@ -93,11 +87,11 @@ end
 # ASSIGNMENT
 
 describe Drink do
-  # Create an explicit subject, using 'described_class' and your choice of
-  # beverage type.
-
   describe '#initialize' do
     context 'when type is specified and ounces is default' do
+      # Create an explicit subject, using 'described_class' and your choice of
+      # beverage type.
+
       # remove the 'x' before running this test
       xit 'is your choice of beverage' do
       end
@@ -110,15 +104,20 @@ describe Drink do
 
   describe '#full?' do
     context 'when drink has 16 ounces or more' do
+      # Create an explicit subject, using 'described_class' and your choice of
+      # beverage type.
+
       # remove the 'x' before running this test
       xit 'is full' do
       end
     end
 
     context 'when drink has less than 16 ounces' do
+      # Create an explicit subject, using 'described_class' and your choice of
+      # beverage type. In addition, specify ounces to be any number under 16.
+
       # remove the 'x' before running this test
       xit 'is not full' do
-        # You will need to set the instance_variable for this example.
       end
     end
   end

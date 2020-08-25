@@ -14,9 +14,9 @@ class CaesarBreaker
 
   CODE_SHIFTS = (1..25).to_a
 
-  def initialize(message)
+  def initialize(message, translator = CaesarTranslator.new(message))
     @message = message
-    @translator = CaesarTranslator.new(message)
+    @translator = translator
     @decrypted_messages = []
   end
 

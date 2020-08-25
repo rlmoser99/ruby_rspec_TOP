@@ -29,7 +29,7 @@ require_relative '../lib/16b_caesar_translator'
 
 describe CaesarBreaker do
   # The tests for CaesarBreaker do not depend on creating different conditions.
-  # Therefore we can use the same subject instance for all of these tests.
+  # Therefore we can use the same subject instance for most of these tests.
   subject(:phrase) { described_class.new('Ebiil, Tloia!') }
 
   # ASSIGNMENT #1

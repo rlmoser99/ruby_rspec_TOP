@@ -13,7 +13,6 @@ predicate matchers
 ## 3_number_spec
 explicit 'subject'\
 comparison matchers\
-instance_variable_set\
 .not_to instead of .to\
 (assignment has 'include')
 
@@ -44,7 +43,6 @@ custom matcher
 
 ## 10_drinks_spec
 default parameters\
-instance_variable_set\
 magic_matchers\
 described class
 

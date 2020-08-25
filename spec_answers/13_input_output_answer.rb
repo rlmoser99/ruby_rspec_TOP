@@ -60,37 +60,40 @@ describe NumberGame do
 
   describe '#game_over?' do
     context 'when user guess is correct' do
+      # To test this method, we need to set specific values for @solution and
+      # @guess, so we will create a new instance of NumberGame.
+      subject(:game_end) { described_class.new(5, '5') }
+
       it 'is game over' do
-        game.instance_variable_set(:@solution, 5)
-        game.instance_variable_set(:@guess, '5')
-        expect(game).to be_game_over
+        expect(game_end).to be_game_over
       end
     end
 
     # ASSIGNMENT #2
-    # Write one test for when game.solution does not equal correct_guess?
+    # Create a new instance of NumberGame and write a test for when the @guess
+    # does not equal @solution.
     context 'when user guess is not correct' do
+      subject(:game_mid) { described_class.new(5, '2') }
+
       # remove the 'x' before running this test
       it 'is not game over' do
-        game.instance_variable_set(:@solution, 5)
-        game.instance_variable_set(:@guess, '2')
-        expect(game).to_not be_game_over
+        expect(game_mid).to_not be_game_over
       end
     end
   end
 
   # The #player_input method is used in the game as an argument passed into the
   # verify_input method. The #player_input method is not tested because it is a
-  # protected method. In addition, it is unnecessary to test methods that only
+  # private method. In addition, it is unnecessary to test methods that only
   # contain puts and/or gets. However, at the bottom of the answer file is an
   # example of how you would test the #player_input method if it were not
-  # protected.
+  # private.
 
   # Since we do not have to test #player_input, let's test #verify_input.
 
   describe '#verify_input' do
     # Note: #verify_input is a recursive method that will repeat until
-    # #valid_input? is true.
+    # number.match?(/^[0-9]$/) is true.
 
     context 'when given a valid input as argument' do
       it 'returns valid input' do
@@ -187,42 +190,49 @@ describe NumberGame do
 
   describe '#final_message' do
     context 'when count is 1' do
+      # To test this method, we need to set specific values for @solution,
+      # @guess and @count, so we will create a new instance of NumberGame.
+      subject(:game_one) { described_class.new(5, '5', 1) }
+
       it 'outputs correct phrase' do
-        game.instance_variable_set(:@count, 1)
         lucky_phrase = "LUCKY GUESS!\n"
         # The output matcher needs a block of code to assert.
-        expect { game.final_message }.to output(lucky_phrase).to_stdout
+        expect { game_one.final_message }.to output(lucky_phrase).to_stdout
       end
     end
 
     # ASSIGNMENT #4
     context 'when count is 2-3' do
+      # Create a new instance of NumberGame, with specific values for @solution,
+      # @guess, and @count.
+      subject(:game_three) { described_class.new(5, '5', 3) }
+
       # remove the 'x' before running this test
       it 'outputs correct phrase' do
-        # Set the instance variable of count
-        game.instance_variable_set(:@count, 3)
         congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
-        expect { game.final_message }.to output(congrats_phrase).to_stdout
+        expect { game_three.final_message }.to output(congrats_phrase).to_stdout
       end
     end
 
     # ASSIGNMENT #5
+    # Create a new instance of NumberGame, with specific values for @solution,
+    # @guess, and @count. Write a test for the following context.
     context 'when count is 4 and over' do
+      subject(:game_seven) { described_class.new(5, '5', 7) }
+
       # remove the 'x' before running this test
       it 'outputs correct phrase' do
-        # Write the entire test for the conditions in the context.
-        game.instance_variable_set(:@count, 7)
         hard_phrase = "That was hard. It took you 7 guesses!\n"
-        expect { game.final_message }.to output(hard_phrase).to_stdout
+        expect { game_seven.final_message }.to output(hard_phrase).to_stdout
       end
     end
   end
 
-  # This method is a PROTECTED method and it does NOT need to be tested.
+  # This method is a private method and so it does not need to be tested.
   # This method is only used as parameter for the #verify_input method.
   # It is unneccessary to test methods that only contain puts and/or gets
   # because they are well-tested in the standard ruby library. However, if this
-  # test was public (instead of protected) and you had to test it, you'll need
+  # test were public (instead of private) and you had to test it, you'd need
   # to create a stub for the puts & gets method.
   # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/stub-with-substitute-implementation
 
