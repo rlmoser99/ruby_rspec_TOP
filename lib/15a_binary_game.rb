@@ -1,125 +1,93 @@
 # frozen_string_literal: true
 
-require_relative '../lib/15c_random_number'
-require_relative '../lib/15b_binary_search'
-
-# This file can be run in the console by uncommenting the appropriate
-# commands at the bottom of the file. Be sure to comment them out before
-# running rspec to avoid errors.
+# require_relative '../lib/15c_random_number'
+# require_relative '../lib/15b_binary_search'
 
 # class for computer to find random number
 class BinaryGame
-  attr_reader :range, :random_number, :binary_search
-
-  def initialize
-    @range = (1..100).to_a
-    @random_number = nil
-    @binary_search = nil
+  def initialize(minimum, maximum, random_number = RandomNumber.new(minimum, maximum))
+    @minimum = minimum
+    @maximum = maximum
+    @random_number = random_number
+    @guess_count = 0
   end
 
-  def start
-    game_instructions
-    mode = game_mode_selection(mode_input)
-    mode == 1 ? user_random : computer_random
-    computer_turns
+  def play_game
+    introduction
+    mode = player_input(1, 2)
+    update_random_number if mode == 1
+    puts "\nUsing a binary search, any number can be found in #{maximum_guesses} guesses or less!\n\n"
+    binary_search = create_binary_search
+    display_binary_search(binary_search)
+    puts "As predicted, the computer found it in #{@guess_count} guesses."
   end
 
-  def computer_random
-    min = range[0]
-    max = range[-1]
-    @random_number = RandomNumber.new(min, max)
-    puts "The computer-generated random number is: \e[32m#{random_number.value}\e[0m!"
-    @binary_search = BinarySearch.new(min, max, random_number.value)
+  def player_input(min, max)
+    number = gets.chomp.to_i
+    return number if number.between?(min, max)
+
+    puts "Input error! Please enter a number between #{min} or #{max}."
+    player_input(min, max)
   end
 
-  def user_random
-    @random_number = random_number_input(player_input)
-    @binary_search = BinarySearch.new(range[0], range[-1], random_number)
+  def update_random_number
+    puts "Enter a number between #{@minimum} and #{@maximum}"
+    number_input = player_input(@minimum, @maximum)
+    @random_number.update_value(number_input)
   end
 
-  def computer_turns
-    count = 1
-    puts "The computer will find it in \e[32m#{max_guesses}\e[0m guesses or less!\n\n"
-    loop do
-      display_range
-      puts "Guess ##{count} -> \e[32m#{binary_search.make_guess}\e[0m"
-      break if binary_search.game_over?
-
-      binary_search.update_range
-      count += 1
-    end
+  def maximum_guesses
+    (Math.log2(@maximum - @minimum) + 1).to_i
   end
 
-  protected
-
-  def max_guesses
-    (Math.log2(range[-1] - range[0]) + 1).to_i
+  def create_binary_search
+    BinarySearch.new(@minimum, @maximum, @random_number)
   end
 
-  def display_range
+  def display_binary_search(binary_search)
+    display_turn_order(binary_search) until binary_search.game_over?
+  end
+
+  def display_turn_order(binary_search)
+    binary_search.make_guess
+    @guess_count += 1
+    display_guess(binary_search)
+    binary_search.update_range
+  end
+
+  private
+
+  def introduction
+    puts <<~HEREDOC
+
+      \e[32mWatch the computer find a number between #{@minimum} and #{@maximum} using a binary search.\e[0m
+
+      The computer-generated random number is \e[32m#{@random_number.value}\e[0m.
+      Would you like to choose your own number?
+
+      \e[32m[1]\e[0m Choose a new number
+      \e[32m[2]\e[0m Keep the randomly-generated number
+
+    HEREDOC
+  end
+
+  def display_guess(binary_search)
+    range = (@minimum..@maximum).to_a
     sleep(2)
-    puts ''
+    puts
     range.each do |number|
-      print_number(number)
+      print_number(binary_search.min, binary_search.max, number)
     end
-    puts "\n\n"
+    puts "\nGuess ##{@guess_count} -> \e[32m#{binary_search.guess}\e[0m\n\n"
   end
 
-  def print_number(number)
-    if number == (binary_search.min + binary_search.max) / 2
+  def print_number(min, max, number)
+    if number == (min + max) / 2
       print "\e[32m#{number} \e[0m"
-    elsif number.between?(binary_search.min, binary_search.max)
+    elsif number.between?(min, max)
       print "#{number} "
     else
       print "\e[91m#{number} \e[0m"
     end
   end
-
-  def random_number_input(number)
-    return number if valid_number?(number)
-
-    puts 'Input error!'
-    random_number_input(player_input)
-  end
-
-  def game_mode_selection(number)
-    return number if valid_mode?(number)
-
-    puts 'Input error! Please select 1 or 2.'
-    game_mode_selection(mode_input)
-  end
-
-  def valid_number?(input)
-    input.between?(1, 100)
-  end
-
-  def valid_mode?(input)
-    input.between?(1, 2)
-  end
-
-  def game_instructions
-    puts <<~HEREDOC
-
-      Watch the computer find a number between #{range[0]} and #{range[-1]}.
-
-      You can choose the random number or use a computer-generated number.
-      Then watch the computer find that number using a Binary binary_search.
-
-      \e[32m[1]\e[0m Choose the random number
-      \e[32m[2]\e[0m Use a randomly-generated number
-
-    HEREDOC
-  end
-
-  def player_input
-    puts "Enter a number between #{range[0]} and #{range[-1]}"
-    gets.chomp.to_i
-  end
-
-  def mode_input
-    gets.chomp.to_i
-  end
 end
-
-# game = BinaryGame.new
-# game.start

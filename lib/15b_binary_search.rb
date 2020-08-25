@@ -7,7 +7,7 @@ class BinarySearch
   def initialize(min, max, answer)
     @min = min
     @max = max
-    @answer = answer
+    @answer = answer.value
     @guess = nil
   end
 

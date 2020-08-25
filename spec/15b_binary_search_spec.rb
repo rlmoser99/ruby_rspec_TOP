@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../lib/15b_binary_search'
+require_relative '../lib/15c_random_number'
 
 # The file order to complete this lesson:
 
@@ -11,61 +12,78 @@ require_relative '../lib/15b_binary_search'
 # 2. Look at spec/15b_binary_search_spec which is based on 14_find_number_spec
 # 3. Complete spec/15a_binary_game_spec
 
-# This spec file is for the BinarySearch class that is used by the BinaryGame
+# This spec file is for the BinarySearch class that is used in the BinaryGame
 # class. These tests were written in the last lesson. The FindNumber class
 # has been renamed to BinarySearch, which is a more accurate description.
-# Note that BinaryGame is going to let the user decide between inputting a
-# random number and having the computer generate one using the
-# RandomNumber class. This means that the RandomNumber double is no longer
-# needed for this spec file.
+
+# After you have completed your TDD, the classes and methods that were used
+# as a test double should be updated to be a 'verifying double.' Using a
+# 'verifying double' is preferred, because doubles can produce an error if
+# they do not exist in the actual class. Therefore using a 'verifying double'
+# makes a test more stable.
+# https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles
+
+# Unit testing relies on using doubles to test the object in isolation
+# (i.e., not dependent on any other object). One important concept to
+# understand is that the BinarySearch or FindNumber class doesn't care if it
+# is given an actual random_number class object. It only cares that it is
+# given an object that can respond to certain methods. This concept is
+# called polymorphism.
+# https://www.geeksforgeeks.org/polymorphism-in-ruby/
 
 describe BinarySearch do
   describe '#make_guess' do
-    subject(:guess_game) { described_class.new(0, 9, 8) }
+    # Below (commented out) is the previous generic 'random_number' object
+    # used in TDD. Compare it to the new verifying instance_double for the
+    # RandomNumber class.
+    # let(:random_number) { double('random_number', value: 8) }
+    let(:random_number) { instance_double(RandomNumber, value: 8) }
+    subject(:game) { described_class.new(0, 9, random_number) }
 
     context 'when min is 0 and max is 9' do
       it 'returns 4' do
-        guess = guess_game.make_guess
+        guess = game.make_guess
         expect(guess).to eq(4)
       end
     end
 
     context 'when min is 5 and max is 9' do
       it 'returns 7' do
-        guess_game.instance_variable_set(:@min, 5)
-        guess = guess_game.make_guess
+        game.instance_variable_set(:@min, 5)
+        guess = game.make_guess
         expect(guess).to eq(7)
       end
     end
 
     context 'when min is 8 and max is 9' do
       it 'returns 8' do
-        guess_game.instance_variable_set(:@min, 8)
-        guess = guess_game.make_guess
+        game.instance_variable_set(:@min, 8)
+        guess = game.make_guess
         expect(guess).to eq(8)
       end
     end
 
     context 'when min is 0 and max is 3' do
       it 'returns 1' do
-        guess_game.instance_variable_set(:@max, 3)
-        guess = guess_game.make_guess
+        game.instance_variable_set(:@max, 3)
+        guess = game.make_guess
         expect(guess).to eq(1)
       end
     end
 
     context 'when min and max both equal 3' do
       it 'returns 3' do
-        guess_game.instance_variable_set(:@min, 3)
-        guess_game.instance_variable_set(:@max, 3)
-        guess = guess_game.make_guess
+        game.instance_variable_set(:@min, 3)
+        game.instance_variable_set(:@max, 3)
+        guess = game.make_guess
         expect(guess).to eq(3)
       end
     end
   end
 
   describe '#game_over?' do
-    subject(:ending_game) { described_class.new(0, 9, 3) }
+    let(:ending_number) { instance_double(RandomNumber, value: 3) }
+    subject(:ending_game) { described_class.new(0, 9, ending_number) }
 
     context 'when guess and random_number are equal' do
       it 'is game over' do
@@ -83,7 +101,8 @@ describe BinarySearch do
   end
 
   describe '#update_range' do
-    subject(:updating_game) { described_class.new(0, 9, 8) }
+    let(:updating_number) { instance_double(RandomNumber, value: 8) }
+    subject(:updating_game) { described_class.new(0, 9, updating_number) }
 
     context 'when the guess is less than the answer' do
       before do
