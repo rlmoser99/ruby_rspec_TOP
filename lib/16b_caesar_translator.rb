@@ -16,7 +16,7 @@ class CaesarTranslator
     result
   end
 
-  protected
+  private
 
   def character_shift(char, base, shift)
     char_num = char.ord

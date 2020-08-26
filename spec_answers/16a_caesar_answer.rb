@@ -5,69 +5,51 @@ require_relative '../lib/16b_caesar_translator'
 
 # The file order to complete this lesson:
 
-# 1. Familarize yourself with the three lib/16 files.
+# 1. Familarize yourself with the four lib/16 files.
+#    - lib/16_caesar_main
 #    - lib/16a_caesar_breaker
 #    - lib/16b_caesar_translator which is based on the typical Caesar Cipher
 #    - lib/16c_database (module)
 # 2. Check out the completed tests in spec/16b_caesar_translator.
 # 3. Complete spec/16a_caesar_breaker_spec.
 
-# The CaesarBreaker class creates a yaml file with the 25 possible translations,
-# using a CaesarTranslator class and a Database module.
+# The CaesarBreaker class creates the 26 possible translations (using the
+# CaesarTranslator class) & saves them in a yaml file (using a Database module).
 
 # Let's write tests for the CaesarBreaker class & the included Database module.
 
-# Here are the three kinds of methods that need to be tested in unit testing:
-# Incoming Query ->     Assert the result
-# Incoming Command ->   Assert the direct public side effects
-# Outgoing Command ->   Expect to send
-
-# In this lesson, you will be writing tests for 3 methods - #decrypt,
-# #create_decrypted_messages, and #save_to_yaml. In addition, you will learn
-# about testing module methods and how to handle testing methods that can raise
-# errors.
+# In this lesson, you will be writing tests for 3 methods -
+# #create_decrypted_messages, #save_decrypted_messages, and #save_to_yaml.
+# In addition, you will learn about testing module methods and how to handle
+# testing methods that can raise errors.
 
 describe CaesarBreaker do
   # The tests for CaesarBreaker do not depend on creating different conditions.
-  # Therefore we can use the same subject instance for most of these tests.
-  subject(:phrase) { described_class.new('Ebiil, Tloia!') }
+  # Therefore we can use the same subject instance and CaesarTranslator double.
 
-  # ASSIGNMENT #1
-  # Write the following two tests for #decrypt
+  subject(:phrase) { described_class.new('Lipps, Asvph!', translator) }
+  let(:translator) { instance_double(CaesarTranslator) }
 
-  # Incoming Command -> Assert the direct public side effects
   describe '#decrypt' do
-    before do
-      allow(phrase).to receive(:save_decrypted_messages)
-      allow(phrase).to receive(:create_decrypted_messages)
-    end
-
-    it 'calls create_decrypted_messages' do
-      expect(phrase).to receive(:create_decrypted_messages)
-      phrase.decrypt
-    end
-
-    it 'calls save_decrypted_messages' do
-      expect(phrase).to receive(:save_decrypted_messages)
-      phrase.decrypt
-    end
+    # Public Script Method -> No test neccessary, but all methods inside should
+    # be tested.
   end
 
-  # ASSIGNMENT #2
-  # Write the following test for #create_decrypted_messages
+  # ASSIGNMENT #1
 
-  # Outgoing Command -> Expect to send
+  # Write a test for the following method.
   describe '#create_decrypted_messages' do
-    let(:translator) { instance_double(CaesarTranslator) }
-    subject(:phrase_create) { described_class.new('Lipps, Asvph!', translator) }
+    # Located inside #decrypt (Public Script Method)
 
-    it 'sends translate 25 times' do
-      expect(phrase_create.translator).to receive(:translate).exactly(25).times
-      phrase_create.create_decrypted_messages
+    # Method with Outgoing Command -> Test that a message is sent
+    it 'sends translate 26 times' do
+      expect(translator).to receive(:translate).exactly(26).times
+      phrase.create_decrypted_messages
     end
   end
 
   # MODULE TESTING: There are several ways to test methods inside a module.
+  # (The following methods are located in lib/16c_database.rb)
 
   # Some prefer explicitly including it in the configuration option.
   # https://relishapp.com/rspec/rspec-core/docs/helper-methods/define-helper-methods-in-a-module
@@ -78,24 +60,46 @@ describe CaesarBreaker do
   # Modules can also be tested in a class that includes it, which is how the
   # following tests work.
 
-  # Incoming Command -> Assert the direct public side effects
-  # You'll find the below method in 16_database.rb
   describe '#save_decrypted_messages' do
+    # Located inside #decrypt (Public Script Method)
+
     # This method has a rescue block in case an error occurs.
     # Let's test that this method can run without raising an error.
     # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/raise-error-matcher
 
     context 'when it saves a file' do
+      # The tests in this context block will output two puts statements from
+      # #display_file_location. So let's stub out that method to clean up the
+      # test output.
+      before do
+        allow(phrase).to receive(:display_file_location)
+      end
+
       it 'does not raise an error' do
         expect { phrase.save_decrypted_messages }.not_to raise_error
       end
 
-      # The test above will pass when you run it, but it will also output
-      # two lines from #display_file_location.
-      # So let's stub out that method to clean up the test output.
-      it 'does not raise an error' do
-        allow(phrase).to receive(:display_file_location)
-        expect { phrase.save_decrypted_messages }.not_to raise_error
+      # ASSIGNMENT #2
+
+      # Write the following 3 tests:
+
+      # Method with Outgoing Command -> Test that a message is sent
+      it 'opens a new File' do
+        expect(File).to receive(:open)
+        phrase.save_decrypted_messages
+      end
+
+      # Method with Outgoing Command -> Test that a message is sent
+      it 'makes new directory' do
+        allow(Dir).to receive(:exist?).and_return(false)
+        expect(Dir).to receive(:mkdir)
+        phrase.save_decrypted_messages
+      end
+
+      it 'does not make new directory' do
+        allow(Dir).to receive(:exist?).and_return(true)
+        expect(Dir).not_to receive(:mkdir)
+        phrase.save_decrypted_messages
       end
     end
 
@@ -110,7 +114,7 @@ describe CaesarBreaker do
 
       # When an error is rescued, the method will not raise an error. Therefore,
       # you test the conditions that would occur if an error were rescued.
-      it 'rescues error' do
+      it 'does not raise an error' do
         expect { phrase.save_decrypted_messages }.not_to raise_error
       end
 
@@ -127,8 +131,8 @@ describe CaesarBreaker do
   end
 
   # ASSIGNMENT #3
-  # Write the following test for #save_to_yaml
-  # This method is found in 16_database.rb
+
+  # Write the following test:
 
   # Outgoing Command -> Expect to send
   describe '#save_to_yaml' do
