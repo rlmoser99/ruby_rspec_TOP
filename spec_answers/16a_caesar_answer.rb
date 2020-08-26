@@ -114,7 +114,7 @@ describe CaesarBreaker do
 
       # When an error is rescued, the method will not raise an error. Therefore,
       # you test the conditions that would occur if an error were rescued.
-      it 'rescues error' do
+      it 'does not raise an error' do
         expect { phrase.save_decrypted_messages }.not_to raise_error
       end
 

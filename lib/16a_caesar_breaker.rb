@@ -4,7 +4,6 @@ require_relative '../lib/16c_database'
 
 # breaks the Caesar Cipher code
 class CaesarBreaker
-  # attr_reader :message, :decrypted_messages, :translator
   include Database
 
   def initialize(message, translator = CaesarTranslator.new(message))
