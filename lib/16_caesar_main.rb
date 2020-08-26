@@ -6,5 +6,5 @@ require_relative '../lib/16c_database'
 
 # This file can be run in the console.
 
-phrase = CaesarBreaker.new('Ebiil, Tloia!')
+phrase = CaesarBreaker.new('Rovvy, Gybvn!')
 phrase.decrypt
