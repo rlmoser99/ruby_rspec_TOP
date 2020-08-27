@@ -30,6 +30,16 @@ class BinaryGame
     player_input(min, max)
   end
 
+  # DOES THIS ERROR WORK FOR LETTERS TOO?
+
+  # def player_input(min, max)
+  #   number = gets.chomp.to_i
+  #   return number if number.between?(min, max)
+
+  #   puts "Input error! Please enter a number between #{min} or #{max}."
+  #   player_input(min, max)
+  # end
+
   def update_random_number
     puts "Enter a number between #{@minimum} and #{@maximum}"
     number_input = player_input(@minimum, @maximum)
