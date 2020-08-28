@@ -111,48 +111,58 @@ describe NumberGame do
   end
 
   describe '#player_turn' do
-    # In order to test the behavior or #player_turn,
-
-    # receiving an invalid input, we need to use
-    # a method stub. In this example, the method stub will return the valid
-    # input, 'number_input', which will be the final result of this test.
-    # To stub this method, you 'allow' the test subject (game) to receive the
-    # :method_name and to return a specific value.
+    # In order to test the behavior of #player_turn, we need to use a method
+    # stub for #player_input to return a valid_input ('3'). To stub a method,
+    # you 'allow' the test subject (player_game) to receive the :method_name
+    # and to return a specific value.
     # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/allow-with-a-simple-return-value
     # http://testing-for-beginners.rubymonstas.org/test_doubles.html
-
-    # When using the same 'Arrange' part of a test, you can utilize before
-    # hooks to set up the test conditions.
-    # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
 
     subject(:player_game) { described_class.new }
 
     context 'when user input is valid' do
-      before do
-        valid_input = '3'
-        allow(player_game).to receive(:player_input).and_return(valid_input)
-      end
+      # To test the behavior, we want to test that the loop stops before the
+      # puts 'Input error!' line. In order to test that this method is not
+      # called, we use a message expectation.
+      # https://relishapp.com/rspec/rspec-mocks/docs
 
       it 'stops loop and does not display error message' do
-        player_game.player_turn
+        valid_input = '3'
+        allow(player_game).to receive(:player_input).and_return(valid_input)
+        # To use a message expectation, move 'Assert' before 'Act'.
         expect(player_game).not_to receive(:puts).with('Input error!')
+        player_game.player_turn
       end
     end
 
-    context 'when user inputs an incorrect value once' do
+    context 'when user inputs an incorrect value once, then a valid input' do
+      # A method stub can be called multiple times and return different values.
+      # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/returning-a-value
+      # Create a stub method to receive :player_input and return the invalid
+      # 'letter' input, then the 'valid_input'
+
+      # As the 'Arrange' step for tests grow, you can use a before hook to
+      # separate the test from the set-up.
+      # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
+      # https://www.tutorialspoint.com/rspec/rspec_hooks.htm
       before do
         letter = 'd'
         valid_input = '8'
         allow(player_game).to receive(:player_input).and_return(letter, valid_input)
       end
 
+      # When using message expectations, you can specify how many times you
+      # expect the message to be received.
+      # https://relishapp.com/rspec/rspec-mocks/docs/setting-constraints/receive-counts
       it 'completes loop and displays error message once' do
         expect(player_game).to receive(:puts).with('Input error!').once
         player_game.player_turn
       end
     end
 
-    context 'when user inputs two incorrect values' do
+    # ASSIGNMENT # ????
+
+    context 'when user inputs two incorrect values, then a valid input' do
       before do
         letter = 'd'
         symbol = '$'
