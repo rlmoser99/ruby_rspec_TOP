@@ -108,6 +108,8 @@ describe BinaryGame do
 
       # When you want to read an instance variable's value that does not need to
       # have a reader method, you can use instance_variable_get.
+      # https://www.rubydoc.info/stdlib/core/2.0.0/Object:instance_variable_get
+
       it 'stops loop and does not display error message' do
         min = game_input.instance_variable_get(:@minimum)
         max = game_input.instance_variable_get(:@maximum)
