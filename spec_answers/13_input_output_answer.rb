@@ -44,6 +44,7 @@ describe NumberGame do
       end
 
       # ASSIGNMENT #1
+
       # Write a similar test to the one above, that uses a custom matcher
       # instead of <, >, =.
       matcher :be_between_zero_and_nine do
@@ -70,6 +71,7 @@ describe NumberGame do
     end
 
     # ASSIGNMENT #2
+
     # Create a new instance of NumberGame and write a test for when the @guess
     # does not equal @solution.
     context 'when user guess is not correct' do
@@ -101,6 +103,9 @@ describe NumberGame do
       end
     end
 
+    # ASSIGNMENT #3
+
+    # Write a test for the following context.
     context 'when given invalid input as argument' do
       it 'returns nil' do
         letter_input = 'g'
@@ -160,8 +165,9 @@ describe NumberGame do
       end
     end
 
-    # ASSIGNMENT # ????
+    # ASSIGNMENT #4
 
+    # Write a test for the following context.
     context 'when user inputs two incorrect values, then a valid input' do
       before do
         letter = 'd'
@@ -198,10 +204,11 @@ describe NumberGame do
       end
     end
 
-    # ASSIGNMENT #4
+    # ASSIGNMENT #5
+
+    # Create a new instance of NumberGame, with specific values for @solution,
+    # @guess, and @count.
     context 'when count is 2-3' do
-      # Create a new instance of NumberGame, with specific values for @solution,
-      # @guess, and @count.
       subject(:game_three) { described_class.new(5, '5', 3) }
 
       # remove the 'x' before running this test
@@ -211,9 +218,9 @@ describe NumberGame do
       end
     end
 
-    # ASSIGNMENT #5
-    # Create a new instance of NumberGame, with specific values for @solution,
-    # @guess, and @count. Write a test for the following context.
+    # ASSIGNMENT #6
+
+    # Write a test for the following context.
     context 'when count is 4 and over' do
       subject(:game_seven) { described_class.new(5, '5', 7) }
 

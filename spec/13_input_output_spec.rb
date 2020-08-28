@@ -44,10 +44,10 @@ describe NumberGame do
       end
 
       # ASSIGNMENT #1
+
       # Write a similar test to the one above, that uses a custom matcher
       # instead of <, >, =.
       matcher :be_between_zero_and_nine do
-        match { |number| number.between?(0, 9) }
       end
 
       # remove the 'x' before running this test
@@ -68,6 +68,7 @@ describe NumberGame do
     end
 
     # ASSIGNMENT #2
+
     # Create a new instance of NumberGame and write a test for when the @guess
     # does not equal @solution.
     context 'when user guess is not correct' do
@@ -80,93 +81,89 @@ describe NumberGame do
   # The #player_input method is used in the game as an argument passed into the
   # verify_input method. The #player_input method is not tested because it is a
   # private method. In addition, it is unnecessary to test methods that only
-  # contain puts and/or gets. However, at the bottom of the answer file is an
-  # example of how you would test the #player_input method if it were not
-  # private.
+  # contain puts and/or gets.
 
   # Since we do not have to test #player_input, let's test #verify_input.
 
   describe '#verify_input' do
-    # Note: #verify_input is a recursive method that will repeat until
-    # number.match?(/^[0-9]$/) is true.
+    subject(:verify_game) { described_class.new }
+    # Note: #verify_input will only return a value if it matches /^[0-9]$/
 
     context 'when given a valid input as argument' do
       it 'returns valid input' do
         user_input = '3'
-        verified_input = game.verify_input(user_input)
+        verified_input = verify_game.verify_input(user_input)
         expect(verified_input).to eq('3')
       end
     end
 
-    # In order to test #verify_input receiving an invalid input, we need to use
-    # a method stub. In this example, the method stub will return the valid
-    # input, 'number_input', which will be the final result of this test.
-    # To stub this method, you 'allow' the test subject (game) to receive the
-    # :method_name and to return a specific value.
+    # ASSIGNMENT #3
+
+    # Write a test for the following context.
+    context 'when given invalid input as argument' do
+      xit 'returns nil' do
+      end
+    end
+  end
+
+  describe '#player_turn' do
+    # In order to test the behavior of #player_turn, we need to use a method
+    # stub for #player_input to return a valid_input ('3'). To stub a method,
+    # you 'allow' the test subject (player_game) to receive the :method_name
+    # and to return a specific value.
     # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/allow-with-a-simple-return-value
     # http://testing-for-beginners.rubymonstas.org/test_doubles.html
 
-    context 'when given invalid input once before valid input' do
-      letter_input = 'g'
-      number_input = '5'
+    subject(:player_game) { described_class.new }
 
-      # When using the same 'Arrange' part of a test, you can utilize before
-      # hooks to set up the test conditions.
-      # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
+    context 'when user input is valid' do
+      # To test the behavior, we want to test that the loop stops before the
+      # puts 'Input error!' line. In order to test that this method is not
+      # called, we use a message expectation.
+      # https://relishapp.com/rspec/rspec-mocks/docs
 
-      before do
-        # The stub below will return the number_input when called.
-        allow(game).to receive(:player_input).and_return(number_input)
-      end
-
-      it 'loops once until it receives valid input' do
-        # The stub below will remove the 'Input error!' from appearing in the
-        # test output.
-        allow(game).to receive(:puts)
-
-        # This test starts with the invalid parameter (letter_input = 'g').
-        verified_input = game.verify_input(letter_input)
-
-        # The result of 'verified_input' is the valid parameter, because
-        # of the player_input stub in the before hook (number_input = '5').
-        expect(verified_input).to eq('5')
-      end
-
-      it 'displays error message once' do
-        # Due to the loop, we can test that the game received :puts with the
-        # error message one time. In order to test if this method is called,
-        # we use a message expectation.
-        # https://relishapp.com/rspec/rspec-mocks/docs
-
-        # To set a message expectation, move 'Assert' before 'Act'.
-        expect(game).to receive(:puts).once.with('Input error!')
-        game.verify_input(letter_input)
+      it 'stops loop and does not display error message' do
+        valid_input = '3'
+        allow(player_game).to receive(:player_input).and_return(valid_input)
+        # To use a message expectation, move 'Assert' before 'Act'.
+        expect(player_game).not_to receive(:puts).with('Input error!')
+        player_game.player_turn
       end
     end
 
-    # ASSIGNMENT #3
-    context 'when given invalid input twice before valid input' do
-      letter_input = 'h'
-      number_input = '3'
-      # Create another invalid input (anything except a digit between 0 and 9).
+    context 'when user inputs an incorrect value once, then a valid input' do
+      # A method stub can be called multiple times and return different values.
+      # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/returning-a-value
+      # Create a stub method to receive :player_input and return the invalid
+      # 'letter' input, then the 'valid_input'
 
+      # As the 'Arrange' step for tests grow, you can use a before hook to
+      # separate the test from the set-up.
+      # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
+      # https://www.tutorialspoint.com/rspec/rspec_hooks.htm
       before do
-        # A method stub can be called multiple times and return different values.
-        # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/returning-a-value
-        # Create a stub method to receive :player_input and return your invalid
-        # input and the number_input.
+        letter = 'd'
+        valid_input = '8'
+        allow(player_game).to receive(:player_input).and_return(letter, valid_input)
       end
 
-      # remove the 'x' before running this test
-      xit 'loops twice until it receives valid input' do
-        # Creating a stub method for :puts is optional
+      # When using message expectations, you can specify how many times you
+      # expect the message to be received.
+      # https://relishapp.com/rspec/rspec-mocks/docs/setting-constraints/receive-counts
+      it 'completes loop and displays error message once' do
+        expect(player_game).to receive(:puts).with('Input error!').once
+        player_game.player_turn
+      end
+    end
 
-        verified_input = game.verify_input(letter_input)
-        expect(verified_input).to eq(number_input)
+    # ASSIGNMENT #4
+
+    # Write a test for the following context.
+    context 'when user inputs two incorrect values, then a valid input' do
+      before do
       end
 
-      # remove the 'x' before running this test
-      xit 'displays error message twice' do
+      xit 'completes loop and displays error message twice' do
       end
     end
   end
@@ -192,11 +189,11 @@ describe NumberGame do
       end
     end
 
-    # ASSIGNMENT #4
-    context 'when count is 2-3' do
-      # Create a new instance of NumberGame, with specific values for @solution,
-      # @guess, and @count.
+    # ASSIGNMENT #5
 
+    # Create a new instance of NumberGame, with specific values for @solution,
+    # @guess, and @count.
+    context 'when count is 2-3' do
       # remove the 'x' before running this test
       xit 'outputs correct phrase' do
         congrats_phrase = "Congratulations! You picked the random number in 3 guesses!\n"
@@ -204,9 +201,9 @@ describe NumberGame do
       end
     end
 
-    # ASSIGNMENT #5
-    # Create a new instance of NumberGame, with specific values for @solution,
-    # @guess, and @count. Write a test for the following context.
+    # ASSIGNMENT #6
+
+    # Write a test for the following context.
     context 'when count is 4 and over' do
       # remove the 'x' before running this test
       xit 'outputs correct phrase' do
