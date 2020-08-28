@@ -125,8 +125,9 @@ describe CaesarBreaker do
 
   # Write the following test:
 
-  # Outgoing Command -> Expect to send
   describe '#save_to_yaml' do
+    # Method with Outgoing Command -> Test that a message is sent
+
     xit 'dumps to yaml' do
     end
   end

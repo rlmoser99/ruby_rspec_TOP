@@ -134,8 +134,9 @@ describe CaesarBreaker do
 
   # Write the following test:
 
-  # Outgoing Command -> Expect to send
   describe '#save_to_yaml' do
+    # Method with Outgoing Command -> Test that a message is sent
+
     it 'dumps to yaml' do
       expect(YAML).to receive(:dump)
       phrase.save_to_yaml
