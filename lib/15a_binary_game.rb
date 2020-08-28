@@ -25,9 +25,7 @@ class BinaryGame
   def player_input(min, max)
     loop do
       user_input = gets.chomp
-      if user_input.match?(/^\d+$/)
-        verified_number = verify_input(min, max, user_input.to_i)
-      end
+      verified_number = verify_input(min, max, user_input.to_i) if user_input.match?(/^\d+$/)
       return verified_number if verified_number
 
       puts "Input error! Please enter a number between #{min} or #{max}."
