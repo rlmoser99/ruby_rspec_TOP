@@ -21,7 +21,10 @@ require_relative '../lib/12_magic_seven'
 
 # NOTE: When you start using A-A-A to format your tests, it will feel
 # strange to not be following DRY (Don't Repeat Yourself). With tests, however,
-# repetition is necessary in order for them to be easy to read.
+# repetition is necessary in order for them to be easy to read. If you are using
+# rubocop, you can disable specific (or all) cops for certain files (or
+# directories) by adding a .rubocop.yml file.
+# https://docs.rubocop.org/rubocop/0.88/configuration.html#includingexcluding-files
 
 # When you start working on a existing code base, you will often become familiar
 # with the code by reading the tests.
