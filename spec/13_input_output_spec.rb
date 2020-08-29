@@ -109,7 +109,7 @@ describe NumberGame do
   describe '#player_turn' do
     # In order to test the behavior of #player_turn, we need to use a method
     # stub for #player_input to return a valid_input ('3'). To stub a method,
-    # you 'allow' the test subject (player_game) to receive the :method_name
+    # we 'allow' the test subject (player_game) to receive the :method_name
     # and to return a specific value.
     # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/allow-with-a-simple-return-value
     # http://testing-for-beginners.rubymonstas.org/test_doubles.html
@@ -137,7 +137,7 @@ describe NumberGame do
       # Create a stub method to receive :player_input and return the invalid
       # 'letter' input, then the 'valid_input'
 
-      # As the 'Arrange' step for tests grow, you can use a before hook to
+      # As the 'Arrange' step for tests grows, you can use a before hook to
       # separate the test from the set-up.
       # https://relishapp.com/rspec/rspec-core/v/2-0/docs/hooks/before-and-after-hooks\
       # https://www.tutorialspoint.com/rspec/rspec_hooks.htm
@@ -192,7 +192,7 @@ describe NumberGame do
     # ASSIGNMENT #5
 
     # Create a new instance of NumberGame, with specific values for @solution,
-    # @guess, and @count.
+    # @guess, and @count
     context 'when count is 2-3' do
       # remove the 'x' before running this test
       xit 'outputs correct phrase' do

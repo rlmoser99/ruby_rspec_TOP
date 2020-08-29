@@ -94,7 +94,7 @@ describe BinaryGame do
   describe '#player_input' do
     # Located inside #play_game (Public Script Method)
     # Looping Script Method -> Test the behavior of the method (for example, it
-    # stopping when certain conditions are met).
+    # stops when certain conditions are met).
 
     # Note: #player_input will stop looping when the valid_input is between?(min, max)
 
@@ -107,7 +107,7 @@ describe BinaryGame do
       end
 
       # When you want to read an instance variable's value that does not need to
-      # have a reader method, you can use instance_variable_get.
+      # have a reader method, you can use instance_variable_get
       # https://www.rubydoc.info/stdlib/core/2.0.0/Object:instance_variable_get
 
       it 'stops loop and does not display error message' do
@@ -122,7 +122,7 @@ describe BinaryGame do
     # ASSIGNMENT #1
 
     # Write a test for the following two context blocks. You will need to
-    # provide 1-2 invalid inputs (letters, symbols, or an number that is not
+    # provide 1-2 invalid inputs (letters, symbols, or numbers that are not
     # between the min & max integers) and one valid input number (as a string).
 
     # Remember a stub can be called multiple times and return different values.
@@ -275,7 +275,7 @@ describe BinaryGame do
     # Located inside #play_game (Public Script Method)
 
     # Looping Script Method -> Test the behavior of the method (for example, it
-    # stopping when certain conditions are met).
+    # stops when certain conditions are met).
 
     # This method is a Looping Script Method, because #display_turn_order will
     # loop until binary_search.game_over?
