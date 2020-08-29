@@ -17,11 +17,10 @@ require_relative '../lib/14_find_number'
 
 # In this lesson, we will be testing the class 'FindNumber'. Look at the
 # lib/14_find_number.rb file. An instance of 'FindNumber' is initialized with
-# a 'RandomNumber' object (unless a third argument is given to the initialize
-# method).
+# min, max, answer and guess. There are default values for answer and guess.
 
-# The 'RandomNumber' class has not been written, so we will use a double for it
-# in these tests.
+# Note: the 'RandomNumber' class has not been written. During TDD, we will need
+# to create a double for RandomNumber in the tests for FindNumber.
 # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/basics/test-doubles
 
 # Learning about doubles can be very confusing, because many resources use
@@ -84,7 +83,7 @@ describe FindNumber do
 end
 
 # ASSIGNMENT
-# For this assignment you will be doing TDD for 3 methods: #make_guess,
+# For this lesson you will be doing TDD for 3 methods: #make_guess,
 # #game_over?, and #update_range.
 
 # After you have some experience using TDD, you can use the typical
@@ -112,10 +111,11 @@ describe FindNumber do
   # The computer will update min and max values to help find the correct number.
 
   describe '#make_guess' do
-    # Create a random_number double & allow it to receive 'value' and return any
-    # number between 0 and 9, in one of the two ways explained above.
+    # Create a random_number double called 'number_guessing'. Allow the double
+    # to receive 'value' and return the value of 8, in one of the two ways
+    # explained above.
 
-    subject(:game) { described_class.new(0, 9, random_number) }
+    subject(:game_guessing) { described_class.new(0, 9, number_guessing) }
 
     # Before you write the #make_guess method:
     # Write a test that would expect #make_guess to return the average of
@@ -130,39 +130,45 @@ describe FindNumber do
     # the average of the min and max values (rounded down).
     # You can now run the above test and it should pass.
 
-    # Write a test for each of the following contexts:
+    # Write a test for each of the following contexts. You will need to create a
+    # new instance of FindNumber for each context, but you can use the same
+    # random number double created inside this method's describe block.
 
     context 'when min is 5 and max is 9' do
+      xit 'returns 7' do
+      end
     end
 
     context 'when min is 8 and max is 9' do
+      xit 'returns 8' do
+      end
     end
 
     context 'when min is 0 and max is 3' do
+      xit 'returns 1' do
+      end
     end
 
     context 'when min and max both equal 3' do
+      xit 'returns 3' do
+      end
     end
   end
 
   # ASSIGNMENT: METHOD #2
   describe '#game_over?' do
-    # In a long test file, it can be helpful to declare variables in each
-    # describe block, to make the tests more readable. When creating another
-    # instance of the random number and/or subject, use a meaningful name to
-    # differentiate between instances.
-
-    # Create a subject and random_number double with meaningful names.
-    # A helpful tip is to combine the purpose of the test and the object.
-    # E.g., ending_number & ending_game or completing_random & completing_game.
-
-    # Allow the double to receive 'value' and return a number from 0 to 9.
-
-    # Write a test that would expect game to be_game_over when a guess equals
-    # the random_number double's value above. Remember that this test will not
-    # be able to pass yet because you haven't written the method!
-
     context 'when guess and random_number are equal' do
+      # Create another subject and random_number double with meaningful names.
+      # The subject will need to specify the number value of @guess.
+
+      # Allow the double to receive 'value' and return the same number as @guess.
+
+      # Write a test that would expect game to be_game_over when a guess equals
+      # the random_number double's value above. Remember that this test will not
+      # be able to pass yet because you haven't written the method!
+
+      xit 'is game over' do
+      end
     end
 
     # Write the corresponding method in 14_find_number.rb called #game_over?
@@ -172,14 +178,16 @@ describe FindNumber do
     # NOT equal the random_number double's value above.
 
     context 'when guess and random_number are not equal' do
+      xit 'is not game over' do
+      end
     end
   end
 
   # ASSIGNMENT: METHOD #3
   describe '#update_range' do
-    # If you share the same random_number double for both multiple context
-    # blocks, you can declare it inside the describe block.
-    let(:range_number) { double('random_number', value: 8) }
+    # As you have seen above, you can share the same random_number double for
+    # multiple context blocks, by declaring it inside the describe block.
+    let(:number_range) { double('random_number', value: 8) }
 
     # Write four tests for #update_range that test the values of min and max.
 
@@ -191,17 +199,10 @@ describe FindNumber do
     # - min stays the same
     # - max updates to one less than the guess
 
-    # Note: updating_game in each context block starts off with
-    # min = 0 and max = 9.
-
     context 'when the guess is less than the answer' do
-      subject(:low_guess_game) { described_class.new(0, 9, range_number, 4) }
+      subject(:low_guess_game) { described_class.new(0, 9, number_range, 4) }
 
-      before do
-        low_guess_game.update_range
-      end
-
-      xit 'updates min' do
+      xit 'updates min to 5' do
       end
 
       xit 'does not update max' do
@@ -209,10 +210,12 @@ describe FindNumber do
     end
 
     context 'when the guess is more than the answer' do
+      subject(:high_guess_game) { described_class.new(0, 9, number_range, 9) }
+
       xit 'does not update min' do
       end
 
-      xit 'updates max' do
+      xit 'updates max to 8' do
       end
     end
 
