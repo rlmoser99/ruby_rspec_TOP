@@ -7,12 +7,13 @@
 ## Summary
 
 The purpose of the 'RSpec Playground' is to equip students with additional practice before doing TDD with Connect Four. In addition, I believe students do not understand several important concepts, such as: 
-- Writing small and isolated methods.
-- Using a testing pattern, such as 'Arrange Act, and Assert'.
-- Correctly using an explicit subject.
-- How to create different test conditions
-- How to stub methods - either class methods or puts/gets (and that it can be unnecessary to test puts/gets).
-- How to use doubles, verifying doubles, etc.
+- The importance of writing small and isolated methods.
+- The benefits of using a testing pattern, such as 'Arrange Act, and Assert'.
+- The importance of class encapsulation
+- How to correctly use an explicit subject.
+- How to create different test conditions using a new instance with specific instance variable values.
+- How to use stubs, doubles, verifying doubles, etc.
+- How to determine what methods should be tested for good unit test coverage.
 
 ## Motivation
 
@@ -30,8 +31,6 @@ If students had additional practice using RSpec, specifically mocks and doubles,
 
 When I first started working on this 'playground', I imagined that it would be an additional resource in the [Testing Your Ruby Code lesson](https://www.theodinproject.com/courses/ruby-programming/lessons/testing-your-ruby-code). However, after talking with other people struggling with writing tests, I think it should be an assignment after writing tests for Caesar Cipher and before Tic Tac Toe. 
 
-In addition, I believe the Sandi Metz video should come before doing tests for Tic Tac Toe. I included a link in the second to file because it is very useful to teach what methods should & should not be tested. 
-
 ## Drawbacks
 
 The only drawback to adding this to the curriculum is that we may be answering more questions about these exercises. I have asked a few Odinites to work through these exercises to help me eliminate the typos and any confusing wording. 
@@ -42,11 +41,11 @@ I searched for an alternative and could not find an better option than the Udemy
 
 ## Additional
 
-I have told a few people about this repo in the #ruby-testing channel. In addition, I have privately told a few students about it. At this time, I know that andrewjh271, aaron-contreras, tenacious-qi, Natty, msespos, and Pandenok have or are currently going through them.
+I have told a few people about this repo in the #ruby-testing channel. In addition, I have privately told a few students about it. At this time, I know that andrewjh271, aaron-contreras, tenacious-qi, msespos, and Pandenok have gone through them. 
 
-This playground needs a thorough review by someone a lot more familiar with RSpec. Even though I have spent over two months learning RSpec, I do not feel 100% confident in some of my explanations & I have 0 'real-world' experience. 
+This playground needs a thorough review by someone a lot more familiar with RSpec. Even though I have spent over three months learning RSpec, I do not feel 100% confident in some of my explanations & I have zero 'real-world' experience. 
 
-For example, the last two files focus on methods that should be tested, based on Sandi Metz talk [Magic Tricks of Testing](https://www.youtube.com/watch?v=URSWYvyc42M). However, I am still uncertain of my understanding of this concept. In my tic-tac-toe game, I have several private methods in my Game class that handle crucial pieces of logic, such as `#player_turns` or `#switch_current_player`. However, these methods are only sent to self or are sending outgoing query messages. Based on my current understanding, these methods do not need to be tested. Having a thorough review by someone that is a lot more familiar with RSpec & Ruby would solidify my confidence in this RSpec playground. 
+For example, the last two files focus on 'types' of methods that should always be tested. It was difficult to find useful information on what methods should be tested for these ruby games. Therefore, I combined information from Sandi Metz talk [Magic Tricks of Testing](https://www.youtube.com/watch?v=URSWYvyc42M), conversations in #ruby-testing, and even direct messages with Timato. 
 
 ## Status
 - [x] Proposed
