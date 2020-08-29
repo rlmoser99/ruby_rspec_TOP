@@ -28,8 +28,8 @@ require_relative '../lib/15c_random_number'
 # https://www.artofunittesting.com/definition-of-a-unit-test
 
 # In general, you probably have 4 different types of methods:
-# 1. Command - Performs an action and/or has a side effect.
-# 2. Query - Returns a value.
+# 1. Command - Changes the observable state, but does not return a value.
+# 2. Query - Returns a result, but does not change the observable state.
 # 3. Script - Only calls other methods, usually without returning anything.
 # 4. Looping Script - Only call other methods, usually without returning
 #    anything and stopping when certain conditions are met.
@@ -56,7 +56,7 @@ require_relative '../lib/15c_random_number'
 # example, that it stops when certain conditions are met.
 
 # Here is a summary of what should be tested
-# 1. Command Method -> Test the action/side effect
+# 1. Command Method -> Test the change in the observable state
 # 2. Query Method -> Test the return value
 # 3. Method with Outgoing Command -> Test that a message is sent
 # 4. Looping Script Method -> Test the behavior of the method
@@ -93,54 +93,104 @@ describe BinaryGame do
 
   describe '#player_input' do
     # Located inside #play_game (Public Script Method)
-    # Command Method -> Test the action/side effect
+    # Looping Script Method -> Test the behavior of the method (for example, it
+    # stops when certain conditions are met).
+
+    # Note: #player_input will stop looping when the valid_input is between?(min, max)
 
     subject(:game_input) { described_class.new(1, 10) }
 
-    context 'when user input is between arguments' do
-      it 'returns the valid, first user input' do
-        user_input = '4'
-        allow(game_input).to receive(:gets).and_return(user_input)
-        min = 1
-        max = 10
-        result = game_input.player_input(min, max)
-        # This method gets a string ('4') and turns into an integer (4).
-        expect(result).to eq(user_input.to_i)
+    context 'when user number is between arguments' do
+      before do
+        valid_input = '3'
+        allow(game_input).to receive(:gets).and_return(valid_input)
       end
-    end
 
-    # Remember a stub can be called multiple times and return different values.
-    # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/returning-a-value
-    context 'when first user input is not between arguments' do
-      it 'returns the valid, second user input' do
-        letter = 'r'
-        user_input = '9'
-        allow(game_input).to receive(:gets).and_return(letter, user_input)
-        # Stubing puts is not necessary, but it cleans up the test output
-        allow(game_input).to receive(:puts).once
-        min = 5
-        max = 15
-        result = game_input.player_input(min, max)
-        expect(result).to eq(user_input.to_i)
+      # When you want to read an instance variable's value that does not need to
+      # have a reader method, you can use instance_variable_get
+      # https://www.rubydoc.info/stdlib/core/2.0.0/Object:instance_variable_get
+
+      it 'stops loop and does not display error message' do
+        min = game_input.instance_variable_get(:@minimum)
+        max = game_input.instance_variable_get(:@maximum)
+        error_message = "Input error! Please enter a number between #{min} or #{max}."
+        expect(game_input).not_to receive(:puts).with(error_message)
+        game_input.player_input(min, max)
       end
     end
 
     # ASSIGNMENT #1
 
-    # Write a test that provides two invalid inputs (letters, symbols, or
-    # an number that is not between the min & max integers) and one valid
-    # input number that will be returned as an integer.
-    context 'when first and second user input are not between arguments' do
-      it 'returns the valid, third user input' do
-        letter = 'r'
-        number = '25'
-        user_input = '6'
-        allow(game_input).to receive(:gets).and_return(letter, number, user_input)
-        allow(game_input).to receive(:puts).twice
-        min = 1
-        max = 10
-        result = game_input.player_input(min, max)
-        expect(result).to eq(user_input.to_i)
+    # Write a test for the following two context blocks. You will need to
+    # provide 1-2 invalid inputs (letters, symbols, or numbers that are not
+    # between the min & max integers) and one valid input number (as a string).
+
+    # Remember a stub can be called multiple times and return different values.
+    # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/returning-a-value
+
+    context 'when user inputs an incorrect value once, then a valid input' do
+      before do
+        letter = 'q'
+        valid_input = '3'
+        allow(game_input).to receive(:gets).and_return(letter, valid_input)
+      end
+
+      it 'completes loop and displays error message once' do
+        min = game_input.instance_variable_get(:@minimum)
+        max = game_input.instance_variable_get(:@maximum)
+        error_message = "Input error! Please enter a number between #{min} or #{max}."
+        expect(game_input).to receive(:puts).with(error_message).once
+        game_input.player_input(min, max)
+      end
+    end
+
+    context 'when user inputs two incorrect values, then a valid input' do
+      before do
+        letter = 'q'
+        symbol = '@'
+        valid_input = '3'
+        allow(game_input).to receive(:gets).and_return(letter, symbol, valid_input)
+      end
+
+      it 'completes loop and displays error message twice' do
+        min = game_input.instance_variable_get(:@minimum)
+        max = game_input.instance_variable_get(:@maximum)
+        error_message = "Input error! Please enter a number between #{min} or #{max}."
+        expect(game_input).to receive(:puts).with(error_message).twice
+        game_input.player_input(min, max)
+      end
+    end
+  end
+
+  # ASSIGNMENT #2
+
+  # Create a new instance of BinaryGame and write a test for the following two
+  # context blocks.
+  describe '#verify_input' do
+    # Located inside #play_game (Looping Script Method)
+    # Query Method -> Test the return value
+
+    # Note: #verify_input will only return a number if it is between?(min, max)
+
+    subject(:verify_game) { described_class.new(1, 100) }
+
+    context 'when given a valid input as argument' do
+      it 'returns valid input' do
+        min = verify_game.instance_variable_get(:@minimum)
+        max = verify_game.instance_variable_get(:@maximum)
+        user_number = 48
+        verified_input = verify_game.verify_input(min, max, user_number)
+        expect(verified_input).to eq(48)
+      end
+    end
+
+    context 'when given invalid input as argument' do
+      it 'returns nil' do
+        min = verify_game.instance_variable_get(:@minimum)
+        max = verify_game.instance_variable_get(:@maximum)
+        user_number = 234
+        verified_input = verify_game.verify_input(min, max, user_number)
+        expect(verified_input).to be_nil
       end
     end
   end
@@ -198,12 +248,6 @@ describe BinaryGame do
         allow(game_update).to receive(:maximum_guesses)
       end
 
-      # To test if #update_value is sent to the RandomNumber instance
-      # (random_update) with the correct value (76), we will be using
-      # message expectations.
-      # https://relishapp.com/rspec/rspec-mocks/docs
-
-      # To set a message expectation, move 'Assert' before 'Act'.
       it 'sends update_value to random_number' do
         expect(random_update).to receive(:update_value).with(76)
         game_update.update_random_number
@@ -233,7 +277,7 @@ describe BinaryGame do
       end
     end
 
-    # ASSIGNMENT #2
+    # ASSIGNMENT #3
 
     # Write a test for the following context.
     context 'when game minimum and maximum is 100 and 600' do
@@ -264,8 +308,11 @@ describe BinaryGame do
   describe '#display_binary_search' do
     # Located inside #play_game (Public Script Method)
 
-    # Looping Script -> Test the behavior of the method (for example, it
-    # stopping when certain conditions are met).
+    # Looping Script Method -> Test the behavior of the method (for example, it
+    # stops when certain conditions are met).
+
+    # This method is a Looping Script Method, because #display_turn_order will
+    # loop until binary_search.game_over?
 
     subject(:game_display) { described_class.new(1, 10) }
     let(:search_display) { instance_double(BinarySearch) }
@@ -292,7 +339,7 @@ describe BinaryGame do
       end
     end
 
-    # ASSIGNMENT #3
+    # ASSIGNMENT #4
 
     # Write a test for the following context.
     context 'when game_over? is false five times' do
@@ -307,7 +354,7 @@ describe BinaryGame do
     end
   end
 
-  # ASSIGNMENT #4
+  # ASSIGNMENT #5
 
   # Write three tests for the following method.
   describe '#display_turn_order' do
@@ -325,7 +372,7 @@ describe BinaryGame do
       allow(game_turn).to receive(:display_guess)
     end
 
-    # Command Method -> Test the action/side effect
+    # Command Method -> Test the change in the observable state
     it 'increases guess_count by one' do
       expect { game_turn.display_turn_order(binary_search_turn) }.to change { game_turn.instance_variable_get(:@guess_count) }.by(1)
     end

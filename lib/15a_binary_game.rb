@@ -23,11 +23,17 @@ class BinaryGame
   end
 
   def player_input(min, max)
-    number = gets.chomp.to_i
-    return number if number.between?(min, max)
+    loop do
+      user_input = gets.chomp
+      verified_number = verify_input(min, max, user_input.to_i) if user_input.match?(/^\d+$/)
+      return verified_number if verified_number
 
-    puts "Input error! Please enter a number between #{min} or #{max}."
-    player_input(min, max)
+      puts "Input error! Please enter a number between #{min} or #{max}."
+    end
+  end
+
+  def verify_input(min, max, input)
+    return input if input.between?(min, max)
   end
 
   def update_random_number

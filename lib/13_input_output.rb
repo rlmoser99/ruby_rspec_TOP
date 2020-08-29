@@ -57,20 +57,26 @@ class NumberGame
 
   def play_game
     puts "Let's play a game called 'Guess a random number!'"
-    player_turn until game_over?
+    turn_order until game_over?
     final_message
   end
 
-  def player_turn
-    @guess = verify_input(player_input)
+  def turn_order
+    player_turn
     @count += 1
+  end
+
+  def player_turn
+    loop do
+      @guess = verify_input(player_input)
+      break if @guess
+
+      puts 'Input error!'
+    end
   end
 
   def verify_input(number)
     return number if number.match?(/^[0-9]$/)
-
-    puts 'Input error!'
-    verify_input(player_input)
   end
 
   def game_over?

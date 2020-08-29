@@ -8,5 +8,5 @@ require_relative '../lib/15c_random_number'
 
 minimum = 1
 maximum = 100
-@game = BinaryGame.new(minimum, maximum)
-@game.play_game
+game = BinaryGame.new(minimum, maximum)
+game.play_game
