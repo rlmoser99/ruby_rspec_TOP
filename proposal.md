@@ -7,13 +7,13 @@
 ## Summary
 
 The purpose of the 'RSpec Playground' is to equip students with additional practice before doing TDD with Connect Four. In addition, I believe students do not understand several important concepts, such as: 
-- The importance of writing small and isolated methods.
-- The benefits of using a testing pattern, such as 'Arrange Act, and Assert'.
-- The importance of class encapsulation
-- How to correctly use an explicit subject.
-- How to create different test conditions using a new instance with specific instance variable values.
-- How to use stubs, doubles, verifying doubles, etc.
-- How to determine what methods should be tested for good unit test coverage.
+- the importance of writing small and isolated methods
+- the benefits of using a testing pattern such as 'Arrange, Act, and Assert'
+- the importance of class encapsulation
+- how to correctly use an explicit subject
+- how to create different test conditions using a new instance with specific instance variable values
+- how to use stubs, doubles, verifying doubles, etc.
+- how to determine what methods should be tested for good unit test coverage
 
 ## Motivation
 
@@ -41,11 +41,11 @@ I searched for an alternative and could not find an better option than the Udemy
 
 ## Additional
 
-I have told a few people about this repo in the #ruby-testing channel. In addition, I have privately told a few students about it. At this time, I know that andrewjh271, aaron-contreras, tenacious-qi, msespos, and Pandenok have gone through them. 
+I have told a few people about this repo in the #ruby-testing channel. In addition, I have privately told a few students about it. At this time, I know that andrewjh271, aaron-contreras, tenacious-qi, msespos and Pandenok have viewed it. 
 
 This playground needs a thorough review by someone a lot more familiar with RSpec. Even though I have spent over three months learning RSpec, I do not feel 100% confident in some of my explanations & I have zero 'real-world' experience. 
 
-For example, the last two files focus on 'types' of methods that should always be tested. It was difficult to find useful information on what methods should be tested for these ruby games. Therefore, I combined information from Sandi Metz talk [Magic Tricks of Testing](https://www.youtube.com/watch?v=URSWYvyc42M), conversations in #ruby-testing, and even direct messages with Timato. 
+For example, the last two files focus on 'types' of methods that should always be tested. It was difficult to find useful information on what methods should be tested for these ruby games. Therefore I combined information from Sandi Metz talk [Magic Tricks of Testing](https://www.youtube.com/watch?v=URSWYvyc42M), conversations in #ruby-testing, and even direct messages with Timato. 
 
 ## Status
 - [x] Proposed
