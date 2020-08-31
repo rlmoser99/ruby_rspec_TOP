@@ -62,7 +62,13 @@ describe NumberGame do
   describe '#game_over?' do
     context 'when user guess is correct' do
       # To test this method, we need to set specific values for @solution and
-      # @guess, so we will create a new instance of NumberGame.
+      # @guess, so we will create a new instance of NumberGame. When creating
+      # another instance of NumberGame, we'll use a meaningful name to
+      # differentiate between instances.
+
+      # A helpful tip is to combine the purpose of the test and the object.
+      # E.g., game_end or complete_game.
+
       subject(:game_end) { described_class.new(5, '5') }
 
       it 'is game over' do
@@ -92,13 +98,13 @@ describe NumberGame do
   # Since we do not have to test #player_input, let's test #verify_input.
 
   describe '#verify_input' do
-    subject(:verify_game) { described_class.new }
+    subject(:game_check) { described_class.new }
     # Note: #verify_input will only return a value if it matches /^[0-9]$/
 
     context 'when given a valid input as argument' do
       it 'returns valid input' do
         user_input = '3'
-        verified_input = verify_game.verify_input(user_input)
+        verified_input = game_check.verify_input(user_input)
         expect(verified_input).to eq('3')
       end
     end
@@ -109,7 +115,7 @@ describe NumberGame do
     context 'when given invalid input as argument' do
       it 'returns nil' do
         letter_input = 'g'
-        verified_input = verify_game.verify_input(letter_input)
+        verified_input = game_check.verify_input(letter_input)
         expect(verified_input).to be_nil
       end
     end
@@ -123,7 +129,7 @@ describe NumberGame do
     # https://relishapp.com/rspec/rspec-mocks/v/2-14/docs/method-stubs/allow-with-a-simple-return-value
     # http://testing-for-beginners.rubymonstas.org/test_doubles.html
 
-    subject(:player_game) { described_class.new }
+    subject(:game_loop) { described_class.new }
 
     context 'when user input is valid' do
       # To test the behavior, we want to test that the loop stops before the
@@ -133,10 +139,10 @@ describe NumberGame do
 
       it 'stops loop and does not display error message' do
         valid_input = '3'
-        allow(player_game).to receive(:player_input).and_return(valid_input)
+        allow(game_loop).to receive(:player_input).and_return(valid_input)
         # To use a message expectation, move 'Assert' before 'Act'.
-        expect(player_game).not_to receive(:puts).with('Input error!')
-        player_game.player_turn
+        expect(game_loop).not_to receive(:puts).with('Input error!')
+        game_loop.player_turn
       end
     end
 
@@ -153,15 +159,15 @@ describe NumberGame do
       before do
         letter = 'd'
         valid_input = '8'
-        allow(player_game).to receive(:player_input).and_return(letter, valid_input)
+        allow(game_loop).to receive(:player_input).and_return(letter, valid_input)
       end
 
       # When using message expectations, you can specify how many times you
       # expect the message to be received.
       # https://relishapp.com/rspec/rspec-mocks/docs/setting-constraints/receive-counts
       it 'completes loop and displays error message once' do
-        expect(player_game).to receive(:puts).with('Input error!').once
-        player_game.player_turn
+        expect(game_loop).to receive(:puts).with('Input error!').once
+        game_loop.player_turn
       end
     end
 
@@ -173,12 +179,12 @@ describe NumberGame do
         letter = 'd'
         symbol = '$'
         valid_input = '2'
-        allow(player_game).to receive(:player_input).and_return(letter, symbol, valid_input)
+        allow(game_loop).to receive(:player_input).and_return(letter, symbol, valid_input)
       end
 
       it 'completes loop and displays error message twice' do
-        expect(player_game).to receive(:puts).with('Input error!').twice
-        player_game.player_turn
+        expect(game_loop).to receive(:puts).with('Input error!').twice
+        game_loop.player_turn
       end
     end
   end

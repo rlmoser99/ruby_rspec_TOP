@@ -52,28 +52,34 @@ have_attributes\
 respond_to
 
 ## 12_magic_seven
-Arrange, Act & Assert testing pattern
+Arrange, Act & Assert testing pattern\
+disabling rubocop 
 
 ## 13_input_output
 Important to write small, isolated methods to test\
 Unnecessary to test puts and gets\
 Use 'gets methods' as parameters in another method that is tested\
 stubbing a method\
+creating new subjects & variables with meaningful names\
 before hooks\
+message expectations\
 output matcher
 
 ## 14_find_number
 TDD with doubles\
-Add method names to: subject { described_class.new.game_solution }
+Red-Green-Refactor\
+Creating a test subject, with a double as an argument\
+Add method names to: subject { described_class.new.solution }
 
 ## 15_binary_search
 Changing TDD Double to Instance Double\
-Stubbing a method\
+Determining what methods need to be tested in unit testing\
+instance_variable_get\
+Class Encapsulation\
 Polymorphism concept
 
 ## 16_caesar_breaker
 modules\
-mocking - assert before act\
 not_to raise_error\
 testing rescued error
 
