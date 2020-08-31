@@ -1,6 +1,6 @@
 | Title | Author | Date |
 | --- | --- | --- |
-| Addition of RSpec Playground | `Rachel Moser` | July 2020 |
+| Addition of RSpec Playground | `Rachel Moser` | August 2020 |
 
 # Addition of RSpec Playground
 
