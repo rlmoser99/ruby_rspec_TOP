@@ -31,7 +31,7 @@ describe CaesarBreaker do
   let(:translator) { instance_double(CaesarTranslator) }
 
   describe '#decrypt' do
-    # Public Script Method -> No test neccessary, but all methods inside should
+    # Public Script Method -> No test necessary, but all methods inside should
     # be tested.
   end
 
@@ -112,7 +112,7 @@ describe CaesarBreaker do
         allow(phrase).to receive(:puts).twice
       end
 
-      # When an error is rescued, the method will not raise an error. Therefore,
+      # When an error is rescued, the method will not raise an error. Therefore
       # you test the conditions that would occur if an error were rescued.
       it 'does not raise an error' do
         expect { phrase.save_decrypted_messages }.not_to raise_error
