@@ -10,7 +10,7 @@ require_relative '../lib/15c_random_number'
 #    - lib/15_binary_main
 #    - lib/15a_binary_game
 #    - lib/15b_binary_search which is based on 14_find_number
-#    - lib/15c_random_numer
+#    - lib/15c_random_number
 # 2. Read the comments in spec/15b_binary_search_spec
 # 3. Complete spec/15a_binary_game_spec
 
@@ -31,8 +31,8 @@ require_relative '../lib/15c_random_number'
 # 1. Command - Changes the observable state, but does not return a value.
 # 2. Query - Returns a result, but does not change the observable state.
 # 3. Script - Only calls other methods, usually without returning anything.
-# 4. Looping Script - Only call other methods, usually without returning
-#    anything and stopping when certain conditions are met.
+# 4. Looping Script - Only calls other methods, usually without returning
+#    anything, and stops when certain conditions are met.
 
 # Let's take a look at methods that should always be tested:
 
@@ -46,10 +46,10 @@ require_relative '../lib/15c_random_number'
 # full game. Since these methods are required to play the game, they should be
 # publicly tested methods (even if you previously made them private). Pretend
 # that someone will be using your class to make their own game with customized
-# text. Any method that they would need in their game, should be a publicly
+# text. Any method that they would need in their game should be a publicly
 # tested method.
 
-# 3. Any Method that sends a command message to another class should always test
+# 3. Any method that sends a command message to another class should always test
 # that those messages were sent.
 
 # 4. A Looping Script Method should test the behavior of the method. For
@@ -69,25 +69,25 @@ require_relative '../lib/15c_random_number'
 # will need to stub any inside methods because they will be called when you
 # create an instance of the class.
 
-# 2. Methods that only contain 'puts' or 'gets' because they are well-tested
-# in the standard ruby library.
+# 2. You do not have to test methods that only contain 'puts' or 'gets' 
+# because they are well-tested in the standard Ruby library.
 
 # 3. Private methods do not need to be tested because they should have test
 # coverage in public methods. However, as previously discussed, you may have
-# some private methods that are called inside a script or looping script method,
-# that should be publicly tested methods.
+# some private methods that are called inside a script or looping script method;
+# these should be publicly tested methods.
 
-# Open the file, lib/15a_binary_game, in a split screen, so you can see both
+# Open the file lib/15a_binary_game in a split screen, so you can see both
 # files at the same time. We will look at every method and determine if it will
 # need to be tested or not.
 
 describe BinaryGame do
   describe '#initialize' do
-    # Initialize -> No test neccessary, when only creating instance variables.
+    # Initialize -> No test necessary, when only creating instance variables.
   end
 
   describe '#play_game' do
-    # Public Script Method -> No test neccessary, but all methods inside should
+    # Public Script Method -> No test necessary, but all methods inside should
     # be tested.
   end
 
@@ -125,7 +125,7 @@ describe BinaryGame do
     # provide 1-2 invalid inputs (letters, symbols, or numbers that are not
     # between the min & max integers) and one valid input number (as a string).
 
-    # Remember a stub can be called multiple times and return different values.
+    # Remember that a stub can be called multiple times and return different values.
     # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/returning-a-value
 
     context 'when user inputs an incorrect value once, then a valid input' do
@@ -212,10 +212,10 @@ describe BinaryGame do
     # update the value. For example: @random_number.update_value(number_input)
 
     context 'when updating value of random number' do
-      # Instead of using a normal double, like we did in TDD. We are going to
+      # Instead of using a normal double, as we did in TDD, we are going to
       # use an instance_double. An instance_double is a verifying double that
       # will produce an error if any methods being stubbed does not exist in
-      # the actual class. Therefore using a 'verifying double' makes a test
+      # the actual class. In this way, using a verifying double makes a test
       # more stable.
       # https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles
 
@@ -408,15 +408,15 @@ describe BinaryGame do
 
   describe '#introduction' do
     # Located inside #play_game (Public Script Method)
-    # Only contains puts statements -> No test neccessary & can be private.
+    # Only contains puts statements -> No test necessary & can be private.
   end
 
   describe '#display_range' do
     # Located inside #display_turn_order (Looping Script Method)
-    # Only contains puts statements -> No test neccessary & can be private.
+    # Only contains puts statements -> No test necessary & can be private.
   end
 
   describe '#print_number' do
-    # Only contains puts statements -> No test neccessary & can be private.
+    # Only contains puts statements -> No test necessary & can be private.
   end
 end
