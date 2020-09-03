@@ -69,13 +69,13 @@ require_relative '../lib/15c_random_number'
 # will need to stub any inside methods because they will be called when you
 # create an instance of the class.
 
-# 2. You do not have to test methods that only contain 'puts' or 'gets' 
+# 2. You do not have to test methods that only contain 'puts' or 'gets'
 # because they are well-tested in the standard Ruby library.
 
 # 3. Private methods do not need to be tested because they should have test
 # coverage in public methods. However, as previously discussed, you may have
 # some private methods that are called inside a script or looping script method;
-# these should be publicly tested methods.
+# these methods should be tested publicly.
 
 # Open the file lib/15a_binary_game in a split screen, so you can see both
 # files at the same time. We will look at every method and determine if it will

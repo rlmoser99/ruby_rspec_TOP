@@ -75,7 +75,7 @@ require_relative '../lib/15c_random_number'
 # 3. Private methods do not need to be tested because they should have test
 # coverage in public methods. However, as previously discussed, you may have
 # some private methods that are called inside a script or looping script method;
-# these should be publicly tested methods.
+# these methods should be tested publicly.
 
 # Open the file lib/15a_binary_game in a split screen, so you can see both
 # files at the same time. We will look at every method and determine if it will
