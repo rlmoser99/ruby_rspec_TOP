@@ -245,7 +245,6 @@ describe BinaryGame do
         allow(game_update).to receive(:puts)
         new_number = 76
         allow(game_update).to receive(:player_input).with(1, 100).and_return(new_number)
-        allow(game_update).to receive(:maximum_guesses)
       end
 
       it 'sends update_value to random_number' do
