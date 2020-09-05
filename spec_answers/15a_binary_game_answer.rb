@@ -203,7 +203,7 @@ describe BinaryGame do
     # gets the user's input & wants to update the value of the @random_number.
     # If the RandomNumber class had a public setter method (like attr_accessor)
     # for @value, we could update @random_number's value inside the BinaryGame
-    # class. For example: @random_nmber.value = number_input
+    # class. For example: @random_number.value = number_input
 
     # However, this breaks the encapsulation of the RandomNumber class. As a
     # general rule, you want to minimize what classes know about other classes.
