@@ -1,5 +1,8 @@
-# RSpec Playground
-The purpose of this repository is to provide 'hands-on' RSpec lessons. These lessons were designed to equip students of the [The Odin Project](https://www.theodinproject.com/) to write tests for their Tic-Tac-Toe and to TDD their Connect Four.
+# RSpec Playground (no longer maintained)
+This repository was a contribution to an open source web development curriculum called [The Odin Project](https://www.theodinproject.com/). It is included in this [lesson]https://www.theodinproject.com/courses/ruby-programming/lessons/testing-your-ruby-code and is maintained on their [github](https://github.com/TheOdinProject/ruby_testing).
+
+## Purpose
+The purpose of this repository is to provide 'hands-on' RSpec lessons. These lessons were designed to equip students to write tests for their Tic-Tac-Toe and to TDD their Connect Four.
 
 ## Topics
 These lessons cover many topics, but it does not cover everything that RSpec is capable of testing. You should expect to learn foundational knowledge on the following topics:
